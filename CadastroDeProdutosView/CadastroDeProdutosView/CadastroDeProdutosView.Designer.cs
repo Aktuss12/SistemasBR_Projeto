@@ -161,6 +161,8 @@ namespace CadastroDeProdutosView
             this.undMedidaLookUpEdit.Name = "undMedidaLookUpEdit";
             this.undMedidaLookUpEdit.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.undMedidaLookUpEdit.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Value", "UN")});
             this.undMedidaLookUpEdit.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard;
             this.undMedidaLookUpEdit.Size = new System.Drawing.Size(177, 28);
             this.undMedidaLookUpEdit.TabIndex = 2;
