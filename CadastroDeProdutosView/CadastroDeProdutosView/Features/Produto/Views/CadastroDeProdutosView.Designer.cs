@@ -402,7 +402,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             // 
             // origemDaMercadoriaLookUpEdit
             // 
-            this.origemDaMercadoriaLookUpEdit.Location = new System.Drawing.Point(73, 94);
+            this.origemDaMercadoriaLookUpEdit.Location = new System.Drawing.Point(45, 87);
             this.origemDaMercadoriaLookUpEdit.Margin = new System.Windows.Forms.Padding(2);
             this.origemDaMercadoriaLookUpEdit.Name = "origemDaMercadoriaLookUpEdit";
             this.origemDaMercadoriaLookUpEdit.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -411,13 +411,13 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Value", "Origem Da Mercadoria")});
             this.origemDaMercadoriaLookUpEdit.Properties.DropDownRows = 9;
             this.origemDaMercadoriaLookUpEdit.Properties.NullText = "";
-            this.origemDaMercadoriaLookUpEdit.Size = new System.Drawing.Size(241, 20);
+            this.origemDaMercadoriaLookUpEdit.Size = new System.Drawing.Size(298, 20);
             this.origemDaMercadoriaLookUpEdit.TabIndex = 11;
             this.origemDaMercadoriaLookUpEdit.EditValueChanged += new System.EventHandler(this.origemDaMercadoriaLookUpEdit_EditValueChanged);
             // 
             // situacaoTributariaLookUpEdit
             // 
-            this.situacaoTributariaLookUpEdit.Location = new System.Drawing.Point(73, 164);
+            this.situacaoTributariaLookUpEdit.Location = new System.Drawing.Point(45, 165);
             this.situacaoTributariaLookUpEdit.Margin = new System.Windows.Forms.Padding(2);
             this.situacaoTributariaLookUpEdit.Name = "situacaoTributariaLookUpEdit";
             this.situacaoTributariaLookUpEdit.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -426,14 +426,14 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Value", "Situação Tributaria")});
             this.situacaoTributariaLookUpEdit.Properties.DropDownRows = 11;
             this.situacaoTributariaLookUpEdit.Properties.NullText = "";
-            this.situacaoTributariaLookUpEdit.Size = new System.Drawing.Size(241, 20);
+            this.situacaoTributariaLookUpEdit.Size = new System.Drawing.Size(298, 20);
             this.situacaoTributariaLookUpEdit.TabIndex = 12;
             // 
             // ncmLabelControl
             // 
             this.ncmLabelControl.Appearance.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ncmLabelControl.Appearance.Options.UseFont = true;
-            this.ncmLabelControl.Location = new System.Drawing.Point(408, 77);
+            this.ncmLabelControl.Location = new System.Drawing.Point(406, 70);
             this.ncmLabelControl.Margin = new System.Windows.Forms.Padding(2);
             this.ncmLabelControl.Name = "ncmLabelControl";
             this.ncmLabelControl.Size = new System.Drawing.Size(26, 13);
@@ -444,7 +444,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             // 
             this.origemMercadoriaLabelControl.Appearance.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.origemMercadoriaLabelControl.Appearance.Options.UseFont = true;
-            this.origemMercadoriaLabelControl.Location = new System.Drawing.Point(73, 77);
+            this.origemMercadoriaLabelControl.Location = new System.Drawing.Point(45, 70);
             this.origemMercadoriaLabelControl.Margin = new System.Windows.Forms.Padding(2);
             this.origemMercadoriaLabelControl.Name = "origemMercadoriaLabelControl";
             this.origemMercadoriaLabelControl.Size = new System.Drawing.Size(109, 13);
@@ -453,17 +453,17 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             // 
             // reducaoIcmsTextEdit
             // 
-            this.reducaoIcmsTextEdit.Location = new System.Drawing.Point(408, 229);
+            this.reducaoIcmsTextEdit.Location = new System.Drawing.Point(407, 246);
             this.reducaoIcmsTextEdit.Margin = new System.Windows.Forms.Padding(2);
             this.reducaoIcmsTextEdit.Name = "reducaoIcmsTextEdit";
-            this.reducaoIcmsTextEdit.Size = new System.Drawing.Size(241, 20);
+            this.reducaoIcmsTextEdit.Size = new System.Drawing.Size(301, 20);
             this.reducaoIcmsTextEdit.TabIndex = 16;
             // 
             // reducaoIcmsLabelControl
             // 
             this.reducaoIcmsLabelControl.Appearance.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.reducaoIcmsLabelControl.Appearance.Options.UseFont = true;
-            this.reducaoIcmsLabelControl.Location = new System.Drawing.Point(407, 213);
+            this.reducaoIcmsLabelControl.Location = new System.Drawing.Point(406, 230);
             this.reducaoIcmsLabelControl.Margin = new System.Windows.Forms.Padding(2);
             this.reducaoIcmsLabelControl.Name = "reducaoIcmsLabelControl";
             this.reducaoIcmsLabelControl.Size = new System.Drawing.Size(163, 13);
@@ -474,7 +474,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             // 
             this.naturezaOperacaoLabelControl.Appearance.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.naturezaOperacaoLabelControl.Appearance.Options.UseFont = true;
-            this.naturezaOperacaoLabelControl.Location = new System.Drawing.Point(73, 213);
+            this.naturezaOperacaoLabelControl.Location = new System.Drawing.Point(41, 229);
             this.naturezaOperacaoLabelControl.Margin = new System.Windows.Forms.Padding(2);
             this.naturezaOperacaoLabelControl.Name = "naturezaOperacaoLabelControl";
             this.naturezaOperacaoLabelControl.Size = new System.Drawing.Size(113, 13);
@@ -486,7 +486,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.aliquotaDeIcmsTextEdit.Location = new System.Drawing.Point(408, 164);
             this.aliquotaDeIcmsTextEdit.Margin = new System.Windows.Forms.Padding(2);
             this.aliquotaDeIcmsTextEdit.Name = "aliquotaDeIcmsTextEdit";
-            this.aliquotaDeIcmsTextEdit.Size = new System.Drawing.Size(241, 20);
+            this.aliquotaDeIcmsTextEdit.Size = new System.Drawing.Size(300, 20);
             this.aliquotaDeIcmsTextEdit.TabIndex = 15;
             // 
             // aliquotaIcmsLabelControl
@@ -504,7 +504,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             // 
             this.situacaoTributariaLabelControl.Appearance.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.situacaoTributariaLabelControl.Appearance.Options.UseFont = true;
-            this.situacaoTributariaLabelControl.Location = new System.Drawing.Point(73, 148);
+            this.situacaoTributariaLabelControl.Location = new System.Drawing.Point(45, 148);
             this.situacaoTributariaLabelControl.Margin = new System.Windows.Forms.Padding(2);
             this.situacaoTributariaLabelControl.Name = "situacaoTributariaLabelControl";
             this.situacaoTributariaLabelControl.Size = new System.Drawing.Size(94, 13);
@@ -515,7 +515,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             // 
             this.informacoesFiscaisLabelControl.Appearance.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.informacoesFiscaisLabelControl.Appearance.Options.UseFont = true;
-            this.informacoesFiscaisLabelControl.Location = new System.Drawing.Point(244, 15);
+            this.informacoesFiscaisLabelControl.Location = new System.Drawing.Point(256, 14);
             this.informacoesFiscaisLabelControl.Margin = new System.Windows.Forms.Padding(2);
             this.informacoesFiscaisLabelControl.Name = "informacoesFiscaisLabelControl";
             this.informacoesFiscaisLabelControl.Size = new System.Drawing.Size(238, 29);
@@ -524,15 +524,15 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             // 
             // ncmTextEdit
             // 
-            this.ncmTextEdit.Location = new System.Drawing.Point(407, 94);
+            this.ncmTextEdit.Location = new System.Drawing.Point(406, 87);
             this.ncmTextEdit.Margin = new System.Windows.Forms.Padding(2);
             this.ncmTextEdit.Name = "ncmTextEdit";
-            this.ncmTextEdit.Size = new System.Drawing.Size(241, 20);
+            this.ncmTextEdit.Size = new System.Drawing.Size(302, 20);
             this.ncmTextEdit.TabIndex = 14;
             // 
             // naturezaDaOperacaoLookUpEdit
             // 
-            this.naturezaDaOperacaoLookUpEdit.Location = new System.Drawing.Point(73, 229);
+            this.naturezaDaOperacaoLookUpEdit.Location = new System.Drawing.Point(45, 246);
             this.naturezaDaOperacaoLookUpEdit.Margin = new System.Windows.Forms.Padding(2);
             this.naturezaDaOperacaoLookUpEdit.Name = "naturezaDaOperacaoLookUpEdit";
             this.naturezaDaOperacaoLookUpEdit.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -541,7 +541,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Value", "Natureza da Operação")});
             this.naturezaDaOperacaoLookUpEdit.Properties.DropDownRows = 6;
             this.naturezaDaOperacaoLookUpEdit.Properties.NullText = "";
-            this.naturezaDaOperacaoLookUpEdit.Size = new System.Drawing.Size(241, 20);
+            this.naturezaDaOperacaoLookUpEdit.Size = new System.Drawing.Size(298, 20);
             this.naturezaDaOperacaoLookUpEdit.TabIndex = 13;
             this.naturezaDaOperacaoLookUpEdit.EditValueChanged += new System.EventHandler(this.naturezaDaOperacaoLookUpEdit_EditValueChanged);
             // 
