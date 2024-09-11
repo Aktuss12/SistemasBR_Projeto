@@ -154,14 +154,15 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.produtosTabNavigationPage.Size = new System.Drawing.Size(1136, 640);
             this.produtosTabNavigationPage.Paint += new System.Windows.Forms.PaintEventHandler(this.produtosTabNavigationPage_Paint);
             // 
-            // undMedidaLookUpEdit
+            // unidadeDeMedidaLookUpEdit
             // 
             this.unidadeDeMedidaLookUpEdit.Location = new System.Drawing.Point(110, 252);
-            this.unidadeDeMedidaLookUpEdit.Name = "undMedidaLookUpEdit";
+            this.unidadeDeMedidaLookUpEdit.Name = "unidadeDeMedidaLookUpEdit";
             this.unidadeDeMedidaLookUpEdit.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.unidadeDeMedidaLookUpEdit.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
             new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Value", "Unidade")});
+            this.unidadeDeMedidaLookUpEdit.Properties.DropDownRows = 11;
             this.unidadeDeMedidaLookUpEdit.Properties.NullText = "";
             this.unidadeDeMedidaLookUpEdit.Size = new System.Drawing.Size(177, 28);
             this.unidadeDeMedidaLookUpEdit.TabIndex = 2;
