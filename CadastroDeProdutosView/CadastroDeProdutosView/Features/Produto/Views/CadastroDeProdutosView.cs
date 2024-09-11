@@ -14,6 +14,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
         private void InitializeLookUpEdit()
         {
+            // Implementação das Enums para o LookUpEdit
             unidadeDeMedidaLookUpEdit
                 .PreencherLookUpEditComOValorDoEnum<Enums.UnidadeDeMedidaView.UnidadeDeMedida>();
 
@@ -26,6 +27,11 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             origemDaMercadoriaLookUpEdit
                 .PreencherLookUpEditComOValorDoEnum<Enums.OrigemDaMercadoriaView.OrigemDaMercadoria>();
 
+            situacaoTributariaLookUpEdit
+                .PreencherLookUpEditComOValorDoEnum<Enums.SituacaoTributariaView.SituacaoTributaria>();
+
+            naturezaDaOperacaoLookUpEdit
+                .PreencherLookUpEditComOValorDoEnum <Enums.NaturezaDaOperacaoView.NaturezaDaOperacao>();
         }
 
         private void CadastroDeProdutosView_Load(object sender, EventArgs e)
@@ -63,11 +69,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
         }
 
-        private void naturezaOperacaoTextEdit_EditValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void fornecedorLabelControl_Click(object sender, EventArgs e)
         {
 
@@ -79,6 +80,16 @@ namespace CadastroDeProdutosView.Features.Produto.Views
         }
 
         private void categoriaLabelControl_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void naturezaDaOperacaoLookUpEdit_EditValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void origemDaMercadoriaLookUpEdit_EditValueChanged(object sender, EventArgs e)
         {
 
         }

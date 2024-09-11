@@ -56,6 +56,7 @@
   <ItemGroup>
     <Compile Include="Features\Produto\Enums\CategoriaDeProdutos.cs" />
     <Compile Include="Features\Produto\Enums\MarcaDoProduto.cs" />
+    <Compile Include="Features\Produto\Enums\NaturezaDaOperacao.cs" />
     <Compile Include="Features\Produto\Enums\OrigemDaMercadoria.cs" />
     <Compile Include="Features\Produto\Enums\SituacaoTributaria.cs" />
     <Compile Include="Features\Produto\Views\CadastroDeProdutosView.cs">
