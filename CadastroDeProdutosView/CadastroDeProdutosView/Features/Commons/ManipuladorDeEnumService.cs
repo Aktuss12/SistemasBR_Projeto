@@ -3,7 +3,7 @@ using System;
 using System.Linq;
 
 namespace CadastroDeProdutosView.Features.Commons
-{
+{ 
     public static class ManipuladorDeEnumService
     {
         private static T ObterAtributoDoTipo<T>(this Enum valorEnum) where T : Attribute

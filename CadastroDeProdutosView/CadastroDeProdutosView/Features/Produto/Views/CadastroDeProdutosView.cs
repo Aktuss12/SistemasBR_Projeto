@@ -20,6 +20,11 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             categoriaDeProdutosLookUpEdit
                 .PreencherLookUpEditComOValorDoEnum<Enums.CategoriaDoProdutoView.CategoriaDeProdutos>();
 
+            marcaLookUpEdit
+                .PreencherLookUpEditComOValorDoEnum<Enums.MarcaDoProdutoView.MarcaDoProduto>();
+
+            origemDaMercadoriaLookUpEdit
+                .PreencherLookUpEditComOValorDoEnum<Enums.OrigemDaMercadoriaView.OrigemDaMercadoria>();
 
         }
 
@@ -58,11 +63,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
         }
 
-        private void origemMercadoriaTextEdit_EditValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void naturezaOperacaoTextEdit_EditValueChanged(object sender, EventArgs e)
         {
 
@@ -74,6 +74,11 @@ namespace CadastroDeProdutosView.Features.Produto.Views
         }
 
         private void marcaLookUpEdit_EditValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void categoriaLabelControl_Click(object sender, EventArgs e)
         {
 
         }
