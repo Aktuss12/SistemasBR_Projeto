@@ -1,9 +1,8 @@
 ﻿using DevExpress.XtraEditors;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 
-namespace CadastroDeProdutosView
+namespace CadastroDeProdutosView.Features.Commons
 {
     public static class ManipuladorDeEnumService
     {
@@ -12,9 +11,9 @@ namespace CadastroDeProdutosView
             var type = valorEnum.GetType();
             var memInfo = type.GetMember(valorEnum.ToString());
             var attributes = memInfo[0].GetCustomAttributes(typeof(T), false);
-            return (attributes.Length > 0) ? (T)attributes[0] : null;
+            return attributes.Length > 0 ? (T)attributes[0] : null;
         }
-        
+
         public static string ObterDescricao(this Enum valorEnum) =>
              valorEnum.ObterAtributoDoTipo<System.ComponentModel.DescriptionAttribute>().Description;
 
@@ -22,7 +21,7 @@ namespace CadastroDeProdutosView
         {
             var dicionarioDeUnidadeDeMedida = Enum.GetValues(typeof(T))
             .Cast<T>()
-            .ToDictionary(x => Convert.ToInt32(x),x => x.ObterDescricao());
+            .ToDictionary(x => Convert.ToInt32(x), x => x.ObterDescricao());
 
             lookUpEdit.Properties.DataSource = dicionarioDeUnidadeDeMedida;
             lookUpEdit.Properties.ValueMember = "Key";

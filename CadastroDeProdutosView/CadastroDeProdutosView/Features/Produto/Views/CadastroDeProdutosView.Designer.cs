@@ -1,5 +1,5 @@
 ﻿
-namespace CadastroDeProdutosView
+namespace CadastroDeProdutosView.Features.Produto.Views
 {
     partial class CadastroDeProdutosView
     {

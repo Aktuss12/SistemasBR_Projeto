@@ -54,16 +54,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CadastroDeProdutosView.cs">
+    <Compile Include="Features\Produto\Views\CadastroDeProdutosView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CadastroDeProdutosView.Designer.cs">
+    <Compile Include="Features\Produto\Views\CadastroDeProdutosView.Designer.cs">
       <DependentUpon>CadastroDeProdutosView.cs</DependentUpon>
     </Compile>
-    <Compile Include="ManipuladorDeEnumService.cs" />
+    <Compile Include="Features\Commons\ManipuladorDeEnumService.cs" />
+    <Compile Include="Features\Produto\Enums\UnidadeDeMedida.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="CadastroDeProdutosView.resx">
+    <EmbeddedResource Include="Features\Produto\Views\CadastroDeProdutosView.resx">
       <DependentUpon>CadastroDeProdutosView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
@@ -89,5 +90,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

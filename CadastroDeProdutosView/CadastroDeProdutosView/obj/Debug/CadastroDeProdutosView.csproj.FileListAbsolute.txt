@@ -152,7 +152,6 @@ C:\Users\admin\Documents\Sistemasbr_Projeto\CadastroDeProdutosView\CadastroDePro
 C:\Users\admin\Documents\Sistemasbr_Projeto\CadastroDeProdutosView\CadastroDeProdutosView\bin\Debug\ja\DevExpress.Pdf.v18.1.Core.resources.dll
 C:\Users\admin\Documents\Sistemasbr_Projeto\CadastroDeProdutosView\CadastroDeProdutosView\bin\Debug\ru\DevExpress.Pdf.v18.1.Core.resources.dll
 C:\Users\admin\Documents\Sistemasbr_Projeto\CadastroDeProdutosView\CadastroDeProdutosView\obj\Debug\CadastroDeProdutosView.csproj.AssemblyReference.cache
-C:\Users\admin\Documents\Sistemasbr_Projeto\CadastroDeProdutosView\CadastroDeProdutosView\obj\Debug\CadastroDeProdutosView.CadastroDeProdutosView.resources
 C:\Users\admin\Documents\Sistemasbr_Projeto\CadastroDeProdutosView\CadastroDeProdutosView\obj\Debug\CadastroDeProdutosView.Properties.Resources.resources
 C:\Users\admin\Documents\Sistemasbr_Projeto\CadastroDeProdutosView\CadastroDeProdutosView\obj\Debug\CadastroDeProdutosView.csproj.GenerateResource.cache
 C:\Users\admin\Documents\Sistemasbr_Projeto\CadastroDeProdutosView\CadastroDeProdutosView\obj\Debug\CadastroDeProdutosView.exe.licenses
@@ -160,3 +159,4 @@ C:\Users\admin\Documents\Sistemasbr_Projeto\CadastroDeProdutosView\CadastroDePro
 C:\Users\admin\Documents\Sistemasbr_Projeto\CadastroDeProdutosView\CadastroDeProdutosView\obj\Debug\CadastroDeProdutosView.csproj.CopyComplete
 C:\Users\admin\Documents\Sistemasbr_Projeto\CadastroDeProdutosView\CadastroDeProdutosView\obj\Debug\CadastroDeProdutosView.exe
 C:\Users\admin\Documents\Sistemasbr_Projeto\CadastroDeProdutosView\CadastroDeProdutosView\obj\Debug\CadastroDeProdutosView.pdb
+C:\Users\admin\Documents\Sistemasbr_Projeto\CadastroDeProdutosView\CadastroDeProdutosView\obj\Debug\CadastroDeProdutosView.Features.Produto.Views.CadastroDeProdutosView.resources
