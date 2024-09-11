@@ -12,8 +12,16 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             InitializeLookUpEdit();
         }
 
-        private void InitializeLookUpEdit()=>
-            unidadeDeMedidaLookUpEdit.PreencherLookUpEditComOValorDoEnum<Enums.CadastroDeProdutosView.UnidadeDeMedida>();
+        private void InitializeLookUpEdit()
+        {
+            unidadeDeMedidaLookUpEdit
+                .PreencherLookUpEditComOValorDoEnum<Enums.UnidadeDeMedidaView.UnidadeDeMedida>();
+
+            categoriaDeProdutosLookUpEdit
+                .PreencherLookUpEditComOValorDoEnum<Enums.CategoriaDoProdutoView.CategoriaDeProdutos>();
+
+
+        }
 
         private void CadastroDeProdutosView_Load(object sender, EventArgs e)
         {
@@ -50,21 +58,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
         }
 
-        private void marcaTextEdit_EditValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void categoriaTextEdit_EditValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void situacaoTributariaTextEdit_EditValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void origemMercadoriaTextEdit_EditValueChanged(object sender, EventArgs e)
         {
 
@@ -75,7 +68,12 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
         }
 
-        private void fornecedorTextEdit_EditValueChanged(object sender, EventArgs e)
+        private void fornecedorLabelControl_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void marcaLookUpEdit_EditValueChanged(object sender, EventArgs e)
         {
 
         }

@@ -19,11 +19,11 @@ namespace CadastroDeProdutosView.Features.Commons
 
         public static void PreencherLookUpEditComOValorDoEnum<T>(this LookUpEdit lookUpEdit) where T : Enum
         {
-            var dicionarioDeUnidadeDeMedida = Enum.GetValues(typeof(T))
+            var dicionarioDeEnums = Enum.GetValues(typeof(T))
             .Cast<T>()
             .ToDictionary(x => Convert.ToInt32(x), x => x.ObterDescricao());
 
-            lookUpEdit.Properties.DataSource = dicionarioDeUnidadeDeMedida;
+            lookUpEdit.Properties.DataSource = dicionarioDeEnums;
             lookUpEdit.Properties.ValueMember = "Key";
             lookUpEdit.Properties.DisplayMember = "Value";
         }

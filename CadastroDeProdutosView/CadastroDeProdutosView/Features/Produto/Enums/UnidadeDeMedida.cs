@@ -2,32 +2,32 @@
 
 namespace CadastroDeProdutosView.Features.Produto.Enums
 {
-    public partial class CadastroDeProdutosView
+    public class UnidadeDeMedidaView
     {
         public enum UnidadeDeMedida
         {
+            [Description("PALETE")]
+            Palete,
+            [Description("FARDO")]
+            Fardo,
+            [Description("LATA")]
+            Lata,
             [Description("UN")]
             Unidade,
-            [Description("LTA")]
-            Lata,
+            [Description("CM")]
+            Centimetro,
             [Description("KG")]
             Quilos,
+            [Description("CX")]
+            Caixa,
             [Description("G")]
             Grama,
             [Description("M²")]
             MetroCubico,
-            [Description("CM")]
-            Centimetro,
-            [Description("PALETE")]
-            Palete,
-            [Description("CX")]
-            Caixa,
-            [Description("FARDO")]
-            Fardo,
-            [Description("LT")]
+            [Description("L")]
             Litros,
             [Description("M")]
-            Metros,
+            Metros
         }
     }
 }

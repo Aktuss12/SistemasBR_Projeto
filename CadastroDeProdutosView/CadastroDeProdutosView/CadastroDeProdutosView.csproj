@@ -54,6 +54,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Features\Produto\Enums\CategoriaDeProdutos.cs" />
+    <Compile Include="Features\Produto\Enums\MarcaDoProduto.cs" />
     <Compile Include="Features\Produto\Views\CadastroDeProdutosView.cs">
       <SubType>Form</SubType>
     </Compile>
