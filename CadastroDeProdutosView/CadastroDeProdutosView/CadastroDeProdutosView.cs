@@ -1,13 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DevExpress.XtraEditors;
 using System.Windows.Forms;
 
 namespace CadastroDeProdutosView
@@ -19,29 +14,21 @@ namespace CadastroDeProdutosView
             InitializeComponent();
             InitializeLookUpEdit();
         }
-
-
-
+        
         public enum UnidadeDeMedida
         {
-            Quilos = 1,
-            Litros = 2,
-            Metros = 3,
-            Unidade = 4
+            [Description("UN")]
+            Unidade,
+            [Description("KG")]
+            Quilos,
+            [Description("LT")]
+            Litros,
+            [Description("MT")]
+            Metros
         }
 
-        private void InitializeLookUpEdit()
-        {
-            Dictionary<int, string> unidadeDeMedida = Enum.GetValues(typeof(UnidadeDeMedida))
-                .Cast<UnidadeDeMedida>()
-                .ToDictionary(x => (int)x, x => x.ToString());
-
-
-            undMedidaLookUpEdit.Properties.DataSource = unidadeDeMedida;
-            undMedidaLookUpEdit.Properties.ValueMember = "Id";
-            undMedidaLookUpEdit.Properties.DisplayMember = "Nome";
-        }
-
+        private void InitializeLookUpEdit()=>
+            unidadeDeMedidaLookUpEdit.PreencherLookUpEditComOValorDoEnum<UnidadeDeMedida>();
 
         private void CadastroDeProdutosView_Load(object sender, EventArgs e)
         {

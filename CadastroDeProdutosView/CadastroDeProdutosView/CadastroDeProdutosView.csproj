@@ -60,6 +60,7 @@
     <Compile Include="CadastroDeProdutosView.Designer.cs">
       <DependentUpon>CadastroDeProdutosView.cs</DependentUpon>
     </Compile>
+    <Compile Include="ManipuladorDeEnumService.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="CadastroDeProdutosView.resx">
