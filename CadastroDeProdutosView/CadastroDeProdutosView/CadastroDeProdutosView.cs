@@ -17,25 +17,34 @@ namespace CadastroDeProdutosView
         public CadastroDeProdutosView()
         {
             InitializeComponent();
+            InitializeLookUpEdit();
         }
 
-        public enum Produtos
+
+
+        public enum UnidadeDeMedida
         {
-            Quilos,
-            Litros,
-            Metros,
-            Unidades
+            Quilos = 1,
+            Litros = 2,
+            Metros = 3,
+            Unidade = 4
         }
 
-        private Dictionary<int, string> GetProdutosList()
+        private void InitializeLookUpEdit()
         {
-            return Enum.GetValues(typeof(Produtos)).Cast<Produtos>().ToDictionary(x => (int)x, x => x.ToString());
+            Dictionary<int, string> unidadeDeMedida = Enum.GetValues(typeof(UnidadeDeMedida))
+                .Cast<UnidadeDeMedida>()
+                .ToDictionary(x => (int)x, x => x.ToString());
+
+
+            undMedidaLookUpEdit.Properties.DataSource = unidadeDeMedida;
+            undMedidaLookUpEdit.Properties.ValueMember = "Id";
+            undMedidaLookUpEdit.Properties.DisplayMember = "Nome";
         }
+
+
         private void CadastroDeProdutosView_Load(object sender, EventArgs e)
         {
-            undMedidaLookUpEdit.Properties.DataSource = GetProdutosList();
-            undMedidaLookUpEdit.Properties.ValueMember = "Key";
-            undMedidaLookUpEdit.Properties.DisplayMember = " Value";
 
         }
 
@@ -59,12 +68,6 @@ namespace CadastroDeProdutosView
 
         }
 
-        private void lookUpEdit1_EditValueChanged(object sender, EventArgs e)
-        {
-
-
-        }
-
         private void precoLabelControl_Click(object sender, EventArgs e)
         {
 
@@ -72,6 +75,7 @@ namespace CadastroDeProdutosView
 
         public void lookUpEdit1_EditValueChanged_1(object sender, EventArgs e)
         {
+
         }
 
         private void nomeTextEdit_EditValueChanged(object sender, EventArgs e)
