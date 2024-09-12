@@ -54,6 +54,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Features\Commons\ValidacoesDeTextEdit.cs" />
     <Compile Include="Features\Produto\Enums\CategoriaDeProdutos.cs" />
     <Compile Include="Features\Produto\Enums\MarcaDoProduto.cs" />
     <Compile Include="Features\Produto\Enums\NaturezaDaOperacao.cs" />
