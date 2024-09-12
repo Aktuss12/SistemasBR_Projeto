@@ -1,4 +1,6 @@
 ﻿using CadastroDeProdutosView.Features.Commons;
+using CadastroDeProdutosView.Features.Produto.Enums;
+using DevExpress.XtraEditors;
 using System;
 using System.Windows.Forms;
 
@@ -16,22 +18,22 @@ namespace CadastroDeProdutosView.Features.Produto.Views
         {
             // Implementação das Enums para o LookUpEdit
             unidadeDeMedidaLookUpEdit
-                .PreencherLookUpEditComOValorDoEnum<Enums.UnidadeDeMedidaView.UnidadeDeMedida>();
+                .PreencherLookUpEditComOValorDoEnum<UnidadeDeMedidaView.UnidadeDeMedida>();
 
             categoriaDeProdutosLookUpEdit
-                .PreencherLookUpEditComOValorDoEnum<Enums.CategoriaDoProdutoView.CategoriaDeProdutos>();
+                .PreencherLookUpEditComOValorDoEnum<CategoriaDoProdutoView.CategoriaDeProdutos>();
 
             marcaLookUpEdit
-                .PreencherLookUpEditComOValorDoEnum<Enums.MarcaDoProdutoView.MarcaDoProduto>();
+                .PreencherLookUpEditComOValorDoEnum<MarcaDoProdutoView.MarcaDoProduto>();
 
             origemDaMercadoriaLookUpEdit
-                .PreencherLookUpEditComOValorDoEnum<Enums.OrigemDaMercadoriaView.OrigemDaMercadoria>();
+                .PreencherLookUpEditComOValorDoEnum<OrigemDaMercadoriaView.OrigemDaMercadoria>();
 
             situacaoTributariaLookUpEdit
-                .PreencherLookUpEditComOValorDoEnum<Enums.SituacaoTributariaView.SituacaoTributaria>();
+                .PreencherLookUpEditComOValorDoEnum<SituacaoTributariaView.SituacaoTributaria>();
 
             naturezaDaOperacaoLookUpEdit
-                .PreencherLookUpEditComOValorDoEnum <Enums.NaturezaDaOperacaoView.NaturezaDaOperacao>();
+                .PreencherLookUpEditComOValorDoEnum <NaturezaDaOperacaoView.NaturezaDaOperacao>();
         }
 
         private void CadastroDeProdutosView_Load(object sender, EventArgs e)
@@ -64,9 +66,38 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
         }
 
-        private void nomeTextEdit_EditValueChanged(object sender, EventArgs e)
+        private bool ValidarCamposObrigatorios()
+        {
+            var todosCamposPreenchidos =
+                (!string.IsNullOrWhiteSpace(nomeTextEdit.Text) &&
+                 !string.IsNullOrWhiteSpace(fornecedorTextEdit.Text) &&
+                 !string.IsNullOrWhiteSpace(codigodebarrasTextEdit.Text) &&
+                 !string.IsNullOrWhiteSpace(estoqueTextEdit.Text) &&
+                 !string.IsNullOrWhiteSpace(precoVendaTextEdit.Text) &&
+                 !string.IsNullOrWhiteSpace(custoTextEdit.Text) &&
+                 !string.IsNullOrWhiteSpace(markupTextEdit.Text) &&
+                 !string.IsNullOrWhiteSpace(ncmTextEdit.Text) &&
+                 !string.IsNullOrWhiteSpace(aliquotaDeIcmsTextEdit.Text) &&
+                 !string.IsNullOrWhiteSpace(reducaoIcmsTextEdit.Text));
+
+            if (todosCamposPreenchidos)
+            {
+                return true;
+            }
+            else
+            {
+                XtraMessageBox.Show("Todos os campos obrigatórios devem ser preenchidos.");
+                return false;
+            }
+        }
+
+        private void ValidarValoresMinimosEMaximos()
         {
 
+        }
+
+        public void nomeTextEdit_EditValueChanged(object sender, EventArgs e)
+        {
         }
 
         private void fornecedorLabelControl_Click(object sender, EventArgs e)
@@ -90,6 +121,31 @@ namespace CadastroDeProdutosView.Features.Produto.Views
         }
 
         private void origemDaMercadoriaLookUpEdit_EditValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void simpleButton1_Click(object sender, EventArgs e)
+        {
+            if (!ValidarCamposObrigatorios())
+            {
+                XtraMessageBox.Show("Produto nao cadastrado");
+            }
+
+            else if(ValidarCamposObrigatorios())
+            {
+                XtraMessageBox.Show("Cadastrado com Sucesso!");
+            }
+
+            ValidarValoresMinimosEMaximos();
+        }
+
+        private void simpleButton2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void simpleButton3_Click(object sender, EventArgs e)
         {
 
         }

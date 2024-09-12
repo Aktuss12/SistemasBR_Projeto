@@ -53,6 +53,8 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.codigodebarrasLabelControl = new DevExpress.XtraEditors.LabelControl();
             this.nomeLabelControl = new DevExpress.XtraEditors.LabelControl();
             this.infofiscalTabNavigationPage = new DevExpress.XtraBars.Navigation.TabNavigationPage();
+            this.simpleButton2 = new DevExpress.XtraEditors.SimpleButton();
+            this.SalvarButton = new DevExpress.XtraEditors.SimpleButton();
             this.naturezaDaOperacaoLookUpEdit = new DevExpress.XtraEditors.LookUpEdit();
             this.ncmTextEdit = new DevExpress.XtraEditors.TextEdit();
             this.origemDaMercadoriaLookUpEdit = new DevExpress.XtraEditors.LookUpEdit();
@@ -66,6 +68,8 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.aliquotaIcmsLabelControl = new DevExpress.XtraEditors.LabelControl();
             this.situacaoTributariaLabelControl = new DevExpress.XtraEditors.LabelControl();
             this.informacoesFiscaisLabelControl = new DevExpress.XtraEditors.LabelControl();
+            this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
+            this.simpleButton3 = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.tabPage)).BeginInit();
             this.tabPage.SuspendLayout();
             this.produtosTabNavigationPage.SuspendLayout();
@@ -131,6 +135,8 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.produtosTabNavigationPage.Appearance.Font = new System.Drawing.Font("Tahoma", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.produtosTabNavigationPage.Appearance.Options.UseFont = true;
             this.produtosTabNavigationPage.Caption = "Produtos";
+            this.produtosTabNavigationPage.Controls.Add(this.simpleButton1);
+            this.produtosTabNavigationPage.Controls.Add(this.simpleButton3);
             this.produtosTabNavigationPage.Controls.Add(this.fornecedorTextEdit);
             this.produtosTabNavigationPage.Controls.Add(this.marcaLookUpEdit);
             this.produtosTabNavigationPage.Controls.Add(this.categoriaDeProdutosLookUpEdit);
@@ -242,7 +248,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             // 
             // estoqueTextEdit
             // 
-            this.estoqueTextEdit.Location = new System.Drawing.Point(406, 152);
+            this.estoqueTextEdit.Location = new System.Drawing.Point(410, 152);
             this.estoqueTextEdit.Margin = new System.Windows.Forms.Padding(2);
             this.estoqueTextEdit.Name = "estoqueTextEdit";
             this.estoqueTextEdit.Size = new System.Drawing.Size(132, 20);
@@ -255,7 +261,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.precoVendaTextEdit.Name = "precoVendaTextEdit";
             this.precoVendaTextEdit.Properties.Mask.EditMask = "n";
             this.precoVendaTextEdit.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
-            this.precoVendaTextEdit.Size = new System.Drawing.Size(134, 20);
+            this.precoVendaTextEdit.Size = new System.Drawing.Size(138, 20);
             this.precoVendaTextEdit.TabIndex = 8;
             // 
             // custoTextEdit
@@ -391,6 +397,8 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             // infofiscalTabNavigationPage
             // 
             this.infofiscalTabNavigationPage.Caption = "Informações Fiscais";
+            this.infofiscalTabNavigationPage.Controls.Add(this.simpleButton2);
+            this.infofiscalTabNavigationPage.Controls.Add(this.SalvarButton);
             this.infofiscalTabNavigationPage.Controls.Add(this.naturezaDaOperacaoLookUpEdit);
             this.infofiscalTabNavigationPage.Controls.Add(this.ncmTextEdit);
             this.infofiscalTabNavigationPage.Controls.Add(this.origemDaMercadoriaLookUpEdit);
@@ -408,6 +416,28 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.infofiscalTabNavigationPage.Margin = new System.Windows.Forms.Padding(2);
             this.infofiscalTabNavigationPage.Name = "infofiscalTabNavigationPage";
             this.infofiscalTabNavigationPage.Size = new System.Drawing.Size(757, 415);
+            // 
+            // simpleButton2
+            // 
+            this.simpleButton2.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.simpleButton2.Appearance.Options.UseFont = true;
+            this.simpleButton2.Location = new System.Drawing.Point(508, 321);
+            this.simpleButton2.Name = "simpleButton2";
+            this.simpleButton2.Size = new System.Drawing.Size(89, 28);
+            this.simpleButton2.TabIndex = 32;
+            this.simpleButton2.Text = "Excluir";
+            this.simpleButton2.Click += new System.EventHandler(this.simpleButton2_Click);
+            // 
+            // SalvarButton
+            // 
+            this.SalvarButton.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SalvarButton.Appearance.Options.UseFont = true;
+            this.SalvarButton.Location = new System.Drawing.Point(134, 321);
+            this.SalvarButton.Name = "SalvarButton";
+            this.SalvarButton.Size = new System.Drawing.Size(89, 28);
+            this.SalvarButton.TabIndex = 30;
+            this.SalvarButton.Text = "Salvar";
+            this.SalvarButton.Click += new System.EventHandler(this.simpleButton1_Click);
             // 
             // naturezaDaOperacaoLookUpEdit
             // 
@@ -560,6 +590,27 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.informacoesFiscaisLabelControl.TabIndex = 1;
             this.informacoesFiscaisLabelControl.Text = "Informações Fiscais";
             // 
+            // simpleButton1
+            // 
+            this.simpleButton1.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.simpleButton1.Appearance.Options.UseFont = true;
+            this.simpleButton1.Location = new System.Drawing.Point(516, 347);
+            this.simpleButton1.Name = "simpleButton1";
+            this.simpleButton1.Size = new System.Drawing.Size(89, 28);
+            this.simpleButton1.TabIndex = 34;
+            this.simpleButton1.Text = "Excluir";
+            // 
+            // simpleButton3
+            // 
+            this.simpleButton3.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.simpleButton3.Appearance.Options.UseFont = true;
+            this.simpleButton3.Location = new System.Drawing.Point(142, 347);
+            this.simpleButton3.Name = "simpleButton3";
+            this.simpleButton3.Size = new System.Drawing.Size(89, 28);
+            this.simpleButton3.TabIndex = 33;
+            this.simpleButton3.Text = "Salvar";
+            this.simpleButton3.Click += new System.EventHandler(this.simpleButton3_Click);
+            // 
             // CadastroDeProdutosView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -635,6 +686,10 @@ namespace CadastroDeProdutosView.Features.Produto.Views
         public DevExpress.XtraEditors.LookUpEdit origemDaMercadoriaLookUpEdit;
         private DevExpress.XtraEditors.TextEdit ncmTextEdit;
         public DevExpress.XtraEditors.LookUpEdit naturezaDaOperacaoLookUpEdit;
+        private DevExpress.XtraEditors.SimpleButton SalvarButton;
+        private DevExpress.XtraEditors.SimpleButton simpleButton2;
+        private DevExpress.XtraEditors.SimpleButton simpleButton1;
+        private DevExpress.XtraEditors.SimpleButton simpleButton3;
     }
 }
 
