@@ -66,6 +66,15 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
         }
 
+        private void LimparLookUpEdits()
+        {
+            unidadeDeMedidaLookUpEdit.EditValue = null;
+            categoriaDeProdutosLookUpEdit.EditValue = null;
+            marcaLookUpEdit.EditValue = null;
+            origemDaMercadoriaLookUpEdit.EditValue = null;
+            situacaoTributariaLookUpEdit.EditValue = null;
+            naturezaDaOperacaoLookUpEdit.EditValue = null;
+        }
         private bool ValidarCamposObrigatorios()
         {
             var todosCamposPreenchidos =
@@ -89,11 +98,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
                 XtraMessageBox.Show("Todos os campos obrigatórios devem ser preenchidos.");
                 return false;
             }
-        }
-
-        private void ValidarValoresMinimosEMaximos()
-        {
-
         }
 
         public void nomeTextEdit_EditValueChanged(object sender, EventArgs e)
@@ -125,6 +129,20 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
         }
 
+        private void LimparTextEdits()
+        {
+            nomeTextEdit.Text = "";
+            fornecedorTextEdit.Text = "";
+            codigodebarrasTextEdit.Text = "";
+            estoqueTextEdit.Text = "";
+            precoVendaTextEdit.Text = "";
+            custoTextEdit.Text = "";
+            markupTextEdit.Text = "";
+            ncmTextEdit.Text = "";
+            aliquotaDeIcmsTextEdit.Text = "";
+            reducaoIcmsTextEdit.Text = "";
+        }
+
         private void simpleButton1_Click(object sender, EventArgs e)
         {
             if (!ValidarCamposObrigatorios())
@@ -134,20 +152,25 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
             else if(ValidarCamposObrigatorios())
             {
-                XtraMessageBox.Show("Cadastrado com Sucesso!");
+                XtraMessageBox.Show("Produto cadastrado com Sucesso!");
+                 LimparTextEdits();
+                 LimparLookUpEdits();
             }
-
-            ValidarValoresMinimosEMaximos();
-        }
-
-        private void simpleButton2_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void simpleButton3_Click(object sender, EventArgs e)
         {
+            if (!ValidarCamposObrigatorios())
+            {
+                XtraMessageBox.Show("Produto nao cadastrado");
+            }
 
+            else if (ValidarCamposObrigatorios())
+            {
+                XtraMessageBox.Show("Produto cadastrado com Sucesso!");
+                LimparTextEdits();
+                LimparLookUpEdits();
+            }
         }
     }
 }
