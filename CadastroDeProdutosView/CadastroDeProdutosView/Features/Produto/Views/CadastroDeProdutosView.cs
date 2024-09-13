@@ -29,6 +29,9 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             origemDaMercadoriaLookUpEdit
                 .PreencherLookUpEditComOValorDoEnum<OrigemDaMercadoriaView.OrigemDaMercadoria>();
 
+            tipoDeEstoqueLookUpEdit
+                .PreencherLookUpEditComOValorDoEnum<UnidadeDeMedidaView.UnidadeDeMedida>();
+
             situacaoTributariaLookUpEdit
                 .PreencherLookUpEditComOValorDoEnum<SituacaoTributariaView.SituacaoTributaria>();
 
@@ -123,6 +126,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             origemDaMercadoriaLookUpEdit.EditValue = null;
             situacaoTributariaLookUpEdit.EditValue = null;
             naturezaDaOperacaoLookUpEdit.EditValue = null;
+            tipoDeEstoqueLookUpEdit.EditValue = null;
         }
 
         // Automação de limpeza das TextEdit após salvar o produto cadastrado
@@ -131,28 +135,18 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             nomeTextEdit.Text = "";
             fornecedorTextEdit.Text = "";
             codigodebarrasTextEdit.Text = "";
-            estoqueTextEdit.Text = "";
-            precoVendaTextEdit.Text = "";
-            custoTextEdit.Text = "";
-            markupTextEdit.Text = "";
+            estoqueTextEdit.Text = null;
+            precoVendaTextEdit.Text = null;
+            custoTextEdit.Text = null;
+            markupTextEdit.Text = null;
             ncmTextEdit.Text = "";
-            aliquotaDeIcmsTextEdit.Text = "";
-            reducaoDeCalculoIcmsTextEdit.Text = "";
+            aliquotaDeIcmsTextEdit.Text = null;
+            reducaoDeCalculoIcmsTextEdit.Text = null;
         }
 
 
 
-        private void simpleButton3_Click(object sender, EventArgs e)
-        {
-            if (ValidarCamposObrigatorios())
-            {
-                XtraMessageBox.Show("Produto cadastrado com sucesso");
-                LimparTextEdits();
-                LimparLookUpEdits();
-            }
-            else 
-                XtraMessageBox.Show("Todos os campos obrigatórios devem ser preenchidos!");
-        }
+        
 
         private void fornecedorTextEdit_EditValueChanged(object sender, EventArgs e)
         {
@@ -161,7 +155,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
         private void estoqueTextEdit_EditValueChanged(object sender, EventArgs e)
         {
-            estoqueTextEdit.Properties.MaxLength = 7;
+            estoqueTextEdit.Properties.MaxLength = 12;
         }
 
         private void precoVendaTextEdit_EditValueChanged(object sender, EventArgs e)
@@ -171,12 +165,46 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
         private void custoTextEdit_EditValueChanged(object sender, EventArgs e)
         {
-
+            custoTextEdit.Properties.MaxLength = 8;
         }
 
         private void markupTextEdit_EditValueChanged(object sender, EventArgs e)
         {
+            markupTextEdit.Properties.MaxLength = 8;
+        }
 
+        private void simpleButton1_Click(object sender, EventArgs e)
+        {
+            {
+                if (ValidarCamposObrigatorios())
+                {
+                    XtraMessageBox.Show("Produto cadastrado com sucesso");
+                    LimparTextEdits();
+                    LimparLookUpEdits();
+                }
+                else
+                    XtraMessageBox.Show("Todos os campos obrigatórios devem ser preenchidos!");
+            }
+        }
+
+        private void tipoDeEstoqueLookUpEdit_EditValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ncmTextEdit_EditValueChanged(object sender, EventArgs e)
+        {
+            ncmTextEdit.Properties.MaxLength = 8;
+        }
+
+        private void aliquotaDeIcmsTextEdit_EditValueChanged(object sender, EventArgs e)
+        {
+            aliquotaDeIcmsTextEdit.Properties.MaxLength = 8;
+        }
+
+        private void reducaoDeCalculoIcmsTextEdit_EditValueChanged(object sender, EventArgs e)
+        {
+            reducaoDeCalculoIcmsTextEdit.Properties.MaxLength = 8;
         }
     }
 }

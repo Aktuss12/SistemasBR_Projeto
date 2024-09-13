@@ -32,7 +32,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.produtosLabelControl = new DevExpress.XtraEditors.LabelControl();
             this.tabPage = new DevExpress.XtraBars.Navigation.TabPane();
             this.produtosTabNavigationPage = new DevExpress.XtraBars.Navigation.TabNavigationPage();
-            this.salvarButton = new DevExpress.XtraEditors.SimpleButton();
             this.fornecedorTextEdit = new DevExpress.XtraEditors.TextEdit();
             this.marcaLookUpEdit = new DevExpress.XtraEditors.LookUpEdit();
             this.categoriaDeProdutosLookUpEdit = new DevExpress.XtraEditors.LookUpEdit();
@@ -54,6 +53,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.codigodebarrasLabelControl = new DevExpress.XtraEditors.LabelControl();
             this.nomeLabelControl = new DevExpress.XtraEditors.LabelControl();
             this.infofiscalTabNavigationPage = new DevExpress.XtraBars.Navigation.TabNavigationPage();
+            this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             this.naturezaDaOperacaoLookUpEdit = new DevExpress.XtraEditors.LookUpEdit();
             this.ncmTextEdit = new DevExpress.XtraEditors.TextEdit();
             this.origemDaMercadoriaLookUpEdit = new DevExpress.XtraEditors.LookUpEdit();
@@ -67,6 +67,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.aliquotaDeIcmsLabelControl = new DevExpress.XtraEditors.LabelControl();
             this.situacaoTributariaLabelControl = new DevExpress.XtraEditors.LabelControl();
             this.informacoesFiscaisLabelControl = new DevExpress.XtraEditors.LabelControl();
+            this.tipoDeEstoqueLookUpEdit = new DevExpress.XtraEditors.LookUpEdit();
             ((System.ComponentModel.ISupportInitialize)(this.tabPage)).BeginInit();
             this.tabPage.SuspendLayout();
             this.produtosTabNavigationPage.SuspendLayout();
@@ -87,6 +88,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             ((System.ComponentModel.ISupportInitialize)(this.situacaoTributariaLookUpEdit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.reducaoDeCalculoIcmsTextEdit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.aliquotaDeIcmsTextEdit.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tipoDeEstoqueLookUpEdit.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // produtosLabelControl
@@ -132,7 +134,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.produtosTabNavigationPage.Appearance.Font = new System.Drawing.Font("Tahoma", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.produtosTabNavigationPage.Appearance.Options.UseFont = true;
             this.produtosTabNavigationPage.Caption = "Produtos";
-            this.produtosTabNavigationPage.Controls.Add(this.salvarButton);
+            this.produtosTabNavigationPage.Controls.Add(this.tipoDeEstoqueLookUpEdit);
             this.produtosTabNavigationPage.Controls.Add(this.fornecedorTextEdit);
             this.produtosTabNavigationPage.Controls.Add(this.marcaLookUpEdit);
             this.produtosTabNavigationPage.Controls.Add(this.categoriaDeProdutosLookUpEdit);
@@ -159,21 +161,11 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.produtosTabNavigationPage.Size = new System.Drawing.Size(757, 415);
             this.produtosTabNavigationPage.Paint += new System.Windows.Forms.PaintEventHandler(this.produtosTabNavigationPage_Paint);
             // 
-            // salvarButton
-            // 
-            this.salvarButton.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.salvarButton.Appearance.Options.UseFont = true;
-            this.salvarButton.Location = new System.Drawing.Point(329, 356);
-            this.salvarButton.Name = "salvarButton";
-            this.salvarButton.Size = new System.Drawing.Size(89, 28);
-            this.salvarButton.TabIndex = 11;
-            this.salvarButton.Text = "Salvar";
-            this.salvarButton.Click += new System.EventHandler(this.simpleButton3_Click);
-            // 
             // fornecedorTextEdit
             // 
+            this.fornecedorTextEdit.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.fornecedorTextEdit.EditValue = "";
-            this.fornecedorTextEdit.Location = new System.Drawing.Point(45, 296);
+            this.fornecedorTextEdit.Location = new System.Drawing.Point(45, 328);
             this.fornecedorTextEdit.Margin = new System.Windows.Forms.Padding(2);
             this.fornecedorTextEdit.Name = "fornecedorTextEdit";
             this.fornecedorTextEdit.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
@@ -184,8 +176,9 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             // 
             // marcaLookUpEdit
             // 
+            this.marcaLookUpEdit.Cursor = System.Windows.Forms.Cursors.Hand;
             this.marcaLookUpEdit.EditValue = "<Null>";
-            this.marcaLookUpEdit.Location = new System.Drawing.Point(45, 219);
+            this.marcaLookUpEdit.Location = new System.Drawing.Point(45, 247);
             this.marcaLookUpEdit.Margin = new System.Windows.Forms.Padding(2);
             this.marcaLookUpEdit.Name = "marcaLookUpEdit";
             this.marcaLookUpEdit.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
@@ -200,8 +193,9 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             // 
             // categoriaDeProdutosLookUpEdit
             // 
+            this.categoriaDeProdutosLookUpEdit.Cursor = System.Windows.Forms.Cursors.Hand;
             this.categoriaDeProdutosLookUpEdit.EditValue = "";
-            this.categoriaDeProdutosLookUpEdit.Location = new System.Drawing.Point(211, 152);
+            this.categoriaDeProdutosLookUpEdit.Location = new System.Drawing.Point(211, 177);
             this.categoriaDeProdutosLookUpEdit.Margin = new System.Windows.Forms.Padding(2);
             this.categoriaDeProdutosLookUpEdit.Name = "categoriaDeProdutosLookUpEdit";
             this.categoriaDeProdutosLookUpEdit.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
@@ -216,8 +210,9 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             // 
             // unidadeDeMedidaLookUpEdit
             // 
+            this.unidadeDeMedidaLookUpEdit.Cursor = System.Windows.Forms.Cursors.Hand;
             this.unidadeDeMedidaLookUpEdit.EditValue = "<Null>";
-            this.unidadeDeMedidaLookUpEdit.Location = new System.Drawing.Point(45, 152);
+            this.unidadeDeMedidaLookUpEdit.Location = new System.Drawing.Point(45, 177);
             this.unidadeDeMedidaLookUpEdit.Margin = new System.Windows.Forms.Padding(2);
             this.unidadeDeMedidaLookUpEdit.Name = "unidadeDeMedidaLookUpEdit";
             this.unidadeDeMedidaLookUpEdit.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
@@ -233,8 +228,8 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             // 
             // markupTextEdit
             // 
-            this.markupTextEdit.EditValue = "";
-            this.markupTextEdit.Location = new System.Drawing.Point(410, 296);
+            this.markupTextEdit.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.markupTextEdit.Location = new System.Drawing.Point(410, 328);
             this.markupTextEdit.Margin = new System.Windows.Forms.Padding(2);
             this.markupTextEdit.Name = "markupTextEdit";
             this.markupTextEdit.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
@@ -242,14 +237,14 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.markupTextEdit.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.markupTextEdit.Properties.Mask.UseMaskAsDisplayFormat = true;
             this.markupTextEdit.Size = new System.Drawing.Size(298, 22);
-            this.markupTextEdit.TabIndex = 10;
+            this.markupTextEdit.TabIndex = 11;
             this.markupTextEdit.EditValueChanged += new System.EventHandler(this.markupTextEdit_EditValueChanged);
             // 
             // markupLabelControl
             // 
             this.markupLabelControl.Appearance.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.markupLabelControl.Appearance.Options.UseFont = true;
-            this.markupLabelControl.Location = new System.Drawing.Point(410, 271);
+            this.markupLabelControl.Location = new System.Drawing.Point(410, 303);
             this.markupLabelControl.Margin = new System.Windows.Forms.Padding(2);
             this.markupLabelControl.Name = "markupLabelControl";
             this.markupLabelControl.Size = new System.Drawing.Size(57, 21);
@@ -260,7 +255,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             // 
             this.unidadeDeMedidaLabelControl.Appearance.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.unidadeDeMedidaLabelControl.Appearance.Options.UseFont = true;
-            this.unidadeDeMedidaLabelControl.Location = new System.Drawing.Point(45, 127);
+            this.unidadeDeMedidaLabelControl.Location = new System.Drawing.Point(45, 152);
             this.unidadeDeMedidaLabelControl.Margin = new System.Windows.Forms.Padding(2);
             this.unidadeDeMedidaLabelControl.Name = "unidadeDeMedidaLabelControl";
             this.unidadeDeMedidaLabelControl.Size = new System.Drawing.Size(112, 21);
@@ -269,21 +264,21 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             // 
             // estoqueTextEdit
             // 
-            this.estoqueTextEdit.EditValue = "";
+            this.estoqueTextEdit.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.estoqueTextEdit.Location = new System.Drawing.Point(410, 152);
             this.estoqueTextEdit.Margin = new System.Windows.Forms.Padding(2);
             this.estoqueTextEdit.Name = "estoqueTextEdit";
             this.estoqueTextEdit.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
-            this.estoqueTextEdit.Properties.Mask.EditMask = "d";
+            this.estoqueTextEdit.Properties.Mask.EditMask = "n";
             this.estoqueTextEdit.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
+            this.estoqueTextEdit.Properties.Mask.UseMaskAsDisplayFormat = true;
             this.estoqueTextEdit.Size = new System.Drawing.Size(132, 22);
             this.estoqueTextEdit.TabIndex = 7;
             this.estoqueTextEdit.EditValueChanged += new System.EventHandler(this.estoqueTextEdit_EditValueChanged);
             // 
             // precoVendaTextEdit
             // 
-            this.precoVendaTextEdit.EditValue = "";
-            this.precoVendaTextEdit.Location = new System.Drawing.Point(570, 152);
+            this.precoVendaTextEdit.Location = new System.Drawing.Point(570, 177);
             this.precoVendaTextEdit.Margin = new System.Windows.Forms.Padding(2);
             this.precoVendaTextEdit.Name = "precoVendaTextEdit";
             this.precoVendaTextEdit.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
@@ -291,13 +286,13 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.precoVendaTextEdit.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.precoVendaTextEdit.Properties.Mask.UseMaskAsDisplayFormat = true;
             this.precoVendaTextEdit.Size = new System.Drawing.Size(138, 22);
-            this.precoVendaTextEdit.TabIndex = 8;
+            this.precoVendaTextEdit.TabIndex = 9;
             this.precoVendaTextEdit.EditValueChanged += new System.EventHandler(this.precoVendaTextEdit_EditValueChanged);
             // 
             // custoTextEdit
             // 
-            this.custoTextEdit.EditValue = "";
-            this.custoTextEdit.Location = new System.Drawing.Point(410, 219);
+            this.custoTextEdit.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.custoTextEdit.Location = new System.Drawing.Point(410, 247);
             this.custoTextEdit.Margin = new System.Windows.Forms.Padding(2);
             this.custoTextEdit.Name = "custoTextEdit";
             this.custoTextEdit.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
@@ -310,13 +305,14 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             0,
             0});
             this.custoTextEdit.Size = new System.Drawing.Size(298, 22);
-            this.custoTextEdit.TabIndex = 9;
+            this.custoTextEdit.TabIndex = 10;
             this.custoTextEdit.EditValueChanged += new System.EventHandler(this.custoTextEdit_EditValueChanged);
             // 
             // codigodebarrasTextEdit
             // 
+            this.codigodebarrasTextEdit.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.codigodebarrasTextEdit.EditValue = "";
-            this.codigodebarrasTextEdit.Location = new System.Drawing.Point(410, 87);
+            this.codigodebarrasTextEdit.Location = new System.Drawing.Point(410, 92);
             this.codigodebarrasTextEdit.Margin = new System.Windows.Forms.Padding(2);
             this.codigodebarrasTextEdit.Name = "codigodebarrasTextEdit";
             this.codigodebarrasTextEdit.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
@@ -328,8 +324,9 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             // 
             // nomeTextEdit
             // 
+            this.nomeTextEdit.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.nomeTextEdit.EditValue = "";
-            this.nomeTextEdit.Location = new System.Drawing.Point(45, 87);
+            this.nomeTextEdit.Location = new System.Drawing.Point(45, 92);
             this.nomeTextEdit.Margin = new System.Windows.Forms.Padding(2);
             this.nomeTextEdit.Name = "nomeTextEdit";
             this.nomeTextEdit.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
@@ -342,7 +339,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             // 
             this.categoriaLabelControl.Appearance.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.categoriaLabelControl.Appearance.Options.UseFont = true;
-            this.categoriaLabelControl.Location = new System.Drawing.Point(211, 127);
+            this.categoriaLabelControl.Location = new System.Drawing.Point(211, 152);
             this.categoriaLabelControl.Margin = new System.Windows.Forms.Padding(2);
             this.categoriaLabelControl.Name = "categoriaLabelControl";
             this.categoriaLabelControl.Size = new System.Drawing.Size(70, 21);
@@ -365,7 +362,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             // 
             this.precoDaVendaLabelControl.Appearance.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.precoDaVendaLabelControl.Appearance.Options.UseFont = true;
-            this.precoDaVendaLabelControl.Location = new System.Drawing.Point(570, 127);
+            this.precoDaVendaLabelControl.Location = new System.Drawing.Point(570, 152);
             this.precoDaVendaLabelControl.Margin = new System.Windows.Forms.Padding(2);
             this.precoDaVendaLabelControl.Name = "precoDaVendaLabelControl";
             this.precoDaVendaLabelControl.Size = new System.Drawing.Size(111, 21);
@@ -376,7 +373,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             // 
             this.fornecedorLabelControl.Appearance.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.fornecedorLabelControl.Appearance.Options.UseFont = true;
-            this.fornecedorLabelControl.Location = new System.Drawing.Point(45, 271);
+            this.fornecedorLabelControl.Location = new System.Drawing.Point(45, 303);
             this.fornecedorLabelControl.Margin = new System.Windows.Forms.Padding(2);
             this.fornecedorLabelControl.Name = "fornecedorLabelControl";
             this.fornecedorLabelControl.Size = new System.Drawing.Size(82, 21);
@@ -388,7 +385,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             // 
             this.marcaLabelControl.Appearance.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.marcaLabelControl.Appearance.Options.UseFont = true;
-            this.marcaLabelControl.Location = new System.Drawing.Point(45, 194);
+            this.marcaLabelControl.Location = new System.Drawing.Point(45, 222);
             this.marcaLabelControl.Margin = new System.Windows.Forms.Padding(2);
             this.marcaLabelControl.Name = "marcaLabelControl";
             this.marcaLabelControl.Size = new System.Drawing.Size(46, 21);
@@ -399,7 +396,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             // 
             this.custoLabelControl.Appearance.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.custoLabelControl.Appearance.Options.UseFont = true;
-            this.custoLabelControl.Location = new System.Drawing.Point(410, 194);
+            this.custoLabelControl.Location = new System.Drawing.Point(410, 222);
             this.custoLabelControl.Margin = new System.Windows.Forms.Padding(2);
             this.custoLabelControl.Name = "custoLabelControl";
             this.custoLabelControl.Size = new System.Drawing.Size(43, 21);
@@ -412,7 +409,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.codigodebarrasLabelControl.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.codigodebarrasLabelControl.Appearance.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.codigodebarrasLabelControl.Appearance.Options.UseFont = true;
-            this.codigodebarrasLabelControl.Location = new System.Drawing.Point(410, 63);
+            this.codigodebarrasLabelControl.Location = new System.Drawing.Point(410, 68);
             this.codigodebarrasLabelControl.Margin = new System.Windows.Forms.Padding(2);
             this.codigodebarrasLabelControl.Name = "codigodebarrasLabelControl";
             this.codigodebarrasLabelControl.Size = new System.Drawing.Size(122, 21);
@@ -423,7 +420,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             // 
             this.nomeLabelControl.Appearance.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.nomeLabelControl.Appearance.Options.UseFont = true;
-            this.nomeLabelControl.Location = new System.Drawing.Point(45, 63);
+            this.nomeLabelControl.Location = new System.Drawing.Point(45, 68);
             this.nomeLabelControl.Margin = new System.Windows.Forms.Padding(2);
             this.nomeLabelControl.Name = "nomeLabelControl";
             this.nomeLabelControl.Size = new System.Drawing.Size(46, 21);
@@ -434,6 +431,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             // infofiscalTabNavigationPage
             // 
             this.infofiscalTabNavigationPage.Caption = "Informações Fiscais";
+            this.infofiscalTabNavigationPage.Controls.Add(this.simpleButton1);
             this.infofiscalTabNavigationPage.Controls.Add(this.naturezaDaOperacaoLookUpEdit);
             this.infofiscalTabNavigationPage.Controls.Add(this.ncmTextEdit);
             this.infofiscalTabNavigationPage.Controls.Add(this.origemDaMercadoriaLookUpEdit);
@@ -452,10 +450,22 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.infofiscalTabNavigationPage.Name = "infofiscalTabNavigationPage";
             this.infofiscalTabNavigationPage.Size = new System.Drawing.Size(757, 415);
             // 
+            // simpleButton1
+            // 
+            this.simpleButton1.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.simpleButton1.Appearance.Options.UseFont = true;
+            this.simpleButton1.Location = new System.Drawing.Point(331, 341);
+            this.simpleButton1.Name = "simpleButton1";
+            this.simpleButton1.Size = new System.Drawing.Size(89, 28);
+            this.simpleButton1.TabIndex = 18;
+            this.simpleButton1.Text = "Salvar";
+            this.simpleButton1.Click += new System.EventHandler(this.simpleButton1_Click);
+            // 
             // naturezaDaOperacaoLookUpEdit
             // 
+            this.naturezaDaOperacaoLookUpEdit.Cursor = System.Windows.Forms.Cursors.Hand;
             this.naturezaDaOperacaoLookUpEdit.EditValue = "";
-            this.naturezaDaOperacaoLookUpEdit.Location = new System.Drawing.Point(45, 276);
+            this.naturezaDaOperacaoLookUpEdit.Location = new System.Drawing.Point(45, 283);
             this.naturezaDaOperacaoLookUpEdit.Margin = new System.Windows.Forms.Padding(2);
             this.naturezaDaOperacaoLookUpEdit.Name = "naturezaDaOperacaoLookUpEdit";
             this.naturezaDaOperacaoLookUpEdit.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
@@ -471,6 +481,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             // 
             // ncmTextEdit
             // 
+            this.ncmTextEdit.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.ncmTextEdit.EditValue = "";
             this.ncmTextEdit.Location = new System.Drawing.Point(406, 98);
             this.ncmTextEdit.Margin = new System.Windows.Forms.Padding(2);
@@ -480,9 +491,11 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.ncmTextEdit.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.ncmTextEdit.Size = new System.Drawing.Size(302, 22);
             this.ncmTextEdit.TabIndex = 15;
+            this.ncmTextEdit.EditValueChanged += new System.EventHandler(this.ncmTextEdit_EditValueChanged);
             // 
             // origemDaMercadoriaLookUpEdit
             // 
+            this.origemDaMercadoriaLookUpEdit.Cursor = System.Windows.Forms.Cursors.Hand;
             this.origemDaMercadoriaLookUpEdit.EditValue = "";
             this.origemDaMercadoriaLookUpEdit.Location = new System.Drawing.Point(45, 98);
             this.origemDaMercadoriaLookUpEdit.Margin = new System.Windows.Forms.Padding(2);
@@ -500,6 +513,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             // 
             // situacaoTributariaLookUpEdit
             // 
+            this.situacaoTributariaLookUpEdit.Cursor = System.Windows.Forms.Cursors.Hand;
             this.situacaoTributariaLookUpEdit.EditValue = "";
             this.situacaoTributariaLookUpEdit.Location = new System.Drawing.Point(45, 190);
             this.situacaoTributariaLookUpEdit.Margin = new System.Windows.Forms.Padding(2);
@@ -538,8 +552,8 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             // 
             // reducaoDeCalculoIcmsTextEdit
             // 
-            this.reducaoDeCalculoIcmsTextEdit.EditValue = "";
-            this.reducaoDeCalculoIcmsTextEdit.Location = new System.Drawing.Point(408, 276);
+            this.reducaoDeCalculoIcmsTextEdit.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.reducaoDeCalculoIcmsTextEdit.Location = new System.Drawing.Point(408, 283);
             this.reducaoDeCalculoIcmsTextEdit.Margin = new System.Windows.Forms.Padding(2);
             this.reducaoDeCalculoIcmsTextEdit.Name = "reducaoDeCalculoIcmsTextEdit";
             this.reducaoDeCalculoIcmsTextEdit.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
@@ -548,12 +562,13 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.reducaoDeCalculoIcmsTextEdit.Properties.Mask.UseMaskAsDisplayFormat = true;
             this.reducaoDeCalculoIcmsTextEdit.Size = new System.Drawing.Size(301, 22);
             this.reducaoDeCalculoIcmsTextEdit.TabIndex = 17;
+            this.reducaoDeCalculoIcmsTextEdit.EditValueChanged += new System.EventHandler(this.reducaoDeCalculoIcmsTextEdit_EditValueChanged);
             // 
             // reducaoDeCalculoIcmsLabelControl
             // 
             this.reducaoDeCalculoIcmsLabelControl.Appearance.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.reducaoDeCalculoIcmsLabelControl.Appearance.Options.UseFont = true;
-            this.reducaoDeCalculoIcmsLabelControl.Location = new System.Drawing.Point(407, 254);
+            this.reducaoDeCalculoIcmsLabelControl.Location = new System.Drawing.Point(407, 261);
             this.reducaoDeCalculoIcmsLabelControl.Margin = new System.Windows.Forms.Padding(2);
             this.reducaoDeCalculoIcmsLabelControl.Name = "reducaoDeCalculoIcmsLabelControl";
             this.reducaoDeCalculoIcmsLabelControl.Size = new System.Drawing.Size(229, 21);
@@ -564,7 +579,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             // 
             this.naturezaOperacaoLabelControl.Appearance.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.naturezaOperacaoLabelControl.Appearance.Options.UseFont = true;
-            this.naturezaOperacaoLabelControl.Location = new System.Drawing.Point(45, 251);
+            this.naturezaOperacaoLabelControl.Location = new System.Drawing.Point(45, 258);
             this.naturezaOperacaoLabelControl.Margin = new System.Windows.Forms.Padding(2);
             this.naturezaOperacaoLabelControl.Name = "naturezaOperacaoLabelControl";
             this.naturezaOperacaoLabelControl.Size = new System.Drawing.Size(158, 21);
@@ -573,7 +588,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             // 
             // aliquotaDeIcmsTextEdit
             // 
-            this.aliquotaDeIcmsTextEdit.EditValue = "";
+            this.aliquotaDeIcmsTextEdit.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.aliquotaDeIcmsTextEdit.Location = new System.Drawing.Point(408, 190);
             this.aliquotaDeIcmsTextEdit.Margin = new System.Windows.Forms.Padding(2);
             this.aliquotaDeIcmsTextEdit.Name = "aliquotaDeIcmsTextEdit";
@@ -583,6 +598,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.aliquotaDeIcmsTextEdit.Properties.Mask.UseMaskAsDisplayFormat = true;
             this.aliquotaDeIcmsTextEdit.Size = new System.Drawing.Size(300, 22);
             this.aliquotaDeIcmsTextEdit.TabIndex = 16;
+            this.aliquotaDeIcmsTextEdit.EditValueChanged += new System.EventHandler(this.aliquotaDeIcmsTextEdit_EditValueChanged);
             // 
             // aliquotaDeIcmsLabelControl
             // 
@@ -617,6 +633,24 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.informacoesFiscaisLabelControl.TabIndex = 1;
             this.informacoesFiscaisLabelControl.Text = "Informações Fiscais";
             // 
+            // tipoDeEstoqueLookUpEdit
+            // 
+            this.tipoDeEstoqueLookUpEdit.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.tipoDeEstoqueLookUpEdit.EditValue = "";
+            this.tipoDeEstoqueLookUpEdit.Location = new System.Drawing.Point(410, 178);
+            this.tipoDeEstoqueLookUpEdit.Margin = new System.Windows.Forms.Padding(2);
+            this.tipoDeEstoqueLookUpEdit.Name = "tipoDeEstoqueLookUpEdit";
+            this.tipoDeEstoqueLookUpEdit.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
+            this.tipoDeEstoqueLookUpEdit.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.tipoDeEstoqueLookUpEdit.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Value", "Unidade De Medida")});
+            this.tipoDeEstoqueLookUpEdit.Properties.DropDownRows = 11;
+            this.tipoDeEstoqueLookUpEdit.Properties.NullText = "";
+            this.tipoDeEstoqueLookUpEdit.Size = new System.Drawing.Size(132, 22);
+            this.tipoDeEstoqueLookUpEdit.TabIndex = 8;
+            this.tipoDeEstoqueLookUpEdit.EditValueChanged += new System.EventHandler(this.tipoDeEstoqueLookUpEdit_EditValueChanged);
+            // 
             // CadastroDeProdutosView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -649,6 +683,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             ((System.ComponentModel.ISupportInitialize)(this.situacaoTributariaLookUpEdit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.reducaoDeCalculoIcmsTextEdit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.aliquotaDeIcmsTextEdit.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tipoDeEstoqueLookUpEdit.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -692,7 +727,8 @@ namespace CadastroDeProdutosView.Features.Produto.Views
         public DevExpress.XtraEditors.LookUpEdit origemDaMercadoriaLookUpEdit;
         private DevExpress.XtraEditors.TextEdit ncmTextEdit;
         public DevExpress.XtraEditors.LookUpEdit naturezaDaOperacaoLookUpEdit;
-        private DevExpress.XtraEditors.SimpleButton salvarButton;
+        private DevExpress.XtraEditors.SimpleButton simpleButton1;
+        public DevExpress.XtraEditors.LookUpEdit tipoDeEstoqueLookUpEdit;
     }
 }
 
