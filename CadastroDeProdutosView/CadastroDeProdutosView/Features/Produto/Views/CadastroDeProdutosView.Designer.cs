@@ -32,6 +32,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.produtosLabelControl = new DevExpress.XtraEditors.LabelControl();
             this.tabPage = new DevExpress.XtraBars.Navigation.TabPane();
             this.produtosTabNavigationPage = new DevExpress.XtraBars.Navigation.TabNavigationPage();
+            this.tipoDeEstoqueLookUpEdit = new DevExpress.XtraEditors.LookUpEdit();
             this.fornecedorTextEdit = new DevExpress.XtraEditors.TextEdit();
             this.marcaLookUpEdit = new DevExpress.XtraEditors.LookUpEdit();
             this.categoriaDeProdutosLookUpEdit = new DevExpress.XtraEditors.LookUpEdit();
@@ -67,10 +68,10 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.aliquotaDeIcmsLabelControl = new DevExpress.XtraEditors.LabelControl();
             this.situacaoTributariaLabelControl = new DevExpress.XtraEditors.LabelControl();
             this.informacoesFiscaisLabelControl = new DevExpress.XtraEditors.LabelControl();
-            this.tipoDeEstoqueLookUpEdit = new DevExpress.XtraEditors.LookUpEdit();
             ((System.ComponentModel.ISupportInitialize)(this.tabPage)).BeginInit();
             this.tabPage.SuspendLayout();
             this.produtosTabNavigationPage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tipoDeEstoqueLookUpEdit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fornecedorTextEdit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.marcaLookUpEdit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.categoriaDeProdutosLookUpEdit.Properties)).BeginInit();
@@ -88,7 +89,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             ((System.ComponentModel.ISupportInitialize)(this.situacaoTributariaLookUpEdit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.reducaoDeCalculoIcmsTextEdit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.aliquotaDeIcmsTextEdit.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tipoDeEstoqueLookUpEdit.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // produtosLabelControl
@@ -162,6 +162,24 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.produtosTabNavigationPage.Name = "produtosTabNavigationPage";
             this.produtosTabNavigationPage.Size = new System.Drawing.Size(757, 415);
             this.produtosTabNavigationPage.Paint += new System.Windows.Forms.PaintEventHandler(this.produtosTabNavigationPage_Paint);
+            // 
+            // tipoDeEstoqueLookUpEdit
+            // 
+            this.tipoDeEstoqueLookUpEdit.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.tipoDeEstoqueLookUpEdit.EditValue = "";
+            this.tipoDeEstoqueLookUpEdit.Location = new System.Drawing.Point(410, 179);
+            this.tipoDeEstoqueLookUpEdit.Margin = new System.Windows.Forms.Padding(2);
+            this.tipoDeEstoqueLookUpEdit.Name = "tipoDeEstoqueLookUpEdit";
+            this.tipoDeEstoqueLookUpEdit.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
+            this.tipoDeEstoqueLookUpEdit.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.tipoDeEstoqueLookUpEdit.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Value", "Unidade De Medida")});
+            this.tipoDeEstoqueLookUpEdit.Properties.DropDownRows = 11;
+            this.tipoDeEstoqueLookUpEdit.Properties.NullText = "";
+            this.tipoDeEstoqueLookUpEdit.Size = new System.Drawing.Size(132, 22);
+            this.tipoDeEstoqueLookUpEdit.TabIndex = 8;
+            this.tipoDeEstoqueLookUpEdit.EditValueChanged += new System.EventHandler(this.tipoDeEstoqueLookUpEdit_EditValueChanged);
             // 
             // fornecedorTextEdit
             // 
@@ -331,6 +349,8 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.nomeTextEdit.Location = new System.Drawing.Point(45, 92);
             this.nomeTextEdit.Margin = new System.Windows.Forms.Padding(2);
             this.nomeTextEdit.Name = "nomeTextEdit";
+            this.nomeTextEdit.Properties.Appearance.BackColor = System.Drawing.Color.White;
+            this.nomeTextEdit.Properties.Appearance.Options.UseBackColor = true;
             this.nomeTextEdit.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
             this.nomeTextEdit.Properties.Mask.EditMask = "String";
             this.nomeTextEdit.Size = new System.Drawing.Size(298, 22);
@@ -422,7 +442,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             // 
             this.nomeLabelControl.Appearance.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.nomeLabelControl.Appearance.Options.UseFont = true;
-            this.nomeLabelControl.Location = new System.Drawing.Point(45, 68);
+            this.nomeLabelControl.Location = new System.Drawing.Point(45, 71);
             this.nomeLabelControl.Margin = new System.Windows.Forms.Padding(2);
             this.nomeLabelControl.Name = "nomeLabelControl";
             this.nomeLabelControl.Size = new System.Drawing.Size(46, 21);
@@ -637,24 +657,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.informacoesFiscaisLabelControl.TabIndex = 1;
             this.informacoesFiscaisLabelControl.Text = "Informações Fiscais";
             // 
-            // tipoDeEstoqueLookUpEdit
-            // 
-            this.tipoDeEstoqueLookUpEdit.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.tipoDeEstoqueLookUpEdit.EditValue = "";
-            this.tipoDeEstoqueLookUpEdit.Location = new System.Drawing.Point(410, 179);
-            this.tipoDeEstoqueLookUpEdit.Margin = new System.Windows.Forms.Padding(2);
-            this.tipoDeEstoqueLookUpEdit.Name = "tipoDeEstoqueLookUpEdit";
-            this.tipoDeEstoqueLookUpEdit.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
-            this.tipoDeEstoqueLookUpEdit.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.tipoDeEstoqueLookUpEdit.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Value", "Unidade De Medida")});
-            this.tipoDeEstoqueLookUpEdit.Properties.DropDownRows = 11;
-            this.tipoDeEstoqueLookUpEdit.Properties.NullText = "";
-            this.tipoDeEstoqueLookUpEdit.Size = new System.Drawing.Size(132, 22);
-            this.tipoDeEstoqueLookUpEdit.TabIndex = 8;
-            this.tipoDeEstoqueLookUpEdit.EditValueChanged += new System.EventHandler(this.tipoDeEstoqueLookUpEdit_EditValueChanged);
-            // 
             // CadastroDeProdutosView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -669,6 +671,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.tabPage.ResumeLayout(false);
             this.produtosTabNavigationPage.ResumeLayout(false);
             this.produtosTabNavigationPage.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tipoDeEstoqueLookUpEdit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fornecedorTextEdit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.marcaLookUpEdit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.categoriaDeProdutosLookUpEdit.Properties)).EndInit();
@@ -687,7 +690,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             ((System.ComponentModel.ISupportInitialize)(this.situacaoTributariaLookUpEdit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.reducaoDeCalculoIcmsTextEdit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.aliquotaDeIcmsTextEdit.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tipoDeEstoqueLookUpEdit.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }

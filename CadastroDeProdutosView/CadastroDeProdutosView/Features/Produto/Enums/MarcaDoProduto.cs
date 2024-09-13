@@ -7,7 +7,7 @@ namespace CadastroDeProdutosView.Features.Produto.Enums
         public enum MarcaDoProduto
         {
             [Description("Natural da Terra")] NaturalDaTerra,
-            [Description("Coca-Cola")] CocaCola,
+            [Description("Saboraki")] Saboraki,
             [Description("Localiza")] Localiza,
             [Description("Granado")] Granado,
             [Description("Natura")] Natura,

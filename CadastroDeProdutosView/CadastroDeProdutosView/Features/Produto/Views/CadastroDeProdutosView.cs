@@ -102,17 +102,126 @@ namespace CadastroDeProdutosView.Features.Produto.Views
         // Validação para os campos obrigatorios do cadastro
         private bool ValidarCamposObrigatorios()
         {
-            var todosCamposPreenchidos =
-                (!string.IsNullOrWhiteSpace(nomeTextEdit.Text) &&
-                 !string.IsNullOrWhiteSpace(fornecedorTextEdit.Text) &&
-                 !string.IsNullOrWhiteSpace(codigodebarrasTextEdit.Text) &&
-                 !string.IsNullOrWhiteSpace(estoqueTextEdit.Text) &&
-                 !string.IsNullOrWhiteSpace(precoVendaTextEdit.Text) &&
-                 !string.IsNullOrWhiteSpace(custoTextEdit.Text) &&
-                 !string.IsNullOrWhiteSpace(markupTextEdit.Text) &&
-                 !string.IsNullOrWhiteSpace(ncmTextEdit.Text) &&
-                 !string.IsNullOrWhiteSpace(aliquotaDeIcmsTextEdit.Text) &&
-                 !string.IsNullOrWhiteSpace(reducaoDeCalculoIcmsTextEdit.Text));
+            var todosCamposPreenchidos = true;
+            if (string.IsNullOrWhiteSpace(nomeTextEdit.Text))
+            {
+                nomeLabelControl.Text = "Nome: <color=red>*</color>";
+                nomeLabelControl.AllowHtmlString = true;
+                todosCamposPreenchidos = false;
+            }
+            else
+            {
+                nomeLabelControl.Text = "Nome:";
+                nomeLabelControl.AllowHtmlString = false;
+            }
+
+            if (string.IsNullOrWhiteSpace(fornecedorTextEdit.Text))
+            {
+                fornecedorLabelControl.Text = "Fornecedor: <color=red>*</color>";
+                fornecedorLabelControl.AllowHtmlString = true;
+                todosCamposPreenchidos = false;
+            }
+            else
+            {
+                fornecedorLabelControl.Text = "Fornecedor:";
+                fornecedorLabelControl.AllowHtmlString = false;
+            }
+
+            if (string.IsNullOrWhiteSpace(codigodebarrasTextEdit.Text))
+            {
+                codigodebarrasLabelControl.Text = "Codigo de Barras: <color=red>*</color>";
+                codigodebarrasLabelControl.AllowHtmlString = true;
+                todosCamposPreenchidos = false;
+            }
+            else
+            {
+                codigodebarrasLabelControl.Text = "Codigo De Barras:";
+                codigodebarrasLabelControl.AllowHtmlString = false;
+            }
+
+            if (string.IsNullOrWhiteSpace(estoqueTextEdit.Text))
+            {
+                estoqueLabelControl.Text = "Estoque: <color=red>*</color>";
+                estoqueLabelControl.AllowHtmlString = true;
+                todosCamposPreenchidos = false;
+            }
+            else
+            {
+                estoqueLabelControl.Text = "Estoque:";
+                estoqueLabelControl.AllowHtmlString = false;
+            }
+
+            if (string.IsNullOrWhiteSpace(precoVendaTextEdit.Text))
+            {
+                precoDaVendaLabelControl.Text = "Preço da Venda: <color=red>*</color>";
+                precoDaVendaLabelControl.AllowHtmlString = true;
+                todosCamposPreenchidos = false;
+            }
+            else
+            {
+                precoDaVendaLabelControl.Text = "Preço da Venda:";
+                precoDaVendaLabelControl.AllowHtmlString = false;
+            }
+
+            if (string.IsNullOrWhiteSpace(custoTextEdit.Text))
+            {
+                custoLabelControl.Text = "Custo: <color=red>*</color>";
+                custoLabelControl.AllowHtmlString = true;
+                todosCamposPreenchidos = false;
+            }
+            else
+            {
+                custoLabelControl.Text = "Custo:";
+                custoLabelControl.AllowHtmlString = false;
+            }
+
+            if (string.IsNullOrWhiteSpace(markupTextEdit.Text))
+            {
+                markupLabelControl.Text = "Markup: <color=red>*</color>";
+                markupLabelControl.AllowHtmlString = true;
+                todosCamposPreenchidos = false;
+            }
+            else
+            {
+                markupLabelControl.Text = "Markup:";
+                markupLabelControl.AllowHtmlString = false;
+            }
+
+            if (string.IsNullOrWhiteSpace(ncmTextEdit.Text))
+            {
+                ncmLabelControl.Text = "NCM: <color=red>*</color>";
+                ncmLabelControl.AllowHtmlString = true;
+                todosCamposPreenchidos = false;
+            }
+            else
+            {
+                ncmLabelControl.Text = "NCM:";
+                ncmLabelControl.AllowHtmlString = false;
+            }
+
+            if (string.IsNullOrWhiteSpace(aliquotaDeIcmsTextEdit.Text))
+            {
+                aliquotaDeIcmsLabelControl.Text = "Alíquota de ICMS (%): <color=red>*</color>";
+                aliquotaDeIcmsLabelControl.AllowHtmlString = true;
+                todosCamposPreenchidos = false;
+            }
+            else
+            {
+                aliquotaDeIcmsLabelControl.Text = "Alíquota de ICMS (%):";
+                aliquotaDeIcmsLabelControl.AllowHtmlString = false;
+            }
+
+            if (string.IsNullOrWhiteSpace(reducaoDeCalculoIcmsTextEdit.Text))
+            {
+                reducaoDeCalculoIcmsLabelControl.Text = "Redução de Cálculo do ICMS (%):<color=red>*</color>";
+                reducaoDeCalculoIcmsLabelControl.AllowHtmlString = true;
+                todosCamposPreenchidos = false;
+            }
+            else
+            {
+                reducaoDeCalculoIcmsLabelControl.Text = "Redução de Cálculo do ICMS (%):";
+                reducaoDeCalculoIcmsLabelControl.AllowHtmlString = false;
+            }
 
             return todosCamposPreenchidos;
         }
@@ -144,10 +253,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             reducaoDeCalculoIcmsTextEdit.Text = null;
         }
 
-
-
-        
-
         private void fornecedorTextEdit_EditValueChanged(object sender, EventArgs e)
         {
             fornecedorTextEdit.Properties.MaxLength = 100;
@@ -175,15 +280,15 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
         private void simpleButton1_Click(object sender, EventArgs e)
         {
+            if (ValidarCamposObrigatorios())
             {
-                if (ValidarCamposObrigatorios())
-                {
-                    XtraMessageBox.Show("Produto cadastrado com sucesso");
-                    LimparTextEdits();
-                    LimparLookUpEdits();
-                }
-                else
-                    XtraMessageBox.Show("Todos os campos obrigatórios devem ser preenchidos!");
+                XtraMessageBox.Show("Produto cadastrado com sucesso");
+                LimparTextEdits();
+                LimparLookUpEdits();
+            }
+            else
+            {
+                XtraMessageBox.Show("Todos os campos obrigatórios devem ser preenchidos!");
             }
         }
 
@@ -206,5 +311,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
         {
             reducaoDeCalculoIcmsTextEdit.Properties.MaxLength = 8;
         }
+
     }
 }
