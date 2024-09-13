@@ -131,7 +131,9 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             // 
             // produtosTabNavigationPage
             // 
+            this.produtosTabNavigationPage.Appearance.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.produtosTabNavigationPage.Appearance.Font = new System.Drawing.Font("Tahoma", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.produtosTabNavigationPage.Appearance.Options.UseBackColor = true;
             this.produtosTabNavigationPage.Appearance.Options.UseFont = true;
             this.produtosTabNavigationPage.Caption = "Produtos";
             this.produtosTabNavigationPage.Controls.Add(this.tipoDeEstoqueLookUpEdit);
@@ -637,7 +639,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             // 
             this.tipoDeEstoqueLookUpEdit.Cursor = System.Windows.Forms.Cursors.Hand;
             this.tipoDeEstoqueLookUpEdit.EditValue = "";
-            this.tipoDeEstoqueLookUpEdit.Location = new System.Drawing.Point(410, 178);
+            this.tipoDeEstoqueLookUpEdit.Location = new System.Drawing.Point(410, 179);
             this.tipoDeEstoqueLookUpEdit.Margin = new System.Windows.Forms.Padding(2);
             this.tipoDeEstoqueLookUpEdit.Name = "tipoDeEstoqueLookUpEdit";
             this.tipoDeEstoqueLookUpEdit.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
