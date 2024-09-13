@@ -432,6 +432,8 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             // 
             // infofiscalTabNavigationPage
             // 
+            this.infofiscalTabNavigationPage.Appearance.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.infofiscalTabNavigationPage.Appearance.Options.UseBackColor = true;
             this.infofiscalTabNavigationPage.Caption = "Informações Fiscais";
             this.infofiscalTabNavigationPage.Controls.Add(this.simpleButton1);
             this.infofiscalTabNavigationPage.Controls.Add(this.naturezaDaOperacaoLookUpEdit);
