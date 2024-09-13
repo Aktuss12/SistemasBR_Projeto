@@ -27,6 +27,5 @@ namespace CadastroDeProdutosView.Features.Commons
             lookUpEdit.Properties.ValueMember = "Key";
             lookUpEdit.Properties.DisplayMember = "Value";
         }
-
     }
 }

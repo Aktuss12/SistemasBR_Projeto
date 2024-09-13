@@ -48,7 +48,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
         private void textEdit2_EditValueChanged(object sender, EventArgs e)
         {
-
+            codigodebarrasTextEdit.Properties.MaxLength = 13;
         }
 
         private void produtosTabNavigationPage_Paint(object sender, PaintEventArgs e)
@@ -66,42 +66,9 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
         }
 
-        private void LimparLookUpEdits()
-        {
-            unidadeDeMedidaLookUpEdit.EditValue = null;
-            categoriaDeProdutosLookUpEdit.EditValue = null;
-            marcaLookUpEdit.EditValue = null;
-            origemDaMercadoriaLookUpEdit.EditValue = null;
-            situacaoTributariaLookUpEdit.EditValue = null;
-            naturezaDaOperacaoLookUpEdit.EditValue = null;
-        }
-        private bool ValidarCamposObrigatorios()
-        {
-            var todosCamposPreenchidos =
-                (!string.IsNullOrWhiteSpace(nomeTextEdit.Text) &&
-                 !string.IsNullOrWhiteSpace(fornecedorTextEdit.Text) &&
-                 !string.IsNullOrWhiteSpace(codigodebarrasTextEdit.Text) &&
-                 !string.IsNullOrWhiteSpace(estoqueTextEdit.Text) &&
-                 !string.IsNullOrWhiteSpace(precoVendaTextEdit.Text) &&
-                 !string.IsNullOrWhiteSpace(custoTextEdit.Text) &&
-                 !string.IsNullOrWhiteSpace(markupTextEdit.Text) &&
-                 !string.IsNullOrWhiteSpace(ncmTextEdit.Text) &&
-                 !string.IsNullOrWhiteSpace(aliquotaDeIcmsTextEdit.Text) &&
-                 !string.IsNullOrWhiteSpace(reducaoIcmsTextEdit.Text));
-
-            if (todosCamposPreenchidos)
-            {
-                return true;
-            }
-            else
-            {
-                XtraMessageBox.Show("Todos os campos obrigatórios devem ser preenchidos.");
-                return false;
-            }
-        }
-
         public void nomeTextEdit_EditValueChanged(object sender, EventArgs e)
         {
+            nomeTextEdit.Properties.MaxLength = 100;
         }
 
         private void fornecedorLabelControl_Click(object sender, EventArgs e)
@@ -129,6 +96,36 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
         }
 
+        // Validação para os campos obrigatorios do cadastro
+        private bool ValidarCamposObrigatorios()
+        {
+            var todosCamposPreenchidos =
+                (!string.IsNullOrWhiteSpace(nomeTextEdit.Text) &&
+                 !string.IsNullOrWhiteSpace(fornecedorTextEdit.Text) &&
+                 !string.IsNullOrWhiteSpace(codigodebarrasTextEdit.Text) &&
+                 !string.IsNullOrWhiteSpace(estoqueTextEdit.Text) &&
+                 !string.IsNullOrWhiteSpace(precoVendaTextEdit.Text) &&
+                 !string.IsNullOrWhiteSpace(custoTextEdit.Text) &&
+                 !string.IsNullOrWhiteSpace(markupTextEdit.Text) &&
+                 !string.IsNullOrWhiteSpace(ncmTextEdit.Text) &&
+                 !string.IsNullOrWhiteSpace(aliquotaDeIcmsTextEdit.Text) &&
+                 !string.IsNullOrWhiteSpace(reducaoDeCalculoIcmsTextEdit.Text));
+
+            return todosCamposPreenchidos;
+        }
+
+        // Automação de limpeza nas LookUpEdit após salvar o produto cadastrado
+        private void LimparLookUpEdits()
+        {
+            unidadeDeMedidaLookUpEdit.EditValue = null;
+            categoriaDeProdutosLookUpEdit.EditValue = null;
+            marcaLookUpEdit.EditValue = null;
+            origemDaMercadoriaLookUpEdit.EditValue = null;
+            situacaoTributariaLookUpEdit.EditValue = null;
+            naturezaDaOperacaoLookUpEdit.EditValue = null;
+        }
+
+        // Automação de limpeza das TextEdit após salvar o produto cadastrado
         private void LimparTextEdits()
         {
             nomeTextEdit.Text = "";
@@ -140,37 +137,46 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             markupTextEdit.Text = "";
             ncmTextEdit.Text = "";
             aliquotaDeIcmsTextEdit.Text = "";
-            reducaoIcmsTextEdit.Text = "";
+            reducaoDeCalculoIcmsTextEdit.Text = "";
         }
 
-        private void simpleButton1_Click(object sender, EventArgs e)
-        {
-            if (!ValidarCamposObrigatorios())
-            {
-                XtraMessageBox.Show("Produto nao cadastrado");
-            }
 
-            else if(ValidarCamposObrigatorios())
-            {
-                XtraMessageBox.Show("Produto cadastrado com Sucesso!");
-                 LimparTextEdits();
-                 LimparLookUpEdits();
-            }
-        }
 
         private void simpleButton3_Click(object sender, EventArgs e)
         {
-            if (!ValidarCamposObrigatorios())
+            if (ValidarCamposObrigatorios())
             {
-                XtraMessageBox.Show("Produto nao cadastrado");
-            }
-
-            else if (ValidarCamposObrigatorios())
-            {
-                XtraMessageBox.Show("Produto cadastrado com Sucesso!");
+                XtraMessageBox.Show("Produto cadastrado com sucesso");
                 LimparTextEdits();
                 LimparLookUpEdits();
             }
+            else 
+                XtraMessageBox.Show("Todos os campos obrigatórios devem ser preenchidos!");
+        }
+
+        private void fornecedorTextEdit_EditValueChanged(object sender, EventArgs e)
+        {
+            fornecedorTextEdit.Properties.MaxLength = 100;
+        }
+
+        private void estoqueTextEdit_EditValueChanged(object sender, EventArgs e)
+        {
+            estoqueTextEdit.Properties.MaxLength = 7;
+        }
+
+        private void precoVendaTextEdit_EditValueChanged(object sender, EventArgs e)
+        {
+            precoVendaTextEdit.Properties.MaxLength = 16;
+        }
+
+        private void custoTextEdit_EditValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void markupTextEdit_EditValueChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
