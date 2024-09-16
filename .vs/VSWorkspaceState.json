@@ -2,7 +2,11 @@
   "ExpandedNodes": [
     "",
     "\\CadastroDeProdutosView",
-    "\\CadastroDeProdutosView\\CadastroDeProdutosView"
+    "\\CadastroDeProdutosView\\CadastroDeProdutosView",
+    "\\CadastroDeProdutosView\\CadastroDeProdutosView\\Features",
+    "\\CadastroDeProdutosView\\CadastroDeProdutosView\\Features\\Produto",
+    "\\CadastroDeProdutosView\\CadastroDeProdutosView\\Features\\Produto\\Views"
   ],
+  "SelectedNode": "\\CadastroDeProdutosView\\CadastroDeProdutosView\\Features\\Produto\\Views\\CadastroDeProdutosView.cs",
   "PreviewInSolutionExplorer": false
 }

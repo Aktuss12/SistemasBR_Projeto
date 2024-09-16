@@ -55,7 +55,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.codigodebarrasLabelControl = new DevExpress.XtraEditors.LabelControl();
             this.nomeLabelControl = new DevExpress.XtraEditors.LabelControl();
             this.infofiscalTabNavigationPage = new DevExpress.XtraBars.Navigation.TabNavigationPage();
-            this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             this.naturezaDaOperacaoLookUpEdit = new DevExpress.XtraEditors.LookUpEdit();
             this.ncmTextEdit = new DevExpress.XtraEditors.TextEdit();
             this.origemDaMercadoriaLookUpEdit = new DevExpress.XtraEditors.LookUpEdit();
@@ -73,6 +72,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.bar = new DevExpress.XtraBars.Bar();
             this.salvarButtomItem = new DevExpress.XtraBars.BarButtonItem();
             this.excluirProdutoButtomItem = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
@@ -82,7 +82,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.pesquisarButtomItem = new DevExpress.XtraBars.BarButtonItem();
             this.barHeaderItem1 = new DevExpress.XtraBars.BarHeaderItem();
             this.barCheckItem1 = new DevExpress.XtraBars.BarCheckItem();
-            this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.tabPage)).BeginInit();
             this.tabPage.SuspendLayout();
             this.produtosTabNavigationPage.SuspendLayout();
@@ -450,7 +449,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.infofiscalTabNavigationPage.Appearance.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.infofiscalTabNavigationPage.Appearance.Options.UseBackColor = true;
             this.infofiscalTabNavigationPage.Caption = "Informações Fiscais";
-            this.infofiscalTabNavigationPage.Controls.Add(this.simpleButton1);
             this.infofiscalTabNavigationPage.Controls.Add(this.naturezaDaOperacaoLookUpEdit);
             this.infofiscalTabNavigationPage.Controls.Add(this.ncmTextEdit);
             this.infofiscalTabNavigationPage.Controls.Add(this.origemDaMercadoriaLookUpEdit);
@@ -468,17 +466,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.infofiscalTabNavigationPage.Margin = new System.Windows.Forms.Padding(2);
             this.infofiscalTabNavigationPage.Name = "infofiscalTabNavigationPage";
             this.infofiscalTabNavigationPage.Size = new System.Drawing.Size(757, 380);
-            // 
-            // simpleButton1
-            // 
-            this.simpleButton1.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.simpleButton1.Appearance.Options.UseFont = true;
-            this.simpleButton1.Location = new System.Drawing.Point(331, 341);
-            this.simpleButton1.Name = "simpleButton1";
-            this.simpleButton1.Size = new System.Drawing.Size(89, 28);
-            this.simpleButton1.TabIndex = 18;
-            this.simpleButton1.Text = "Salvar";
-            this.simpleButton1.Click += new System.EventHandler(this.simpleButton1_Click);
             // 
             // naturezaDaOperacaoLookUpEdit
             // 
@@ -703,6 +690,15 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.excluirProdutoButtomItem.Name = "excluirProdutoButtomItem";
             this.excluirProdutoButtomItem.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
             // 
+            // barButtonItem1
+            // 
+            this.barButtonItem1.Border = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
+            this.barButtonItem1.Caption = "PESQUISAR";
+            this.barButtonItem1.Id = 8;
+            this.barButtonItem1.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItem1.ImageOptions.SvgImage")));
+            this.barButtonItem1.Name = "barButtonItem1";
+            this.barButtonItem1.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
+            // 
             // barDockControlTop
             // 
             this.barDockControlTop.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -774,15 +770,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.barCheckItem1.Caption = "barCheckItem1";
             this.barCheckItem1.Id = 5;
             this.barCheckItem1.Name = "barCheckItem1";
-            // 
-            // barButtonItem1
-            // 
-            this.barButtonItem1.Border = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
-            this.barButtonItem1.Caption = "PESQUISAR";
-            this.barButtonItem1.Id = 8;
-            this.barButtonItem1.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItem1.ImageOptions.SvgImage")));
-            this.barButtonItem1.Name = "barButtonItem1";
-            this.barButtonItem1.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
             // 
             // CadastroDeProdutosView
             // 
@@ -865,7 +852,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
         public DevExpress.XtraEditors.LookUpEdit origemDaMercadoriaLookUpEdit;
         private DevExpress.XtraEditors.TextEdit ncmTextEdit;
         public DevExpress.XtraEditors.LookUpEdit naturezaDaOperacaoLookUpEdit;
-        private DevExpress.XtraEditors.SimpleButton simpleButton1;
         private DevExpress.XtraBars.BarManager barManager;
         private DevExpress.XtraBars.Bar bar;
         private DevExpress.XtraBars.BarButtonItem salvarBarItem;

@@ -2,7 +2,6 @@
 using CadastroDeProdutosView.Features.Produto.Enums;
 using DevExpress.XtraEditors;
 using System;
-using System.Diagnostics.Eventing.Reader;
 using System.Windows.Forms;
 
 namespace CadastroDeProdutosView.Features.Produto.Views
@@ -345,10 +344,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
         private void markupTextEdit_EditValueChanged(object sender, EventArgs e)
         {
             markupTextEdit.Properties.MaxLength = 8;
-        }
-
-        private void simpleButton1_Click(object sender, EventArgs e)
-        {
         }
 
         private void ncmTextEdit_EditValueChanged(object sender, EventArgs e)
