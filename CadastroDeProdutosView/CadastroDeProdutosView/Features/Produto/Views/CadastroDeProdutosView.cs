@@ -33,7 +33,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
                 .PreencherLookUpEditComOValorDoEnum<SituacaoTributariaView.SituacaoTributaria>();
 
             naturezaDaOperacaoLookUpEdit
-                .PreencherLookUpEditComOValorDoEnum <NaturezaDaOperacaoView.NaturezaDaOperacao>();
+                .PreencherLookUpEditComOValorDoEnum<NaturezaDaOperacaoView.NaturezaDaOperacao>();
         }
 
         private void CadastroDeProdutosView_Load(object sender, EventArgs e)
@@ -49,10 +49,14 @@ namespace CadastroDeProdutosView.Features.Produto.Views
         private void textEdit2_EditValueChanged(object sender, EventArgs e)
         {
             codigodebarrasTextEdit.Properties.MaxLength = 13;
-            if (codigodebarrasTextEdit.Text.Length != 13) return;
-            if (!ValidarCodigoDeBarrasEAN13(codigodebarrasTextEdit.Text))
+            var texto = codigodebarrasTextEdit.Text;
+
+            if (string.IsNullOrEmpty(texto) || texto.Length != 13)return;
+
             {
-                XtraMessageBox.Show("Código de Barras EAN-13 inválido. Verifique os dados inseridos.");
+                if (ValidarCodigoDeBarrasEAN13(texto))
+                    return;
+                XtraMessageBox.Show("Código de Barras EAN-13 inválido. Verifique os dados inseridos e tente novamente.");
             }
         }
 
@@ -146,18 +150,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
                 nomeLabelControl.AllowHtmlString = false;
             }
 
-            if (string.IsNullOrWhiteSpace(fornecedorTextEdit.Text))
-            {
-                fornecedorLabelControl.Text = "Fornecedor: <color=red>*</color>";
-                fornecedorLabelControl.AllowHtmlString = true;
-                todosCamposPreenchidos = false;
-            }
-            else
-            {
-                fornecedorLabelControl.Text = "Fornecedor:";
-                fornecedorLabelControl.AllowHtmlString = false;
-            }
-
             if (string.IsNullOrWhiteSpace(codigodebarrasTextEdit.Text))
             {
                 codigodebarrasLabelControl.Text = "Codigo de Barras: <color=red>*</color>";
@@ -218,42 +210,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
                 markupLabelControl.AllowHtmlString = false;
             }
 
-            if (string.IsNullOrWhiteSpace(ncmTextEdit.Text))
-            {
-                ncmLabelControl.Text = "NCM: <color=red>*</color>";
-                ncmLabelControl.AllowHtmlString = true;
-                todosCamposPreenchidos = false;
-            }
-            else
-            {
-                ncmLabelControl.Text = "NCM:";
-                ncmLabelControl.AllowHtmlString = false;
-            }
-
-            if (string.IsNullOrWhiteSpace(aliquotaDeIcmsTextEdit.Text))
-            {
-                aliquotaDeIcmsLabelControl.Text = "Alíquota de ICMS (%): <color=red>*</color>";
-                aliquotaDeIcmsLabelControl.AllowHtmlString = true;
-                todosCamposPreenchidos = false;
-            }
-            else
-            {
-                aliquotaDeIcmsLabelControl.Text = "Alíquota de ICMS (%):";
-                aliquotaDeIcmsLabelControl.AllowHtmlString = false;
-            }
-
-            if (string.IsNullOrWhiteSpace(reducaoDeCalculoIcmsTextEdit.Text))
-            {
-                reducaoDeCalculoIcmsLabelControl.Text = "Redução de Cálculo do ICMS (%): <color=red>*</color>";
-                reducaoDeCalculoIcmsLabelControl.AllowHtmlString = true;
-                todosCamposPreenchidos = false;
-            }
-            else
-            {
-                reducaoDeCalculoIcmsLabelControl.Text = "Redução de Cálculo do ICMS (%):";
-                reducaoDeCalculoIcmsLabelControl.AllowHtmlString = false;
-            }
-
             if (unidadeDeMedidaLookUpEdit.EditValue == null)
             {
                 unidadeDeMedidaLabelControl.Text = "Und. de Medida: <color=red>*</color>";
@@ -276,54 +232,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             {
                 categoriaLabelControl.Text = "Categoria:";
                 categoriaLabelControl.AllowHtmlString = false;
-            }
-
-            if (marcaLookUpEdit.EditValue == null)
-            {
-                marcaLabelControl.Text = "Marca: <color=red>*</color>";
-                marcaLabelControl.AllowHtmlString = true;
-                todosCamposPreenchidos = false;
-            }
-            else
-            {
-                marcaLabelControl.Text = "Marca:";
-                marcaLabelControl.AllowHtmlString = false;
-            }
-
-            if (origemDaMercadoriaLookUpEdit.EditValue == null)
-            {
-                origemDaMercadoriaLabelControl.Text = "Origem da Mercadoria: <color=red>*</color>";
-                origemDaMercadoriaLabelControl.AllowHtmlString = true;
-                todosCamposPreenchidos = false;
-            }
-            else
-            {
-                origemDaMercadoriaLabelControl.Text = "Origem da Mercadoria:";
-                origemDaMercadoriaLabelControl.AllowHtmlString = false;
-            }
-
-            if (situacaoTributariaLookUpEdit.EditValue == null) 
-            {
-                situacaoTributariaLabelControl.Text = "Situação Tributaria: <color=red>*</color>";
-                situacaoTributariaLabelControl.AllowHtmlString = true;
-                todosCamposPreenchidos = false;
-            }
-            else
-            {
-                situacaoTributariaLabelControl.Text = "Situação Tributaria:";
-                situacaoTributariaLabelControl.AllowHtmlString = false;
-            }
-
-            if (naturezaDaOperacaoLookUpEdit.EditValue == null)
-            {
-                naturezaOperacaoLabelControl.Text = "Natureza da Operação: <color=red>*</color>";
-                naturezaOperacaoLabelControl.AllowHtmlString = true;
-                todosCamposPreenchidos = false;
-            }
-            else
-            {
-                naturezaOperacaoLabelControl.Text = "Natureza da Operação: <color=red>*</color>";
-                naturezaOperacaoLabelControl.AllowHtmlString = false;
             }
 
             return todosCamposPreenchidos;
@@ -422,6 +330,11 @@ namespace CadastroDeProdutosView.Features.Produto.Views
         private void marcaLabelControl_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void leave(object sender, EventArgs e)
+        {
+            codigodebarrasTextEdit.Text = "";
         }
     }
 }
