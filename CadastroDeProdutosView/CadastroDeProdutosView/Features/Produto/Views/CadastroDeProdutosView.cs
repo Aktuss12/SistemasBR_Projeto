@@ -2,6 +2,7 @@
 using CadastroDeProdutosView.Features.Produto.Enums;
 using DevExpress.XtraEditors;
 using System;
+using System.Diagnostics.Eventing.Reader;
 using System.Windows.Forms;
 
 namespace CadastroDeProdutosView.Features.Produto.Views
@@ -28,9 +29,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
             origemDaMercadoriaLookUpEdit
                 .PreencherLookUpEditComOValorDoEnum<OrigemDaMercadoriaView.OrigemDaMercadoria>();
-
-            tipoDeEstoqueLookUpEdit
-                .PreencherLookUpEditComOValorDoEnum<UnidadeDeMedidaView.UnidadeDeMedida>();
 
             situacaoTributariaLookUpEdit
                 .PreencherLookUpEditComOValorDoEnum<SituacaoTributariaView.SituacaoTributaria>();
@@ -213,7 +211,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
             if (string.IsNullOrWhiteSpace(reducaoDeCalculoIcmsTextEdit.Text))
             {
-                reducaoDeCalculoIcmsLabelControl.Text = "Redução de Cálculo do ICMS (%):<color=red>*</color>";
+                reducaoDeCalculoIcmsLabelControl.Text = "Redução de Cálculo do ICMS (%): <color=red>*</color>";
                 reducaoDeCalculoIcmsLabelControl.AllowHtmlString = true;
                 todosCamposPreenchidos = false;
             }
@@ -221,6 +219,78 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             {
                 reducaoDeCalculoIcmsLabelControl.Text = "Redução de Cálculo do ICMS (%):";
                 reducaoDeCalculoIcmsLabelControl.AllowHtmlString = false;
+            }
+
+            if (unidadeDeMedidaLookUpEdit.EditValue == null)
+            {
+                unidadeDeMedidaLabelControl.Text = "Und. de Medida: <color=red>*</color>";
+                unidadeDeMedidaLabelControl.AllowHtmlString = true;
+                todosCamposPreenchidos = false;
+            }
+            else
+            {
+                unidadeDeMedidaLabelControl.Text = "Und. de Medida:";
+                unidadeDeMedidaLabelControl.AllowHtmlString = false;
+            }
+
+            if (categoriaDeProdutosLookUpEdit.EditValue == null)
+            {
+                categoriaLabelControl.Text = "Categoria: <color=red>*</color>";
+                categoriaLabelControl.AllowHtmlString = true;
+                todosCamposPreenchidos = false;
+            }
+            else
+            {
+                categoriaLabelControl.Text = "Categoria:";
+                categoriaLabelControl.AllowHtmlString = false;
+            }
+
+            if (marcaLookUpEdit.EditValue == null)
+            {
+                marcaLabelControl.Text = "Marca: <color=red>*</color>";
+                marcaLabelControl.AllowHtmlString = true;
+                todosCamposPreenchidos = false;
+            }
+            else
+            {
+                marcaLabelControl.Text = "Marca:";
+                marcaLabelControl.AllowHtmlString = false;
+            }
+
+            if (origemDaMercadoriaLookUpEdit.EditValue == null)
+            {
+                origemDaMercadoriaLabelControl.Text = "Origem da Mercadoria: <color=red>*</color>";
+                origemDaMercadoriaLabelControl.AllowHtmlString = true;
+                todosCamposPreenchidos = false;
+            }
+            else
+            {
+                origemDaMercadoriaLabelControl.Text = "Origem da Mercadoria:";
+                origemDaMercadoriaLabelControl.AllowHtmlString = false;
+            }
+
+            if (situacaoTributariaLookUpEdit.EditValue == null) 
+            {
+                situacaoTributariaLabelControl.Text = "Situação Tributaria: <color=red>*</color>";
+                situacaoTributariaLabelControl.AllowHtmlString = true;
+                todosCamposPreenchidos = false;
+            }
+            else
+            {
+                situacaoTributariaLabelControl.Text = "Situação Tributaria:";
+                situacaoTributariaLabelControl.AllowHtmlString = false;
+            }
+
+            if (naturezaDaOperacaoLookUpEdit.EditValue == null)
+            {
+                naturezaOperacaoLabelControl.Text = "Natureza da Operação: <color=red>*</color>";
+                naturezaOperacaoLabelControl.AllowHtmlString = true;
+                todosCamposPreenchidos = false;
+            }
+            else
+            {
+                naturezaOperacaoLabelControl.Text = "Natureza da Operação: <color=red>*</color>";
+                naturezaOperacaoLabelControl.AllowHtmlString = false;
             }
 
             return todosCamposPreenchidos;
@@ -235,20 +305,19 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             origemDaMercadoriaLookUpEdit.EditValue = null;
             situacaoTributariaLookUpEdit.EditValue = null;
             naturezaDaOperacaoLookUpEdit.EditValue = null;
-            tipoDeEstoqueLookUpEdit.EditValue = null;
         }
 
         // Automação de limpeza das TextEdit após salvar o produto cadastrado
         private void LimparTextEdits()
         {
-            nomeTextEdit.Text = "";
-            fornecedorTextEdit.Text = "";
-            codigodebarrasTextEdit.Text = "";
+            nomeTextEdit.Text = null;
+            fornecedorTextEdit.Text = null;
+            codigodebarrasTextEdit.Text = null;
             estoqueTextEdit.Text = null;
             precoVendaTextEdit.Text = null;
             custoTextEdit.Text = null;
             markupTextEdit.Text = null;
-            ncmTextEdit.Text = "";
+            ncmTextEdit.Text = null;
             aliquotaDeIcmsTextEdit.Text = null;
             reducaoDeCalculoIcmsTextEdit.Text = null;
         }
@@ -280,11 +349,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
         private void simpleButton1_Click(object sender, EventArgs e)
         {
-        }
-
-        private void tipoDeEstoqueLookUpEdit_EditValueChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void ncmTextEdit_EditValueChanged(object sender, EventArgs e)
@@ -319,6 +383,16 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             {
                 XtraMessageBox.Show("Todos os campos obrigatórios devem ser preenchidos!");
             }
+        }
+
+        private void categoriaDeProdutosLookUpEdit_EditValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void marcaLabelControl_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
