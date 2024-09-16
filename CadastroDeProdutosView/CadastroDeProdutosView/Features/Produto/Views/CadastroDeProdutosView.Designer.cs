@@ -29,6 +29,8 @@ namespace CadastroDeProdutosView.Features.Produto.Views
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CadastroDeProdutosView));
             this.produtosLabelControl = new DevExpress.XtraEditors.LabelControl();
             this.tabPage = new DevExpress.XtraBars.Navigation.TabPane();
             this.produtosTabNavigationPage = new DevExpress.XtraBars.Navigation.TabNavigationPage();
@@ -68,6 +70,20 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.aliquotaDeIcmsLabelControl = new DevExpress.XtraEditors.LabelControl();
             this.situacaoTributariaLabelControl = new DevExpress.XtraEditors.LabelControl();
             this.informacoesFiscaisLabelControl = new DevExpress.XtraEditors.LabelControl();
+            this.barManager = new DevExpress.XtraBars.BarManager(this.components);
+            this.bar = new DevExpress.XtraBars.Bar();
+            this.salvarButtomItem = new DevExpress.XtraBars.BarButtonItem();
+            this.excluirProdutoButtomItem = new DevExpress.XtraBars.BarButtonItem();
+            this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
+            this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
+            this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
+            this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
+            this.salvarBarItem = new DevExpress.XtraBars.BarButtonItem();
+            this.excluirButtomItem = new DevExpress.XtraBars.BarButtonItem();
+            this.pesquisarButtomItem = new DevExpress.XtraBars.BarButtonItem();
+            this.barHeaderItem1 = new DevExpress.XtraBars.BarHeaderItem();
+            this.barCheckItem1 = new DevExpress.XtraBars.BarCheckItem();
+            this.pesquisarProdutoButtomItem = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.tabPage)).BeginInit();
             this.tabPage.SuspendLayout();
             this.produtosTabNavigationPage.SuspendLayout();
@@ -89,6 +105,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             ((System.ComponentModel.ISupportInitialize)(this.situacaoTributariaLookUpEdit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.reducaoDeCalculoIcmsTextEdit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.aliquotaDeIcmsTextEdit.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.barManager)).BeginInit();
             this.SuspendLayout();
             // 
             // produtosLabelControl
@@ -118,15 +135,15 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.tabPage.Controls.Add(this.infofiscalTabNavigationPage);
             this.tabPage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabPage.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabPage.Location = new System.Drawing.Point(0, 0);
+            this.tabPage.Location = new System.Drawing.Point(0, 35);
             this.tabPage.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage.Name = "tabPage";
             this.tabPage.Pages.AddRange(new DevExpress.XtraBars.Navigation.NavigationPageBase[] {
             this.produtosTabNavigationPage,
             this.infofiscalTabNavigationPage});
-            this.tabPage.RegularSize = new System.Drawing.Size(757, 448);
+            this.tabPage.RegularSize = new System.Drawing.Size(757, 413);
             this.tabPage.SelectedPage = this.produtosTabNavigationPage;
-            this.tabPage.Size = new System.Drawing.Size(757, 448);
+            this.tabPage.Size = new System.Drawing.Size(757, 413);
             this.tabPage.TabIndex = 1;
             // 
             // produtosTabNavigationPage
@@ -160,7 +177,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.produtosTabNavigationPage.Controls.Add(this.produtosLabelControl);
             this.produtosTabNavigationPage.Margin = new System.Windows.Forms.Padding(2);
             this.produtosTabNavigationPage.Name = "produtosTabNavigationPage";
-            this.produtosTabNavigationPage.Size = new System.Drawing.Size(757, 415);
+            this.produtosTabNavigationPage.Size = new System.Drawing.Size(757, 380);
             this.produtosTabNavigationPage.Paint += new System.Windows.Forms.PaintEventHandler(this.produtosTabNavigationPage_Paint);
             // 
             // tipoDeEstoqueLookUpEdit
@@ -472,7 +489,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.infofiscalTabNavigationPage.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.infofiscalTabNavigationPage.Margin = new System.Windows.Forms.Padding(2);
             this.infofiscalTabNavigationPage.Name = "infofiscalTabNavigationPage";
-            this.infofiscalTabNavigationPage.Size = new System.Drawing.Size(757, 415);
+            this.infofiscalTabNavigationPage.Size = new System.Drawing.Size(757, 386);
             // 
             // simpleButton1
             // 
@@ -657,12 +674,151 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.informacoesFiscaisLabelControl.TabIndex = 1;
             this.informacoesFiscaisLabelControl.Text = "Informações Fiscais";
             // 
+            // barManager
+            // 
+            this.barManager.Bars.AddRange(new DevExpress.XtraBars.Bar[] {
+            this.bar});
+            this.barManager.DockControls.Add(this.barDockControlTop);
+            this.barManager.DockControls.Add(this.barDockControlBottom);
+            this.barManager.DockControls.Add(this.barDockControlLeft);
+            this.barManager.DockControls.Add(this.barDockControlRight);
+            this.barManager.Form = this;
+            this.barManager.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
+            this.salvarBarItem,
+            this.salvarButtomItem,
+            this.excluirButtomItem,
+            this.pesquisarButtomItem,
+            this.barHeaderItem1,
+            this.barCheckItem1,
+            this.excluirProdutoButtomItem,
+            this.pesquisarProdutoButtomItem});
+            this.barManager.MaxItemId = 9;
+            // 
+            // bar
+            // 
+            this.bar.BarName = "Barra de Tarefas";
+            this.bar.DockCol = 0;
+            this.bar.DockRow = 0;
+            this.bar.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
+            this.bar.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(this.salvarButtomItem),
+            new DevExpress.XtraBars.LinkPersistInfo(this.excluirProdutoButtomItem),
+            new DevExpress.XtraBars.LinkPersistInfo(this.pesquisarProdutoButtomItem)});
+            this.bar.OptionsBar.AllowQuickCustomization = false;
+            this.bar.OptionsBar.AutoPopupMode = DevExpress.XtraBars.BarAutoPopupMode.OnlyMenu;
+            this.bar.OptionsBar.DrawBorder = false;
+            this.bar.Text = "Tools";
+            // 
+            // salvarButtomItem
+            // 
+            this.salvarButtomItem.Border = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
+            this.salvarButtomItem.Caption = "SALVAR";
+            this.salvarButtomItem.Id = 1;
+            this.salvarButtomItem.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("salvarButtomItem.ImageOptions.SvgImage")));
+            this.salvarButtomItem.Name = "salvarButtomItem";
+            this.salvarButtomItem.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
+            this.salvarButtomItem.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.salvarButtomItem_ItemClick);
+            // 
+            // excluirProdutoButtomItem
+            // 
+            this.excluirProdutoButtomItem.Border = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
+            this.excluirProdutoButtomItem.Caption = "EXCLUIR";
+            this.excluirProdutoButtomItem.Id = 7;
+            this.excluirProdutoButtomItem.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("excluirProdutoButtomItem.ImageOptions.SvgImage")));
+            this.excluirProdutoButtomItem.Name = "excluirProdutoButtomItem";
+            this.excluirProdutoButtomItem.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
+            // 
+            // barDockControlTop
+            // 
+            this.barDockControlTop.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.barDockControlTop.Appearance.Options.UseFont = true;
+            this.barDockControlTop.CausesValidation = false;
+            this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
+            this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
+            this.barDockControlTop.Manager = this.barManager;
+            this.barDockControlTop.Size = new System.Drawing.Size(757, 35);
+            // 
+            // barDockControlBottom
+            // 
+            this.barDockControlBottom.CausesValidation = false;
+            this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.barDockControlBottom.Location = new System.Drawing.Point(0, 448);
+            this.barDockControlBottom.Manager = this.barManager;
+            this.barDockControlBottom.Size = new System.Drawing.Size(757, 0);
+            // 
+            // barDockControlLeft
+            // 
+            this.barDockControlLeft.CausesValidation = false;
+            this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
+            this.barDockControlLeft.Location = new System.Drawing.Point(0, 35);
+            this.barDockControlLeft.Manager = this.barManager;
+            this.barDockControlLeft.Size = new System.Drawing.Size(0, 413);
+            // 
+            // barDockControlRight
+            // 
+            this.barDockControlRight.CausesValidation = false;
+            this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
+            this.barDockControlRight.Location = new System.Drawing.Point(757, 35);
+            this.barDockControlRight.Manager = this.barManager;
+            this.barDockControlRight.Size = new System.Drawing.Size(0, 413);
+            // 
+            // salvarBarItem
+            // 
+            this.salvarBarItem.Caption = "Salvar";
+            this.salvarBarItem.Id = 0;
+            this.salvarBarItem.Name = "salvarBarItem";
+            this.salvarBarItem.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem1_ItemClick);
+            // 
+            // excluirButtomItem
+            // 
+            this.excluirButtomItem.Border = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
+            this.excluirButtomItem.Caption = "EXCLUIR";
+            this.excluirButtomItem.Id = 2;
+            this.excluirButtomItem.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("excluirButtomItem.ImageOptions.Image")));
+            this.excluirButtomItem.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("excluirButtomItem.ImageOptions.LargeImage")));
+            this.excluirButtomItem.Name = "excluirButtomItem";
+            this.excluirButtomItem.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionInMenu;
+            // 
+            // pesquisarButtomItem
+            // 
+            this.pesquisarButtomItem.Border = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
+            this.pesquisarButtomItem.Caption = "PESQUISAR";
+            this.pesquisarButtomItem.Id = 3;
+            this.pesquisarButtomItem.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("pesquisarButtomItem.ImageOptions.Image")));
+            this.pesquisarButtomItem.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("pesquisarButtomItem.ImageOptions.LargeImage")));
+            this.pesquisarButtomItem.Name = "pesquisarButtomItem";
+            // 
+            // barHeaderItem1
+            // 
+            this.barHeaderItem1.Caption = "barHeaderItem1";
+            this.barHeaderItem1.Id = 4;
+            this.barHeaderItem1.Name = "barHeaderItem1";
+            // 
+            // barCheckItem1
+            // 
+            this.barCheckItem1.Caption = "barCheckItem1";
+            this.barCheckItem1.Id = 5;
+            this.barCheckItem1.Name = "barCheckItem1";
+            // 
+            // pesquisarProdutoButtomItem
+            // 
+            this.pesquisarProdutoButtomItem.Border = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
+            this.pesquisarProdutoButtomItem.Caption = "PESQUISAR";
+            this.pesquisarProdutoButtomItem.Id = 8;
+            this.pesquisarProdutoButtomItem.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("pesquisarProdutoButtomItem.ImageOptions.SvgImage")));
+            this.pesquisarProdutoButtomItem.Name = "pesquisarProdutoButtomItem";
+            this.pesquisarProdutoButtomItem.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
+            // 
             // CadastroDeProdutosView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(757, 448);
             this.Controls.Add(this.tabPage);
+            this.Controls.Add(this.barDockControlLeft);
+            this.Controls.Add(this.barDockControlRight);
+            this.Controls.Add(this.barDockControlBottom);
+            this.Controls.Add(this.barDockControlTop);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "CadastroDeProdutosView";
             this.Text = "Cadastro De Produtos";
@@ -690,7 +846,9 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             ((System.ComponentModel.ISupportInitialize)(this.situacaoTributariaLookUpEdit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.reducaoDeCalculoIcmsTextEdit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.aliquotaDeIcmsTextEdit.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.barManager)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -735,6 +893,20 @@ namespace CadastroDeProdutosView.Features.Produto.Views
         public DevExpress.XtraEditors.LookUpEdit naturezaDaOperacaoLookUpEdit;
         private DevExpress.XtraEditors.SimpleButton simpleButton1;
         public DevExpress.XtraEditors.LookUpEdit tipoDeEstoqueLookUpEdit;
+        private DevExpress.XtraBars.BarManager barManager;
+        private DevExpress.XtraBars.Bar bar;
+        private DevExpress.XtraBars.BarButtonItem salvarBarItem;
+        private DevExpress.XtraBars.BarDockControl barDockControlTop;
+        private DevExpress.XtraBars.BarDockControl barDockControlBottom;
+        private DevExpress.XtraBars.BarDockControl barDockControlLeft;
+        private DevExpress.XtraBars.BarDockControl barDockControlRight;
+        private DevExpress.XtraBars.BarButtonItem salvarButtomItem;
+        private DevExpress.XtraBars.BarButtonItem excluirButtomItem;
+        private DevExpress.XtraBars.BarButtonItem pesquisarButtomItem;
+        private DevExpress.XtraBars.BarHeaderItem barHeaderItem1;
+        private DevExpress.XtraBars.BarCheckItem barCheckItem1;
+        private DevExpress.XtraBars.BarButtonItem excluirProdutoButtomItem;
+        private DevExpress.XtraBars.BarButtonItem pesquisarProdutoButtomItem;
     }
 }
 

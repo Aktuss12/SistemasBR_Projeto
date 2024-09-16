@@ -160,3 +160,9 @@ C:\Users\admin\Documents\Sistemasbr_Projeto\CadastroDeProdutosView\CadastroDePro
 C:\Users\admin\Documents\Sistemasbr_Projeto\CadastroDeProdutosView\CadastroDeProdutosView\obj\Debug\CadastroDeProdutosView.exe
 C:\Users\admin\Documents\Sistemasbr_Projeto\CadastroDeProdutosView\CadastroDeProdutosView\obj\Debug\CadastroDeProdutosView.pdb
 C:\Users\admin\Documents\Sistemasbr_Projeto\CadastroDeProdutosView\CadastroDeProdutosView\obj\Debug\CadastroDeProdutosView.Features.Produto.Views.CadastroDeProdutosView.resources
+C:\Users\admin\Documents\Sistemasbr_Projeto\CadastroDeProdutosView\CadastroDeProdutosView\bin\Debug\DevExpress.XtraNavBar.v18.1.dll
+C:\Users\admin\Documents\Sistemasbr_Projeto\CadastroDeProdutosView\CadastroDeProdutosView\bin\Debug\DevExpress.XtraNavBar.v18.1.xml
+C:\Users\admin\Documents\Sistemasbr_Projeto\CadastroDeProdutosView\CadastroDeProdutosView\bin\Debug\de\DevExpress.XtraNavBar.v18.1.resources.dll
+C:\Users\admin\Documents\Sistemasbr_Projeto\CadastroDeProdutosView\CadastroDeProdutosView\bin\Debug\es\DevExpress.XtraNavBar.v18.1.resources.dll
+C:\Users\admin\Documents\Sistemasbr_Projeto\CadastroDeProdutosView\CadastroDeProdutosView\bin\Debug\ja\DevExpress.XtraNavBar.v18.1.resources.dll
+C:\Users\admin\Documents\Sistemasbr_Projeto\CadastroDeProdutosView\CadastroDeProdutosView\bin\Debug\ru\DevExpress.XtraNavBar.v18.1.resources.dll

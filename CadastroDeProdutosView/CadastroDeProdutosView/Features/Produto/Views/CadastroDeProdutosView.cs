@@ -109,7 +109,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
                 nomeLabelControl.AllowHtmlString = true;
                 todosCamposPreenchidos = false;
             }
-            else
+            else 
             {
                 nomeLabelControl.Text = "Nome:";
                 nomeLabelControl.AllowHtmlString = false;
@@ -280,16 +280,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
         private void simpleButton1_Click(object sender, EventArgs e)
         {
-            if (ValidarCamposObrigatorios())
-            {
-                XtraMessageBox.Show("Produto cadastrado com sucesso");
-                LimparTextEdits();
-                LimparLookUpEdits();
-            }
-            else
-            {
-                XtraMessageBox.Show("Todos os campos obrigatórios devem ser preenchidos!");
-            }
         }
 
         private void tipoDeEstoqueLookUpEdit_EditValueChanged(object sender, EventArgs e)
@@ -312,5 +302,23 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             reducaoDeCalculoIcmsTextEdit.Properties.MaxLength = 8;
         }
 
+        private void barButtonItem1_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+
+        }
+
+        private void salvarButtomItem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            if (ValidarCamposObrigatorios())
+            {
+                XtraMessageBox.Show("Produto cadastrado com sucesso");
+                LimparTextEdits();
+                LimparLookUpEdits();
+            }
+            else
+            {
+                XtraMessageBox.Show("Todos os campos obrigatórios devem ser preenchidos!");
+            }
+        }
     }
 }
