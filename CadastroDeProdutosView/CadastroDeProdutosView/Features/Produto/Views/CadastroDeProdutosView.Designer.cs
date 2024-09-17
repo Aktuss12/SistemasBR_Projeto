@@ -242,7 +242,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.markupTextEdit.Margin = new System.Windows.Forms.Padding(2);
             this.markupTextEdit.Name = "markupTextEdit";
             this.markupTextEdit.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
-            this.markupTextEdit.Properties.Mask.EditMask = "p";
+            this.markupTextEdit.Properties.Mask.EditMask = "n";
             this.markupTextEdit.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.markupTextEdit.Properties.Mask.UseMaskAsDisplayFormat = true;
             this.markupTextEdit.Size = new System.Drawing.Size(80, 22);
@@ -291,7 +291,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.precoVendaTextEdit.Margin = new System.Windows.Forms.Padding(2);
             this.precoVendaTextEdit.Name = "precoVendaTextEdit";
             this.precoVendaTextEdit.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
-            this.precoVendaTextEdit.Properties.Mask.EditMask = "c";
+            this.precoVendaTextEdit.Properties.Mask.EditMask = "n";
             this.precoVendaTextEdit.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.precoVendaTextEdit.Properties.Mask.UseMaskAsDisplayFormat = true;
             this.precoVendaTextEdit.Size = new System.Drawing.Size(131, 22);
@@ -305,7 +305,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.custoTextEdit.Margin = new System.Windows.Forms.Padding(2);
             this.custoTextEdit.Name = "custoTextEdit";
             this.custoTextEdit.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
-            this.custoTextEdit.Properties.Mask.EditMask = "c";
+            this.custoTextEdit.Properties.Mask.EditMask = "n";
             this.custoTextEdit.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.custoTextEdit.Properties.Mask.UseMaskAsDisplayFormat = true;
             this.custoTextEdit.Properties.Tag = new decimal(new int[] {
