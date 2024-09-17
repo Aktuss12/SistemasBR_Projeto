@@ -2,12 +2,15 @@
 using CadastroDeProdutosView.Features.Produto.Enums;
 using DevExpress.XtraEditors;
 using System;
+using System.Data.SqlClient;
 using System.Windows.Forms;
 
 namespace CadastroDeProdutosView.Features.Produto.Views
 {
     public partial class CadastroDeProdutosView : Form
     {
+        private bool isValidating;
+
         public CadastroDeProdutosView()
         {
             InitializeComponent();
@@ -16,37 +19,17 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
         private void InitializeLookUpEdit()
         {
-            // Implementação das Enums para o LookUpEdit
-            unidadeDeMedidaLookUpEdit
-                .PreencherLookUpEditComOValorDoEnum<UnidadeDeMedidaView.UnidadeDeMedida>();
-
-            categoriaDeProdutosLookUpEdit
-                .PreencherLookUpEditComOValorDoEnum<CategoriaDoProdutoView.CategoriaDeProdutos>();
-
-            marcaLookUpEdit
-                .PreencherLookUpEditComOValorDoEnum<MarcaDoProdutoView.MarcaDoProduto>();
-
-            origemDaMercadoriaLookUpEdit
-                .PreencherLookUpEditComOValorDoEnum<OrigemDaMercadoriaView.OrigemDaMercadoria>();
-
-            situacaoTributariaLookUpEdit
-                .PreencherLookUpEditComOValorDoEnum<SituacaoTributariaView.SituacaoTributaria>();
-
-            naturezaDaOperacaoLookUpEdit
-                .PreencherLookUpEditComOValorDoEnum<NaturezaDaOperacaoView.NaturezaDaOperacao>();
+            unidadeDeMedidaLookUpEdit.PreencherLookUpEditComOValorDoEnum<UnidadeDeMedidaView.UnidadeDeMedida>();
+            categoriaDeProdutosLookUpEdit.PreencherLookUpEditComOValorDoEnum<CategoriaDoProdutoView.CategoriaDeProdutos>();
+            marcaLookUpEdit.PreencherLookUpEditComOValorDoEnum<MarcaDoProdutoView.MarcaDoProduto>();
+            origemDaMercadoriaLookUpEdit.PreencherLookUpEditComOValorDoEnum<OrigemDaMercadoriaView.OrigemDaMercadoria>();
+            situacaoTributariaLookUpEdit.PreencherLookUpEditComOValorDoEnum<SituacaoTributariaView.SituacaoTributaria>();
+            naturezaDaOperacaoLookUpEdit.PreencherLookUpEditComOValorDoEnum<NaturezaDaOperacaoView.NaturezaDaOperacao>();
         }
 
-        private void CadastroDeProdutosView_Load(object sender, EventArgs e)
-        {
+        private void CadastroDeProdutosView_Load(object sender, EventArgs e) { }
 
-        }
-
-        private void labelControl_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private bool isValidating;
+        private void labelControl_Click(object sender, EventArgs e) { }
 
         private void textEdit2_EditValueChanged(object sender, EventArgs e)
         {
@@ -58,15 +41,12 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
             if (texto.Length == 13)
             {
-                if (!ValidarCodigoDeBarrasEAN13(texto))
+                var valido = ValidarCodigoDeBarrasEAN13(texto);
+                AtualizarEstiloLabelCodigoBarras(valido);
+                if (!valido)
                 {
                     XtraMessageBox.Show("Código de Barras EAN-13 inválido. Verifique os dados inseridos e tente novamente.");
                     codigodebarrasTextEdit.Text = string.Empty;
-                    AtualizarEstiloLabelCodigoBarras(false);
-                }
-                else
-                {
-                    AtualizarEstiloLabelCodigoBarras(true);
                 }
             }
             else
@@ -75,6 +55,20 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             }
 
             isValidating = false;
+        }
+
+        private void CalcularPrecoVenda()
+        {
+            if (decimal.TryParse(custoTextEdit.Text, out var custo) &&
+                decimal.TryParse(markupTextEdit.Text, out var markup))
+            {
+                var precoVenda = custo * (1 + (markup / 100));
+                precoVendaTextEdit.Text = precoVenda.ToString("F2");
+            }
+            else
+            {
+                precoVendaTextEdit.Text = string.Empty;
+            }
         }
 
         private bool ValidarCodigoDeBarrasEAN13(string codigoDeBarras)
@@ -105,167 +99,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             return digitoVerificadorCalculado == digitoVerificadorInformado;
         }
 
-
-        private void produtosTabNavigationPage_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void precoLabelControl_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        public void lookUpEdit1_EditValueChanged_1(object sender, EventArgs e)
-        {
-
-        }
-
-        public void nomeTextEdit_EditValueChanged(object sender, EventArgs e)
-        {
-            nomeTextEdit.Properties.MaxLength = 100;
-        }
-
-        private void fornecedorLabelControl_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void marcaLookUpEdit_EditValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void categoriaLabelControl_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void naturezaDaOperacaoLookUpEdit_EditValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void origemDaMercadoriaLookUpEdit_EditValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        // Validação para os campos obrigatorios do cadastro
-        private bool ValidarCamposObrigatorios()
-        {
-            var todosCamposPreenchidos = true;
-
-            if (string.IsNullOrWhiteSpace(codigodebarrasTextEdit.Text))
-            {
-                AtualizarEstiloLabelCodigoBarras(false);
-                todosCamposPreenchidos = false;
-            }
-            else
-            {
-                AtualizarEstiloLabelCodigoBarras(true);
-            }
-
-            if (string.IsNullOrWhiteSpace(nomeTextEdit.Text))
-            {
-                nomeLabelControl.Text = "Nome: <color=red>*</color>";
-                nomeLabelControl.AllowHtmlString = true;
-                todosCamposPreenchidos = false;
-            }
-            else 
-            {
-                nomeLabelControl.Text = "Nome: *";
-                nomeLabelControl.AllowHtmlString = false;
-            }
-
-            if (string.IsNullOrWhiteSpace(codigodebarrasTextEdit.Text))
-            {
-                codigodebarrasLabelControl.Text = "Codigo de Barras: <color=red>*</color>";
-                codigodebarrasLabelControl.AllowHtmlString = true;
-                todosCamposPreenchidos = false;
-            }
-            else
-            {
-                codigodebarrasLabelControl.Text = "Codigo de Barras: *";
-                codigodebarrasLabelControl.AllowHtmlString = false;
-            }
-
-            if (string.IsNullOrWhiteSpace(estoqueTextEdit.Text))
-            {
-                estoqueLabelControl.Text = "Estoque: <color=red>*</color>";
-                estoqueLabelControl.AllowHtmlString = true;
-                todosCamposPreenchidos = false;
-            }
-            else
-            {
-                estoqueLabelControl.Text = "Estoque: *";
-                estoqueLabelControl.AllowHtmlString = false;
-            }
-
-            if (string.IsNullOrWhiteSpace(precoVendaTextEdit.Text))
-            {
-                precoDaVendaLabelControl.Text = "Preço da Venda: <color=red>*</color>";
-                precoDaVendaLabelControl.AllowHtmlString = true;
-                todosCamposPreenchidos = false;
-            }
-            else
-            {
-                precoDaVendaLabelControl.Text = "Preço da Venda: *";
-                precoDaVendaLabelControl.AllowHtmlString = false;
-            }
-
-            if (string.IsNullOrWhiteSpace(custoTextEdit.Text))
-            {
-                custoLabelControl.Text = "Custo: <color=red>*</color>";
-                custoLabelControl.AllowHtmlString = true;
-                todosCamposPreenchidos = false;
-            }
-            else
-            {
-                custoLabelControl.Text = "Custo: *";
-                custoLabelControl.AllowHtmlString = false;
-            }
-
-            if (string.IsNullOrWhiteSpace(markupTextEdit.Text))
-            {
-                markupLabelControl.Text = "Markup: <color=red>*</color>";
-                markupLabelControl.AllowHtmlString = true;
-                todosCamposPreenchidos = false;
-            }
-            else
-            {
-                markupLabelControl.Text = "Markup: *";
-                markupLabelControl.AllowHtmlString = false;
-            }
-
-            if (unidadeDeMedidaLookUpEdit.EditValue == null)
-            {
-                unidadeDeMedidaLabelControl.Text = "Und. de Medida: <color=red>*</color>";
-                unidadeDeMedidaLabelControl.AllowHtmlString = true;
-                todosCamposPreenchidos = false;
-            }
-            else
-            {
-                unidadeDeMedidaLabelControl.Text = "Und. de Medida: *";
-                unidadeDeMedidaLabelControl.AllowHtmlString = false;
-            }
-
-            if (categoriaDeProdutosLookUpEdit.EditValue == null)
-            {
-                categoriaLabelControl.Text = "Categoria: <color=red>*</color>";
-                categoriaLabelControl.AllowHtmlString = true;
-                todosCamposPreenchidos = false;
-            }
-            else
-            {
-                categoriaLabelControl.Text = "Categoria: *";
-                categoriaLabelControl.AllowHtmlString = false;
-            }
-
-            return todosCamposPreenchidos;
-        }
-
-        // Automação de limpeza nas LookUpEdit após salvar o produto cadastrado
         private void LimparLookUpEdits()
         {
             unidadeDeMedidaLookUpEdit.EditValue = null;
@@ -276,7 +109,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             naturezaDaOperacaoLookUpEdit.EditValue = null;
         }
 
-        // Automação de limpeza das TextEdit após salvar o produto cadastrado
         private void LimparTextEdits()
         {
             nomeTextEdit.Text = null;
@@ -308,12 +140,12 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
         private void custoTextEdit_EditValueChanged(object sender, EventArgs e)
         {
-            custoTextEdit.Properties.MaxLength = 8;
+            CalcularPrecoVenda();
         }
 
         private void markupTextEdit_EditValueChanged(object sender, EventArgs e)
         {
-            markupTextEdit.Properties.MaxLength = 8;
+            CalcularPrecoVenda();
         }
 
         private void ncmTextEdit_EditValueChanged(object sender, EventArgs e)
@@ -331,65 +163,101 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             reducaoDeCalculoIcmsTextEdit.Properties.MaxLength = 8;
         }
 
-        private void barButtonItem1_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        {
-
-        }
+        private void barButtonItem1_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e) { }
 
         private void salvarButtomItem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            if (!ValidarCamposObrigatorios())
             {
-                var camposPreenchidos = ValidarCamposObrigatorios();
+                XtraMessageBox.Show("Todos os campos obrigatórios devem ser preenchidos!");
+                return;
+            }
 
-                if (!camposPreenchidos)
+            if (!string.IsNullOrWhiteSpace(codigodebarrasTextEdit.Text) &&
+                !ValidarCodigoDeBarrasEAN13(codigodebarrasTextEdit.Text))
+            {
+                XtraMessageBox.Show("O campo código de barras não é um EAN-13 válido. Por favor, verifique e tente novamente.");
+                AtualizarEstiloLabelCodigoBarras(false);
+                return;
+            }
+
+            AtualizarEstiloLabelCodigoBarras(true);
+
+            try
+            {
+                using (var connection = new SqlConnection())
                 {
-                    XtraMessageBox.Show("Todos os campos obrigatórios devem ser preenchidos!");
-                    return;
+                    connection.Open();
+
+                    const string insertProdutoQuery = @"
+                        INSERT INTO Produto (Nome, Fornecedor, CodigoDeBarras, Estoque, PrecoVenda, Custo, Markup, NCM, AliquotaICMS, ReducaoICMS, UnidadeDeMedida, Categoria)
+                        VALUES (@Nome, @Fornecedor, @CodigoDeBarras, @Estoque, @PrecoVenda, @Custo, @Markup, @NCM, @AliquotaICMS, @ReducaoICMS, @UnidadeDeMedida, @Categoria)";
+
+                    using (var command = new SqlCommand(insertProdutoQuery, connection))
+                    {
+                        command.Parameters.AddWithValue("@Nome", nomeTextEdit.Text);
+                        command.Parameters.AddWithValue("@Fornecedor", fornecedorTextEdit.Text);
+                        command.Parameters.AddWithValue("@CodigoDeBarras", codigodebarrasTextEdit.Text);
+                        command.Parameters.AddWithValue("@Estoque", estoqueTextEdit.Text);
+                        command.Parameters.AddWithValue("@PrecoVenda", precoVendaTextEdit.Text);
+                        command.Parameters.AddWithValue("@Custo", custoTextEdit.Text);
+                        command.Parameters.AddWithValue("@Markup", markupTextEdit.Text);
+                        command.Parameters.AddWithValue("@NCM", ncmTextEdit.Text);
+                        command.Parameters.AddWithValue("@AliquotaICMS", aliquotaDeIcmsTextEdit.Text);
+                        command.Parameters.AddWithValue("@ReducaoICMS", reducaoDeCalculoIcmsTextEdit.Text);
+                        command.Parameters.AddWithValue("@UnidadeDeMedida", unidadeDeMedidaLookUpEdit.EditValue);
+                        command.Parameters.AddWithValue("@Categoria", categoriaDeProdutosLookUpEdit.EditValue);
+
+                        command.ExecuteNonQuery();
+                    }
+
+                    XtraMessageBox.Show("Produto cadastrado com sucesso");
+                    LimparTextEdits();
+                    LimparLookUpEdits();
                 }
-
-                if (!ValidarCodigoDeBarrasEAN13(codigodebarrasTextEdit.Text))
-                {
-                    XtraMessageBox.Show("O campo código de barras não é um EAN-13 válido. Por favor, verifique e tente novamente.");
-                    AtualizarEstiloLabelCodigoBarras(false);
-                    return;
-                }
-
-                AtualizarEstiloLabelCodigoBarras(true);
-
-                XtraMessageBox.Show("Produto cadastrado com sucesso");
-                LimparTextEdits();
-                LimparLookUpEdits();
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show($"Erro ao salvar o produto: {ex.Message}");
             }
         }
 
         private void AtualizarEstiloLabelCodigoBarras(bool valido)
         {
-            if (valido)
-            {
-                codigodebarrasLabelControl.Text = "Codigo de Barras: *";
-                codigodebarrasLabelControl.AllowHtmlString = false;
-            }
-            else
-            {
-                codigodebarrasLabelControl.Text = "Codigo de Barras: <color=red>*</color>";
-                codigodebarrasLabelControl.AllowHtmlString = true;
-            }
+            codigodebarrasLabelControl.Text = valido
+                ? "Codigo de Barras: "
+                : "Codigo de Barras: <color=red>*</color>";
+
+            codigodebarrasLabelControl.AllowHtmlString = !valido;
         }
 
-
-        private void categoriaDeProdutosLookUpEdit_EditValueChanged(object sender, EventArgs e)
+        // Verifica se os campos obrigatórios estão preenchidos
+        private bool ValidarCamposObrigatorios()
         {
+            var todosCamposPreenchidos = true;
 
-        }
+            todosCamposPreenchidos &= !string.IsNullOrWhiteSpace(nomeTextEdit.Text);
+            todosCamposPreenchidos &= !string.IsNullOrWhiteSpace(estoqueTextEdit.Text);
+            todosCamposPreenchidos &= !string.IsNullOrWhiteSpace(precoVendaTextEdit.Text);
+            todosCamposPreenchidos &= unidadeDeMedidaLookUpEdit.EditValue != null;
+            todosCamposPreenchidos &= categoriaDeProdutosLookUpEdit.EditValue != null;
 
-        private void marcaLabelControl_Click(object sender, EventArgs e)
-        {
+            nomeLabelControl.Text = string.IsNullOrWhiteSpace(nomeTextEdit.Text) ? "Nome: <color=red>*</color>" : "Nome: *";
+            nomeLabelControl.AllowHtmlString = string.IsNullOrWhiteSpace(nomeTextEdit.Text);
 
-        }
+            estoqueLabelControl.Text = string.IsNullOrWhiteSpace(estoqueTextEdit.Text) ? "Estoque: <color=red>*</color>" : "Estoque: *";
+            estoqueLabelControl.AllowHtmlString = string.IsNullOrWhiteSpace(estoqueTextEdit.Text);
 
-        private void aliquotaDeIcmsLabelControl_Click(object sender, EventArgs e)
-        {
+            precoDaVendaLabelControl.Text = string.IsNullOrWhiteSpace(precoVendaTextEdit.Text) ? "Preço da Venda: <color=red>*</color>" : "Preço da Venda: *";
+            precoDaVendaLabelControl.AllowHtmlString = string.IsNullOrWhiteSpace(precoVendaTextEdit.Text);
 
+            unidadeDeMedidaLabelControl.Text = unidadeDeMedidaLookUpEdit.EditValue == null ? "Und. de Medida: <color=red>*</color>" : "Und. de Medida: *";
+            unidadeDeMedidaLabelControl.AllowHtmlString = unidadeDeMedidaLookUpEdit.EditValue == null;
+
+            categoriaLabelControl.Text = categoriaDeProdutosLookUpEdit.EditValue == null ? "Categoria: <color=red>*</color>" : "Categoria: *";
+            categoriaLabelControl.AllowHtmlString = categoriaDeProdutosLookUpEdit.EditValue == null;
+
+            return todosCamposPreenchidos;
         }
     }
 }
