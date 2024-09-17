@@ -503,7 +503,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.origemDaMercadoriaLookUpEdit.Properties.NullText = "";
             this.origemDaMercadoriaLookUpEdit.Size = new System.Drawing.Size(298, 22);
             this.origemDaMercadoriaLookUpEdit.TabIndex = 12;
-
             // 
             // situacaoTributariaLookUpEdit
             // 
@@ -603,7 +602,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.aliquotaDeIcmsLabelControl.Size = new System.Drawing.Size(154, 21);
             this.aliquotaDeIcmsLabelControl.TabIndex = 25;
             this.aliquotaDeIcmsLabelControl.Text = "Alíquota de ICMS (%): ";
-
             // 
             // situacaoTributariaLabelControl
             // 

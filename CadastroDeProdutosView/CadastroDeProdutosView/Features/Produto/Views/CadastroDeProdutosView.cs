@@ -140,12 +140,20 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
         private void custoTextEdit_EditValueChanged(object sender, EventArgs e)
         {
+            if (isValidating) return;
+
+            isValidating = true;
             CalcularPrecoVenda();
+            isValidating = false;
         }
 
         private void markupTextEdit_EditValueChanged(object sender, EventArgs e)
         {
+            if (isValidating) return;
+
+            isValidating = true;
             CalcularPrecoVenda();
+            isValidating = false;
         }
 
         private void ncmTextEdit_EditValueChanged(object sender, EventArgs e)
@@ -185,7 +193,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
             try
             {
-                using (var connection = new SqlConnection())
+                using (var connection = new SqlConnection("Data Source=seu_nome_do_servidor;Initial Catalog=seu_nome_do_banco_de_dados;User ID=seu_nome_de_usuario;Password=sua_senha"))
                 {
                     connection.Open();
 
