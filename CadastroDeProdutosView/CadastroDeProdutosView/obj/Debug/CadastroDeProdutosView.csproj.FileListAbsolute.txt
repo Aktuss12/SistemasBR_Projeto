@@ -166,3 +166,8 @@ C:\Users\admin\Documents\Sistemasbr_Projeto\CadastroDeProdutosView\CadastroDePro
 C:\Users\admin\Documents\Sistemasbr_Projeto\CadastroDeProdutosView\CadastroDeProdutosView\bin\Debug\es\DevExpress.XtraNavBar.v18.1.resources.dll
 C:\Users\admin\Documents\Sistemasbr_Projeto\CadastroDeProdutosView\CadastroDeProdutosView\bin\Debug\ja\DevExpress.XtraNavBar.v18.1.resources.dll
 C:\Users\admin\Documents\Sistemasbr_Projeto\CadastroDeProdutosView\CadastroDeProdutosView\bin\Debug\ru\DevExpress.XtraNavBar.v18.1.resources.dll
+C:\Users\admin\Documents\Sistemasbr_Projeto\CadastroDeProdutosView\CadastroDeProdutosView\bin\Debug\FirebirdSql.Data.FirebirdClient.dll
+C:\Users\admin\Documents\Sistemasbr_Projeto\CadastroDeProdutosView\CadastroDeProdutosView\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\admin\Documents\Sistemasbr_Projeto\CadastroDeProdutosView\CadastroDeProdutosView\bin\Debug\System.Threading.Tasks.Extensions.dll
+C:\Users\admin\Documents\Sistemasbr_Projeto\CadastroDeProdutosView\CadastroDeProdutosView\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\admin\Documents\Sistemasbr_Projeto\CadastroDeProdutosView\CadastroDeProdutosView\bin\Debug\System.Threading.Tasks.Extensions.xml
