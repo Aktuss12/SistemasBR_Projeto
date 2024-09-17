@@ -193,7 +193,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
             try
             {
-                using (var connection = new SqlConnection("Data Source=seu_nome_do_servidor;Initial Catalog=seu_nome_do_banco_de_dados;User ID=seu_nome_de_usuario;Password=sua_senha"))
+                using (var connection = new SqlConnection(@"Server=localhost;Database=C:\\Users\\admin\\Documents\\BancoDeDados\\BancoDeDadosCadastroDeProdutos.fdb;User=sysdba;Password=masterkey;Charset=NONE;"))
                 {
                     connection.Open();
 
