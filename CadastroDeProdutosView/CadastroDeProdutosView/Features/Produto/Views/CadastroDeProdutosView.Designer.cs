@@ -334,7 +334,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.codigodebarrasTextEdit.Size = new System.Drawing.Size(132, 22);
             this.codigodebarrasTextEdit.TabIndex = 4;
             this.codigodebarrasTextEdit.EditValueChanged += new System.EventHandler(this.textEdit2_EditValueChanged);
-            this.codigodebarrasTextEdit.Leave += new System.EventHandler(this.leave);
             // 
             // nomeTextEdit
             // 
@@ -539,9 +538,9 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.ncmLabelControl.Location = new System.Drawing.Point(406, 73);
             this.ncmLabelControl.Margin = new System.Windows.Forms.Padding(2);
             this.ncmLabelControl.Name = "ncmLabelControl";
-            this.ncmLabelControl.Size = new System.Drawing.Size(50, 21);
+            this.ncmLabelControl.Size = new System.Drawing.Size(43, 21);
             this.ncmLabelControl.TabIndex = 0;
-            this.ncmLabelControl.Text = "NCM: *";
+            this.ncmLabelControl.Text = "NCM: ";
             // 
             // origemDaMercadoriaLabelControl
             // 
@@ -611,9 +610,10 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.aliquotaDeIcmsLabelControl.Location = new System.Drawing.Point(408, 166);
             this.aliquotaDeIcmsLabelControl.Margin = new System.Windows.Forms.Padding(2);
             this.aliquotaDeIcmsLabelControl.Name = "aliquotaDeIcmsLabelControl";
-            this.aliquotaDeIcmsLabelControl.Size = new System.Drawing.Size(161, 21);
+            this.aliquotaDeIcmsLabelControl.Size = new System.Drawing.Size(154, 21);
             this.aliquotaDeIcmsLabelControl.TabIndex = 25;
-            this.aliquotaDeIcmsLabelControl.Text = "Alíquota de ICMS (%): *";
+            this.aliquotaDeIcmsLabelControl.Text = "Alíquota de ICMS (%): ";
+            this.aliquotaDeIcmsLabelControl.Click += new System.EventHandler(this.aliquotaDeIcmsLabelControl_Click);
             // 
             // situacaoTributariaLabelControl
             // 

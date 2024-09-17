@@ -46,18 +46,35 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
         }
 
+        private bool isValidating;
+
         private void textEdit2_EditValueChanged(object sender, EventArgs e)
         {
+            if (isValidating) return;
+
+            isValidating = true;
             codigodebarrasTextEdit.Properties.MaxLength = 13;
             var texto = codigodebarrasTextEdit.Text;
 
-            if (string.IsNullOrEmpty(texto) || texto.Length != 13)return;
-
+            if (texto.Length == 13)
             {
-                if (ValidarCodigoDeBarrasEAN13(texto))
-                    return;
-                XtraMessageBox.Show("Código de Barras EAN-13 inválido. Verifique os dados inseridos e tente novamente.");
+                if (!ValidarCodigoDeBarrasEAN13(texto))
+                {
+                    XtraMessageBox.Show("Código de Barras EAN-13 inválido. Verifique os dados inseridos e tente novamente.");
+                    codigodebarrasTextEdit.Text = string.Empty;
+                    AtualizarEstiloLabelCodigoBarras(false);
+                }
+                else
+                {
+                    AtualizarEstiloLabelCodigoBarras(true);
+                }
             }
+            else
+            {
+                AtualizarEstiloLabelCodigoBarras(true);
+            }
+
+            isValidating = false;
         }
 
         private bool ValidarCodigoDeBarrasEAN13(string codigoDeBarras)
@@ -138,6 +155,17 @@ namespace CadastroDeProdutosView.Features.Produto.Views
         private bool ValidarCamposObrigatorios()
         {
             var todosCamposPreenchidos = true;
+
+            if (string.IsNullOrWhiteSpace(codigodebarrasTextEdit.Text))
+            {
+                AtualizarEstiloLabelCodigoBarras(false);
+                todosCamposPreenchidos = false;
+            }
+            else
+            {
+                AtualizarEstiloLabelCodigoBarras(true);
+            }
+
             if (string.IsNullOrWhiteSpace(nomeTextEdit.Text))
             {
                 nomeLabelControl.Text = "Nome: <color=red>*</color>";
@@ -146,7 +174,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             }
             else 
             {
-                nomeLabelControl.Text = "Nome:";
+                nomeLabelControl.Text = "Nome: *";
                 nomeLabelControl.AllowHtmlString = false;
             }
 
@@ -158,7 +186,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             }
             else
             {
-                codigodebarrasLabelControl.Text = "Codigo De Barras:";
+                codigodebarrasLabelControl.Text = "Codigo de Barras: *";
                 codigodebarrasLabelControl.AllowHtmlString = false;
             }
 
@@ -170,7 +198,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             }
             else
             {
-                estoqueLabelControl.Text = "Estoque:";
+                estoqueLabelControl.Text = "Estoque: *";
                 estoqueLabelControl.AllowHtmlString = false;
             }
 
@@ -182,7 +210,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             }
             else
             {
-                precoDaVendaLabelControl.Text = "Preço da Venda:";
+                precoDaVendaLabelControl.Text = "Preço da Venda: *";
                 precoDaVendaLabelControl.AllowHtmlString = false;
             }
 
@@ -194,7 +222,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             }
             else
             {
-                custoLabelControl.Text = "Custo:";
+                custoLabelControl.Text = "Custo: *";
                 custoLabelControl.AllowHtmlString = false;
             }
 
@@ -206,7 +234,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             }
             else
             {
-                markupLabelControl.Text = "Markup:";
+                markupLabelControl.Text = "Markup: *";
                 markupLabelControl.AllowHtmlString = false;
             }
 
@@ -218,7 +246,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             }
             else
             {
-                unidadeDeMedidaLabelControl.Text = "Und. de Medida:";
+                unidadeDeMedidaLabelControl.Text = "Und. de Medida: *";
                 unidadeDeMedidaLabelControl.AllowHtmlString = false;
             }
 
@@ -230,7 +258,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             }
             else
             {
-                categoriaLabelControl.Text = "Categoria:";
+                categoriaLabelControl.Text = "Categoria: *";
                 categoriaLabelControl.AllowHtmlString = false;
             }
 
@@ -310,17 +338,44 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
         private void salvarButtomItem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            if (ValidarCamposObrigatorios())
             {
+                var camposPreenchidos = ValidarCamposObrigatorios();
+
+                if (!camposPreenchidos)
+                {
+                    XtraMessageBox.Show("Todos os campos obrigatórios devem ser preenchidos!");
+                    return;
+                }
+
+                if (!ValidarCodigoDeBarrasEAN13(codigodebarrasTextEdit.Text))
+                {
+                    XtraMessageBox.Show("O campo código de barras não é um EAN-13 válido. Por favor, verifique e tente novamente.");
+                    AtualizarEstiloLabelCodigoBarras(false);
+                    return;
+                }
+
+                AtualizarEstiloLabelCodigoBarras(true);
+
                 XtraMessageBox.Show("Produto cadastrado com sucesso");
                 LimparTextEdits();
                 LimparLookUpEdits();
             }
+        }
+
+        private void AtualizarEstiloLabelCodigoBarras(bool valido)
+        {
+            if (valido)
+            {
+                codigodebarrasLabelControl.Text = "Codigo de Barras: *";
+                codigodebarrasLabelControl.AllowHtmlString = false;
+            }
             else
             {
-                XtraMessageBox.Show("Todos os campos obrigatórios devem ser preenchidos!");
+                codigodebarrasLabelControl.Text = "Codigo de Barras: <color=red>*</color>";
+                codigodebarrasLabelControl.AllowHtmlString = true;
             }
         }
+
 
         private void categoriaDeProdutosLookUpEdit_EditValueChanged(object sender, EventArgs e)
         {
@@ -332,9 +387,9 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
         }
 
-        private void leave(object sender, EventArgs e)
+        private void aliquotaDeIcmsLabelControl_Click(object sender, EventArgs e)
         {
-            codigodebarrasTextEdit.Text = "";
+
         }
     }
 }
