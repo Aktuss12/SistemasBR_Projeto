@@ -71,7 +71,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.barManager = new DevExpress.XtraBars.BarManager(this.components);
             this.bar = new DevExpress.XtraBars.Bar();
             this.salvarProdutoButtomItem = new DevExpress.XtraBars.BarButtonItem();
-            this.excluirProdutoButtomItem = new DevExpress.XtraBars.BarButtonItem();
             this.pesquisarProdutoButtomItem = new DevExpress.XtraBars.BarButtonItem();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
@@ -82,6 +81,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.pesquisarButtomItem = new DevExpress.XtraBars.BarButtonItem();
             this.barHeaderItem1 = new DevExpress.XtraBars.BarHeaderItem();
             this.barCheckItem1 = new DevExpress.XtraBars.BarCheckItem();
+            this.excluirProdutoButtomItem = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.tabPage)).BeginInit();
             this.tabPage.SuspendLayout();
             this.produtosTabNavigationPage.SuspendLayout();
@@ -119,7 +119,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             // tabPage
             // 
             this.tabPage.AllowCollapse = DevExpress.Utils.DefaultBoolean.Default;
-            this.tabPage.Appearance.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.tabPage.Appearance.BackColor = System.Drawing.SystemColors.Control;
             this.tabPage.Appearance.BackColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.tabPage.Appearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
             this.tabPage.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -152,7 +152,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             // 
             // produtosTabNavigationPage
             // 
-            this.produtosTabNavigationPage.Appearance.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.produtosTabNavigationPage.Appearance.BackColor = System.Drawing.SystemColors.Control;
             this.produtosTabNavigationPage.Appearance.BackColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.produtosTabNavigationPage.Appearance.BorderColor = System.Drawing.Color.Aqua;
             this.produtosTabNavigationPage.Appearance.Font = new System.Drawing.Font("Tahoma", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -187,6 +187,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.produtosTabNavigationPage.Margin = new System.Windows.Forms.Padding(2);
             this.produtosTabNavigationPage.Name = "produtosTabNavigationPage";
             this.produtosTabNavigationPage.Size = new System.Drawing.Size(757, 380);
+            this.produtosTabNavigationPage.Paint += new System.Windows.Forms.PaintEventHandler(this.produtosTabNavigationPage_Paint);
             // 
             // fornecedorTextEdit
             // 
@@ -452,7 +453,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             // 
             // infofiscalTabNavigationPage
             // 
-            this.infofiscalTabNavigationPage.Appearance.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.infofiscalTabNavigationPage.Appearance.BackColor = System.Drawing.SystemColors.Control;
             this.infofiscalTabNavigationPage.Appearance.Options.UseBackColor = true;
             this.infofiscalTabNavigationPage.Caption = "Informações Fiscais";
             this.infofiscalTabNavigationPage.Controls.Add(this.naturezaDaOperacaoLookUpEdit);
@@ -668,7 +669,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.bar.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
             this.bar.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(this.salvarProdutoButtomItem),
-            new DevExpress.XtraBars.LinkPersistInfo(this.excluirProdutoButtomItem),
             new DevExpress.XtraBars.LinkPersistInfo(this.pesquisarProdutoButtomItem)});
             this.bar.OptionsBar.AllowQuickCustomization = false;
             this.bar.OptionsBar.AutoPopupMode = DevExpress.XtraBars.BarAutoPopupMode.OnlyMenu;
@@ -684,15 +684,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.salvarProdutoButtomItem.Name = "salvarProdutoButtomItem";
             this.salvarProdutoButtomItem.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
             this.salvarProdutoButtomItem.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.salvarButtomItem_ItemClick);
-            // 
-            // excluirProdutoButtomItem
-            // 
-            this.excluirProdutoButtomItem.Border = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
-            this.excluirProdutoButtomItem.Caption = "EXCLUIR";
-            this.excluirProdutoButtomItem.Id = 7;
-            this.excluirProdutoButtomItem.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("excluirProdutoButtomItem.ImageOptions.SvgImage")));
-            this.excluirProdutoButtomItem.Name = "excluirProdutoButtomItem";
-            this.excluirProdutoButtomItem.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
             // 
             // pesquisarProdutoButtomItem
             // 
@@ -777,6 +768,15 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.barCheckItem1.Caption = "barCheckItem1";
             this.barCheckItem1.Id = 5;
             this.barCheckItem1.Name = "barCheckItem1";
+            // 
+            // excluirProdutoButtomItem
+            // 
+            this.excluirProdutoButtomItem.Border = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
+            this.excluirProdutoButtomItem.Caption = "EXCLUIR";
+            this.excluirProdutoButtomItem.Id = 7;
+            this.excluirProdutoButtomItem.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("excluirProdutoButtomItem.ImageOptions.SvgImage")));
+            this.excluirProdutoButtomItem.Name = "excluirProdutoButtomItem";
+            this.excluirProdutoButtomItem.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
             // 
             // CadastroDeProdutosView
             // 

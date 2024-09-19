@@ -11,7 +11,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
     public partial class CadastroDeProdutosView : Form
     {
         private bool isValidating;
-        private readonly string connectionString = "User ID=SYSDBA;Password=masterkey;Database=C:\\Users\\admin\\Documents\\BANCODEDADOSPRODUTOS.FDB;DataSource=localhost;Port=3050;Dialect=3;Charset=NONE;";
+        private const string connectionString = @"User ID=SYSDBA;Password=masterkey;Database=C:\Users\admin\Documents\BANCODEDADOSPRODUTOS.FDB;DataSource=localhost;Port=3050;Dialect=3;Charset=NONE;";
 
 
         public CadastroDeProdutosView()
@@ -320,6 +320,11 @@ namespace CadastroDeProdutosView.Features.Produto.Views
         }
 
         private void custoLabelControl_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void produtosTabNavigationPage_Paint(object sender, PaintEventArgs e)
         {
 
         }
