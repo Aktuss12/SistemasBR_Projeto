@@ -3,6 +3,7 @@ using CadastroDeProdutosView.Features.Produto.Enums;
 using DevExpress.XtraEditors;
 using FirebirdSql.Data.FirebirdClient;
 using System;
+using System.Globalization;
 using System.Windows.Forms;
 
 namespace CadastroDeProdutosView.Features.Produto.Views
@@ -165,121 +166,120 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
         private void aliquotaDeIcmsTextEdit_EditValueChanged(object sender, EventArgs e)
         {
-            aliquotaDeIcmsTextEdit.Properties.MaxLength = 8;
         }
 
         private void reducaoDeCalculoIcmsTextEdit_EditValueChanged(object sender, EventArgs e)
         {
-            reducaoDeCalculoIcmsTextEdit.Properties.MaxLength = 8;
         }
 
         private void barButtonItem1_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e) { }
 
-private void salvarButtomItem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-{
-    if (!ValidarCamposObrigatorios())
-    {
-        XtraMessageBox.Show("Todos os campos obrigatórios devem ser preenchidos!");
-        return;
-    }
-
-    if (!string.IsNullOrWhiteSpace(codigodebarrasTextEdit.Text) &&
-        !ValidarCodigoDeBarrasEAN13(codigodebarrasTextEdit.Text))
-    {
-        XtraMessageBox.Show("O campo código de barras não é um EAN-13 válido. Por favor, verifique e tente novamente.");
-        AtualizarEstiloLabelCodigoBarras(false);
-        return;
-    }
-
-    AtualizarEstiloLabelCodigoBarras(true);
-
-    try
-    {
-        using (var connection = new FbConnection(connectionString))
+        private void salvarButtomItem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            connection.Open();
-
-            using (var transaction = connection.BeginTransaction())
+            if (!ValidarCamposObrigatorios())
             {
-                try
+                XtraMessageBox.Show("Todos os campos obrigatórios devem ser preenchidos!");
+                return;
+            }
+
+            if (!string.IsNullOrWhiteSpace(codigodebarrasTextEdit.Text) &&
+                !ValidarCodigoDeBarrasEAN13(codigodebarrasTextEdit.Text))
+            {
+                XtraMessageBox.Show("O campo código de barras não é um EAN-13 válido. Por favor, verifique e tente novamente.");
+                AtualizarEstiloLabelCodigoBarras(false);
+                return;
+            }
+
+            AtualizarEstiloLabelCodigoBarras(true);
+
+            try
+            {
+                using (var connection = new FbConnection(connectionString))
                 {
-                    const string insertProdutoQuery = @"
+                    connection.Open();
+
+                    using (var transaction = connection.BeginTransaction())
+                    {
+                        try
+                        {
+                            const string insertProdutoQuery = @"
                         INSERT INTO PRODUTO (Nome, Categoria, Fornecedor, CodigoDeBarras, UnidadeDeMedida, Estoque, Marca, Custo, Markup, PrecoDaVenda)
                         VALUES (@nome, @categoria, @fornecedor, @codigoDeBarras, @unidadeDeMedida, @estoque, @marca, @custo, @markup, @precoDaVenda)
-                        RETURNING IdProduto";
+                        RETURNING idProduto";
 
-                    using (var command = new FbCommand(insertProdutoQuery, connection, transaction))
-                    {
-                        command.Parameters.Add("@Nome", FbDbType.VarChar).Value = nomeTextEdit.Text ?? (object)DBNull.Value;
-                        command.Parameters.Add("@Categoria", FbDbType.VarChar).Value = categoriaDeProdutosLookUpEdit.EditValue ?? DBNull.Value;
-                        command.Parameters.Add("@Fornecedor", FbDbType.VarChar).Value = fornecedorTextEdit.Text ?? (object)DBNull.Value;
-                        command.Parameters.Add("@CodigoDeBarras", FbDbType.VarChar).Value = codigodebarrasTextEdit.Text ?? (object)DBNull.Value;
-                        command.Parameters.Add("@UnidadeDeMedida", FbDbType.VarChar).Value = unidadeDeMedidaLookUpEdit.EditValue ?? DBNull.Value;
-                        command.Parameters.Add("@Estoque", FbDbType.Integer).Value = int.TryParse(estoqueTextEdit.EditValue.ToString(), out var estoque) ? estoque : (object)DBNull.Value;
-                        command.Parameters.Add("@Marca", FbDbType.VarChar).Value = marcaLookUpEdit.EditValue ?? DBNull.Value;
+                            int idProduto;
 
-                        if (decimal.TryParse(custoTextEdit.Text, out var custo))
-                            command.Parameters.Add("@Custo", FbDbType.Decimal).Value = custo;
-                        else
-                            command.Parameters.Add("@Custo", FbDbType.Decimal).Value = DBNull.Value;
+                            using (var command = new FbCommand(insertProdutoQuery, connection, transaction))
+                            {
+                                command.Parameters.Add("@Nome", FbDbType.VarChar).Value = nomeTextEdit.Text ?? (object)DBNull.Value;
+                                command.Parameters.Add("@Categoria", FbDbType.VarChar).Value = categoriaDeProdutosLookUpEdit.EditValue ?? DBNull.Value;
+                                command.Parameters.Add("@Fornecedor", FbDbType.VarChar).Value = fornecedorTextEdit.Text ?? (object)DBNull.Value;
+                                command.Parameters.Add("@CodigoDeBarras", FbDbType.VarChar).Value = codigodebarrasTextEdit.Text ?? (object)DBNull.Value;
+                                command.Parameters.Add("@UnidadeDeMedida", FbDbType.VarChar).Value = unidadeDeMedidaLookUpEdit.EditValue ?? DBNull.Value;
+                                command.Parameters.Add("@Estoque", FbDbType.Integer).Value = int.TryParse(estoqueTextEdit.EditValue.ToString(), out var estoque) ? estoque : (object)DBNull.Value;
+                                command.Parameters.Add("@Marca", FbDbType.VarChar).Value = marcaLookUpEdit.EditValue ?? DBNull.Value;
 
-                        if (decimal.TryParse(markupTextEdit.Text, out var markup))
-                        {
-                            command.Parameters.Add("@Markup", FbDbType.Decimal).Value = markup;
+                                if (decimal.TryParse(custoTextEdit.Text, out var custo))
+                                    command.Parameters.Add("@Custo", FbDbType.Decimal).Value = custo;
+                                else
+                                    command.Parameters.Add("@Custo", FbDbType.Decimal).Value = DBNull.Value;
+
+                                if (decimal.TryParse(markupTextEdit.Text, out var markup))
+                                    command.Parameters.Add("@Markup", FbDbType.Decimal).Value = markup;
+                                else
+                                    command.Parameters.Add("@Markup", FbDbType.Decimal).Value = DBNull.Value;
+
+                                if (decimal.TryParse(precoVendaTextEdit.Text, out var precoVenda))
+                                    command.Parameters.Add("@PrecoDaVenda", FbDbType.Decimal).Value = precoVenda;
+                                else
+                                    command.Parameters.Add("@PrecoDaVenda", FbDbType.Decimal).Value = DBNull.Value;
+
+                                idProduto = (int)command.ExecuteScalar();
+                            }
+
+                            const string insertInformacoesFiscaisQuery = @"
+                        INSERT INTO INFORMACOESFISCAIS (idProduto, origemDaMercadoria, situacaoTributaria, naturezaDaOperacao, ncm, aliquotaDeIcms, reducaoDeCalculo)
+                         VALUES (@idProduto, @origemDaMercadoria, @situacaoTributaria, @naturezaDaOperacao, @ncm, @aliquotaDeIcms, @reducaoDeCalculo)";
+
+                            using (var informacoesCommand = new FbCommand(insertInformacoesFiscaisQuery, connection, transaction))
+                            {
+                                informacoesCommand.Parameters.Add("@idProduto", FbDbType.Integer).Value = idProduto;
+                                informacoesCommand.Parameters.Add("@origemDaMercadoria", FbDbType.VarChar).Value = origemDaMercadoriaLookUpEdit.EditValue ?? DBNull.Value;
+                                informacoesCommand.Parameters.Add("@situacaoTributaria", FbDbType.VarChar).Value = situacaoTributariaLookUpEdit.EditValue ?? DBNull.Value;
+                                informacoesCommand.Parameters.Add("@naturezaDaOperacao", FbDbType.VarChar).Value = naturezaDaOperacaoLookUpEdit.EditValue ?? DBNull.Value;
+                                informacoesCommand.Parameters.Add("@ncm", FbDbType.VarChar).Value = ncmTextEdit.Text ?? (object)DBNull.Value;
+
+                                if (decimal.TryParse(aliquotaDeIcmsTextEdit.Text, NumberStyles.Any, CultureInfo.InvariantCulture, out var aliquotaIcms))
+                                    informacoesCommand.Parameters.Add("@aliquotaDeIcms", FbDbType.Decimal).Value = aliquotaIcms;
+                                else
+                                    informacoesCommand.Parameters.Add("@aliquotaDeIcms", FbDbType.Decimal).Value = DBNull.Value;
+
+                                if (decimal.TryParse(reducaoDeCalculoIcmsTextEdit.Text, NumberStyles.Any, CultureInfo.InvariantCulture, out var reducaoCalculo))
+                                    informacoesCommand.Parameters.Add("@reducaoDeCalculo", FbDbType.Decimal).Value = reducaoCalculo;
+                                else
+                                    informacoesCommand.Parameters.Add("@reducaoDeCalculo", FbDbType.Decimal).Value = DBNull.Value;
+
+                                informacoesCommand.ExecuteNonQuery();
+                            }
+
+                            transaction.Commit();
+                            XtraMessageBox.Show("Produto cadastrado com sucesso");
+                            LimparTextEdits();
+                            LimparLookUpEdits();
                         }
-                        else
+                        catch (Exception ex)
                         {
-                            command.Parameters.Add("@Markup", FbDbType.Decimal).Value = DBNull.Value;
+                            transaction.Rollback();
+                            throw new Exception("Erro ao inserir produto no banco de dados", ex);
                         }
-
-                        if (decimal.TryParse(precoVendaTextEdit.Text, out var precoVenda))
-                        {
-                            command.Parameters.Add("@PrecoDaVenda", FbDbType.Decimal).Value = precoVenda;
-                        }
-                        else
-                        {
-                            command.Parameters.Add("@PrecoDaVenda", FbDbType.Decimal).Value = DBNull.Value;
-                        }
-
-                        command.ExecuteNonQuery();
-
-                                const string insertInformacoesFiscaisQuery = @"
-                                     INSERT INTO INFORMACOESFISCAIS (idProduto, origemDaMercadoria, situacaoTributaria, naturezaDaOperacao, ncm, aliquotaDeIcms, reducaoDeCalculo)
-                                     VALUES (@idProduto, @origemDaMercadoria, @situacaoTributaria, @naturezaDaOperacao, @ncm, @aliquotaDeIcms, @reducaoDeCalculo)";
-
-                                using (var informacoesCommand = new FbCommand(insertInformacoesFiscaisQuery, connection, transaction))
-                                {
-                                    var idProduto = (int)command.ExecuteScalar();
-                                    informacoesCommand.Parameters.Add("@idProduto", FbDbType.Integer).Value = idProduto;
-                                    informacoesCommand.Parameters.Add("@origemDaMercadoria", FbDbType.VarChar).Value = origemDaMercadoriaLookUpEdit.EditValue ?? DBNull.Value;
-                                    informacoesCommand.Parameters.Add("@situacaoTributaria", FbDbType.VarChar).Value = situacaoTributariaLookUpEdit.EditValue ?? DBNull.Value;
-                                    informacoesCommand.Parameters.Add("@naturezaDaOperacao", FbDbType.VarChar).Value = naturezaDaOperacaoLookUpEdit.EditValue ?? DBNull.Value;
-                                    informacoesCommand.Parameters.Add("@ncm", FbDbType.VarChar).Value = ncmTextEdit.Text ?? (object)DBNull.Value;
-                                    informacoesCommand.Parameters.Add("@aliquotaDeIcms", FbDbType.Decimal).Value = decimal.TryParse(aliquotaDeIcmsTextEdit.Text, out var aliquotaIcms) ? aliquotaIcms : (object)DBNull.Value;
-                                    informacoesCommand.Parameters.Add("@reducaoDeCalculo", FbDbType.Decimal).Value = decimal.TryParse(reducaoDeCalculoIcmsTextEdit.Text, out var reducaoCalculo) ? reducaoCalculo : (object)DBNull.Value;
-
-                                    informacoesCommand.ExecuteNonQuery();
-                                }
-
-                                transaction.Commit();
-                        XtraMessageBox.Show("Produto cadastrado com sucesso");
-                        LimparTextEdits();
-                        LimparLookUpEdits();
                     }
                 }
-                catch (Exception ex)
-                {
-                    transaction.Rollback();
-                    throw new Exception("Erro ao inserir produto no banco de dados", ex);
-                }
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show($"Erro ao salvar o produto: {ex.Message}");
             }
         }
-    }
-    catch (Exception ex)
-    {
-        XtraMessageBox.Show($"Erro ao salvar o produto: {ex.Message}");
-    }
-}
 
 
         private void AtualizarEstiloLabelCodigoBarras(bool valido)

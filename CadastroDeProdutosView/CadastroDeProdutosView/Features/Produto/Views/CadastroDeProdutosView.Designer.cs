@@ -278,7 +278,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.estoqueTextEdit.Margin = new System.Windows.Forms.Padding(2);
             this.estoqueTextEdit.Name = "estoqueTextEdit";
             this.estoqueTextEdit.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
-            this.estoqueTextEdit.Properties.Mask.EditMask = "n";
+            this.estoqueTextEdit.Properties.Mask.EditMask = "d";
             this.estoqueTextEdit.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.estoqueTextEdit.Properties.Mask.UseMaskAsDisplayFormat = true;
             this.estoqueTextEdit.Size = new System.Drawing.Size(132, 22);
@@ -549,7 +549,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.reducaoDeCalculoIcmsTextEdit.Margin = new System.Windows.Forms.Padding(2);
             this.reducaoDeCalculoIcmsTextEdit.Name = "reducaoDeCalculoIcmsTextEdit";
             this.reducaoDeCalculoIcmsTextEdit.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
-            this.reducaoDeCalculoIcmsTextEdit.Properties.Mask.EditMask = "p";
+            this.reducaoDeCalculoIcmsTextEdit.Properties.Mask.EditMask = "d";
             this.reducaoDeCalculoIcmsTextEdit.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.reducaoDeCalculoIcmsTextEdit.Properties.Mask.UseMaskAsDisplayFormat = true;
             this.reducaoDeCalculoIcmsTextEdit.Size = new System.Drawing.Size(301, 22);
@@ -585,7 +585,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.aliquotaDeIcmsTextEdit.Margin = new System.Windows.Forms.Padding(2);
             this.aliquotaDeIcmsTextEdit.Name = "aliquotaDeIcmsTextEdit";
             this.aliquotaDeIcmsTextEdit.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
-            this.aliquotaDeIcmsTextEdit.Properties.Mask.EditMask = "p";
+            this.aliquotaDeIcmsTextEdit.Properties.Mask.EditMask = "d";
             this.aliquotaDeIcmsTextEdit.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.aliquotaDeIcmsTextEdit.Properties.Mask.UseMaskAsDisplayFormat = true;
             this.aliquotaDeIcmsTextEdit.Size = new System.Drawing.Size(300, 22);

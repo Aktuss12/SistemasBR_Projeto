@@ -29,8 +29,8 @@ CREATE TABLE INFORMACOESFISCAIS (
     situacaoTributaria VARCHAR(50),
     naturezaDaOperacao VARCHAR(50),
     ncm VARCHAR(8),
-    aliquotaDeIcms DECIMAL(5, 2),
-    reducaoDeCalculo DECIMAL(5, 2),
+    aliquotaDeIcms DECIMAL(18, 2),
+    reducaoDeCalculo DECIMAL(18, 2),
     FOREIGN KEY (idProduto) REFERENCES PRODUTO(idProduto)
 );
 
@@ -46,4 +46,6 @@ END
 DROP TABLE INFORMACOESFISCAIS
 DROP TABLE PRODUTO
 DROP GENERATOR id_produto_generator
+DROP GENERATOR id_informacao_generator
+DROP TRIGGER id_informacao_trigger
 DROP TRIGGER id_produto_trigger
