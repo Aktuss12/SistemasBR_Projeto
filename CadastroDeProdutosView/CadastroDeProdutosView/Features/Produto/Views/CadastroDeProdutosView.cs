@@ -10,7 +10,8 @@ namespace CadastroDeProdutosView.Features.Produto.Views
     public partial class CadastroDeProdutosView : Form
     {
         private bool isValidating;
-        private static readonly string ConnectionString = @"Server=localhost;Database=C:\Users\admin\Documents\Banco\BancoDeDadosCadastroProduto.fdb;User=SYSDBA;Password=masterkey;";
+        private readonly string connectionString = "User ID=SYSDBA;Password=masterkey;Database=C:\\Users\\admin\\Documents\\BANCODEDADOSPRODUTOS.FDB;DataSource=localhost;Port=3050;Dialect=3;Charset=NONE;";
+
 
         public CadastroDeProdutosView()
         {
@@ -194,7 +195,7 @@ private void salvarButtomItem_ItemClick(object sender, DevExpress.XtraBars.ItemC
 
     try
     {
-        using (var connection = new FbConnection(ConnectionString))
+        using (var connection = new FbConnection(connectionString))
         {
             connection.Open();
 
@@ -240,24 +241,25 @@ private void salvarButtomItem_ItemClick(object sender, DevExpress.XtraBars.ItemC
                             command.Parameters.Add("@PrecoDaVenda", FbDbType.Decimal).Value = DBNull.Value;
                         }
 
-                        
-                        const string insertInformacoesFiscaisQuery = @"
+                        command.ExecuteNonQuery();
+
+                                const string insertInformacoesFiscaisQuery = @"
                                      INSERT INTO INFORMACOESFISCAIS (idProduto, origemDaMercadoria, situacaoTributaria, naturezaDaOperacao, ncm, aliquotaDeIcms, reducaoDeCalculo)
                                      VALUES (@idProduto, @origemDaMercadoria, @situacaoTributaria, @naturezaDaOperacao, @ncm, @aliquotaDeIcms, @reducaoDeCalculo)";
 
-                        using (var informacoesCommand = new FbCommand(insertInformacoesFiscaisQuery, connection, transaction))
-                        {
-                            var idProduto = (int)command.ExecuteScalar();
-                            informacoesCommand.Parameters.Add("@idProduto", FbDbType.Integer).Value = idProduto;
-                            informacoesCommand.Parameters.Add("@origemDaMercadoria", FbDbType.VarChar).Value = origemDaMercadoriaLookUpEdit.EditValue ?? DBNull.Value;
-                            informacoesCommand.Parameters.Add("@situacaoTributaria", FbDbType.VarChar).Value = situacaoTributariaLookUpEdit.EditValue ?? DBNull.Value;
-                            informacoesCommand.Parameters.Add("@naturezaDaOperacao", FbDbType.VarChar).Value = naturezaDaOperacaoLookUpEdit.EditValue ?? DBNull.Value;
-                            informacoesCommand.Parameters.Add("@ncm", FbDbType.VarChar).Value = ncmTextEdit.Text ?? (object)DBNull.Value;
-                            informacoesCommand.Parameters.Add("@aliquotaDeIcms", FbDbType.Decimal).Value = decimal.TryParse(aliquotaDeIcmsTextEdit.Text, out var aliquotaIcms) ? aliquotaIcms : (object)DBNull.Value;
-                            informacoesCommand.Parameters.Add("@reducaoDeCalculo", FbDbType.Decimal).Value = decimal.TryParse(reducaoDeCalculoIcmsTextEdit.Text, out var reducaoCalculo) ? reducaoCalculo : (object)DBNull.Value;
+                                using (var informacoesCommand = new FbCommand(insertInformacoesFiscaisQuery, connection, transaction))
+                                {
+                                    var idProduto = (int)command.ExecuteScalar();
+                                    informacoesCommand.Parameters.Add("@idProduto", FbDbType.Integer).Value = idProduto;
+                                    informacoesCommand.Parameters.Add("@origemDaMercadoria", FbDbType.VarChar).Value = origemDaMercadoriaLookUpEdit.EditValue ?? DBNull.Value;
+                                    informacoesCommand.Parameters.Add("@situacaoTributaria", FbDbType.VarChar).Value = situacaoTributariaLookUpEdit.EditValue ?? DBNull.Value;
+                                    informacoesCommand.Parameters.Add("@naturezaDaOperacao", FbDbType.VarChar).Value = naturezaDaOperacaoLookUpEdit.EditValue ?? DBNull.Value;
+                                    informacoesCommand.Parameters.Add("@ncm", FbDbType.VarChar).Value = ncmTextEdit.Text ?? (object)DBNull.Value;
+                                    informacoesCommand.Parameters.Add("@aliquotaDeIcms", FbDbType.Decimal).Value = decimal.TryParse(aliquotaDeIcmsTextEdit.Text, out var aliquotaIcms) ? aliquotaIcms : (object)DBNull.Value;
+                                    informacoesCommand.Parameters.Add("@reducaoDeCalculo", FbDbType.Decimal).Value = decimal.TryParse(reducaoDeCalculoIcmsTextEdit.Text, out var reducaoCalculo) ? reducaoCalculo : (object)DBNull.Value;
 
-                            informacoesCommand.ExecuteNonQuery();
-                        }
+                                    informacoesCommand.ExecuteNonQuery();
+                                }
 
                                 transaction.Commit();
                         XtraMessageBox.Show("Produto cadastrado com sucesso");
