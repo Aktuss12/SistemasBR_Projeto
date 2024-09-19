@@ -51,14 +51,14 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.excluirProdutoButtomItem = new DevExpress.XtraBars.BarButtonItem();
             this.pesquisarProdutoButtomItem = new DevExpress.XtraBars.BarButtonItem();
             this.pesquisarGridControl = new DevExpress.XtraGrid.GridControl();
-            this.bandedGridView1 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridView();
-            this.pesquisarGrid = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
+            this.advBandedGridView1 = new DevExpress.XtraGrid.Views.BandedGrid.AdvBandedGridView();
+            this.gridBand1 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             ((System.ComponentModel.ISupportInitialize)(this.pesquisarTextEdit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pesquisarBehaviorManager)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pesquisarPictureEdit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pesquisarBarManager)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pesquisarGridControl)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bandedGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.advBandedGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // pesquisarLabelControl
@@ -247,27 +247,28 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             // pesquisarGridControl
             // 
             this.pesquisarGridControl.Location = new System.Drawing.Point(0, 179);
-            this.pesquisarGridControl.MainView = this.bandedGridView1;
+            this.pesquisarGridControl.MainView = this.advBandedGridView1;
             this.pesquisarGridControl.Name = "pesquisarGridControl";
             this.pesquisarGridControl.Size = new System.Drawing.Size(800, 274);
             this.pesquisarGridControl.TabIndex = 8;
             this.pesquisarGridControl.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.bandedGridView1});
+            this.advBandedGridView1});
             this.pesquisarGridControl.Click += new System.EventHandler(this.pesquisarGridControl_Click);
             // 
-            // bandedGridView1
+            // advBandedGridView1
             // 
-            this.bandedGridView1.Bands.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.GridBand[] {
-            this.pesquisarGrid});
-            this.bandedGridView1.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
-            this.bandedGridView1.GridControl = this.pesquisarGridControl;
-            this.bandedGridView1.Name = "bandedGridView1";
+            this.advBandedGridView1.Bands.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.GridBand[] {
+            this.gridBand1});
+            this.advBandedGridView1.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
+            this.advBandedGridView1.GridControl = this.pesquisarGridControl;
+            this.advBandedGridView1.Name = "advBandedGridView1";
+            this.advBandedGridView1.VertScrollVisibility = DevExpress.XtraGrid.Views.Base.ScrollVisibility.Never;
             // 
-            // pesquisarGrid
+            // gridBand1
             // 
-            this.pesquisarGrid.Caption = "Produtos";
-            this.pesquisarGrid.Name = "pesquisarGrid";
-            this.pesquisarGrid.VisibleIndex = 0;
+            this.gridBand1.Caption = "gridBand1";
+            this.gridBand1.Name = "gridBand1";
+            this.gridBand1.VisibleIndex = 0;
             // 
             // PesquisarProdutosView
             // 
@@ -290,7 +291,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             ((System.ComponentModel.ISupportInitialize)(this.pesquisarPictureEdit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pesquisarBarManager)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pesquisarGridControl)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bandedGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.advBandedGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -318,7 +319,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
         private DevExpress.XtraBars.BarButtonItem excluirProdutoButtomItem;
         private DevExpress.XtraBars.BarButtonItem pesquisarProdutoButtomItem;
         private DevExpress.XtraGrid.GridControl pesquisarGridControl;
-        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridView bandedGridView1;
-        private DevExpress.XtraGrid.Views.BandedGrid.GridBand pesquisarGrid;
+        private DevExpress.XtraGrid.Views.BandedGrid.AdvBandedGridView advBandedGridView1;
+        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand1;
     }
 }
