@@ -318,5 +318,10 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
             return todosCamposPreenchidos;
         }
+
+        private void custoLabelControl_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
