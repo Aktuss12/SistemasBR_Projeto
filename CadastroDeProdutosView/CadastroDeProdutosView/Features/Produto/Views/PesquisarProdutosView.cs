@@ -12,63 +12,56 @@ namespace CadastroDeProdutosView.Features.Produto.Views
         public PesquisarProdutosView()
         {
             InitializeComponent();
-            LoadProdutoData();
-            LoadInformacoesFiscaisData();
+            LoadCombinedData();
         }
 
-        private void LoadProdutoData()
+        private void LoadCombinedData()
         {
             try
             {
-                var produtoTable = GetProdutoData();
-                pesquisarGridControl.DataSource = produtoTable;
+                var combinedTable = GetCombinedData();
+                pesquisarGridControl.DataSource = combinedTable;
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Erro ao carregar dados de produtos: " + ex.Message);
+                MessageBox.Show("Erro ao carregar dados: " + ex.Message);
             }
         }
 
-        private static DataTable GetProdutoData()
+        private static DataTable GetCombinedData()
         {
             var dataTable = new DataTable();
             using (var connection = new FbConnection(connectionString))
             {
-                const string query = "SELECT * FROM PRODUTO";
+                const string query = @"
+                    SELECT 
+                        P.idProduto, 
+                        P.nome, 
+                        P.categoria, 
+                        P.fornecedor, 
+                        P.codigoDeBarras, 
+                        P.unidadeDeMedida, 
+                        P.estoque, 
+                        P.marca, 
+                        P.custo, 
+                        P.markup, 
+                        P.precoDaVenda,
+                        I.origemDaMercadoria,
+                        I.situacaoTributaria,
+                        I.naturezaDaOperacao,
+                        I.ncm,
+                        I.aliquotaDeIcms,
+                        I.reducaoDeCalculo
+                        FROM PRODUTO P
+                        LEFT JOIN INFORMACOESFISCAIS I ON P.idProduto = I.idProduto";
+
                 var dataAdapter = new FbDataAdapter(query, connection);
                 dataAdapter.Fill(dataTable);
             }
             return dataTable;
         }
-
-        private void LoadInformacoesFiscaisData()
-        {
-            try
-            {
-                var informacoesFiscaisTable = GetInformacoesFiscaisData();
-                pesquisarGridControl.DataSource = informacoesFiscaisTable;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        private static DataTable GetInformacoesFiscaisData()
-        {
-            var dataTable = new DataTable();
-            using (var connection = new FbConnection(connectionString))
-            {
-                const string query = "SELECT * FROM INFORMACOESFISCAIS";
-                var dataAdapter = new FbDataAdapter(query, connection);
-                dataAdapter.Fill(dataTable);
-            }
-            return dataTable;
-        }
-
         private void pesquisarGridControl_Click(object sender, EventArgs e)
         {
-
         }
     }
 }
