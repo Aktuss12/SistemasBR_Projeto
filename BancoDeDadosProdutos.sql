@@ -23,7 +23,7 @@ NEW.idProduto = GEN_ID(id_produto_generator,1);
 END;
 
 CREATE TABLE INFORMACOESFISCAIS (
-    idInformacoes int NOT NULL,
+    idInformacao INT NOT NULL,
     idProduto INTEGER,
     origemDaMercadoria VARCHAR(50),
     situacaoTributaria VARCHAR(50),
@@ -37,11 +37,11 @@ CREATE TABLE INFORMACOESFISCAIS (
 CREATE GENERATOR id_informacao_generator;
 
 CREATE TRIGGER id_informacao_trigger FOR INFORMACOESFISCAIS
-BEFORE INSERT position 0
+BEFORE INSERT POSITION 0
 AS
 BEGIN
-NEW.idInformacao = GEN_ID(id_informacao_generator,2);
-END
+NEW.idInformacao = GEN_ID(id_informacao_generator, 1);
+END;
 
 DROP TABLE INFORMACOESFISCAIS
 DROP TABLE PRODUTO
