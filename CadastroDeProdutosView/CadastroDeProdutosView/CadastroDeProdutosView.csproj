@@ -77,6 +77,12 @@
     </Compile>
     <Compile Include="Features\Commons\ManipuladorDeEnumService.cs" />
     <Compile Include="Features\Produto\Enums\UnidadeDeMedida.cs" />
+    <Compile Include="Features\Produto\Views\PesquisarProdutosView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Features\Produto\Views\PesquisarProdutosView.Designer.cs">
+      <DependentUpon>PesquisarProdutosView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Features\Produto\Views\CadastroDeProdutosView.resx">
