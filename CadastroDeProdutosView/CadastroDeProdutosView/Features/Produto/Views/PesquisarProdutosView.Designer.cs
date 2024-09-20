@@ -158,7 +158,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             // barDockControl1
             // 
             this.barDockControl1.Appearance.BackColor = System.Drawing.Color.White;
-            this.barDockControl1.Appearance.BackColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.barDockControl1.Appearance.BackColor2 = System.Drawing.Color.White;
             this.barDockControl1.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.barDockControl1.Appearance.Options.UseBackColor = true;
             this.barDockControl1.Appearance.Options.UseFont = true;
