@@ -138,5 +138,15 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             var filterText = pesquisarTextEdit.Text.Trim();
             pesquisarGridView.ActiveFilterString = !string.IsNullOrEmpty(filterText) ? $"[nome] LIKE '%{filterText}%'" : string.Empty;
         }
+
+        private void PesquisarProdutosView_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void produtosDesativadosLabelControl_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

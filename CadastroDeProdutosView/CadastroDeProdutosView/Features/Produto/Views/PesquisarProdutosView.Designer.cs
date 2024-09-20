@@ -57,12 +57,14 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.pesquisarGridControl = new DevExpress.XtraGrid.GridControl();
             this.produtosDesativadosToggleSwitchh = new DevExpress.XtraEditors.ToggleSwitch();
             this.produtosDesativadosLabelControl = new DevExpress.XtraEditors.LabelControl();
+            this.imageCollection1 = new DevExpress.Utils.ImageCollection(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pesquisarTextEdit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pesquisarBehaviorManager)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pesquisarBarManager)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pesquisarGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pesquisarGridControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.produtosDesativadosToggleSwitchh.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imageCollection1)).BeginInit();
             this.SuspendLayout();
             // 
             // pesquisarLabelControl
@@ -300,7 +302,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             // 
             // produtosDesativadosToggleSwitchh
             // 
-            this.produtosDesativadosToggleSwitchh.Location = new System.Drawing.Point(12, 146);
+            this.produtosDesativadosToggleSwitchh.Location = new System.Drawing.Point(10, 144);
             this.produtosDesativadosToggleSwitchh.MenuManager = this.pesquisarBarManager;
             this.produtosDesativadosToggleSwitchh.Name = "produtosDesativadosToggleSwitchh";
             this.produtosDesativadosToggleSwitchh.Properties.FullFocusRect = true;
@@ -313,18 +315,24 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             // 
             // produtosDesativadosLabelControl
             // 
-            this.produtosDesativadosLabelControl.Appearance.Font = new System.Drawing.Font("Yu Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.produtosDesativadosLabelControl.Appearance.Font = new System.Drawing.Font("Yu Gothic Medium", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.produtosDesativadosLabelControl.Appearance.Options.UseFont = true;
             this.produtosDesativadosLabelControl.Location = new System.Drawing.Point(12, 119);
             this.produtosDesativadosLabelControl.Name = "produtosDesativadosLabelControl";
-            this.produtosDesativadosLabelControl.Size = new System.Drawing.Size(234, 21);
+            this.produtosDesativadosLabelControl.Size = new System.Drawing.Size(208, 19);
             this.produtosDesativadosLabelControl.TabIndex = 20;
-            this.produtosDesativadosLabelControl.Text = "Produtos Desativados/Ativados";
+            this.produtosDesativadosLabelControl.Text = "Produtos Ativos/Desativos";
+            this.produtosDesativadosLabelControl.Click += new System.EventHandler(this.produtosDesativadosLabelControl_Click);
+            // 
+            // imageCollection1
+            // 
+            this.imageCollection1.ImageStream = ((DevExpress.Utils.ImageCollectionStreamer)(resources.GetObject("imageCollection1.ImageStream")));
             // 
             // PesquisarProdutosView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.produtosDesativadosLabelControl);
             this.Controls.Add(this.produtosDesativadosToggleSwitchh);
@@ -338,12 +346,14 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.Controls.Add(this.barDockControl1);
             this.Name = "PesquisarProdutosView";
             this.Text = "PesquisarProdutosView";
+            this.Load += new System.EventHandler(this.PesquisarProdutosView_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pesquisarTextEdit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pesquisarBehaviorManager)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pesquisarBarManager)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pesquisarGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pesquisarGridControl)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.produtosDesativadosToggleSwitchh.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imageCollection1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -377,5 +387,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
         private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand1;
         private DevExpress.XtraEditors.ToggleSwitch produtosDesativadosToggleSwitchh;
         private DevExpress.XtraEditors.LabelControl produtosDesativadosLabelControl;
+        private DevExpress.Utils.ImageCollection imageCollection1;
     }
 }
