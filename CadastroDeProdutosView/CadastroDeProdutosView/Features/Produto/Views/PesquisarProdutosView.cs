@@ -108,12 +108,12 @@ namespace CadastroDeProdutosView.Features.Produto.Views
                 MessageBoxButtons.YesNo);
             if (confirmarResultado != DialogResult.Yes) return;
 
-            ExcluirProduto(idProduto);
+            DesativarProduto(idProduto);
             XtraMessageBox.Show("Produto excluído com sucesso.");
             CarregarBancoDeDados();
         }
 
-        private static void ExcluirProduto(int idProduto)
+        private static void DesativarProduto(int idProduto)
         {
             using (var connection = new FbConnection(connectionString))
             {
@@ -124,6 +124,21 @@ namespace CadastroDeProdutosView.Features.Produto.Views
                     command.Parameters.AddWithValue("@idProduto", idProduto);
                     command.ExecuteNonQuery();
                 }
+            }
+        }
+
+        private static void ReativarProduto(int idProduto)
+        {
+            using (var connection = new FbConnection(connectionString))
+            {
+                connection.Open();
+                const string updateProdutQuery = "UPDATE PRODUTO SET ativo = 1 WHERE idProduto = @idProduto";
+                using (var command = new FbCommand(updateProdutQuery, connection))
+                {
+                    command.Parameters.AddWithValue("@idProdto", idProduto);
+                    command.ExecuteNonQuery();
+                }
+
             }
         }
 

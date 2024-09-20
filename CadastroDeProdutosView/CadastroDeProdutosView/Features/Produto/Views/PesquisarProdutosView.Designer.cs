@@ -319,9 +319,9 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.produtosDesativadosLabelControl.Appearance.Options.UseFont = true;
             this.produtosDesativadosLabelControl.Location = new System.Drawing.Point(12, 119);
             this.produtosDesativadosLabelControl.Name = "produtosDesativadosLabelControl";
-            this.produtosDesativadosLabelControl.Size = new System.Drawing.Size(208, 19);
+            this.produtosDesativadosLabelControl.Size = new System.Drawing.Size(193, 19);
             this.produtosDesativadosLabelControl.TabIndex = 20;
-            this.produtosDesativadosLabelControl.Text = "Produtos Ativos/Desativos";
+            this.produtosDesativadosLabelControl.Text = "Produtos Ativos/Inativos";
             this.produtosDesativadosLabelControl.Click += new System.EventHandler(this.produtosDesativadosLabelControl_Click);
             // 
             // imageCollection1
