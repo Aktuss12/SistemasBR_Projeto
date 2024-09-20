@@ -60,8 +60,10 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             }
             return dataTable;
         }
+
         private void pesquisarGridControl_Click(object sender, EventArgs e)
         {
+
         }
     }
 }

@@ -39,6 +39,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.pesquisarBarManager = new DevExpress.XtraBars.BarManager(this.components);
             this.bar = new DevExpress.XtraBars.Bar();
             this.salvarProdutoButtomItem = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem3 = new DevExpress.XtraBars.BarButtonItem();
             this.barDockControl1 = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
@@ -50,15 +51,17 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.barCheckItem1 = new DevExpress.XtraBars.BarCheckItem();
             this.excluirProdutoButtomItem = new DevExpress.XtraBars.BarButtonItem();
             this.pesquisarProdutoButtomItem = new DevExpress.XtraBars.BarButtonItem();
-            this.pesquisarGridControl = new DevExpress.XtraGrid.GridControl();
-            this.advBandedGridView1 = new DevExpress.XtraGrid.Views.BandedGrid.AdvBandedGridView();
+            this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem2 = new DevExpress.XtraBars.BarButtonItem();
+            this.pesquisarGridView = new DevExpress.XtraGrid.Views.BandedGrid.AdvBandedGridView();
             this.gridBand1 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
+            this.pesquisarGridControl = new DevExpress.XtraGrid.GridControl();
             ((System.ComponentModel.ISupportInitialize)(this.pesquisarTextEdit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pesquisarBehaviorManager)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pesquisarPictureEdit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pesquisarBarManager)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pesquisarGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pesquisarGridControl)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.advBandedGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // pesquisarLabelControl
@@ -127,8 +130,11 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.barHeaderItem1,
             this.barCheckItem1,
             this.excluirProdutoButtomItem,
-            this.pesquisarProdutoButtomItem});
-            this.pesquisarBarManager.MaxItemId = 9;
+            this.pesquisarProdutoButtomItem,
+            this.barButtonItem1,
+            this.barButtonItem2,
+            this.barButtonItem3});
+            this.pesquisarBarManager.MaxItemId = 13;
             // 
             // bar
             // 
@@ -137,7 +143,8 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.bar.DockRow = 0;
             this.bar.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
             this.bar.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
-            new DevExpress.XtraBars.LinkPersistInfo(this.salvarProdutoButtomItem)});
+            new DevExpress.XtraBars.LinkPersistInfo(this.salvarProdutoButtomItem),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem3)});
             this.bar.OptionsBar.AllowQuickCustomization = false;
             this.bar.OptionsBar.AutoPopupMode = DevExpress.XtraBars.BarAutoPopupMode.OnlyMenu;
             this.bar.OptionsBar.DrawBorder = false;
@@ -151,6 +158,16 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.salvarProdutoButtomItem.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("salvarProdutoButtomItem.ImageOptions.SvgImage")));
             this.salvarProdutoButtomItem.Name = "salvarProdutoButtomItem";
             this.salvarProdutoButtomItem.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
+            // 
+            // barButtonItem3
+            // 
+            this.barButtonItem3.Border = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
+            this.barButtonItem3.Caption = "ALTERAR";
+            this.barButtonItem3.Id = 12;
+            this.barButtonItem3.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItem3.ImageOptions.LargeImage")));
+            this.barButtonItem3.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItem3.ImageOptions.SvgImage")));
+            this.barButtonItem3.Name = "barButtonItem3";
+            this.barButtonItem3.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
             // 
             // barDockControl1
             // 
@@ -244,31 +261,56 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.pesquisarProdutoButtomItem.Name = "pesquisarProdutoButtomItem";
             this.pesquisarProdutoButtomItem.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
             // 
+            // barButtonItem1
+            // 
+            this.barButtonItem1.Border = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
+            this.barButtonItem1.Caption = "ALTERAR";
+            this.barButtonItem1.Id = 9;
+            this.barButtonItem1.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItem1.ImageOptions.LargeImage")));
+            this.barButtonItem1.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItem1.ImageOptions.SvgImage")));
+            this.barButtonItem1.Name = "barButtonItem1";
+            // 
+            // barButtonItem2
+            // 
+            this.barButtonItem2.Border = DevExpress.XtraEditors.Controls.BorderStyles.Office2003;
+            this.barButtonItem2.Caption = "ALTERAR";
+            this.barButtonItem2.Id = 11;
+            this.barButtonItem2.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItem2.ImageOptions.Image")));
+            this.barButtonItem2.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItem2.ImageOptions.LargeImage")));
+            this.barButtonItem2.Name = "barButtonItem2";
+            // 
+            // pesquisarGridView
+            // 
+            this.pesquisarGridView.Bands.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.GridBand[] {
+            this.gridBand1});
+            this.pesquisarGridView.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
+            this.pesquisarGridView.GridControl = this.pesquisarGridControl;
+            this.pesquisarGridView.Name = "pesquisarGridView";
+            this.pesquisarGridView.OptionsBehavior.Editable = false;
+            this.pesquisarGridView.OptionsPrint.EnableAppearanceEvenRow = true;
+            this.pesquisarGridView.OptionsPrint.EnableAppearanceOddRow = true;
+            this.pesquisarGridView.OptionsPrint.PrintBandHeader = false;
+            this.pesquisarGridView.OptionsView.ShowGroupPanel = false;
+            this.pesquisarGridView.VertScrollVisibility = DevExpress.XtraGrid.Views.Base.ScrollVisibility.Never;
+            // 
+            // gridBand1
+            // 
+            this.gridBand1.AppearanceHeader.Font = new System.Drawing.Font("Yu Gothic", 9F, System.Drawing.FontStyle.Bold);
+            this.gridBand1.AppearanceHeader.Options.UseFont = true;
+            this.gridBand1.Caption = "Produtos";
+            this.gridBand1.Name = "gridBand1";
+            this.gridBand1.VisibleIndex = 0;
+            // 
             // pesquisarGridControl
             // 
             this.pesquisarGridControl.Location = new System.Drawing.Point(0, 179);
-            this.pesquisarGridControl.MainView = this.advBandedGridView1;
+            this.pesquisarGridControl.MainView = this.pesquisarGridView;
             this.pesquisarGridControl.Name = "pesquisarGridControl";
             this.pesquisarGridControl.Size = new System.Drawing.Size(800, 274);
             this.pesquisarGridControl.TabIndex = 8;
             this.pesquisarGridControl.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.advBandedGridView1});
+            this.pesquisarGridView});
             this.pesquisarGridControl.Click += new System.EventHandler(this.pesquisarGridControl_Click);
-            // 
-            // advBandedGridView1
-            // 
-            this.advBandedGridView1.Bands.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.GridBand[] {
-            this.gridBand1});
-            this.advBandedGridView1.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
-            this.advBandedGridView1.GridControl = this.pesquisarGridControl;
-            this.advBandedGridView1.Name = "advBandedGridView1";
-            this.advBandedGridView1.VertScrollVisibility = DevExpress.XtraGrid.Views.Base.ScrollVisibility.Never;
-            // 
-            // gridBand1
-            // 
-            this.gridBand1.Caption = "gridBand1";
-            this.gridBand1.Name = "gridBand1";
-            this.gridBand1.VisibleIndex = 0;
             // 
             // PesquisarProdutosView
             // 
@@ -290,8 +332,8 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             ((System.ComponentModel.ISupportInitialize)(this.pesquisarBehaviorManager)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pesquisarPictureEdit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pesquisarBarManager)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pesquisarGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pesquisarGridControl)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.advBandedGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -301,7 +343,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
         private DevExpress.XtraEditors.LabelControl pesquisarLabelControl;
         private DevExpress.XtraEditors.TextEdit pesquisarTextEdit;
-        private DevExpress.Utils.Behaviors.BehaviorManager pesquisarBehaviorManager;
         private DevExpress.XtraEditors.PictureEdit pesquisarPictureEdit;
         private DevExpress.XtraBars.BarDockControl barDockControlTop;
         private DevExpress.XtraBars.BarManager pesquisarBarManager;
@@ -318,8 +359,12 @@ namespace CadastroDeProdutosView.Features.Produto.Views
         private DevExpress.XtraBars.BarCheckItem barCheckItem1;
         private DevExpress.XtraBars.BarButtonItem excluirProdutoButtomItem;
         private DevExpress.XtraBars.BarButtonItem pesquisarProdutoButtomItem;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem3;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem1;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem2;
+        private DevExpress.Utils.Behaviors.BehaviorManager pesquisarBehaviorManager;
         private DevExpress.XtraGrid.GridControl pesquisarGridControl;
-        private DevExpress.XtraGrid.Views.BandedGrid.AdvBandedGridView advBandedGridView1;
+        private DevExpress.XtraGrid.Views.BandedGrid.AdvBandedGridView pesquisarGridView;
         private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand1;
     }
 }
