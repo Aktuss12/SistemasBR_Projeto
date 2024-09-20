@@ -83,6 +83,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.pesquisarTextEdit.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
             this.pesquisarTextEdit.Size = new System.Drawing.Size(337, 22);
             this.pesquisarTextEdit.TabIndex = 1;
+            this.pesquisarTextEdit.EditValueChanged += new System.EventHandler(this.pesquisarTextEdit_EditValueChanged);
             // 
             // barDockControlTop
             // 

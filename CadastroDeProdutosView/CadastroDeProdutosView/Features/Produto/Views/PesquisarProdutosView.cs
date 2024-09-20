@@ -9,7 +9,8 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 {
     public partial class PesquisarProdutosView : Form
     {
-        private const string connectionString = @"User ID=SYSDBA;Password=masterkey;Database=C:\Users\admin\Documents\BANCODEDADOSPRODUTOS.FDB;DataSource=localhost;Port=3050;Dialect=3;Charset=NONE;";
+        private const string connectionString =
+            @"User ID=SYSDBA;Password=masterkey;Database=C:\Users\admin\Documents\BANCODEDADOSPRODUTOS.FDB;DataSource=localhost;Port=3050;Dialect=3;Charset=NONE;";
 
         private bool mostrarAtivos = true;
 
@@ -70,6 +71,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
                     }
                 }
             }
+
             return dataTable;
         }
 
@@ -102,7 +104,8 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
             var idProduto = Convert.ToInt32(selectedRow["idProduto"]);
 
-            var confirmarResultado = XtraMessageBox.Show("Tem certeza que deseja excluir este produto?", "Confirmação", MessageBoxButtons.YesNo);
+            var confirmarResultado = XtraMessageBox.Show("Tem certeza que deseja excluir este produto?", "Confirmação",
+                MessageBoxButtons.YesNo);
             if (confirmarResultado != DialogResult.Yes) return;
 
             ExcluirProduto(idProduto);
@@ -128,6 +131,12 @@ namespace CadastroDeProdutosView.Features.Produto.Views
         {
             mostrarAtivos = !mostrarAtivos;
             CarregarBancoDeDados();
+        }
+
+        private void pesquisarTextEdit_EditValueChanged(object sender, EventArgs e)
+        {
+            var filterText = pesquisarTextEdit.Text.Trim();
+            pesquisarGridView.ActiveFilterString = !string.IsNullOrEmpty(filterText) ? $"[nome] LIKE '%{filterText}%'" : string.Empty;
         }
     }
 }
