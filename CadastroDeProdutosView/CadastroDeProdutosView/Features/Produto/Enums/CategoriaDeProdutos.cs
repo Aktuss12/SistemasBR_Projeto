@@ -6,18 +6,26 @@ namespace CadastroDeProdutosView.Features.Produto.Enums
     {
         public enum CategoriaDeProdutos
         {
-            [Description("Produto")]
-            Produto,
+            [Description("Alimentos")]
+            Alimentos,
             [Description("Higiene")]
             Higiene,
             [Description("Bebidas")]
             Bebidas,
-            [Description("Hortfrúiti")]
+            [Description("Hortifrúti")]
             Hortifruiti,
-            [Description("Serviço")]
-            Servico,
             [Description("Limpeza")]
-            Limpeza
+            Limpeza,
+            [Description("Papelaria")]
+            Papelaria,
+            [Description("Cosméticos")]
+            Cosmeticos,
+            [Description("Eletrônicos")]
+            Eletronicos,
+            [Description("Roupas")]
+            Roupas,
+            [Description("Serviço")]
+            Servico
         }
     }
 }

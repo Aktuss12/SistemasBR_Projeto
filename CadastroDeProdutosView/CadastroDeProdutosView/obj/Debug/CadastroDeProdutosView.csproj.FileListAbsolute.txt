@@ -274,3 +274,15 @@ C:\Users\admin\Documents\Sistemasbr_Projeto\CadastroDeProdutosView\CadastroDePro
 C:\Users\admin\Documents\Sistemasbr_Projeto\CadastroDeProdutosView\CadastroDeProdutosView\bin\Debug\es\DevExpress.Office.v18.1.Core.resources.dll
 C:\Users\admin\Documents\Sistemasbr_Projeto\CadastroDeProdutosView\CadastroDeProdutosView\bin\Debug\ja\DevExpress.Office.v18.1.Core.resources.dll
 C:\Users\admin\Documents\Sistemasbr_Projeto\CadastroDeProdutosView\CadastroDeProdutosView\bin\Debug\ru\DevExpress.Office.v18.1.Core.resources.dll
+C:\Users\admin\Documents\Sistemasbr_Projeto\CadastroDeProdutosView\CadastroDeProdutosView\bin\Debug\DevExpress.XtraScheduler.v18.1.Core.dll
+C:\Users\admin\Documents\Sistemasbr_Projeto\CadastroDeProdutosView\CadastroDeProdutosView\bin\Debug\DevExpress.XtraScheduler.v18.1.dll
+C:\Users\admin\Documents\Sistemasbr_Projeto\CadastroDeProdutosView\CadastroDeProdutosView\bin\Debug\DevExpress.XtraScheduler.v18.1.xml
+C:\Users\admin\Documents\Sistemasbr_Projeto\CadastroDeProdutosView\CadastroDeProdutosView\bin\Debug\DevExpress.XtraScheduler.v18.1.Core.xml
+C:\Users\admin\Documents\Sistemasbr_Projeto\CadastroDeProdutosView\CadastroDeProdutosView\bin\Debug\de\DevExpress.XtraScheduler.v18.1.resources.dll
+C:\Users\admin\Documents\Sistemasbr_Projeto\CadastroDeProdutosView\CadastroDeProdutosView\bin\Debug\es\DevExpress.XtraScheduler.v18.1.resources.dll
+C:\Users\admin\Documents\Sistemasbr_Projeto\CadastroDeProdutosView\CadastroDeProdutosView\bin\Debug\ja\DevExpress.XtraScheduler.v18.1.resources.dll
+C:\Users\admin\Documents\Sistemasbr_Projeto\CadastroDeProdutosView\CadastroDeProdutosView\bin\Debug\ru\DevExpress.XtraScheduler.v18.1.resources.dll
+C:\Users\admin\Documents\Sistemasbr_Projeto\CadastroDeProdutosView\CadastroDeProdutosView\bin\Debug\de\DevExpress.XtraScheduler.v18.1.Core.resources.dll
+C:\Users\admin\Documents\Sistemasbr_Projeto\CadastroDeProdutosView\CadastroDeProdutosView\bin\Debug\es\DevExpress.XtraScheduler.v18.1.Core.resources.dll
+C:\Users\admin\Documents\Sistemasbr_Projeto\CadastroDeProdutosView\CadastroDeProdutosView\bin\Debug\ja\DevExpress.XtraScheduler.v18.1.Core.resources.dll
+C:\Users\admin\Documents\Sistemasbr_Projeto\CadastroDeProdutosView\CadastroDeProdutosView\bin\Debug\ru\DevExpress.XtraScheduler.v18.1.Core.resources.dll

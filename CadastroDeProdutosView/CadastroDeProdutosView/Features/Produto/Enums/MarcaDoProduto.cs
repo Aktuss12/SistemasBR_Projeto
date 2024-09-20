@@ -6,13 +6,26 @@ namespace CadastroDeProdutosView.Features.Produto.Enums
     {
         public enum MarcaDoProduto
         {
-            [Description("Natural da Terra")] NaturalDaTerra,
-            [Description("Saboraki")] Saboraki,
-            [Description("Localiza")] Localiza,
-            [Description("Granado")] Granado,
-            [Description("Natura")] Natura,
-            [Description("Ambev")] Ambev,
-            [Description("Ypê")] Ypê
+            [Description("Marca A")]
+            MarcaA,
+            [Description("Marca B")]
+            MarcaB,
+            [Description("Marca C")]
+            MarcaC,
+            [Description("Marca D")]
+            MarcaD,
+            [Description("Marca E")]
+            MarcaE,
+            [Description("Marca F")]
+            MarcaF,
+            [Description("Marca G")]
+            MarcaG,
+            [Description("Marca H")]
+            MarcaH,
+            [Description("Marca I")]
+            MarcaI,
+            [Description("Marca J")]
+            MarcaJ
         }
     }
 }

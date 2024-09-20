@@ -23,11 +23,13 @@ namespace CadastroDeProdutosView.Features.Produto.Enums
             [Description("G")]
             Grama,
             [Description("M²")]
-            MetroCubico,
+            MetroQuadrado,
             [Description("L")]
             Litros,
             [Description("M")]
-            Metros
+            Metros,
+            [Description("ML")]
+            Mililitros
         }
     }
 }
