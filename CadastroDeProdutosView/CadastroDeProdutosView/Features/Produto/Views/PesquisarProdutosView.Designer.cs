@@ -327,6 +327,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.produtosDesativadosToggleSwitchh.Properties.OnText = "";
             this.produtosDesativadosToggleSwitchh.Size = new System.Drawing.Size(72, 24);
             this.produtosDesativadosToggleSwitchh.TabIndex = 14;
+            this.produtosDesativadosToggleSwitchh.Toggled += new System.EventHandler(this.produtosDesativadosToggleSwitchh_Toggled);
             // 
             // produtosDesativadosLabelControl
             // 

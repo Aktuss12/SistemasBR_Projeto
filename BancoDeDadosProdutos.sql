@@ -10,6 +10,7 @@ CREATE TABLE PRODUTO (
     custo DECIMAL(18, 2),
     markup DECIMAL(18, 2),
     precoDaVenda DECIMAL(18, 2) NOT NULL,
+    ativo SMALLINT DEFAULT 1,
     CONSTRAINT PK_PRODUTO PRIMARY KEY (idProduto)
 );
 

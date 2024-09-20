@@ -9,8 +9,9 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 {
     public partial class PesquisarProdutosView : Form
     {
-        private const string connectionString =
-            @"User ID=SYSDBA;Password=masterkey;Database=C:\Users\admin\Documents\BANCODEDADOSPRODUTOS.FDB;DataSource=localhost;Port=3050;Dialect=3;Charset=NONE;";
+        private const string connectionString = @"User ID=SYSDBA;Password=masterkey;Database=C:\Users\admin\Documents\BANCODEDADOSPRODUTOS.FDB;DataSource=localhost;Port=3050;Dialect=3;Charset=NONE;";
+
+        private bool mostrarAtivos = true;
 
         public PesquisarProdutosView()
         {
@@ -31,7 +32,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             }
         }
 
-        private static DataTable GetCombinedData()
+        private DataTable GetCombinedData()
         {
             var dataTable = new DataTable();
             using (var connection = new FbConnection(connectionString))
@@ -55,10 +56,14 @@ namespace CadastroDeProdutosView.Features.Produto.Views
                         I.ncm,
                         I.aliquotaDeIcms,
                         I.reducaoDeCalculo
-                        FROM PRODUTO P
-                        LEFT JOIN INFORMACOESFISCAIS I ON P.idProduto = I.idProduto";
+                    FROM PRODUTO P
+                    LEFT JOIN INFORMACOESFISCAIS I ON P.idProduto = I.idProduto
+                    WHERE P.ativo = @ativo";
 
-                var dataAdapter = new FbDataAdapter(query, connection);
+                var command = new FbCommand(query, connection);
+                command.Parameters.Add("@ativo", FbDbType.Boolean).Value = mostrarAtivos;
+
+                var dataAdapter = new FbDataAdapter(command);
                 dataAdapter.Fill(dataTable);
             }
 
@@ -67,7 +72,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
         private void pesquisarGridControl_Click(object sender, EventArgs e)
         {
-
         }
 
         private void salvarProdutoButtomItem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -102,7 +106,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             XtraMessageBox.Show("Produto excluído com sucesso.");
         }
 
-
         private static void ExcluirProduto(int idProduto)
         {
             using (var connection = new FbConnection(connectionString))
@@ -125,5 +128,10 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             }
         }
 
+        private void produtosDesativadosToggleSwitchh_Toggled(object sender, EventArgs e)
+        {
+            mostrarAtivos = !mostrarAtivos;
+            LoadCombinedData();
+        }
     }
 }
