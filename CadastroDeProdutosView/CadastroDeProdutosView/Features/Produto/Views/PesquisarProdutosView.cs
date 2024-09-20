@@ -16,10 +16,10 @@ namespace CadastroDeProdutosView.Features.Produto.Views
         public PesquisarProdutosView()
         {
             InitializeComponent();
-            LoadCombinedData();
+            CarregarBancoDeDados();
         }
 
-        private void LoadCombinedData()
+        private void CarregarBancoDeDados()
         {
             try
             {
@@ -37,6 +37,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             var dataTable = new DataTable();
             using (var connection = new FbConnection(connectionString))
             {
+                connection.Open();
                 const string query = @"
                     SELECT 
                         P.idProduto, 
@@ -60,13 +61,15 @@ namespace CadastroDeProdutosView.Features.Produto.Views
                     LEFT JOIN INFORMACOESFISCAIS I ON P.idProduto = I.idProduto
                     WHERE P.ativo = @ativo";
 
-                var command = new FbCommand(query, connection);
-                command.Parameters.Add("@ativo", FbDbType.Boolean).Value = mostrarAtivos;
-
-                var dataAdapter = new FbDataAdapter(command);
-                dataAdapter.Fill(dataTable);
+                using (var command = new FbCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@ativo", mostrarAtivos ? 1 : 0);
+                    using (var dataAdapter = new FbDataAdapter(command))
+                    {
+                        dataAdapter.Fill(dataTable);
+                    }
+                }
             }
-
             return dataTable;
         }
 
@@ -90,20 +93,21 @@ namespace CadastroDeProdutosView.Features.Produto.Views
                 return;
             }
 
-            if (!(gridView.GetRow(focusedRowHandle) is DataRowView selectedRow))
+            var selectedRow = gridView.GetDataRow(focusedRowHandle);
+            if (selectedRow == null)
             {
                 XtraMessageBox.Show("Erro ao obter o produto selecionado.");
                 return;
             }
 
-            var idProduto = (int)selectedRow["idProduto"];
+            var idProduto = Convert.ToInt32(selectedRow["idProduto"]);
 
-            var confirmResult = XtraMessageBox.Show("Tem certeza que deseja excluir este produto?", "Confirmação", MessageBoxButtons.YesNo);
-            if (confirmResult != DialogResult.Yes) return;
+            var confirmarResultado = XtraMessageBox.Show("Tem certeza que deseja excluir este produto?", "Confirmação", MessageBoxButtons.YesNo);
+            if (confirmarResultado != DialogResult.Yes) return;
 
             ExcluirProduto(idProduto);
-            LoadCombinedData();
             XtraMessageBox.Show("Produto excluído com sucesso.");
+            CarregarBancoDeDados();
         }
 
         private static void ExcluirProduto(int idProduto)
@@ -111,18 +115,10 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             using (var connection = new FbConnection(connectionString))
             {
                 connection.Open();
-
-                const string deleteInfoQuery = "DELETE FROM INFORMACOESFISCAIS WHERE idProduto = @idProduto";
-                using (var command = new FbCommand(deleteInfoQuery, connection))
+                const string updateProductQuery = "UPDATE PRODUTO SET ativo = 0 WHERE idProduto = @idProduto";
+                using (var command = new FbCommand(updateProductQuery, connection))
                 {
-                    command.Parameters.Add("@idProduto", FbDbType.Integer).Value = idProduto;
-                    command.ExecuteNonQuery();
-                }
-
-                const string deleteProductQuery = "DELETE FROM PRODUTO WHERE idProduto = @idProduto";
-                using (var command = new FbCommand(deleteProductQuery, connection))
-                {
-                    command.Parameters.Add("@idProduto", FbDbType.Integer).Value = idProduto;
+                    command.Parameters.AddWithValue("@idProduto", idProduto);
                     command.ExecuteNonQuery();
                 }
             }
@@ -131,7 +127,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
         private void produtosDesativadosToggleSwitchh_Toggled(object sender, EventArgs e)
         {
             mostrarAtivos = !mostrarAtivos;
-            LoadCombinedData();
+            CarregarBancoDeDados();
         }
     }
 }

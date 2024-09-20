@@ -34,7 +34,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.pesquisarLabelControl = new DevExpress.XtraEditors.LabelControl();
             this.pesquisarTextEdit = new DevExpress.XtraEditors.TextEdit();
             this.pesquisarBehaviorManager = new DevExpress.Utils.Behaviors.BehaviorManager(this.components);
-            this.pesquisarPictureEdit = new DevExpress.XtraEditors.PictureEdit();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.pesquisarBarManager = new DevExpress.XtraBars.BarManager(this.components);
             this.bar = new DevExpress.XtraBars.Bar();
@@ -60,7 +59,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.produtosDesativadosLabelControl = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.pesquisarTextEdit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pesquisarBehaviorManager)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pesquisarPictureEdit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pesquisarBarManager)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pesquisarGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pesquisarGridControl)).BeginInit();
@@ -85,23 +83,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.pesquisarTextEdit.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
             this.pesquisarTextEdit.Size = new System.Drawing.Size(337, 22);
             this.pesquisarTextEdit.TabIndex = 1;
-            // 
-            // pesquisarPictureEdit
-            // 
-            this.pesquisarBehaviorManager.SetBehaviors(this.pesquisarPictureEdit, new DevExpress.Utils.Behaviors.Behavior[] {
-            ((DevExpress.Utils.Behaviors.Behavior)(DevExpress.Utils.Behaviors.Common.BannerBehavior.Create(typeof(DevExpress.XtraEditors.Behaviors.BannerBehaviorSourceForPictureEdit), 10000, true, new System.Drawing.Image[] {
-                        ((System.Drawing.Image)(((System.Drawing.Image)(resources.GetObject("pesquisarPictureEdit.Behaviors")))))})))});
-            this.pesquisarPictureEdit.EditValue = ((object)(resources.GetObject("pesquisarPictureEdit.EditValue")));
-            this.pesquisarPictureEdit.Location = new System.Drawing.Point(119, 52);
-            this.pesquisarPictureEdit.Name = "pesquisarPictureEdit";
-            this.pesquisarPictureEdit.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
-            this.pesquisarPictureEdit.Properties.Appearance.Options.UseBackColor = true;
-            this.pesquisarPictureEdit.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-            this.pesquisarPictureEdit.Properties.ErrorImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("pesquisarPictureEdit.Properties.ErrorImageOptions.Image")));
-            this.pesquisarPictureEdit.Properties.InitialImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("pesquisarPictureEdit.Properties.InitialImageOptions.Image")));
-            this.pesquisarPictureEdit.Properties.ShowCameraMenuItem = DevExpress.XtraEditors.Controls.CameraMenuItemVisibility.Auto;
-            this.pesquisarPictureEdit.Size = new System.Drawing.Size(22, 27);
-            this.pesquisarPictureEdit.TabIndex = 2;
             // 
             // barDockControlTop
             // 
@@ -347,7 +328,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.Controls.Add(this.produtosDesativadosLabelControl);
             this.Controls.Add(this.produtosDesativadosToggleSwitchh);
             this.Controls.Add(this.pesquisarGridControl);
-            this.Controls.Add(this.pesquisarPictureEdit);
             this.Controls.Add(this.pesquisarTextEdit);
             this.Controls.Add(this.pesquisarLabelControl);
             this.Controls.Add(this.barDockControlTop);
@@ -359,7 +339,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.Text = "PesquisarProdutosView";
             ((System.ComponentModel.ISupportInitialize)(this.pesquisarTextEdit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pesquisarBehaviorManager)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pesquisarPictureEdit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pesquisarBarManager)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pesquisarGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pesquisarGridControl)).EndInit();
@@ -373,7 +352,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
         private DevExpress.XtraEditors.LabelControl pesquisarLabelControl;
         private DevExpress.XtraEditors.TextEdit pesquisarTextEdit;
-        private DevExpress.XtraEditors.PictureEdit pesquisarPictureEdit;
         private DevExpress.XtraBars.BarDockControl barDockControlTop;
         private DevExpress.XtraBars.BarManager pesquisarBarManager;
         private DevExpress.XtraBars.Bar bar;
