@@ -135,17 +135,18 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
         private void estoqueTextEdit_EditValueChanged(object sender, EventArgs e)
         {
-            estoqueTextEdit.Properties.MaxLength = 12;
+
         }
 
         private void precoVendaTextEdit_EditValueChanged(object sender, EventArgs e)
         {
-            precoVendaTextEdit.Properties.MaxLength = 16;
+            precoVendaTextEdit.Properties.MaxLength = 18;
         }
 
 
         private void custoTextEdit_EditValueChanged(object sender, EventArgs e)
         {
+            custoTextEdit.Properties.MaxLength = 18;
             if (isValidating) return;
 
             isValidating = true;
@@ -155,6 +156,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
         private void markupTextEdit_EditValueChanged(object sender, EventArgs e)
         {
+            markupTextEdit.Properties.MaxLength = 18;
             if (isValidating) return;
 
             isValidating = true;
@@ -169,10 +171,12 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
         private void aliquotaDeIcmsTextEdit_EditValueChanged(object sender, EventArgs e)
         {
+            aliquotaDeIcmsTextEdit.Properties.MaxLength = 18;
         }
 
         private void reducaoDeCalculoIcmsTextEdit_EditValueChanged(object sender, EventArgs e)
         {
+            reducaoDeCalculoIcmsTextEdit.Properties.MaxLength = 18;
         }
 
         private void barButtonItem1_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e) { }
@@ -332,6 +336,47 @@ namespace CadastroDeProdutosView.Features.Produto.Views
         private void produtosTabNavigationPage_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void pesquisarProdutoButtomItem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            var pesquisaDeProdutos = new PesquisarProdutosView(string.Empty);
+            pesquisaDeProdutos.ShowDialog();
+        }
+
+        private void nomeTextEdit_EditValueChanged(object sender, EventArgs e)
+        {
+            nomeTextEdit.Properties.MaxLength = 100;
+        }
+
+        private void categoriaDeProdutosLookUpEdit_EditValueChanged(object sender, EventArgs e)
+        {
+            categoriaDeProdutosLookUpEdit.Properties.MaxLength = 50;
+        }
+
+        private void unidadeDeMedidaLookUpEdit_EditValueChanged(object sender, EventArgs e)
+        {
+            unidadeDeMedidaLookUpEdit.Properties.MaxLength = 50;
+        }
+
+        private void marcaLookUpEdit_EditValueChanged(object sender, EventArgs e)
+        {
+            marcaLookUpEdit.Properties.MaxLength = 50;
+        }
+
+        private void origemDaMercadoriaLookUpEdit_EditValueChanged(object sender, EventArgs e)
+        {
+            origemDaMercadoriaLookUpEdit.Properties.MaxLength = 50;
+        }
+
+        private void situacaoTributariaLookUpEdit_EditValueChanged(object sender, EventArgs e)
+        {
+            situacaoTributariaLookUpEdit.Properties.MaxLength = 50;
+        }
+
+        private void naturezaDaOperacaoLookUpEdit_EditValueChanged(object sender, EventArgs e)
+        {
+            naturezaDaOperacaoLookUpEdit.Properties.MaxLength = 50;
         }
     }
 }
