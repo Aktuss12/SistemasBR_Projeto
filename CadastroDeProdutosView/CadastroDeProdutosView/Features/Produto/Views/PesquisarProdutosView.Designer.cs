@@ -38,7 +38,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.pesquisarBarManager = new DevExpress.XtraBars.BarManager(this.components);
             this.bar = new DevExpress.XtraBars.Bar();
             this.salvarProdutoButtomItem = new DevExpress.XtraBars.BarButtonItem();
-            this.barButtonItem3 = new DevExpress.XtraBars.BarButtonItem();
+            this.alterarButtomItem = new DevExpress.XtraBars.BarButtonItem();
             this.barDockControl1 = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
@@ -120,7 +120,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.pesquisarProdutoButtomItem,
             this.barButtonItem1,
             this.barButtonItem2,
-            this.barButtonItem3});
+            this.alterarButtomItem});
             this.pesquisarBarManager.MaxItemId = 13;
             // 
             // bar
@@ -131,7 +131,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.bar.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
             this.bar.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(this.salvarProdutoButtomItem),
-            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem3)});
+            new DevExpress.XtraBars.LinkPersistInfo(this.alterarButtomItem)});
             this.bar.OptionsBar.AllowQuickCustomization = false;
             this.bar.OptionsBar.AutoPopupMode = DevExpress.XtraBars.BarAutoPopupMode.OnlyMenu;
             this.bar.OptionsBar.DrawBorder = false;
@@ -147,15 +147,16 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.salvarProdutoButtomItem.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
             this.salvarProdutoButtomItem.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.salvarProdutoButtomItem_ItemClick);
             // 
-            // barButtonItem3
+            // alterarButtomItem
             // 
-            this.barButtonItem3.Border = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
-            this.barButtonItem3.Caption = "ALTERAR";
-            this.barButtonItem3.Id = 12;
-            this.barButtonItem3.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItem3.ImageOptions.LargeImage")));
-            this.barButtonItem3.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItem3.ImageOptions.SvgImage")));
-            this.barButtonItem3.Name = "barButtonItem3";
-            this.barButtonItem3.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
+            this.alterarButtomItem.Border = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
+            this.alterarButtomItem.Caption = "ALTERAR";
+            this.alterarButtomItem.Id = 12;
+            this.alterarButtomItem.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("alterarButtomItem.ImageOptions.LargeImage")));
+            this.alterarButtomItem.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("alterarButtomItem.ImageOptions.SvgImage")));
+            this.alterarButtomItem.Name = "alterarButtomItem";
+            this.alterarButtomItem.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
+            this.alterarButtomItem.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.AlterarButtomItem);
             // 
             // barDockControl1
             // 
@@ -378,7 +379,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
         private DevExpress.XtraBars.BarCheckItem barCheckItem1;
         private DevExpress.XtraBars.BarButtonItem excluirProdutoButtomItem;
         private DevExpress.XtraBars.BarButtonItem pesquisarProdutoButtomItem;
-        private DevExpress.XtraBars.BarButtonItem barButtonItem3;
+        private DevExpress.XtraBars.BarButtonItem alterarButtomItem;
         private DevExpress.XtraBars.BarButtonItem barButtonItem1;
         private DevExpress.XtraBars.BarButtonItem barButtonItem2;
         private DevExpress.Utils.Behaviors.BehaviorManager pesquisarBehaviorManager;

@@ -14,13 +14,12 @@ namespace CadastroDeProdutosView.Features.Produto.Views
         private const string connectionString = @"User ID=SYSDBA;Password=masterkey;Database=C:\Users\admin\Documents\BANCODEDADOSPRODUTOS.FDB;DataSource=localhost;Port=3050;Dialect=3;Charset=NONE;";
 
 
-        public CadastroDeProdutosView()
+        public CadastroDeProdutosView(int idProduto)
         {
             InitializeComponent();
             InitializeLookUpEdit();
         }
 
-        // Chamando as enums da para as LookUpEdit
         private void InitializeLookUpEdit()
         {
             unidadeDeMedidaLookUpEdit.PreencherLookUpEditComOValorDoEnum<UnidadeDeMedidaView.UnidadeDeMedida>();
@@ -103,7 +102,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
         }
 
         // Clear LookUpEdits
-        private void LimparLookUpEdits()
+        public void LimparLookUpEdits()
         {
             unidadeDeMedidaLookUpEdit.EditValue = null;
             categoriaDeProdutosLookUpEdit.EditValue = null;
@@ -114,7 +113,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
         }
 
         // Clear TextEdit
-        private void LimparTextEdits()
+        public void LimparTextEdits()
         {
             nomeTextEdit.Text = null;
             fornecedorTextEdit.Text = null;

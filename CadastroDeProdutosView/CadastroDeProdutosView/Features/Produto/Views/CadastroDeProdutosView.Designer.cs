@@ -259,7 +259,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.markupTextEdit.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.markupTextEdit.Name = "markupTextEdit";
             this.markupTextEdit.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
-            this.markupTextEdit.Properties.Mask.EditMask = "n";
+            this.markupTextEdit.Properties.Mask.EditMask = "n2";
             this.markupTextEdit.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.markupTextEdit.Properties.Mask.UseMaskAsDisplayFormat = true;
             this.markupTextEdit.Size = new System.Drawing.Size(80, 22);
@@ -309,7 +309,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.precoVendaTextEdit.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.precoVendaTextEdit.Name = "precoVendaTextEdit";
             this.precoVendaTextEdit.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
-            this.precoVendaTextEdit.Properties.Mask.EditMask = "n";
+            this.precoVendaTextEdit.Properties.Mask.EditMask = "n2";
             this.precoVendaTextEdit.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.precoVendaTextEdit.Properties.Mask.UseMaskAsDisplayFormat = true;
             this.precoVendaTextEdit.Size = new System.Drawing.Size(122, 22);
@@ -323,7 +323,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.custoTextEdit.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.custoTextEdit.Name = "custoTextEdit";
             this.custoTextEdit.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
-            this.custoTextEdit.Properties.Mask.EditMask = "n";
+            this.custoTextEdit.Properties.Mask.EditMask = "n2";
             this.custoTextEdit.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.custoTextEdit.Properties.Mask.UseMaskAsDisplayFormat = true;
             this.custoTextEdit.Properties.Tag = new decimal(new int[] {
@@ -572,7 +572,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.reducaoDeCalculoIcmsTextEdit.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.reducaoDeCalculoIcmsTextEdit.Name = "reducaoDeCalculoIcmsTextEdit";
             this.reducaoDeCalculoIcmsTextEdit.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
-            this.reducaoDeCalculoIcmsTextEdit.Properties.Mask.EditMask = "d";
+            this.reducaoDeCalculoIcmsTextEdit.Properties.Mask.EditMask = "n2";
             this.reducaoDeCalculoIcmsTextEdit.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.reducaoDeCalculoIcmsTextEdit.Properties.Mask.UseMaskAsDisplayFormat = true;
             this.reducaoDeCalculoIcmsTextEdit.Size = new System.Drawing.Size(301, 22);
@@ -608,7 +608,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.aliquotaDeIcmsTextEdit.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.aliquotaDeIcmsTextEdit.Name = "aliquotaDeIcmsTextEdit";
             this.aliquotaDeIcmsTextEdit.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
-            this.aliquotaDeIcmsTextEdit.Properties.Mask.EditMask = "d";
+            this.aliquotaDeIcmsTextEdit.Properties.Mask.EditMask = "n2";
             this.aliquotaDeIcmsTextEdit.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.aliquotaDeIcmsTextEdit.Properties.Mask.UseMaskAsDisplayFormat = true;
             this.aliquotaDeIcmsTextEdit.Size = new System.Drawing.Size(300, 22);
