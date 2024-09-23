@@ -1,9 +1,8 @@
-﻿using System;
+﻿using FirebirdSql.Data.FirebirdClient;
+using System;
 using System.Data;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
-using DevExpress.XtraGrid.Views.Grid;
-using FirebirdSql.Data.FirebirdClient;
 
 namespace CadastroDeProdutosView.Features.Produto.Views
 {
@@ -11,68 +10,53 @@ namespace CadastroDeProdutosView.Features.Produto.Views
     {
         private const string connectionString =
             @"User ID=SYSDBA;Password=masterkey;Database=C:\Users\admin\Documents\BANCODEDADOSPRODUTOS.FDB;DataSource=localhost;Port=3050;Dialect=3;Charset=NONE;";
+        private readonly string codigoDeBarras;
+        private readonly string nomeProduto;
+        private readonly string categoria;
 
-        private bool mostrarAtivos = true;
-
-        public PesquisarProdutosView()
+        public PesquisarProdutosView(string nomeProduto, string categoria, string codigoDeBarras)
         {
             InitializeComponent();
-            CarregarBancoDeDados();
+            this.nomeProduto = nomeProduto;
+            this.categoria = categoria;
+            this.codigoDeBarras = codigoDeBarras;
         }
 
-        private void CarregarBancoDeDados()
+        public DataTable PesquisarProdutos(string nomeProduto, string categoria, string codigoDeBarras)
         {
-            try
+            var tabelaData = new DataTable();
+            using (var conexao = new FbConnection(connectionString))
             {
-                var combinedTable = GetCombinedData();
-                pesquisarGridControl.DataSource = combinedTable;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Erro ao carregar dados: " + ex.Message);
-            }
-        }
-
-        private DataTable GetCombinedData()
-        {
-            var dataTable = new DataTable();
-            using (var connection = new FbConnection(connectionString))
-            {
-                connection.Open();
-                const string query = @"
-                    SELECT 
-                        P.idProduto, 
-                        P.nome, 
-                        P.categoria, 
-                        P.fornecedor, 
-                        P.codigoDeBarras, 
-                        P.unidadeDeMedida, 
-                        P.estoque, 
-                        P.marca, 
-                        P.custo, 
-                        P.markup, 
-                        P.precoDaVenda,
-                        I.origemDaMercadoria,
-                        I.situacaoTributaria,
-                        I.naturezaDaOperacao,
-                        I.ncm,
-                        I.aliquotaDeIcms,
-                        I.reducaoDeCalculo
-                    FROM PRODUTO P
-                    LEFT JOIN INFORMACOESFISCAIS I ON P.idProduto = I.idProduto
-                    WHERE P.ativo = @ativo";
-
-                using (var command = new FbCommand(query, connection))
+                try
                 {
-                    command.Parameters.AddWithValue("@ativo", mostrarAtivos ? 1 : 0);
-                    using (var dataAdapter = new FbDataAdapter(command))
+                    conexao.Open();
+                    const string query =
+                        @"SELECT idProduto, nome, categoria, fornecedor, codigoDeBarras, unidadeDeMedida,
+                        estoque, marca, custo, markup, precoDaVenda, ativo
+                        FROM PRODUTO
+                        WHERE (nome LIKE @nomeProduto OR @nomeProduto IS NULL)
+                        AND (categoria LIKE @categoria OR @categoria IS NULL)
+                        AND (codigoDeBarras = @codigoDeBarras OR @codigoDeBarras IS NULL)";
+                    using (var cmd = new FbCommand(query, conexao))
                     {
-                        dataAdapter.Fill(dataTable);
+                        cmd.Parameters.AddWithValue("@nomeProduto",
+                            string.IsNullOrEmpty(nomeProduto) ? (object)DBNull.Value : $"%{nomeProduto}%");
+                        cmd.Parameters.AddWithValue("@categoria",
+                            string.IsNullOrEmpty(categoria) ? (object)DBNull.Value : $"%{categoria}%");
+                        cmd.Parameters.AddWithValue("@codigoDeBarras",
+                            string.IsNullOrEmpty(codigoDeBarras) ? (object)DBNull.Value : codigoDeBarras);
+                        using (var da = new FbDataAdapter(cmd))
+                        {
+                            da.Fill(tabelaData);
+                        }
                     }
                 }
+                catch (Exception ex)
+                {
+                    XtraMessageBox.Show($"Erro: {ex.Message}");
+                }
             }
-
-            return dataTable;
+            return tabelaData;
         }
 
         private void pesquisarGridControl_Click(object sender, EventArgs e)
@@ -81,87 +65,30 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
         private void salvarProdutoButtomItem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            if (!(pesquisarGridControl.MainView is GridView gridView))
-            {
-                XtraMessageBox.Show("O grid não é um GridView.");
-                return;
-            }
-
-            var focusedRowHandle = gridView.FocusedRowHandle;
-
-            if (focusedRowHandle < 0)
-            {
-                XtraMessageBox.Show("Selecione um produto para excluir.");
-                return;
-            }
-
-            var selectedRow = gridView.GetDataRow(focusedRowHandle);
-            if (selectedRow == null)
-            {
-                XtraMessageBox.Show("Erro ao obter o produto selecionado.");
-                return;
-            }
-
-            var idProduto = Convert.ToInt32(selectedRow["idProduto"]);
-
-            var confirmarResultado = XtraMessageBox.Show("Tem certeza que deseja excluir este produto?", "Confirmação",
-                MessageBoxButtons.YesNo);
-            if (confirmarResultado != DialogResult.Yes) return;
-
-            DesativarProduto(idProduto);
-            XtraMessageBox.Show("Produto excluído com sucesso.");
-            CarregarBancoDeDados();
-        }
-
-        private static void DesativarProduto(int idProduto)
-        {
-            using (var connection = new FbConnection(connectionString))
-            {
-                connection.Open();
-                const string updateProductQuery = "UPDATE PRODUTO SET ativo = 0 WHERE idProduto = @idProduto";
-                using (var command = new FbCommand(updateProductQuery, connection))
-                {
-                    command.Parameters.AddWithValue("@idProduto", idProduto);
-                    command.ExecuteNonQuery();
-                }
-            }
-        }
-
-        private static void ReativarProduto(int idProduto)
-        {
-            using (var connection = new FbConnection(connectionString))
-            {
-                connection.Open();
-                const string updateProdutQuery = "UPDATE PRODUTO SET ativo = 1 WHERE idProduto = @idProduto";
-                using (var command = new FbCommand(updateProdutQuery, connection))
-                {
-                    command.Parameters.AddWithValue("@idProdto", idProduto);
-                    command.ExecuteNonQuery();
-                }
-
-            }
         }
 
         private void produtosDesativadosToggleSwitchh_Toggled(object sender, EventArgs e)
         {
-            mostrarAtivos = !mostrarAtivos;
-            CarregarBancoDeDados();
         }
 
         private void pesquisarTextEdit_EditValueChanged(object sender, EventArgs e)
         {
-            var filterText = pesquisarTextEdit.Text.Trim();
-            pesquisarGridView.ActiveFilterString = !string.IsNullOrEmpty(filterText) ? $"[nome] LIKE '%{filterText}%'" : string.Empty;
+        }
+
+        private void CarregarDados()
+        {
+            var produtos = PesquisarProdutos(nomeProduto, categoria, codigoDeBarras);
+            pesquisarGridControl.DataSource = produtos;
+            pesquisarGridView.BestFitColumns();
         }
 
         private void PesquisarProdutosView_Load(object sender, EventArgs e)
         {
-
+            CarregarDados();
         }
 
         private void produtosDesativadosLabelControl_Click(object sender, EventArgs e)
         {
-
         }
     }
 }
