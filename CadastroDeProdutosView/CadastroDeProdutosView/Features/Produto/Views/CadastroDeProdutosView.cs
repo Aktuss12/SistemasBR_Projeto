@@ -20,6 +20,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             InitializeLookUpEdit();
         }
 
+        // Chamando as enums da para as LookUpEdit
         private void InitializeLookUpEdit()
         {
             unidadeDeMedidaLookUpEdit.PreencherLookUpEditComOValorDoEnum<UnidadeDeMedidaView.UnidadeDeMedida>();
@@ -34,7 +35,9 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
         private void labelControl_Click(object sender, EventArgs e) { }
 
-        private void textEdit2_EditValueChanged(object sender, EventArgs e)
+
+        // Validando se o codigo de barras é do tipo EAN-13 e possui 13 caracteres para passar pela verificação
+        private void codigoDeBarrasTextEdit(object sender, EventArgs e)
         {
             if (isValidating) return;
 
@@ -60,20 +63,17 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             isValidating = false;
         }
 
+        // Calculando o preço do custo * + 1 markup / 100 para que preencha o Preço da venda
         private void CalcularPrecoVenda()
         {
-            if (decimal.TryParse(custoTextEdit.Text, out var custo) &&
-                decimal.TryParse(markupTextEdit.Text, out var markup))
-            {
-                var precoVenda = custo * (1 + (markup / 100));
-                precoVendaTextEdit.Text = precoVenda.ToString("F2");
-            }
-            else
-            {
-                precoVendaTextEdit.Text = string.Empty;
-            }
+            if (!decimal.TryParse(custoTextEdit.Text, out var custo) ||
+                !decimal.TryParse(markupTextEdit.Text, out var markup))
+                return;
+            var precoVenda = custo * (1 + (markup / 100));
+            precoVendaTextEdit.Text = precoVenda.ToString("F2");
         }
 
+        // Calculo para definir um codigo de barras EAN-13
         private bool ValidarCodigoDeBarrasEAN13(string codigoDeBarras)
         {
             if (codigoDeBarras.Length != 13 || !long.TryParse(codigoDeBarras, out _))
@@ -102,6 +102,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             return digitoVerificadorCalculado == digitoVerificadorInformado;
         }
 
+        // Clear LookUpEdits
         private void LimparLookUpEdits()
         {
             unidadeDeMedidaLookUpEdit.EditValue = null;
@@ -112,6 +113,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             naturezaDaOperacaoLookUpEdit.EditValue = null;
         }
 
+        // Clear TextEdit
         private void LimparTextEdits()
         {
             nomeTextEdit.Text = null;
@@ -140,6 +142,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
         {
             precoVendaTextEdit.Properties.MaxLength = 16;
         }
+
 
         private void custoTextEdit_EditValueChanged(object sender, EventArgs e)
         {
@@ -174,6 +177,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
         private void barButtonItem1_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e) { }
 
+         // Validação para o botão de salvar criando um try (tentativa) de implementar o produto no banco de dados, caso de errado, retorna um catch com rollback
         private void salvarButtomItem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             if (!ValidarCamposObrigatorios())
@@ -291,6 +295,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             codigodebarrasLabelControl.AllowHtmlString = !valido;
         }
 
+        // Validação de todos os campos obrigatorios adicionando um "*"
         private bool ValidarCamposObrigatorios()
         {
             var todosCamposPreenchidos = true;

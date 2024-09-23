@@ -344,7 +344,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.codigodebarrasTextEdit.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.codigodebarrasTextEdit.Size = new System.Drawing.Size(132, 22);
             this.codigodebarrasTextEdit.TabIndex = 4;
-            this.codigodebarrasTextEdit.EditValueChanged += new System.EventHandler(this.textEdit2_EditValueChanged);
+            this.codigodebarrasTextEdit.EditValueChanged += new System.EventHandler(this.codigoDeBarrasTextEdit);
             // 
             // nomeTextEdit
             // 
