@@ -1,8 +1,8 @@
-﻿using FirebirdSql.Data.FirebirdClient;
+﻿using DevExpress.XtraEditors;
+using FirebirdSql.Data.FirebirdClient;
 using System;
 using System.Data;
 using System.Windows.Forms;
-using DevExpress.XtraEditors;
 
 namespace CadastroDeProdutosView.Features.Produto.Views
 {
@@ -28,10 +28,9 @@ namespace CadastroDeProdutosView.Features.Produto.Views
                 {
                     conexao.Open();
                     const string query =
-                        @"SELECT idProduto, nome, categoria, codigoDeBarras, unidadeDeMedida,
-                        estoque, precoDaVenda
-                        FROM PRODUTO
-                        WHERE UPPER(nome) LIKE UPPER(@nomeProduto)";
+                        @"SELECT idProduto, Nome, Categoria, CodigoDeBarras, UnidadeDeMedida, Estoque, PrecoDaVenda
+                  FROM PRODUTO
+                  WHERE UPPER(Nome) LIKE UPPER(@nomeProduto) AND ativo = 1"; // Certifique-se de filtrar por ativo
                     using (var cmd = new FbCommand(cmdText: query, connection: conexao))
                     {
                         cmd.Parameters.AddWithValue(parameterName: "@nomeProduto", value: $"%{nomeProduto}%");
@@ -49,13 +48,78 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             return tabelaData;
         }
 
+        private void DesativarProduto(int idProduto)
+        {
+            const string query = "UPDATE PRODUTO SET ativo = 0 WHERE idProduto = @idProduto";
+
+            using (var conexao = new FbConnection(connectionString))
+            {
+                var command = new FbCommand(query, conexao);
+                command.Parameters.AddWithValue("@idProduto", idProduto);
+
+                try
+                {
+                    conexao.Open();
+                    var rowsAffected = command.ExecuteNonQuery();
+                    XtraMessageBox.Show(rowsAffected > 0
+                        ? "Produto desativado com sucesso."
+                        : "Nenhum produto foi encontrado com esse ID.");
+                }
+                catch (FbException ex)
+                {
+                    XtraMessageBox.Show($"Erro ao desativar produto: {ex.Message}");
+                }
+                finally
+                {
+                    conexao.Close(); 
+                }
+            }
+
+            AtualizarGridView();
+        }
+
+        private void AtualizarGridView()
+        {
+            const string query = "SELECT * FROM PRODUTO WHERE ativo = 1";
+            var dtProduto = new DataTable();
+
+            using (var conexao = new FbConnection(connectionString))
+            {
+                var adapter = new FbDataAdapter(query, conexao);
+                conexao.Open();
+                adapter.Fill(dtProduto);
+                conexao.Close();
+            }
+
+            pesquisarGridControl.DataSource = dtProduto;
+            pesquisarGridView.RefreshData();
+        }
+
+
         private void pesquisarGridControl_Click(object sender, EventArgs e)
         {
         }
 
         private void salvarProdutoButtomItem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            if (pesquisarGridView.FocusedRowHandle < 0)
+            {
+                XtraMessageBox.Show("Selecione um produto para desativar");
+                return;
+            }
+
+            var idProduto = pesquisarGridView.GetFocusedRowCellValue("idProduto");
+
+            if (idProduto == null || idProduto == DBNull.Value)
+            {
+                XtraMessageBox.Show("Produto não encontrado");
+                return;
+            }
+
+            DesativarProduto(Convert.ToInt32(idProduto)); 
         }
+
+
 
         private void produtosDesativadosToggleSwitchh_Toggled(object sender, EventArgs e)
         {
@@ -87,56 +151,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
         private void AlterarButtomItem(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            if (pesquisarGridView.FocusedRowHandle < 0)
-            {
-                XtraMessageBox.Show("Selecione um produto antes de alterar.");
-                return;
-            }
 
-            var idProduto = pesquisarGridView.GetFocusedRowCellValue("idProduto");
-
-            if (idProduto == null || idProduto == DBNull.Value)
-            {
-                XtraMessageBox.Show("Produto não encontrado.");
-                return;
-            }
-
-            var cadastroDeProdutos = new CadastroDeProdutosView(idProduto: (int)idProduto);
-            cadastroDeProdutos.ShowDialog();
-
-            CarregarDados();
-
-            using (var conexao = new FbConnection(connectionString))
-            {
-                try
-                {
-                    const string query =
-                    @"UPDATE PRODUTO
-                    SET nome = @nome, categoria = @categoria, codigoDeBarras = @codigoDeBarras, 
-                    unidadeDeMedida = @unidadeDeMedida, estoque = @estoque, precoDaVenda = @precoDaVenda
-                    WHERE idProduto = @idProduto";
-
-                    using (var cmd = new FbCommand(query, conexao))
-                    {
-                        cmd.Parameters.AddWithValue("@idProduto", idProduto);
-                        cmd.Parameters.AddWithValue("@nome", "Novo Nome");
-                        cmd.Parameters.AddWithValue("@categoria", "Nova Categoria");
-                        cmd.Parameters.AddWithValue("@codigoDeBarras", "Novo Codigo");
-                        cmd.Parameters.AddWithValue("@unidadeDeMedida", "Unidade");
-                        cmd.Parameters.AddWithValue("@estoque", DBNull.Value);
-                        cmd.Parameters.AddWithValue("@precoDaVenda", DBNull.Value);
-
-                        conexao.Open();
-                        cmd.ExecuteNonQuery();
-                    }
-
-                    XtraMessageBox.Show("Produto atualizado com sucesso!");
-                }
-                catch (FbException ex)
-                {
-                    XtraMessageBox.Show($"Erro ao atualizar produto: {ex.Message}");
-                }
-            }
         }
     }
 }
