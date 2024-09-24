@@ -328,5 +328,16 @@ namespace CadastroDeProdutosView.Features.Produto.Views
         {
 
         }
+
+        private void nomeTextEdit_EditValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pesquisarProdutoButtomItem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            var pesquisarProdutos = new PesquisarProdutosView();
+            pesquisarProdutos.ShowDialog();
+        }
     }
 }

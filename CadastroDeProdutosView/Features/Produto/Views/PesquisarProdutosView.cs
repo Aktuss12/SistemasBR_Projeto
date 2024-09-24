@@ -40,27 +40,15 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             {
                 connection.Open();
                 const string query = @"
-                    SELECT 
-                        P.idProduto, 
-                        P.nome, 
-                        P.categoria, 
-                        P.fornecedor, 
-                        P.codigoDeBarras, 
-                        P.unidadeDeMedida, 
-                        P.estoque, 
-                        P.marca, 
-                        P.custo, 
-                        P.markup, 
-                        P.precoDaVenda,
-                        I.origemDaMercadoria,
-                        I.situacaoTributaria,
-                        I.naturezaDaOperacao,
-                        I.ncm,
-                        I.aliquotaDeIcms,
-                        I.reducaoDeCalculo
-                    FROM PRODUTO P
-                    LEFT JOIN INFORMACOESFISCAIS I ON P.idProduto = I.idProduto
-                    WHERE P.ativo = @ativo";
+                SELECT 
+                    P.idProduto, 
+                    P.nome, 
+                    P.categoria, 
+                    P.unidadeDeMedida, 
+                    P.estoque, 
+                    P.precoDaVenda
+                FROM PRODUTO P
+                WHERE P.ativo = @ativo";
 
                 using (var command = new FbCommand(query, connection))
                 {

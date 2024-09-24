@@ -52,16 +52,16 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.pesquisarProdutoButtomItem = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem2 = new DevExpress.XtraBars.BarButtonItem();
-            this.pesquisarGridView = new DevExpress.XtraGrid.Views.BandedGrid.AdvBandedGridView();
-            this.gridBand1 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             this.pesquisarGridControl = new DevExpress.XtraGrid.GridControl();
+            this.pesquisarGridView = new DevExpress.XtraGrid.Views.BandedGrid.AdvBandedGridView();
             this.produtosDesativadosToggleSwitchh = new DevExpress.XtraEditors.ToggleSwitch();
             this.produtosDesativadosLabelControl = new DevExpress.XtraEditors.LabelControl();
+            this.gridBand1 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             ((System.ComponentModel.ISupportInitialize)(this.pesquisarTextEdit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pesquisarBehaviorManager)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pesquisarBarManager)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pesquisarGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pesquisarGridControl)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pesquisarGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.produtosDesativadosToggleSwitchh.Properties)).BeginInit();
             this.SuspendLayout();
             // 
@@ -265,28 +265,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.barButtonItem2.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItem2.ImageOptions.LargeImage")));
             this.barButtonItem2.Name = "barButtonItem2";
             // 
-            // pesquisarGridView
-            // 
-            this.pesquisarGridView.Bands.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.GridBand[] {
-            this.gridBand1});
-            this.pesquisarGridView.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
-            this.pesquisarGridView.GridControl = this.pesquisarGridControl;
-            this.pesquisarGridView.Name = "pesquisarGridView";
-            this.pesquisarGridView.OptionsBehavior.Editable = false;
-            this.pesquisarGridView.OptionsPrint.EnableAppearanceEvenRow = true;
-            this.pesquisarGridView.OptionsPrint.EnableAppearanceOddRow = true;
-            this.pesquisarGridView.OptionsPrint.PrintBandHeader = false;
-            this.pesquisarGridView.OptionsView.ShowGroupPanel = false;
-            this.pesquisarGridView.VertScrollVisibility = DevExpress.XtraGrid.Views.Base.ScrollVisibility.Never;
-            // 
-            // gridBand1
-            // 
-            this.gridBand1.AppearanceHeader.Font = new System.Drawing.Font("Yu Gothic", 9F, System.Drawing.FontStyle.Bold);
-            this.gridBand1.AppearanceHeader.Options.UseFont = true;
-            this.gridBand1.Caption = "Produtos";
-            this.gridBand1.Name = "gridBand1";
-            this.gridBand1.VisibleIndex = 0;
-            // 
             // pesquisarGridControl
             // 
             this.pesquisarGridControl.Location = new System.Drawing.Point(0, 179);
@@ -297,6 +275,17 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.pesquisarGridControl.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.pesquisarGridView});
             this.pesquisarGridControl.Click += new System.EventHandler(this.pesquisarGridControl_Click);
+            // 
+            // pesquisarGridView
+            // 
+            this.pesquisarGridView.Bands.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.GridBand[] {
+            this.gridBand1});
+            this.pesquisarGridView.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
+            this.pesquisarGridView.GridControl = this.pesquisarGridControl;
+            this.pesquisarGridView.Name = "pesquisarGridView";
+            this.pesquisarGridView.OptionsBehavior.Editable = false;
+            this.pesquisarGridView.OptionsView.ShowGroupPanel = false;
+            this.pesquisarGridView.VertScrollVisibility = DevExpress.XtraGrid.Views.Base.ScrollVisibility.Never;
             // 
             // produtosDesativadosToggleSwitchh
             // 
@@ -321,6 +310,14 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.produtosDesativadosLabelControl.TabIndex = 20;
             this.produtosDesativadosLabelControl.Text = "Produtos Desativados/Ativados";
             // 
+            // gridBand1
+            // 
+            this.gridBand1.AppearanceHeader.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gridBand1.AppearanceHeader.Options.UseFont = true;
+            this.gridBand1.Caption = "Produtos";
+            this.gridBand1.Name = "gridBand1";
+            this.gridBand1.VisibleIndex = 0;
+            // 
             // PesquisarProdutosView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -341,8 +338,8 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             ((System.ComponentModel.ISupportInitialize)(this.pesquisarTextEdit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pesquisarBehaviorManager)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pesquisarBarManager)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pesquisarGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pesquisarGridControl)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pesquisarGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.produtosDesativadosToggleSwitchh.Properties)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -373,9 +370,9 @@ namespace CadastroDeProdutosView.Features.Produto.Views
         private DevExpress.XtraBars.BarButtonItem barButtonItem2;
         private DevExpress.Utils.Behaviors.BehaviorManager pesquisarBehaviorManager;
         private DevExpress.XtraGrid.GridControl pesquisarGridControl;
-        private DevExpress.XtraGrid.Views.BandedGrid.AdvBandedGridView pesquisarGridView;
-        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand1;
         private DevExpress.XtraEditors.ToggleSwitch produtosDesativadosToggleSwitchh;
         private DevExpress.XtraEditors.LabelControl produtosDesativadosLabelControl;
+        private DevExpress.XtraGrid.Views.BandedGrid.AdvBandedGridView pesquisarGridView;
+        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand1;
     }
 }

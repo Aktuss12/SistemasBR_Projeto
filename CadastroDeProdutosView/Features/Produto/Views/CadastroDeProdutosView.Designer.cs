@@ -359,6 +359,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.nomeTextEdit.Properties.Mask.EditMask = "String";
             this.nomeTextEdit.Size = new System.Drawing.Size(262, 22);
             this.nomeTextEdit.TabIndex = 1;
+            this.nomeTextEdit.EditValueChanged += new System.EventHandler(this.nomeTextEdit_EditValueChanged);
             // 
             // categoriaLabelControl
             // 
@@ -693,6 +694,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.pesquisarProdutoButtomItem.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("pesquisarProdutoButtomItem.ImageOptions.SvgImage")));
             this.pesquisarProdutoButtomItem.Name = "pesquisarProdutoButtomItem";
             this.pesquisarProdutoButtomItem.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
+            this.pesquisarProdutoButtomItem.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.pesquisarProdutoButtomItem_ItemClick);
             // 
             // barDockControlTop
             // 

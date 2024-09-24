@@ -13,7 +13,7 @@ namespace CadastroDeProdutosView
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Features.Produto.Views.PesquisarProdutosView());
+            Application.Run(new Features.Produto.Views.CadastroDeProdutosView());
         }
     }
 }
