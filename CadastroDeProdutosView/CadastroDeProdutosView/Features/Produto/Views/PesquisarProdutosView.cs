@@ -22,7 +22,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
         public DataTable PesquisarProdutos(string nomeProduto)
         {
             var tabelaData = new DataTable();
-            using (var conexao = new FbConnection(connectionString))
+            using (var conexao = new FbConnection(connectionString: connectionString))
             {
                 try
                 {
@@ -32,18 +32,18 @@ namespace CadastroDeProdutosView.Features.Produto.Views
                         estoque, precoDaVenda
                         FROM PRODUTO
                         WHERE UPPER(nome) LIKE UPPER(@nomeProduto)";
-                    using (var cmd = new FbCommand(query, conexao))
+                    using (var cmd = new FbCommand(cmdText: query, connection: conexao))
                     {
-                        cmd.Parameters.AddWithValue("@nomeProduto", $"%{nomeProduto}%");
-                        using (var da = new FbDataAdapter(cmd))
+                        cmd.Parameters.AddWithValue(parameterName: "@nomeProduto", value: $"%{nomeProduto}%");
+                        using (var da = new FbDataAdapter(selectCommand: cmd))
                         {
-                            da.Fill(tabelaData);
+                            da.Fill(dataTable: tabelaData);
                         }
                     }
                 }
                 catch (Exception ex)
                 {
-                    XtraMessageBox.Show($"Erro: {ex.Message}");
+                    XtraMessageBox.Show(text: $"Erro: {ex.Message}");
                 }
             }
             return tabelaData;
@@ -64,14 +64,14 @@ namespace CadastroDeProdutosView.Features.Produto.Views
         private void pesquisarTextEdit_EditValueChanged(object sender, EventArgs e)
         {
             var pesquisa = pesquisarTextEdit.Text;
-            var produtos = PesquisarProdutos(pesquisa);
+            var produtos = PesquisarProdutos(nomeProduto: pesquisa);
             pesquisarGridControl.DataSource = produtos;
             pesquisarGridView.BestFitColumns();
         }
 
         private void CarregarDados()
         {
-            var produtos = PesquisarProdutos(nomeProduto);
+            var produtos = PesquisarProdutos(nomeProduto: nomeProduto);
             pesquisarGridControl.DataSource = produtos;
             pesquisarGridView.BestFitColumns();
         }
@@ -87,51 +87,44 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
         private void AlterarButtomItem(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-
             if (pesquisarGridView.FocusedRowHandle < 0)
             {
                 XtraMessageBox.Show("Selecione um produto antes de alterar.");
                 return;
             }
 
-            var idProdutoSelecionado = pesquisarGridView.GetFocusedRowCellValue("idProduto");
+            var idProduto = pesquisarGridView.GetFocusedRowCellValue("idProduto");
 
-            if (idProdutoSelecionado == null)
+            if (idProduto == null || idProduto == DBNull.Value)
             {
-                XtraMessageBox.Show("Não foi possível obter o ID do produto.");
+                XtraMessageBox.Show("Produto não encontrado.");
                 return;
             }
 
-            var cadastroDeProdutos = new CadastroDeProdutosView((int)idProdutoSelecionado);
+            var cadastroDeProdutos = new CadastroDeProdutosView(idProduto: (int)idProduto);
             cadastroDeProdutos.ShowDialog();
 
             CarregarDados();
-
-            const string novoNome = "Novo Nome";
-            const string novaCategoria = "Nova Categoria";
-            const string novoCodigoDeBarras = "Novo Código";
-            const string novaUnidadeDeMedida = "Nova Unidade";
-            const int novoEstoque = 0;
-            const decimal novoPrecoDaVenda = 0;
 
             using (var conexao = new FbConnection(connectionString))
             {
                 try
                 {
                     const string query =
-                        @"UPDATE PRODUTO
-                        SET nome = @nome, categoria = @categoria, codigoDeBarras = @codigoDeBarras, 
-                        unidadeDeMedida = @unidadeDeMedida, estoque = @estoque, precoDaVenda = @precoDaVenda
-                        WHERE idProduto = @idProduto";
+                    @"UPDATE PRODUTO
+                    SET nome = @nome, categoria = @categoria, codigoDeBarras = @codigoDeBarras, 
+                    unidadeDeMedida = @unidadeDeMedida, estoque = @estoque, precoDaVenda = @precoDaVenda
+                    WHERE idProduto = @idProduto";
+
                     using (var cmd = new FbCommand(query, conexao))
                     {
-                        cmd.Parameters.AddWithValue("@idProduto", idProdutoSelecionado);
-                        cmd.Parameters.AddWithValue("@nome", novoNome);
-                        cmd.Parameters.AddWithValue("@categoria", novaCategoria);
-                        cmd.Parameters.AddWithValue("@codigoDeBarras", novoCodigoDeBarras);
-                        cmd.Parameters.AddWithValue("@unidadeDeMedida", novaUnidadeDeMedida);
-                        cmd.Parameters.AddWithValue("@estoque", novoEstoque);
-                        cmd.Parameters.AddWithValue("@precoDaVenda", novoPrecoDaVenda);
+                        cmd.Parameters.AddWithValue("@idProduto", idProduto);
+                        cmd.Parameters.AddWithValue("@nome", "Novo Nome");
+                        cmd.Parameters.AddWithValue("@categoria", "Nova Categoria");
+                        cmd.Parameters.AddWithValue("@codigoDeBarras", "Novo Codigo");
+                        cmd.Parameters.AddWithValue("@unidadeDeMedida", "Unidade");
+                        cmd.Parameters.AddWithValue("@estoque", DBNull.Value);
+                        cmd.Parameters.AddWithValue("@precoDaVenda", DBNull.Value);
 
                         conexao.Open();
                         cmd.ExecuteNonQuery();
@@ -145,6 +138,5 @@ namespace CadastroDeProdutosView.Features.Produto.Views
                 }
             }
         }
-
     }
 }
