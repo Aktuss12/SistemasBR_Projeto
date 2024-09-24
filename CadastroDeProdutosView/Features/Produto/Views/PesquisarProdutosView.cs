@@ -36,9 +36,9 @@ namespace CadastroDeProdutosView.Features.Produto.Views
         private DataTable GetCombinedData()
         {
             var dataTable = new DataTable();
-            using (var connection = new FbConnection(connectionString))
+            using (var conexao = new FbConnection(connectionString))
             {
-                connection.Open();
+                conexao.Open();
                 const string query = @"
                 SELECT 
                     P.idProduto, 
@@ -50,7 +50,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
                 FROM PRODUTO P
                 WHERE P.ativo = @ativo";
 
-                using (var command = new FbCommand(query, connection))
+                using (var command = new FbCommand(query, conexao))
                 {
                     command.Parameters.AddWithValue("@ativo", mostrarAtivos ? 1 : 0);
                     using (var dataAdapter = new FbDataAdapter(command))
@@ -123,8 +123,8 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
         private void pesquisarTextEdit_EditValueChanged(object sender, EventArgs e)
         {
-            var filterText = pesquisarTextEdit.Text.Trim();
-            pesquisarGridView.ActiveFilterString = !string.IsNullOrEmpty(filterText) ? $"[nome] LIKE '%{filterText}%'" : string.Empty;
+            var nomeProduto = pesquisarTextEdit.Text.Trim();
+            pesquisarGridView.ActiveFilterString = !string.IsNullOrEmpty(nomeProduto) ? $"[nome] LIKE '%{nomeProduto}%'" : string.Empty;
         }
     }
 }
