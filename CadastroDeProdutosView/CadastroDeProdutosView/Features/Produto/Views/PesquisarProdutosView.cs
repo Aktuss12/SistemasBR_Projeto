@@ -30,7 +30,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
                     const string query =
                         @"SELECT idProduto, Nome, Categoria, CodigoDeBarras, UnidadeDeMedida, Estoque, PrecoDaVenda
                   FROM PRODUTO
-                  WHERE UPPER(Nome) LIKE UPPER(@nomeProduto) AND ativo = 1"; // Certifique-se de filtrar por ativo
+                  WHERE UPPER(Nome) LIKE UPPER(@nomeProduto) AND ativo = 1";
                     using (var cmd = new FbCommand(cmdText: query, connection: conexao))
                     {
                         cmd.Parameters.AddWithValue(parameterName: "@nomeProduto", value: $"%{nomeProduto}%");
