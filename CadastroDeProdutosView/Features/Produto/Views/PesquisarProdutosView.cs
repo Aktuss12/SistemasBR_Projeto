@@ -35,7 +35,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
         private DataTable GetCombinedData()
         {
-            var dataTable = new DataTable();
+            var tabelaDados = new DataTable();
             using (var conexao = new FbConnection(connectionString))
             {
                 conexao.Open();
@@ -50,17 +50,17 @@ namespace CadastroDeProdutosView.Features.Produto.Views
                 FROM PRODUTO P
                 WHERE P.ativo = @ativo";
 
-                using (var command = new FbCommand(query, conexao))
+                using (var comando = new FbCommand(query, conexao))
                 {
-                    command.Parameters.AddWithValue("@ativo", mostrarAtivos ? 1 : 0);
-                    using (var dataAdapter = new FbDataAdapter(command))
+                    comando.Parameters.AddWithValue("@ativo", mostrarAtivos ? 1 : 0);
+                    using (var dataAdapter = new FbDataAdapter(comando))
                     {
-                        dataAdapter.Fill(dataTable);
+                        dataAdapter.Fill(tabelaDados);
                     }
                 }
             }
 
-            return dataTable;
+            return tabelaDados;
         }
 
         private void pesquisarGridControl_Click(object sender, EventArgs e)
@@ -83,14 +83,14 @@ namespace CadastroDeProdutosView.Features.Produto.Views
                 return;
             }
 
-            var selectedRow = gridView.GetDataRow(focusedRowHandle);
-            if (selectedRow == null)
+            var colunaSelecionada = gridView.GetDataRow(focusedRowHandle);
+            if (colunaSelecionada == null)
             {
                 XtraMessageBox.Show("Erro ao obter o produto selecionado.");
                 return;
             }
 
-            var idProduto = Convert.ToInt32(selectedRow["idProduto"]);
+            var idProduto = Convert.ToInt32(colunaSelecionada["idProduto"]);
 
             var confirmarResultado = XtraMessageBox.Show("Tem certeza que deseja excluir este produto?", "Confirmação",
                 MessageBoxButtons.YesNo);
@@ -103,13 +103,27 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
         private static void ExcluirProduto(int idProduto)
         {
-            using (var connection = new FbConnection(connectionString))
+            using (var conexao = new FbConnection(connectionString))
             {
-                connection.Open();
+                conexao.Open();
                 const string updateProductQuery = "UPDATE PRODUTO SET ativo = 0 WHERE idProduto = @idProduto";
-                using (var command = new FbCommand(updateProductQuery, connection))
+                using (var command = new FbCommand(updateProductQuery, conexao))
                 {
                     command.Parameters.AddWithValue("@idProduto", idProduto);
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
+
+        private static void ReativarProduto(int idProduto)
+        {
+            using (var conexao = new FbConnection(connectionString))
+            {
+                conexao.Open();
+                const string updateProductQuery = "UPDATE PRODUTO SET = 1 WHERE idProduto = @idProduto";
+                using (var command = new FbCommand(updateProductQuery))
+                {
+                    command.Parameters.AddWithValue(@"idProduto", idProduto);
                     command.ExecuteNonQuery();
                 }
             }
@@ -125,6 +139,39 @@ namespace CadastroDeProdutosView.Features.Produto.Views
         {
             var nomeProduto = pesquisarTextEdit.Text.Trim();
             pesquisarGridView.ActiveFilterString = !string.IsNullOrEmpty(nomeProduto) ? $"[nome] LIKE '%{nomeProduto}%'" : string.Empty;
+        }
+
+        private void reativarProdutoButtomItem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            if (!(pesquisarGridControl.MainView is GridView gridView))
+            {
+                XtraMessageBox.Show("O produto não foi selecionado");
+                return;
+            }
+
+            var FocusedHowHandle = gridView.FocusedRowHandle;
+            if (FocusedHowHandle < 0)
+            {
+                XtraMessageBox.Show("Selecione um produto para reativar");
+                return;
+            }
+
+            var colunaSelecionada = gridView.GetDataRow(FocusedHowHandle);
+            if (colunaSelecionada == null)
+            {
+                XtraMessageBox.Show("Ocorreu um erro ao reativar o produto selecionado");
+                return;
+            }
+
+            var idProduto = Convert.ToInt32(colunaSelecionada["idProduto"]);
+            var confirmarResultado = XtraMessageBox.Show("Tem certeza que deseja reativar esse produto?", "Confirmação",
+                MessageBoxButtons.YesNo);
+            if (confirmarResultado != DialogResult.Yes)return;
+            {
+                ReativarProduto(idProduto);
+                XtraMessageBox.Show("Produto reativado com sucesso");
+                CarregarBancoDeDados();
+            }
         }
     }
 }
