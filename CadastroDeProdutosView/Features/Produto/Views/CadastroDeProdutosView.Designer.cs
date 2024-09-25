@@ -241,6 +241,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.nomeTextEdit.Properties.Mask.EditMask = "String";
             this.nomeTextEdit.Size = new System.Drawing.Size(298, 22);
             this.nomeTextEdit.TabIndex = 22;
+            this.nomeTextEdit.EditValueChanged += new System.EventHandler(this.nomeTextEdit_EditValueChanged);
             // 
             // marcaLookUpEdit
             // 
@@ -779,7 +780,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.salvarBarItem.Caption = "Salvar";
             this.salvarBarItem.Id = 0;
             this.salvarBarItem.Name = "salvarBarItem";
-            this.salvarBarItem.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem1_ItemClick);
             // 
             // excluirButtomItem
             // 

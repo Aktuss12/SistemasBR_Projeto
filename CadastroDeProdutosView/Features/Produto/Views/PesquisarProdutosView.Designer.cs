@@ -291,7 +291,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             // searchImgEdit
             // 
             this.searchImgEdit.EditValue = ((object)(resources.GetObject("searchImgEdit.EditValue")));
-            this.searchImgEdit.Location = new System.Drawing.Point(107, 11);
+            this.searchImgEdit.Location = new System.Drawing.Point(112, 6);
             this.searchImgEdit.MenuManager = this.pesquisarBarManager;
             this.searchImgEdit.Name = "searchImgEdit";
             this.searchImgEdit.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
@@ -355,7 +355,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             // pesquisarTextEdit
             // 
             this.pesquisarTextEdit.EditValue = "";
-            this.pesquisarTextEdit.Location = new System.Drawing.Point(0, 38);
+            this.pesquisarTextEdit.Location = new System.Drawing.Point(5, 38);
             this.pesquisarTextEdit.Name = "pesquisarTextEdit";
             this.pesquisarTextEdit.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
             this.pesquisarTextEdit.Size = new System.Drawing.Size(337, 22);
@@ -366,7 +366,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             // 
             this.pesquisarLabelControl.Appearance.Font = new System.Drawing.Font("Yu Gothic", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.pesquisarLabelControl.Appearance.Options.UseFont = true;
-            this.pesquisarLabelControl.Location = new System.Drawing.Point(0, 11);
+            this.pesquisarLabelControl.Location = new System.Drawing.Point(5, 6);
             this.pesquisarLabelControl.Name = "pesquisarLabelControl";
             this.pesquisarLabelControl.Size = new System.Drawing.Size(101, 27);
             this.pesquisarLabelControl.TabIndex = 21;

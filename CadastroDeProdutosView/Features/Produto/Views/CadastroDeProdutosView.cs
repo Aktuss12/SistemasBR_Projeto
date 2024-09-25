@@ -6,14 +6,16 @@ using System;
 using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
+using DevExpress.Utils.Extensions;
 
 namespace CadastroDeProdutosView.Features.Produto.Views
 {
     public partial class CadastroDeProdutosView : Form
     {
-        private int? idProduto;
+        private readonly int? idProduto;
         private bool isValidating;
-        private const string connectionString = @"User ID=SYSDBA;Password=masterkey;Database=C:\Users\admin\Documents\BANCODEDADOSPRODUTOS.FDB;DataSource=localhost;Port=3050;Dialect=3;Charset=NONE;";
+        private const string connectionString = 
+            @"User ID=SYSDBA;Password=masterkey;Database=C:\Users\admin\Documents\BANCODEDADOSPRODUTOS.FDB;DataSource=localhost;Port=3050;Dialect=3;Charset=NONE;";
 
 
         public CadastroDeProdutosView(int produtoId)
@@ -45,26 +47,24 @@ namespace CadastroDeProdutosView.Features.Produto.Views
                 command.Parameters.AddWithValue("@idProduto", idProduto);
 
                 using var reader = command.ExecuteReader();
-                if (reader.Read())
-                {
-                    nomeTextEdit.Text = reader["Nome"].ToString();
-                    categoriaDeProdutosLookUpEdit.EditValue = reader["Categoria"];
-                    fornecedorTextEdit.Text = reader["Fornecedor"].ToString();
-                    codigodebarrasTextEdit.Text = reader["CodigoDeBarras"].ToString();
-                    unidadeDeMedidaLookUpEdit.EditValue = reader["UnidadeDeMedida"];
-                    estoqueTextEdit.Text = reader["Estoque"].ToString();
-                    marcaLookUpEdit.EditValue = reader["Marca"];
-                    custoTextEdit.Text = reader["Custo"].ToString();
-                    markupTextEdit.Text = reader["Markup"].ToString();
-                    precoVendaTextEdit.Text = reader["PrecoDaVenda"].ToString();
+                if (!reader.Read()) return;
+                nomeTextEdit.Text = reader["Nome"].ToString();
+                categoriaDeProdutosLookUpEdit.EditValue = reader["Categoria"];
+                fornecedorTextEdit.Text = reader["Fornecedor"].ToString();
+                codigodebarrasTextEdit.Text = reader["CodigoDeBarras"].ToString();
+                unidadeDeMedidaLookUpEdit.EditValue = reader["UnidadeDeMedida"];
+                estoqueTextEdit.Text = reader["Estoque"].ToString();
+                marcaLookUpEdit.EditValue = reader["Marca"];
+                custoTextEdit.Text = reader["Custo"].ToString();
+                markupTextEdit.Text = reader["Markup"].ToString();
+                precoVendaTextEdit.Text = reader["PrecoDaVenda"].ToString();
 
-                    origemDaMercadoriaLookUpEdit.EditValue = reader["origemDaMercadoria"];
-                    situacaoTributariaLookUpEdit.EditValue = reader["situacaoTributaria"];
-                    naturezaDaOperacaoLookUpEdit.EditValue = reader["naturezaDaOperacao"];
-                    ncmTextEdit.Text = reader["ncm"].ToString();
-                    aliquotaDeIcmsTextEdit.Text = reader["aliquotaDeIcms"].ToString();
-                    reducaoDeCalculoIcmsTextEdit.Text = reader["reducaoDeCalculo"].ToString();
-                }
+                origemDaMercadoriaLookUpEdit.EditValue = reader["origemDaMercadoria"];
+                situacaoTributariaLookUpEdit.EditValue = reader["situacaoTributaria"];
+                naturezaDaOperacaoLookUpEdit.EditValue = reader["naturezaDaOperacao"];
+                ncmTextEdit.Text = reader["ncm"].ToString();
+                aliquotaDeIcmsTextEdit.Text = reader["aliquotaDeIcms"].ToString();
+                reducaoDeCalculoIcmsTextEdit.Text = reader["reducaoDeCalculo"].ToString();
             }
             catch (Exception ex)
             {
@@ -212,8 +212,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             ncmTextEdit.Properties.MaxLength = 8;
         }
 
-        private void barButtonItem1_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e) { }
-
         private void salvarButtomItem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             if (!ValidarCamposObrigatorios())
@@ -300,10 +298,17 @@ namespace CadastroDeProdutosView.Features.Produto.Views
                         informacoesCommand.ExecuteNonQuery();
                     }
 
-                    transaction.Commit();
-                    XtraMessageBox.Show("Produto cadastrado com sucesso");
-                    LimparTextEdits();
-                    LimparLookUpEdits();
+                    if (idProduto < 0)
+                    {
+                        XtraMessageBox.Show("Produto cadastrado com sucesso");
+                        LimparTextEdits();
+                        LimparLookUpEdits();
+                        transaction.Commit();
+                    }
+                    else
+                    {   
+                        CarregarProduto(idProduto);
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -376,6 +381,11 @@ namespace CadastroDeProdutosView.Features.Produto.Views
         }
 
         private void produtosGroupControl_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void nomeTextEdit_EditValueChanged(object sender, EventArgs e)
         {
 
         }
