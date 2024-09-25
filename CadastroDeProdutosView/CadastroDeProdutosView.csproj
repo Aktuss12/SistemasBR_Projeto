@@ -72,6 +72,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Features\Commons\CalculadorDeCodigoDeBarras.cs" />
+    <Compile Include="Features\Commons\CalculoDeCustoEMarkupParaPrecoVenda.cs" />
     <Compile Include="Features\Produto\Enums\CategoriaDeProdutos.cs" />
     <Compile Include="Features\Produto\Enums\MarcaDoProduto.cs" />
     <Compile Include="Features\Produto\Enums\NaturezaDaOperacao.cs" />

@@ -107,21 +107,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             isValidating = false;
         }
 
-        private void CalcularPrecoVenda()
-        {
-            if (decimal.TryParse(custoTextEdit.Text, out var custo) &&
-                decimal.TryParse(markupTextEdit.Text, out var markup))
-            {
-                var precoVenda = custo * (1 + (markup / 100));
-                precoVendaTextEdit.Text = precoVenda.ToString("F2");
-            }
-            else
-            {
-                precoVendaTextEdit.Text = string.Empty;
-            }
-        }
-
-
         private void LimparLookUpEdits()
         {
             unidadeDeMedidaLookUpEdit.EditValue = null;
@@ -166,7 +151,13 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             if (isValidating) return;
 
             isValidating = true;
-            CalcularPrecoVenda();
+
+            if (decimal.TryParse(custoTextEdit.Text, out var custo) &&
+                decimal.TryParse(markupTextEdit.Text, out var markup))
+            {
+                CalculoDeCustoEMarkupParaPrecoVenda.CalcularPrecoVenda(custo, markup, precoVendaTextEdit);
+            }
+
             isValidating = false;
         }
 
@@ -175,7 +166,13 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             if (isValidating) return;
 
             isValidating = true;
-            CalcularPrecoVenda();
+
+            if (decimal.TryParse(custoTextEdit.Text, out var custo) &&
+                decimal.TryParse(markupTextEdit.Text, out var markup))
+            {
+                CalculoDeCustoEMarkupParaPrecoVenda.CalcularPrecoVenda(custo, markup, precoVendaTextEdit);
+            }
+
             isValidating = false;
         }
 
@@ -187,7 +184,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
         private void salvarButtomItem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             if (!ValidarCamposObrigatorios())
-            {
+            {                                    
                 XtraMessageBox.Show("Todos os campos obrigatórios devem ser preenchidos!");
                 return;
             }
