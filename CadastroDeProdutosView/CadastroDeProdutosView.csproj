@@ -88,6 +88,7 @@
     <Compile Include="Features\Produto\Views\PesquisarProdutosView.Designer.cs">
       <DependentUpon>PesquisarProdutosView.cs</DependentUpon>
     </Compile>
+    <Compile Include="produtosDesativadosToggleSwitchh\IsOn.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Features\Produto\Views\CadastroDeProdutosView.resx">

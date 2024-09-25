@@ -37,7 +37,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.pesquisarBarManager = new DevExpress.XtraBars.BarManager(this.components);
             this.bar = new DevExpress.XtraBars.Bar();
-            this.salvarProdutoButtomItem = new DevExpress.XtraBars.BarButtonItem();
+            this.desativarProdutoButtomItem = new DevExpress.XtraBars.BarButtonItem();
             this.reativarProdutoButtomItem = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem3 = new DevExpress.XtraBars.BarButtonItem();
             this.barDockControl1 = new DevExpress.XtraBars.BarDockControl();
@@ -111,7 +111,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.pesquisarBarManager.Form = this;
             this.pesquisarBarManager.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
             this.salvarBarItem,
-            this.salvarProdutoButtomItem,
+            this.desativarProdutoButtomItem,
             this.excluirButtomItem,
             this.pesquisarButtomItem,
             this.barHeaderItem1,
@@ -131,7 +131,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.bar.DockRow = 0;
             this.bar.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
             this.bar.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
-            new DevExpress.XtraBars.LinkPersistInfo(this.salvarProdutoButtomItem),
+            new DevExpress.XtraBars.LinkPersistInfo(this.desativarProdutoButtomItem),
             new DevExpress.XtraBars.LinkPersistInfo(this.reativarProdutoButtomItem),
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem3)});
             this.bar.OptionsBar.AllowQuickCustomization = false;
@@ -139,15 +139,15 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.bar.OptionsBar.DrawBorder = false;
             this.bar.Text = "Tools";
             // 
-            // salvarProdutoButtomItem
+            // desativarProdutoButtomItem
             // 
-            this.salvarProdutoButtomItem.Border = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
-            this.salvarProdutoButtomItem.Caption = "EXCLUIR";
-            this.salvarProdutoButtomItem.Id = 1;
-            this.salvarProdutoButtomItem.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("salvarProdutoButtomItem.ImageOptions.SvgImage")));
-            this.salvarProdutoButtomItem.Name = "salvarProdutoButtomItem";
-            this.salvarProdutoButtomItem.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
-            this.salvarProdutoButtomItem.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.salvarProdutoButtomItem_ItemClick);
+            this.desativarProdutoButtomItem.Border = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
+            this.desativarProdutoButtomItem.Caption = "DESATIVAR";
+            this.desativarProdutoButtomItem.Id = 1;
+            this.desativarProdutoButtomItem.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("salvarProdutoButtomItem.ImageOptions.SvgImage")));
+            this.desativarProdutoButtomItem.Name = "desativarProdutoButtomItem";
+            this.desativarProdutoButtomItem.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
+            this.desativarProdutoButtomItem.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.desativarProdutoButtomItem_ItemClick);
             // 
             // reativarProdutoButtomItem
             // 
@@ -377,7 +377,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
         private DevExpress.XtraBars.BarDockControl barDockControlTop;
         private DevExpress.XtraBars.BarManager pesquisarBarManager;
         private DevExpress.XtraBars.Bar bar;
-        private DevExpress.XtraBars.BarButtonItem salvarProdutoButtomItem;
+        private DevExpress.XtraBars.BarButtonItem desativarProdutoButtomItem;
         private DevExpress.XtraBars.BarDockControl barDockControl1;
         private DevExpress.XtraBars.BarDockControl barDockControlBottom;
         private DevExpress.XtraBars.BarDockControl barDockControlLeft;
