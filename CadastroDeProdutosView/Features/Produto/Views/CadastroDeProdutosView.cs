@@ -30,10 +30,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             naturezaDaOperacaoLookUpEdit.PreencherLookUpEditComOValorDoEnum<NaturezaDaOperacaoView.NaturezaDaOperacao>();
         }
 
-        private void CadastroDeProdutosView_Load(object sender, EventArgs e) { }
-
-        private void labelControl_Click(object sender, EventArgs e) { }
-
         private void textEdit2_EditValueChanged(object sender, EventArgs e)
         {
             if (isValidating) return;
@@ -164,14 +160,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             ncmTextEdit.Properties.MaxLength = 8;
         }
 
-        private void aliquotaDeIcmsTextEdit_EditValueChanged(object sender, EventArgs e)
-        {
-        }
-
-        private void reducaoDeCalculoIcmsTextEdit_EditValueChanged(object sender, EventArgs e)
-        {
-        }
-
         private void barButtonItem1_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e) { }
 
         private void salvarButtomItem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -194,85 +182,81 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
             try
             {
-                using (var connection = new FbConnection(connectionString))
-                {
-                    connection.Open();
+                using var connection = new FbConnection(connectionString);
+                connection.Open();
 
-                    using (var transaction = connection.BeginTransaction())
-                    {
-                        try
-                        {
-                            const string insertProdutoQuery = @"
+                using var transaction = connection.BeginTransaction();
+                try
+                {
+                    const string insertProdutoQuery = @"
                         INSERT INTO PRODUTO (Nome, Categoria, Fornecedor, CodigoDeBarras, UnidadeDeMedida, Estoque, Marca, Custo, Markup, PrecoDaVenda)
                         VALUES (@nome, @categoria, @fornecedor, @codigoDeBarras, @unidadeDeMedida, @estoque, @marca, @custo, @markup, @precoDaVenda)
                         RETURNING idProduto";
 
-                            int idProduto;
+                    int idProduto;
 
-                            using (var command = new FbCommand(insertProdutoQuery, connection, transaction))
-                            {
-                                command.Parameters.Add("@Nome", FbDbType.VarChar).Value = nomeTextEdit.Text ?? (object)DBNull.Value;
-                                command.Parameters.Add("@Categoria", FbDbType.VarChar).Value = categoriaDeProdutosLookUpEdit.EditValue ?? DBNull.Value;
-                                command.Parameters.Add("@Fornecedor", FbDbType.VarChar).Value = fornecedorTextEdit.Text ?? (object)DBNull.Value;
-                                command.Parameters.Add("@CodigoDeBarras", FbDbType.VarChar).Value = codigodebarrasTextEdit.Text ?? (object)DBNull.Value;
-                                command.Parameters.Add("@UnidadeDeMedida", FbDbType.VarChar).Value = unidadeDeMedidaLookUpEdit.EditValue ?? DBNull.Value;
-                                command.Parameters.Add("@Estoque", FbDbType.Integer).Value = int.TryParse(estoqueTextEdit.EditValue.ToString(), out var estoque) ? estoque : (object)DBNull.Value;
-                                command.Parameters.Add("@Marca", FbDbType.VarChar).Value = marcaLookUpEdit.EditValue ?? DBNull.Value;
+                    using (var command = new FbCommand(insertProdutoQuery, connection, transaction))
+                    {
+                        command.Parameters.Add("@Nome", FbDbType.VarChar).Value = nomeTextEdit.Text ?? (object)DBNull.Value;
+                        command.Parameters.Add("@Categoria", FbDbType.VarChar).Value = categoriaDeProdutosLookUpEdit.EditValue ?? DBNull.Value;
+                        command.Parameters.Add("@Fornecedor", FbDbType.VarChar).Value = fornecedorTextEdit.Text ?? (object)DBNull.Value;
+                        command.Parameters.Add("@CodigoDeBarras", FbDbType.VarChar).Value = codigodebarrasTextEdit.Text ?? (object)DBNull.Value;
+                        command.Parameters.Add("@UnidadeDeMedida", FbDbType.VarChar).Value = unidadeDeMedidaLookUpEdit.EditValue ?? DBNull.Value;
+                        command.Parameters.Add("@Estoque", FbDbType.Integer).Value = int.TryParse(estoqueTextEdit.EditValue.ToString(), out var estoque) ? estoque : DBNull.Value;
+                        command.Parameters.Add("@Marca", FbDbType.VarChar).Value = marcaLookUpEdit.EditValue ?? DBNull.Value;
 
-                                if (decimal.TryParse(custoTextEdit.Text, out var custo))
-                                    command.Parameters.Add("@Custo", FbDbType.Decimal).Value = custo;
-                                else
-                                    command.Parameters.Add("@Custo", FbDbType.Decimal).Value = DBNull.Value;
+                        if (decimal.TryParse(custoTextEdit.Text, out var custo))
+                            command.Parameters.Add("@Custo", FbDbType.Decimal).Value = custo;
+                        else
+                            command.Parameters.Add("@Custo", FbDbType.Decimal).Value = DBNull.Value;
 
-                                if (decimal.TryParse(markupTextEdit.Text, out var markup))
-                                    command.Parameters.Add("@Markup", FbDbType.Decimal).Value = markup;
-                                else
-                                    command.Parameters.Add("@Markup", FbDbType.Decimal).Value = DBNull.Value;
+                        if (decimal.TryParse(markupTextEdit.Text, out var markup))
+                            command.Parameters.Add("@Markup", FbDbType.Decimal).Value = markup;
+                        else
+                            command.Parameters.Add("@Markup", FbDbType.Decimal).Value = DBNull.Value;
 
-                                if (decimal.TryParse(precoVendaTextEdit.Text, out var precoVenda))
-                                    command.Parameters.Add("@PrecoDaVenda", FbDbType.Decimal).Value = precoVenda;
-                                else
-                                    command.Parameters.Add("@PrecoDaVenda", FbDbType.Decimal).Value = DBNull.Value;
+                        if (decimal.TryParse(precoVendaTextEdit.Text, out var precoVenda))
+                            command.Parameters.Add("@PrecoDaVenda", FbDbType.Decimal).Value = precoVenda;
+                        else
+                            command.Parameters.Add("@PrecoDaVenda", FbDbType.Decimal).Value = DBNull.Value;
 
-                                idProduto = (int)command.ExecuteScalar();
-                            }
+                        idProduto = (int)command.ExecuteScalar();
+                    }
 
-                            const string insertInformacoesFiscaisQuery = @"
+                    const string insertInformacoesFiscaisQuery = @"
                         INSERT INTO INFORMACOESFISCAIS (idProduto, origemDaMercadoria, situacaoTributaria, naturezaDaOperacao, ncm, aliquotaDeIcms, reducaoDeCalculo)
                          VALUES (@idProduto, @origemDaMercadoria, @situacaoTributaria, @naturezaDaOperacao, @ncm, @aliquotaDeIcms, @reducaoDeCalculo)";
 
-                            using (var informacoesCommand = new FbCommand(insertInformacoesFiscaisQuery, connection, transaction))
-                            {
-                                informacoesCommand.Parameters.Add("@idProduto", FbDbType.Integer).Value = idProduto;
-                                informacoesCommand.Parameters.Add("@origemDaMercadoria", FbDbType.VarChar).Value = origemDaMercadoriaLookUpEdit.EditValue ?? DBNull.Value;
-                                informacoesCommand.Parameters.Add("@situacaoTributaria", FbDbType.VarChar).Value = situacaoTributariaLookUpEdit.EditValue ?? DBNull.Value;
-                                informacoesCommand.Parameters.Add("@naturezaDaOperacao", FbDbType.VarChar).Value = naturezaDaOperacaoLookUpEdit.EditValue ?? DBNull.Value;
-                                informacoesCommand.Parameters.Add("@ncm", FbDbType.VarChar).Value = ncmTextEdit.Text ?? (object)DBNull.Value;
+                    using (var informacoesCommand = new FbCommand(insertInformacoesFiscaisQuery, connection, transaction))
+                    {
+                        informacoesCommand.Parameters.Add("@idProduto", FbDbType.Integer).Value = idProduto;
+                        informacoesCommand.Parameters.Add("@origemDaMercadoria", FbDbType.VarChar).Value = origemDaMercadoriaLookUpEdit.EditValue ?? DBNull.Value;
+                        informacoesCommand.Parameters.Add("@situacaoTributaria", FbDbType.VarChar).Value = situacaoTributariaLookUpEdit.EditValue ?? DBNull.Value;
+                        informacoesCommand.Parameters.Add("@naturezaDaOperacao", FbDbType.VarChar).Value = naturezaDaOperacaoLookUpEdit.EditValue ?? DBNull.Value;
+                        informacoesCommand.Parameters.Add("@ncm", FbDbType.VarChar).Value = ncmTextEdit.Text ?? (object)DBNull.Value;
 
-                                if (decimal.TryParse(aliquotaDeIcmsTextEdit.Text, NumberStyles.Any, CultureInfo.InvariantCulture, out var aliquotaIcms))
-                                    informacoesCommand.Parameters.Add("@aliquotaDeIcms", FbDbType.Decimal).Value = aliquotaIcms;
-                                else
-                                    informacoesCommand.Parameters.Add("@aliquotaDeIcms", FbDbType.Decimal).Value = DBNull.Value;
+                        if (decimal.TryParse(aliquotaDeIcmsTextEdit.Text, NumberStyles.Any, CultureInfo.InvariantCulture, out var aliquotaIcms))
+                            informacoesCommand.Parameters.Add("@aliquotaDeIcms", FbDbType.Decimal).Value = aliquotaIcms;
+                        else
+                            informacoesCommand.Parameters.Add("@aliquotaDeIcms", FbDbType.Decimal).Value = DBNull.Value;
 
-                                if (decimal.TryParse(reducaoDeCalculoIcmsTextEdit.Text, NumberStyles.Any, CultureInfo.InvariantCulture, out var reducaoCalculo))
-                                    informacoesCommand.Parameters.Add("@reducaoDeCalculo", FbDbType.Decimal).Value = reducaoCalculo;
-                                else
-                                    informacoesCommand.Parameters.Add("@reducaoDeCalculo", FbDbType.Decimal).Value = DBNull.Value;
+                        if (decimal.TryParse(reducaoDeCalculoIcmsTextEdit.Text, NumberStyles.Any, CultureInfo.InvariantCulture, out var reducaoCalculo))
+                            informacoesCommand.Parameters.Add("@reducaoDeCalculo", FbDbType.Decimal).Value = reducaoCalculo;
+                        else
+                            informacoesCommand.Parameters.Add("@reducaoDeCalculo", FbDbType.Decimal).Value = DBNull.Value;
 
-                                informacoesCommand.ExecuteNonQuery();
-                            }
-
-                            transaction.Commit();
-                            XtraMessageBox.Show("Produto cadastrado com sucesso");
-                            LimparTextEdits();
-                            LimparLookUpEdits();
-                        }
-                        catch (Exception ex)
-                        {
-                            transaction.Rollback();
-                            throw new Exception("Erro ao inserir produto no banco de dados", ex);
-                        }
+                        informacoesCommand.ExecuteNonQuery();
                     }
+
+                    transaction.Commit();
+                    XtraMessageBox.Show("Produto cadastrado com sucesso");
+                    LimparTextEdits();
+                    LimparLookUpEdits();
+                }
+                catch (Exception ex)
+                {
+                    transaction.Rollback();
+                    throw new Exception("Erro ao inserir produto no banco de dados", ex);
                 }
             }
             catch (Exception ex)
@@ -301,41 +285,43 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             todosCamposPreenchidos &= unidadeDeMedidaLookUpEdit.EditValue != null;
             todosCamposPreenchidos &= categoriaDeProdutosLookUpEdit.EditValue != null;
 
-            nomeLabelControl.Text = string.IsNullOrWhiteSpace(nomeTextEdit.Text) ? "Nome: <color=red>*</color>" : "Nome: *";
+            nomeLabelControl.Text =
+                string.IsNullOrWhiteSpace(nomeTextEdit.Text) ? "Nome: <color=red>*</color>" : "Nome: *";
             nomeLabelControl.AllowHtmlString = string.IsNullOrWhiteSpace(nomeTextEdit.Text);
 
-            estoqueLabelControl.Text = string.IsNullOrWhiteSpace(estoqueTextEdit.Text) ? "Estoque: <color=red>*</color>" : "Estoque: *";
+            estoqueLabelControl.Text = string.IsNullOrWhiteSpace(estoqueTextEdit.Text)
+                ? "Estoque: <color=red>*</color>"
+                : "Estoque: *";
             estoqueLabelControl.AllowHtmlString = string.IsNullOrWhiteSpace(estoqueTextEdit.Text);
 
-            precoDaVendaLabelControl.Text = string.IsNullOrWhiteSpace(precoVendaTextEdit.Text) ? "Preço da Venda: <color=red>*</color>" : "Preço da Venda: *";
+            precoDaVendaLabelControl.Text = string.IsNullOrWhiteSpace(precoVendaTextEdit.Text)
+                ? "Preço da Venda: <color=red>*</color>"
+                : "Preço da Venda: *";
             precoDaVendaLabelControl.AllowHtmlString = string.IsNullOrWhiteSpace(precoVendaTextEdit.Text);
 
-            unidadeDeMedidaLabelControl.Text = unidadeDeMedidaLookUpEdit.EditValue == null ? "Und. de Medida: <color=red>*</color>" : "Und. de Medida: *";
+            unidadeDeMedidaLabelControl.Text = unidadeDeMedidaLookUpEdit.EditValue == null
+                ? "Und. de Medida: <color=red>*</color>"
+                : "Und. de Medida: *";
             unidadeDeMedidaLabelControl.AllowHtmlString = unidadeDeMedidaLookUpEdit.EditValue == null;
 
-            categoriaLabelControl.Text = categoriaDeProdutosLookUpEdit.EditValue == null ? "Categoria: <color=red>*</color>" : "Categoria: *";
+            categoriaLabelControl.Text = categoriaDeProdutosLookUpEdit.EditValue == null
+                ? "Categoria: <color=red>*</color>"
+                : "Categoria: *";
             categoriaLabelControl.AllowHtmlString = categoriaDeProdutosLookUpEdit.EditValue == null;
 
             return todosCamposPreenchidos;
         }
 
-        private void custoLabelControl_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void produtosTabNavigationPage_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void nomeTextEdit_EditValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void pesquisarProdutoButtomItem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            foreach (Form form in Application.OpenForms)
+            {
+                if (form is PesquisarProdutosView)
+                {
+                    XtraMessageBox.Show("A janela de pesquisa já está aberta", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return; 
+                }
+            }
             var pesquisarProdutos = new PesquisarProdutosView();
             pesquisarProdutos.ShowDialog();
         }

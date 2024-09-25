@@ -1,9 +1,9 @@
-﻿using System;
-using System.Data;
-using System.Windows.Forms;
-using DevExpress.XtraEditors;
+﻿using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Views.Grid;
 using FirebirdSql.Data.FirebirdClient;
+using System;
+using System.Data;
+using System.Windows.Forms;
 
 namespace CadastroDeProdutosView.Features.Produto.Views
 {
@@ -143,44 +143,50 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             DesativarBotoes();
             CarregarBancoDeDados();
         }
-        
+
         private void pesquisarTextEdit_EditValueChanged(object sender, EventArgs e)
+        {
+            var nomeProduto = pesquisarTextEdit.Text.Trim();
+            pesquisarGridView.ActiveFilterString =
+                !string.IsNullOrEmpty(nomeProduto) ? $"[nome] LIKE '%{nomeProduto}%'" : string.Empty;
+        }
+
+        private void reativarProdutoButtomItem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            if (!(pesquisarGridControl.MainView is GridView gridView))
             {
-                var nomeProduto = pesquisarTextEdit.Text.Trim();
-                pesquisarGridView.ActiveFilterString = !string.IsNullOrEmpty(nomeProduto) ? $"[nome] LIKE '%{nomeProduto}%'" : string.Empty;
+                XtraMessageBox.Show("O produto não foi selecionado");
+                return;
             }
 
-            private void reativarProdutoButtomItem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+            var FocusedHowHandle = gridView.FocusedRowHandle;
+            if (FocusedHowHandle < 0)
             {
-                if (!(pesquisarGridControl.MainView is GridView gridView))
-                {
-                    XtraMessageBox.Show("O produto não foi selecionado");
-                    return;
-                }
-
-                var FocusedHowHandle = gridView.FocusedRowHandle;
-                if (FocusedHowHandle < 0)
-                {
-                    XtraMessageBox.Show("Selecione um produto para reativar");
-                    return;
-                }
-
-                var colunaSelecionada = gridView.GetDataRow(FocusedHowHandle);
-                if (colunaSelecionada == null)
-                {
-                    XtraMessageBox.Show("Ocorreu um erro ao reativar o produto selecionado");
-                    return;
-                }
-
-                var idProduto = Convert.ToInt32(colunaSelecionada["idProduto"]);
-                var confirmarResultado = XtraMessageBox.Show("Tem certeza que deseja reativar esse produto?", "Confirmação",
-                    MessageBoxButtons.YesNo);
-                if (confirmarResultado != DialogResult.Yes)return;
-                {
-                    ReativarProduto(idProduto);
-                    XtraMessageBox.Show("Produto reativado com sucesso");
-                    CarregarBancoDeDados();
-                }
+                XtraMessageBox.Show("Selecione um produto para reativar");
+                return;
             }
+
+            var colunaSelecionada = gridView.GetDataRow(FocusedHowHandle);
+            if (colunaSelecionada == null)
+            {
+                XtraMessageBox.Show("Ocorreu um erro ao reativar o produto selecionado");
+                return;
+            }
+
+            var idProduto = Convert.ToInt32(colunaSelecionada["idProduto"]);
+            var confirmarResultado = XtraMessageBox.Show("Tem certeza que deseja reativar esse produto?", "Confirmação",
+                MessageBoxButtons.YesNo);
+            if (confirmarResultado != DialogResult.Yes) return;
+            {
+                ReativarProduto(idProduto);
+                XtraMessageBox.Show("Produto reativado com sucesso");
+                CarregarBancoDeDados();
+            }
+        }
+        private void alterarButtonItem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            var cadastroDeProdutos = new CadastroDeProdutosView();
+            cadastroDeProdutos.ShowDialog();
+        }
     }
 }

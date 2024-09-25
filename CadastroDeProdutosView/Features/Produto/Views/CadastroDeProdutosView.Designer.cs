@@ -187,7 +187,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.produtosTabNavigationPage.Margin = new System.Windows.Forms.Padding(2);
             this.produtosTabNavigationPage.Name = "produtosTabNavigationPage";
             this.produtosTabNavigationPage.Size = new System.Drawing.Size(757, 380);
-            this.produtosTabNavigationPage.Paint += new System.Windows.Forms.PaintEventHandler(this.produtosTabNavigationPage_Paint);
             // 
             // fornecedorTextEdit
             // 
@@ -359,7 +358,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.nomeTextEdit.Properties.Mask.EditMask = "String";
             this.nomeTextEdit.Size = new System.Drawing.Size(262, 22);
             this.nomeTextEdit.TabIndex = 1;
-            this.nomeTextEdit.EditValueChanged += new System.EventHandler(this.nomeTextEdit_EditValueChanged);
             // 
             // categoriaLabelControl
             // 
@@ -426,7 +424,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.custoLabelControl.Size = new System.Drawing.Size(47, 21);
             this.custoLabelControl.TabIndex = 0;
             this.custoLabelControl.Text = "Custo: ";
-            this.custoLabelControl.Click += new System.EventHandler(this.custoLabelControl_Click);
             // 
             // codigodebarrasLabelControl
             // 
@@ -450,7 +447,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.nomeLabelControl.Size = new System.Drawing.Size(57, 21);
             this.nomeLabelControl.TabIndex = 0;
             this.nomeLabelControl.Text = "Nome: *";
-            this.nomeLabelControl.Click += new System.EventHandler(this.labelControl_Click);
             // 
             // infofiscalTabNavigationPage
             // 
@@ -571,7 +567,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.reducaoDeCalculoIcmsTextEdit.Properties.Mask.UseMaskAsDisplayFormat = true;
             this.reducaoDeCalculoIcmsTextEdit.Size = new System.Drawing.Size(301, 22);
             this.reducaoDeCalculoIcmsTextEdit.TabIndex = 17;
-            this.reducaoDeCalculoIcmsTextEdit.EditValueChanged += new System.EventHandler(this.reducaoDeCalculoIcmsTextEdit_EditValueChanged);
             // 
             // reducaoDeCalculoIcmsLabelControl
             // 
@@ -607,7 +602,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.aliquotaDeIcmsTextEdit.Properties.Mask.UseMaskAsDisplayFormat = true;
             this.aliquotaDeIcmsTextEdit.Size = new System.Drawing.Size(300, 22);
             this.aliquotaDeIcmsTextEdit.TabIndex = 16;
-            this.aliquotaDeIcmsTextEdit.EditValueChanged += new System.EventHandler(this.aliquotaDeIcmsTextEdit_EditValueChanged);
             // 
             // aliquotaDeIcmsLabelControl
             // 
@@ -793,7 +787,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "CadastroDeProdutosView";
             this.Text = "Cadastro De Produtos";
-            this.Load += new System.EventHandler(this.CadastroDeProdutosView_Load);
             ((System.ComponentModel.ISupportInitialize)(this.tabPage)).EndInit();
             this.tabPage.ResumeLayout(false);
             this.produtosTabNavigationPage.ResumeLayout(false);
