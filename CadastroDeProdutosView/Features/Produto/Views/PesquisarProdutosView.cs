@@ -37,10 +37,9 @@ namespace CadastroDeProdutosView.Features.Produto.Views
         private DataTable GetCombinedData()
         {
             var tabelaDados = new DataTable();
-            using (var conexao = new FbConnection(connectionString))
-            {
-                conexao.Open();
-                const string query = @"
+            using var conexao = new FbConnection(connectionString);
+            conexao.Open();
+            const string query = @"
                 SELECT 
                     P.idProduto, 
                     P.nome, 
@@ -51,15 +50,10 @@ namespace CadastroDeProdutosView.Features.Produto.Views
                 FROM PRODUTO P
                 WHERE P.ativo = @ativo";
 
-                using (var comando = new FbCommand(query, conexao))
-                {
-                    comando.Parameters.AddWithValue("@ativo", mostrarAtivos ? 1 : 0);
-                    using (var dataAdapter = new FbDataAdapter(comando))
-                    {
-                        dataAdapter.Fill(tabelaDados);
-                    }
-                }
-            }
+            using var comando = new FbCommand(query, conexao);
+            comando.Parameters.AddWithValue("@ativo", mostrarAtivos ? 1 : 0);
+            using var dataAdapter = new FbDataAdapter(comando);
+            dataAdapter.Fill(tabelaDados);
 
             return tabelaDados;
         }
@@ -105,16 +99,12 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
         private static void ExcluirProduto(int idProduto)
         {
-            using (var conexao = new FbConnection(connectionString))
-            {
-                conexao.Open();
-                const string updateProductQuery = "UPDATE PRODUTO SET ativo = 0 WHERE idProduto = @idProduto";
-                using (var command = new FbCommand(updateProductQuery, conexao))
-                {
-                    command.Parameters.AddWithValue("@idProduto", idProduto);
-                    command.ExecuteNonQuery();
-                }
-            }
+            using var conexao = new FbConnection(connectionString);
+            conexao.Open();
+            const string updateProductQuery = "UPDATE PRODUTO SET ativo = 0 WHERE idProduto = @idProduto";
+            using var command = new FbCommand(updateProductQuery, conexao);
+            command.Parameters.AddWithValue("@idProduto", idProduto);
+            command.ExecuteNonQuery();
         }
 
         private static void ReativarProduto(int idProduto)

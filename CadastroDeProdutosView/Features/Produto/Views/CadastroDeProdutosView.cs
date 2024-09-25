@@ -316,11 +316,9 @@ namespace CadastroDeProdutosView.Features.Produto.Views
         {
             foreach (Form form in Application.OpenForms)
             {
-                if (form is PesquisarProdutosView)
-                {
-                    XtraMessageBox.Show("A janela de pesquisa já está aberta", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return; 
-                }
+                if (form is not PesquisarProdutosView) continue;
+                XtraMessageBox.Show("A janela de pesquisa já está aberta", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
             var pesquisarProdutos = new PesquisarProdutosView();
             pesquisarProdutos.ShowDialog();
