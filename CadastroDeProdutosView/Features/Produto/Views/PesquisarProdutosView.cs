@@ -94,7 +94,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             ExcluirProduto(idProduto);
             XtraMessageBox.Show("Produto excluído com sucesso.");
             CarregarBancoDeDados();
-
         }
 
         private static void ExcluirProduto(int idProduto)
@@ -109,16 +108,12 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
         private static void ReativarProduto(int idProduto)
         {
-            using (var conexao = new FbConnection(connectionString))
-            {
-                conexao.Open();
-                const string updateProductQuery = "UPDATE PRODUTO SET ativo = 1 WHERE idProduto = @idProduto";
-                using (var command = new FbCommand(updateProductQuery, conexao))
-                {
-                    command.Parameters.AddWithValue("idProduto", idProduto);
-                    command.ExecuteNonQuery();
-                }
-            }
+            using var conexao = new FbConnection(connectionString);
+            conexao.Open();
+            const string updateProductQuery = "UPDATE PRODUTO SET ativo = 1 WHERE idProduto = @idProduto";
+            using var command = new FbCommand(updateProductQuery, conexao);
+            command.Parameters.AddWithValue("idProduto", idProduto);
+            command.ExecuteNonQuery();
         }
 
         private void DesativarBotoes()
