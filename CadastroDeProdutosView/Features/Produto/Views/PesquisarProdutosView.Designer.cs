@@ -31,8 +31,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PesquisarProdutosView));
-            this.pesquisarLabelControl = new DevExpress.XtraEditors.LabelControl();
-            this.pesquisarTextEdit = new DevExpress.XtraEditors.TextEdit();
             this.pesquisarBehaviorManager = new DevExpress.Utils.Behaviors.BehaviorManager(this.components);
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.pesquisarBarManager = new DevExpress.XtraBars.BarManager(this.components);
@@ -53,39 +51,24 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.pesquisarProdutoButtomItem = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem2 = new DevExpress.XtraBars.BarButtonItem();
+            this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
+            this.searchImgEdit = new DevExpress.XtraEditors.PictureEdit();
+            this.produtosDesativadosToggleSwitchh = new DevExpress.XtraEditors.ToggleSwitch();
             this.pesquisarGridControl = new DevExpress.XtraGrid.GridControl();
             this.pesquisarGridView = new DevExpress.XtraGrid.Views.BandedGrid.AdvBandedGridView();
             this.gridBand1 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
-            this.produtosDesativadosToggleSwitchh = new DevExpress.XtraEditors.ToggleSwitch();
-            this.searchImgEdit = new DevExpress.XtraEditors.PictureEdit();
-            ((System.ComponentModel.ISupportInitialize)(this.pesquisarTextEdit.Properties)).BeginInit();
+            this.pesquisarTextEdit = new DevExpress.XtraEditors.TextEdit();
+            this.pesquisarLabelControl = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.pesquisarBehaviorManager)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pesquisarBarManager)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
+            this.groupControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.searchImgEdit.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.produtosDesativadosToggleSwitchh.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pesquisarGridControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pesquisarGridView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.produtosDesativadosToggleSwitchh.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.searchImgEdit.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pesquisarTextEdit.Properties)).BeginInit();
             this.SuspendLayout();
-            // 
-            // pesquisarLabelControl
-            // 
-            this.pesquisarLabelControl.Appearance.Font = new System.Drawing.Font("Yu Gothic", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.pesquisarLabelControl.Appearance.Options.UseFont = true;
-            this.pesquisarLabelControl.Location = new System.Drawing.Point(12, 52);
-            this.pesquisarLabelControl.Name = "pesquisarLabelControl";
-            this.pesquisarLabelControl.Size = new System.Drawing.Size(101, 27);
-            this.pesquisarLabelControl.TabIndex = 0;
-            this.pesquisarLabelControl.Text = "Pesquisar";
-            // 
-            // pesquisarTextEdit
-            // 
-            this.pesquisarTextEdit.EditValue = "";
-            this.pesquisarTextEdit.Location = new System.Drawing.Point(12, 85);
-            this.pesquisarTextEdit.Name = "pesquisarTextEdit";
-            this.pesquisarTextEdit.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
-            this.pesquisarTextEdit.Size = new System.Drawing.Size(337, 22);
-            this.pesquisarTextEdit.TabIndex = 1;
-            this.pesquisarTextEdit.EditValueChanged += new System.EventHandler(this.pesquisarTextEdit_EditValueChanged);
             // 
             // barDockControlTop
             // 
@@ -130,6 +113,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.bar.DockCol = 0;
             this.bar.DockRow = 0;
             this.bar.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
+            this.bar.FloatLocation = new System.Drawing.Point(114, 323);
             this.bar.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(this.desativarProdutoButtomItem),
             new DevExpress.XtraBars.LinkPersistInfo(this.reativarProdutoButtomItem),
@@ -164,8 +148,8 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.alterarButtonItem.Border = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
             this.alterarButtonItem.Caption = "ALTERAR";
             this.alterarButtonItem.Id = 12;
-            this.alterarButtonItem.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItem3.ImageOptions.LargeImage")));
-            this.alterarButtonItem.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItem3.ImageOptions.SvgImage")));
+            this.alterarButtonItem.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("alterarButtonItem.ImageOptions.LargeImage")));
+            this.alterarButtonItem.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("alterarButtonItem.ImageOptions.SvgImage")));
             this.alterarButtonItem.Name = "alterarButtonItem";
             this.alterarButtonItem.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
             this.alterarButtonItem.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.alterarButtonItem_ItemClick);
@@ -280,13 +264,68 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.barButtonItem2.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItem2.ImageOptions.LargeImage")));
             this.barButtonItem2.Name = "barButtonItem2";
             // 
+            // groupControl1
+            // 
+            this.groupControl1.Appearance.Font = new System.Drawing.Font("Yu Gothic", 18F, System.Drawing.FontStyle.Bold);
+            this.groupControl1.Appearance.Options.UseFont = true;
+            this.groupControl1.AppearanceCaption.Font = new System.Drawing.Font("Yu Gothic", 18F, System.Drawing.FontStyle.Bold);
+            this.groupControl1.AppearanceCaption.FontStyleDelta = System.Drawing.FontStyle.Bold;
+            this.groupControl1.AppearanceCaption.Options.UseFont = true;
+            this.groupControl1.AppearanceCaption.Options.UseTextOptions = true;
+            this.groupControl1.AppearanceCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.groupControl1.AppearanceCaption.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            this.groupControl1.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
+            this.groupControl1.CaptionLocation = DevExpress.Utils.Locations.Top;
+            this.groupControl1.Controls.Add(this.searchImgEdit);
+            this.groupControl1.Controls.Add(this.produtosDesativadosToggleSwitchh);
+            this.groupControl1.Controls.Add(this.pesquisarGridControl);
+            this.groupControl1.Controls.Add(this.pesquisarTextEdit);
+            this.groupControl1.Controls.Add(this.pesquisarLabelControl);
+            this.groupControl1.Cursor = System.Windows.Forms.Cursors.Default;
+            this.groupControl1.GroupStyle = DevExpress.Utils.GroupStyle.Card;
+            this.groupControl1.Location = new System.Drawing.Point(0, 29);
+            this.groupControl1.Name = "groupControl1";
+            this.groupControl1.Size = new System.Drawing.Size(800, 421);
+            this.groupControl1.TabIndex = 31;
+            // 
+            // searchImgEdit
+            // 
+            this.searchImgEdit.EditValue = ((object)(resources.GetObject("searchImgEdit.EditValue")));
+            this.searchImgEdit.Location = new System.Drawing.Point(107, 11);
+            this.searchImgEdit.MenuManager = this.pesquisarBarManager;
+            this.searchImgEdit.Name = "searchImgEdit";
+            this.searchImgEdit.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
+            this.searchImgEdit.Properties.Appearance.ForeColor = System.Drawing.Color.Transparent;
+            this.searchImgEdit.Properties.Appearance.Options.UseBackColor = true;
+            this.searchImgEdit.Properties.Appearance.Options.UseForeColor = true;
+            this.searchImgEdit.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.searchImgEdit.Properties.ShowCameraMenuItem = DevExpress.XtraEditors.Controls.CameraMenuItemVisibility.Auto;
+            this.searchImgEdit.Size = new System.Drawing.Size(18, 26);
+            this.searchImgEdit.TabIndex = 25;
+            // 
+            // produtosDesativadosToggleSwitchh
+            // 
+            this.produtosDesativadosToggleSwitchh.Location = new System.Drawing.Point(5, 75);
+            this.produtosDesativadosToggleSwitchh.MenuManager = this.pesquisarBarManager;
+            this.produtosDesativadosToggleSwitchh.Name = "produtosDesativadosToggleSwitchh";
+            this.produtosDesativadosToggleSwitchh.Properties.Appearance.Font = new System.Drawing.Font("Yu Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.produtosDesativadosToggleSwitchh.Properties.Appearance.Options.UseFont = true;
+            this.produtosDesativadosToggleSwitchh.Properties.FullFocusRect = true;
+            this.produtosDesativadosToggleSwitchh.Properties.GlyphAlignment = DevExpress.Utils.HorzAlignment.Default;
+            this.produtosDesativadosToggleSwitchh.Properties.LookAndFeel.Style = DevExpress.LookAndFeel.LookAndFeelStyle.Style3D;
+            this.produtosDesativadosToggleSwitchh.Properties.OffText = " Ativos";
+            this.produtosDesativadosToggleSwitchh.Properties.OnText = " Inativos";
+            this.produtosDesativadosToggleSwitchh.Size = new System.Drawing.Size(160, 31);
+            this.produtosDesativadosToggleSwitchh.TabIndex = 24;
+            this.produtosDesativadosToggleSwitchh.Toggled += new System.EventHandler(this.produtosDesativadosToggleSwitchh_Toggled_1);
+            // 
             // pesquisarGridControl
             // 
-            this.pesquisarGridControl.Location = new System.Drawing.Point(0, 179);
+            this.pesquisarGridControl.Location = new System.Drawing.Point(0, 122);
             this.pesquisarGridControl.MainView = this.pesquisarGridView;
             this.pesquisarGridControl.Name = "pesquisarGridControl";
-            this.pesquisarGridControl.Size = new System.Drawing.Size(800, 274);
-            this.pesquisarGridControl.TabIndex = 8;
+            this.pesquisarGridControl.Size = new System.Drawing.Size(800, 299);
+            this.pesquisarGridControl.TabIndex = 23;
             this.pesquisarGridControl.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.pesquisarGridView});
             this.pesquisarGridControl.Click += new System.EventHandler(this.pesquisarGridControl_Click);
@@ -313,45 +352,32 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.gridBand1.Name = "gridBand1";
             this.gridBand1.VisibleIndex = 0;
             // 
-            // produtosDesativadosToggleSwitchh
+            // pesquisarTextEdit
             // 
-            this.produtosDesativadosToggleSwitchh.Location = new System.Drawing.Point(10, 149);
-            this.produtosDesativadosToggleSwitchh.MenuManager = this.pesquisarBarManager;
-            this.produtosDesativadosToggleSwitchh.Name = "produtosDesativadosToggleSwitchh";
-            this.produtosDesativadosToggleSwitchh.Properties.FullFocusRect = true;
-            this.produtosDesativadosToggleSwitchh.Properties.GlyphAlignment = DevExpress.Utils.HorzAlignment.Default;
-            this.produtosDesativadosToggleSwitchh.Properties.LookAndFeel.Style = DevExpress.LookAndFeel.LookAndFeelStyle.Style3D;
-            this.produtosDesativadosToggleSwitchh.Properties.OffText = "Inativos";
-            this.produtosDesativadosToggleSwitchh.Properties.OnText = "Ativos";
-            this.produtosDesativadosToggleSwitchh.Size = new System.Drawing.Size(72, 24);
-            this.produtosDesativadosToggleSwitchh.TabIndex = 14;
-            this.produtosDesativadosToggleSwitchh.Toggled += new System.EventHandler(this.produtosDesativadosToggleSwitchh_Toggled);
+            this.pesquisarTextEdit.EditValue = "";
+            this.pesquisarTextEdit.Location = new System.Drawing.Point(0, 38);
+            this.pesquisarTextEdit.Name = "pesquisarTextEdit";
+            this.pesquisarTextEdit.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
+            this.pesquisarTextEdit.Size = new System.Drawing.Size(337, 22);
+            this.pesquisarTextEdit.TabIndex = 22;
+            this.pesquisarTextEdit.EditValueChanged += new System.EventHandler(this.pesquisarTextEdit_EditValueChanged);
             // 
-            // searchImgEdit
+            // pesquisarLabelControl
             // 
-            this.searchImgEdit.EditValue = ((object)(resources.GetObject("searchImgEdit.EditValue")));
-            this.searchImgEdit.Location = new System.Drawing.Point(119, 53);
-            this.searchImgEdit.MenuManager = this.pesquisarBarManager;
-            this.searchImgEdit.Name = "searchImgEdit";
-            this.searchImgEdit.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
-            this.searchImgEdit.Properties.Appearance.ForeColor = System.Drawing.Color.Transparent;
-            this.searchImgEdit.Properties.Appearance.Options.UseBackColor = true;
-            this.searchImgEdit.Properties.Appearance.Options.UseForeColor = true;
-            this.searchImgEdit.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-            this.searchImgEdit.Properties.ShowCameraMenuItem = DevExpress.XtraEditors.Controls.CameraMenuItemVisibility.Auto;
-            this.searchImgEdit.Size = new System.Drawing.Size(18, 26);
-            this.searchImgEdit.TabIndex = 20;
+            this.pesquisarLabelControl.Appearance.Font = new System.Drawing.Font("Yu Gothic", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.pesquisarLabelControl.Appearance.Options.UseFont = true;
+            this.pesquisarLabelControl.Location = new System.Drawing.Point(0, 11);
+            this.pesquisarLabelControl.Name = "pesquisarLabelControl";
+            this.pesquisarLabelControl.Size = new System.Drawing.Size(101, 27);
+            this.pesquisarLabelControl.TabIndex = 21;
+            this.pesquisarLabelControl.Text = "Pesquisar";
             // 
             // PesquisarProdutosView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.searchImgEdit);
-            this.Controls.Add(this.produtosDesativadosToggleSwitchh);
-            this.Controls.Add(this.pesquisarGridControl);
-            this.Controls.Add(this.pesquisarTextEdit);
-            this.Controls.Add(this.pesquisarLabelControl);
+            this.Controls.Add(this.groupControl1);
             this.Controls.Add(this.barDockControlTop);
             this.Controls.Add(this.barDockControlLeft);
             this.Controls.Add(this.barDockControlRight);
@@ -359,22 +385,22 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.Controls.Add(this.barDockControl1);
             this.Name = "PesquisarProdutosView";
             this.Text = "PesquisarProdutosView";
-            ((System.ComponentModel.ISupportInitialize)(this.pesquisarTextEdit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pesquisarBehaviorManager)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pesquisarBarManager)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).EndInit();
+            this.groupControl1.ResumeLayout(false);
+            this.groupControl1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.searchImgEdit.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.produtosDesativadosToggleSwitchh.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pesquisarGridControl)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pesquisarGridView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.produtosDesativadosToggleSwitchh.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.searchImgEdit.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pesquisarTextEdit.Properties)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private DevExpress.XtraEditors.LabelControl pesquisarLabelControl;
-        private DevExpress.XtraEditors.TextEdit pesquisarTextEdit;
         private DevExpress.XtraBars.BarDockControl barDockControlTop;
         private DevExpress.XtraBars.BarManager pesquisarBarManager;
         private DevExpress.XtraBars.Bar bar;
@@ -394,11 +420,14 @@ namespace CadastroDeProdutosView.Features.Produto.Views
         private DevExpress.XtraBars.BarButtonItem barButtonItem1;
         private DevExpress.XtraBars.BarButtonItem barButtonItem2;
         private DevExpress.Utils.Behaviors.BehaviorManager pesquisarBehaviorManager;
+        private DevExpress.XtraBars.BarButtonItem reativarProdutoButtomItem;
+        private DevExpress.XtraEditors.GroupControl groupControl1;
+        private DevExpress.XtraEditors.PictureEdit searchImgEdit;
+        private DevExpress.XtraEditors.ToggleSwitch produtosDesativadosToggleSwitchh;
         private DevExpress.XtraGrid.GridControl pesquisarGridControl;
         private DevExpress.XtraGrid.Views.BandedGrid.AdvBandedGridView pesquisarGridView;
         private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand1;
-        private DevExpress.XtraBars.BarButtonItem reativarProdutoButtomItem;
-        private DevExpress.XtraEditors.ToggleSwitch produtosDesativadosToggleSwitchh;
-        private DevExpress.XtraEditors.PictureEdit searchImgEdit;
+        private DevExpress.XtraEditors.TextEdit pesquisarTextEdit;
+        private DevExpress.XtraEditors.LabelControl pesquisarLabelControl;
     }
 }

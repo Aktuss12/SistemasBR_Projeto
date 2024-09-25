@@ -4,20 +4,72 @@ using DevExpress.XtraEditors;
 using FirebirdSql.Data.FirebirdClient;
 using System;
 using System.Globalization;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace CadastroDeProdutosView.Features.Produto.Views
 {
     public partial class CadastroDeProdutosView : Form
     {
+        private int? idProduto;
         private bool isValidating;
         private const string connectionString = @"User ID=SYSDBA;Password=masterkey;Database=C:\Users\admin\Documents\BANCODEDADOSPRODUTOS.FDB;DataSource=localhost;Port=3050;Dialect=3;Charset=NONE;";
 
 
-        public CadastroDeProdutosView()
+        public CadastroDeProdutosView(int produtoId)
         {
             InitializeComponent();
             InitializeLookUpEdit();
+
+            idProduto = produtoId;
+            if (idProduto.HasValue)
+            {
+                CarregarProduto(idProduto.Value);
+            }
+        }
+
+        private void CarregarProduto(int idProduto)
+        {
+            try
+            {
+                using var connection = new FbConnection(connectionString);
+                connection.Open();
+
+                const string query = @"
+                    SELECT P.*, I.*
+                    FROM PRODUTO P
+                    LEFT JOIN INFORMACOESFISCAIS I ON P.idProduto = I.idProduto
+                    WHERE P.idProduto = @idProduto";
+
+                using var command = new FbCommand(query, connection);
+                command.Parameters.AddWithValue("@idProduto", idProduto);
+
+                using var reader = command.ExecuteReader();
+                if (reader.Read())
+                {
+                    nomeTextEdit.Text = reader["Nome"].ToString();
+                    categoriaDeProdutosLookUpEdit.EditValue = reader["Categoria"];
+                    fornecedorTextEdit.Text = reader["Fornecedor"].ToString();
+                    codigodebarrasTextEdit.Text = reader["CodigoDeBarras"].ToString();
+                    unidadeDeMedidaLookUpEdit.EditValue = reader["UnidadeDeMedida"];
+                    estoqueTextEdit.Text = reader["Estoque"].ToString();
+                    marcaLookUpEdit.EditValue = reader["Marca"];
+                    custoTextEdit.Text = reader["Custo"].ToString();
+                    markupTextEdit.Text = reader["Markup"].ToString();
+                    precoVendaTextEdit.Text = reader["PrecoDaVenda"].ToString();
+
+                    origemDaMercadoriaLookUpEdit.EditValue = reader["origemDaMercadoria"];
+                    situacaoTributariaLookUpEdit.EditValue = reader["situacaoTributaria"];
+                    naturezaDaOperacaoLookUpEdit.EditValue = reader["naturezaDaOperacao"];
+                    ncmTextEdit.Text = reader["ncm"].ToString();
+                    aliquotaDeIcmsTextEdit.Text = reader["aliquotaDeIcms"].ToString();
+                    reducaoDeCalculoIcmsTextEdit.Text = reader["reducaoDeCalculo"].ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show($"Erro ao carregar o produto: {ex.Message}");
+            }
         }
 
         private void InitializeLookUpEdit()
@@ -314,9 +366,8 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
         private void pesquisarProdutoButtomItem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            foreach (Form form in Application.OpenForms)
+            if (Application.OpenForms.Cast<Form>().Any(form => form is PesquisarProdutosView))
             {
-                if (form is not PesquisarProdutosView) continue;
                 XtraMessageBox.Show("A janela de pesquisa já está aberta", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }

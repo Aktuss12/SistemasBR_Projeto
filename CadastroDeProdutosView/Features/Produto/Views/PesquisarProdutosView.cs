@@ -13,6 +13,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             @"User ID=SYSDBA;Password=masterkey;Database=C:\Users\admin\Documents\BANCODEDADOSPRODUTOS.FDB;DataSource=localhost;Port=3050;Dialect=3;Charset=NONE;";
 
         private bool mostrarAtivos = true;
+        public int? SelecionadorIdProduto { get; private set; }
 
         public PesquisarProdutosView()
         {
@@ -122,7 +123,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             reativarProdutoButtomItem.Enabled = produtosDesativadosToggleSwitchh.IsOn;
         }
 
-        public void produtosDesativadosToggleSwitchh_Toggled(object sender, EventArgs e)
+        public void produtosDesativadosToggleSwitchh_Toggled_1(object sender, EventArgs e)
         {
             mostrarAtivos = !mostrarAtivos;
             DesativarBotoes();
@@ -170,10 +171,34 @@ namespace CadastroDeProdutosView.Features.Produto.Views
         }
         private void alterarButtonItem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            if (pesquisarGridControl.MainView is not GridView gridview)
+            {
+                XtraMessageBox.Show("Por favor, Selecione a aba de pesquisa");
+                return;
+            }
 
+            var focusedRowHandle = gridview.FocusedRowHandle;
+            if (focusedRowHandle < 0)
+            {
+                XtraMessageBox.Show("Selecione um produto para alterar");
+                return;
+            }
 
-            var cadastroDeProdutos = new CadastroDeProdutosView();
-            cadastroDeProdutos.ShowDialog();
+            var colunaSelecionada = gridview.GetDataRow(focusedRowHandle);
+            if (colunaSelecionada == null)
+            {
+                XtraMessageBox.Show("Erro ao obter o produto selecionado");
+            }
+
+            if (colunaSelecionada != null) SelecionadorIdProduto = Convert.ToInt32(colunaSelecionada["idProduto"]);
+
+            if (SelecionadorIdProduto != null)
+            {
+                var cadastroDeProdutos = new CadastroDeProdutosView(SelecionadorIdProduto.Value);
+                cadastroDeProdutos.ShowDialog();
+            }
+
+            CarregarBancoDeDados();
         }
     }
 }
