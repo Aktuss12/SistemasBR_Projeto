@@ -169,6 +169,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
                 CarregarBancoDeDados();
             }
         }
+
         private void alterarButtonItem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             if (pesquisarGridControl.MainView is not GridView gridview)

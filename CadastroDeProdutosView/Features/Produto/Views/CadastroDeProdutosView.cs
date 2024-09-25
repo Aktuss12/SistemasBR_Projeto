@@ -6,7 +6,6 @@ using System;
 using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
-using DevExpress.Utils.Extensions;
 
 namespace CadastroDeProdutosView.Features.Produto.Views
 {
@@ -92,7 +91,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
             if (texto.Length == 13)
             {
-                var valido = ValidarCodigoDeBarrasEAN13(texto);
+                var valido = CalculadorDeCodigoDeBarras.ValidarCodigoDeBarrasEAN13(texto);
                 AtualizarEstiloLabelCodigoBarras(valido);
                 if (!valido)
                 {
@@ -122,33 +121,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             }
         }
 
-        private bool ValidarCodigoDeBarrasEAN13(string codigoDeBarras)
-        {
-            if (codigoDeBarras.Length != 13 || !long.TryParse(codigoDeBarras, out _))
-                return false;
-
-            var numeros = new int[12];
-            for (var i = 0; i < 12; i++)
-            {
-                numeros[i] = int.Parse(codigoDeBarras[i].ToString());
-            }
-
-            var somaPar = 0;
-            var somaImpar = 0;
-            for (var i = 0; i < 12; i++)
-            {
-                if (i % 2 == 0)
-                    somaImpar += numeros[i];
-                else
-                    somaPar += numeros[i];
-            }
-
-            var somaTotal = somaImpar + (somaPar * 3);
-            var digitoVerificadorCalculado = (10 - (somaTotal % 10)) % 10;
-            var digitoVerificadorInformado = int.Parse(codigoDeBarras[12].ToString());
-
-            return digitoVerificadorCalculado == digitoVerificadorInformado;
-        }
 
         private void LimparLookUpEdits()
         {
@@ -219,15 +191,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
                 XtraMessageBox.Show("Todos os campos obrigatórios devem ser preenchidos!");
                 return;
             }
-
-            if (!string.IsNullOrWhiteSpace(codigodebarrasTextEdit.Text) &&
-                !ValidarCodigoDeBarrasEAN13(codigodebarrasTextEdit.Text))
-            {
-                XtraMessageBox.Show("O campo código de barras não é um EAN-13 válido. Por favor, verifique e tente novamente.");
-                AtualizarEstiloLabelCodigoBarras(false);
-                return;
-            }
-
             AtualizarEstiloLabelCodigoBarras(true);
 
             try
@@ -298,17 +261,10 @@ namespace CadastroDeProdutosView.Features.Produto.Views
                         informacoesCommand.ExecuteNonQuery();
                     }
 
-                    if (idProduto < 0)
-                    {
-                        XtraMessageBox.Show("Produto cadastrado com sucesso");
-                        LimparTextEdits();
-                        LimparLookUpEdits();
-                        transaction.Commit();
-                    }
-                    else
-                    {   
-                        CarregarProduto(idProduto);
-                    }
+                    XtraMessageBox.Show("Produto cadastrado com sucesso");
+                    LimparTextEdits();
+                    LimparLookUpEdits();
+                    transaction.Commit();
                 }
                 catch (Exception ex)
                 {
