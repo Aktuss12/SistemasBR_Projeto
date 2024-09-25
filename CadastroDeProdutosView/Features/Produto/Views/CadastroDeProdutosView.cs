@@ -30,7 +30,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             naturezaDaOperacaoLookUpEdit.PreencherLookUpEditComOValorDoEnum<NaturezaDaOperacaoView.NaturezaDaOperacao>();
         }
 
-        private void textEdit2_EditValueChanged(object sender, EventArgs e)
+        private void codigodebarrasTextEdit_EditValueChanged(object sender, EventArgs e)
         {
             if (isValidating) return;
 
@@ -127,7 +127,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             fornecedorTextEdit.Properties.MaxLength = 100;
         }
 
-        private void estoqueTextEdit_EditValueChanged(object sender, EventArgs e)
+        private void estoqueTextEdit_EditValueChanged_1(object sender, EventArgs e)
         {
             estoqueTextEdit.Properties.MaxLength = 12;
         }
@@ -146,7 +146,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             isValidating = false;
         }
 
-        private void markupTextEdit_EditValueChanged(object sender, EventArgs e)
+        private void markupTextEdit_EditValueChanged_1(object sender, EventArgs e)
         {
             if (isValidating) return;
 
@@ -322,6 +322,11 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             }
             var pesquisarProdutos = new PesquisarProdutosView();
             pesquisarProdutos.ShowDialog();
+        }
+
+        private void produtosGroupControl_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

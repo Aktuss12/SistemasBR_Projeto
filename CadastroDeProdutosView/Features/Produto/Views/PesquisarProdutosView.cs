@@ -64,7 +64,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
         private void desativarProdutoButtomItem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            if (!(pesquisarGridControl.MainView is GridView gridView))
+            if (pesquisarGridControl.MainView is not GridView gridView)
             {
                 XtraMessageBox.Show("O grid não é um GridView.");
                 return;
@@ -138,7 +138,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
         private void reativarProdutoButtomItem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            if (!(pesquisarGridControl.MainView is GridView gridView))
+            if (pesquisarGridControl.MainView is not GridView gridView)
             {
                 XtraMessageBox.Show("O produto não foi selecionado");
                 return;
@@ -170,6 +170,8 @@ namespace CadastroDeProdutosView.Features.Produto.Views
         }
         private void alterarButtonItem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+
+
             var cadastroDeProdutos = new CadastroDeProdutosView();
             cadastroDeProdutos.ShowDialog();
         }
