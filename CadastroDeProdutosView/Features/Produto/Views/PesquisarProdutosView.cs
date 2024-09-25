@@ -120,10 +120,10 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             using (var conexao = new FbConnection(connectionString))
             {
                 conexao.Open();
-                const string updateProductQuery = "UPDATE PRODUTO SET = 1 WHERE idProduto = @idProduto";
-                using (var command = new FbCommand(updateProductQuery))
+                const string updateProductQuery = "UPDATE PRODUTO SET ativo = 1 WHERE idProduto = @idProduto";
+                using (var command = new FbCommand(updateProductQuery, conexao))
                 {
-                    command.Parameters.AddWithValue(@"idProduto", idProduto);
+                    command.Parameters.AddWithValue("idProduto", idProduto);
                     command.ExecuteNonQuery();
                 }
             }
