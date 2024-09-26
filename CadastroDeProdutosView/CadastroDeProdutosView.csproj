@@ -36,6 +36,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DevExpress.Data.v18.1, Version=18.1.18.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Images.v18.1, Version=18.1.18.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Printing.v18.1.Core, Version=18.1.18.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Sparkline.v18.1.Core, Version=18.1.18.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Utils.v18.1, Version=18.1.18.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
@@ -74,6 +75,7 @@
   <ItemGroup>
     <Compile Include="Features\Commons\CalculadorDeCodigoDeBarras.cs" />
     <Compile Include="Features\Commons\CalculoDeCustoEMarkupParaPrecoVenda.cs" />
+    <Compile Include="Features\Commons\GeradorDeCodigoDeBarras.cs" />
     <Compile Include="Features\Commons\LimparLookUpEditETextEdit.cs" />
     <Compile Include="Features\Commons\ValidarCamposObrigatorios.cs" />
     <Compile Include="Features\Produto\Enums\CategoriaDeProdutos.cs" />
