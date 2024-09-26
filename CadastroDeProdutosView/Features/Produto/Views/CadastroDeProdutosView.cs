@@ -19,6 +19,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
         {
             InitializeComponent();
             InitializeLookUpEdit();
+            codigodebarrasTextEdit_EditValueChanged(null, null);
 
             this.produtoId = produtoId; 
 
@@ -335,21 +336,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
         private void codigodebarrasTextEdit_EditValueChanged(object sender, EventArgs e)
         {
-            codigodebarrasTextEdit.Properties.MaxLength = 13;
-            var texto = codigodebarrasTextEdit.Text;
-
-            if (texto.Length == 13)
-            {
-                var valido = CalculadorDeCodigoDeBarras.ValidarCodigoDeBarrasEAN13(texto);
-                AtualizarEstiloLabelCodigoBarras(valido);
-                if (valido) return;
-                XtraMessageBox.Show("Código de Barras EAN-13 inválido. Verifique os dados inseridos e tente novamente.");
-                codigodebarrasTextEdit.Text = string.Empty;
-            }
-            else
-            {
-                AtualizarEstiloLabelCodigoBarras(true);
-            }
+            codigodebarrasTextEdit.Enabled = false;
         }
 
         private void custoTextEdit_EditValueChanged(object sender, EventArgs e)

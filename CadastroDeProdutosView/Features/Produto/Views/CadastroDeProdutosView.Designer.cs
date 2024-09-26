@@ -168,6 +168,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             // 
             this.produtosGroupControl.Appearance.Font = new System.Drawing.Font("Yu Gothic", 18F, System.Drawing.FontStyle.Bold);
             this.produtosGroupControl.Appearance.Options.UseFont = true;
+            this.produtosGroupControl.AppearanceCaption.BackColor2 = System.Drawing.Color.White;
             this.produtosGroupControl.AppearanceCaption.Font = new System.Drawing.Font("Yu Gothic", 18F, System.Drawing.FontStyle.Bold);
             this.produtosGroupControl.AppearanceCaption.FontStyleDelta = System.Drawing.FontStyle.Bold;
             this.produtosGroupControl.AppearanceCaption.Options.UseFont = true;
@@ -507,6 +508,11 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.codigodebarrasTextEdit.Location = new System.Drawing.Point(441, 80);
             this.codigodebarrasTextEdit.Margin = new System.Windows.Forms.Padding(2);
             this.codigodebarrasTextEdit.Name = "codigodebarrasTextEdit";
+            this.codigodebarrasTextEdit.Properties.AppearanceDisabled.BackColor = System.Drawing.Color.White;
+            this.codigodebarrasTextEdit.Properties.AppearanceDisabled.BackColor2 = System.Drawing.Color.White;
+            this.codigodebarrasTextEdit.Properties.AppearanceDisabled.ForeColor = System.Drawing.Color.Black;
+            this.codigodebarrasTextEdit.Properties.AppearanceDisabled.Options.UseBackColor = true;
+            this.codigodebarrasTextEdit.Properties.AppearanceDisabled.Options.UseForeColor = true;
             this.codigodebarrasTextEdit.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
             this.codigodebarrasTextEdit.Properties.Mask.EditMask = "d";
             this.codigodebarrasTextEdit.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
