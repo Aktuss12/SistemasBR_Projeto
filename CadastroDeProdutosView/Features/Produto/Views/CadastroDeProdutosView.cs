@@ -11,6 +11,8 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 {
     public partial class CadastroDeProdutosView : Form
     {
+        private const string connectionString =
+            @"User ID=SYSDBA;Password=masterkey;Database=C:\Users\admin\Documents\BANCODEDADOSPRODUTOS.FDB;DataSource=localhost;Port=3050;Dialect=3;Charset=NONE;";
 
         public CadastroDeProdutosView(int produtoId)
         {
@@ -20,7 +22,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             int? idProduto = produtoId;
             CarregarProduto(idProduto.Value);
         }
-        
+
         // Metodo para utilizar a classe manipuladora de EnumService
         private void InitializeLookUpEdit()
         {
@@ -52,10 +54,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             situacaoTributariaLookUpEdit.LimparLookUpEdit();
             naturezaDaOperacaoLookUpEdit.LimparLookUpEdit();
         }
-
-        private bool isValidating;
-        private const string connectionString =
-            @"User ID=SYSDBA;Password=masterkey;Database=C:\Users\admin\Documents\BANCODEDADOSPRODUTOS.FDB;DataSource=localhost;Port=3050;Dialect=3;Charset=NONE;";
 
         private void CarregarProduto(int idProduto)
         {
@@ -99,11 +97,17 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             }
         }
 
+        private void AtualizarEstiloLabelCodigoBarras(bool valido)
+        {
+            codigodebarrasLabelControl.Text = valido
+                ? "Codigo de Barras: "
+                : "Codigo de Barras: <color=red>*</color>";
+
+            codigodebarrasLabelControl.AllowHtmlString = !valido;
+        }
+
         private void codigodebarrasTextEdit_EditValueChanged(object sender, EventArgs e)
         {
-            if (isValidating) return;
-
-            isValidating = true;
             codigodebarrasTextEdit.Properties.MaxLength = 13;
             var texto = codigodebarrasTextEdit.Text;
 
@@ -111,68 +115,32 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             {
                 var valido = CalculadorDeCodigoDeBarras.ValidarCodigoDeBarrasEAN13(texto);
                 AtualizarEstiloLabelCodigoBarras(valido);
-                if (!valido)
-                {
-                    XtraMessageBox.Show("Código de Barras EAN-13 inválido. Verifique os dados inseridos e tente novamente.");
-                    codigodebarrasTextEdit.Text = string.Empty;
-                }
+                if (valido) return;
+                XtraMessageBox.Show("Código de Barras EAN-13 inválido. Verifique os dados inseridos e tente novamente.");
+                codigodebarrasTextEdit.Text = string.Empty;
             }
             else
             {
                 AtualizarEstiloLabelCodigoBarras(true);
             }
-
-            isValidating = false;
-        }
-
-        private void fornecedorTextEdit_EditValueChanged(object sender, EventArgs e)
-        {
-            fornecedorTextEdit.Properties.MaxLength = 100;
-        }
-
-        private void estoqueTextEdit_EditValueChanged_1(object sender, EventArgs e)
-        {
-            estoqueTextEdit.Properties.MaxLength = 12;
-        }
-
-        private void precoVendaTextEdit_EditValueChanged(object sender, EventArgs e)
-        {
-            precoVendaTextEdit.Properties.MaxLength = 16;
         }
 
         private void custoTextEdit_EditValueChanged(object sender, EventArgs e)
         {
-            if (isValidating) return;
-
-            isValidating = true;
-
             if (decimal.TryParse(custoTextEdit.Text, out var custo) &&
                 decimal.TryParse(markupTextEdit.Text, out var markup))
             {
                 CalculoDeCustoEMarkupParaPrecoVenda.CalcularPrecoVenda(custo, markup, precoVendaTextEdit);
             }
-
-            isValidating = false;
         }
 
         private void markupTextEdit_EditValueChanged_1(object sender, EventArgs e)
         {
-            if (isValidating) return;
-
-            isValidating = true;
-
             if (decimal.TryParse(custoTextEdit.Text, out var custo) &&
                 decimal.TryParse(markupTextEdit.Text, out var markup))
             {
                 CalculoDeCustoEMarkupParaPrecoVenda.CalcularPrecoVenda(custo, markup, precoVendaTextEdit);
             }
-
-            isValidating = false;
-        }
-
-        private void ncmTextEdit_EditValueChanged(object sender, EventArgs e)
-        {
-            ncmTextEdit.Properties.MaxLength = 8;
         }
 
         private void salvarButtomItem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -277,15 +245,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             }
         }
 
-        private void AtualizarEstiloLabelCodigoBarras(bool valido)
-        {
-            codigodebarrasLabelControl.Text = valido
-                ? "Codigo de Barras: "
-                : "Codigo de Barras: <color=red>*</color>";
-
-            codigodebarrasLabelControl.AllowHtmlString = !valido;
-        }
-
+        // Abertura do form de pesquisar os produtos cadastrados, com validação de não abrir outro cadastro caso ja tenha aberto pelo alterar
         private void pesquisarProdutoButtomItem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             if (Application.OpenForms.Cast<Form>().Any(form => form is PesquisarProdutosView))
@@ -295,6 +255,24 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             }
             var pesquisarProdutos = new PesquisarProdutosView();
             pesquisarProdutos.ShowDialog();
+        }
+        private void fornecedorTextEdit_EditValueChanged(object sender, EventArgs e)
+        {
+            fornecedorTextEdit.Properties.MaxLength = 100;
+        }
+
+        private void estoqueTextEdit_EditValueChanged_1(object sender, EventArgs e)
+        {
+            estoqueTextEdit.Properties.MaxLength = 12;
+        }
+
+        private void precoVendaTextEdit_EditValueChanged(object sender, EventArgs e)
+        {
+            precoVendaTextEdit.Properties.MaxLength = 16;
+        }
+        private void ncmTextEdit_EditValueChanged(object sender, EventArgs e)
+        {
+            ncmTextEdit.Properties.MaxLength = 8;
         }
     }
 }

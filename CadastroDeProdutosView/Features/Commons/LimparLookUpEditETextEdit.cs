@@ -1,6 +1,6 @@
 ﻿namespace CadastroDeProdutosView.Features.Commons
 {
-    public static class LimparLookUpEdits
+    public static class LimparLookUpEditETextEdit
     {
         public static void LimparLookUpEdit(this DevExpress.XtraEditors.LookUpEdit lookUpEditNull)
         {

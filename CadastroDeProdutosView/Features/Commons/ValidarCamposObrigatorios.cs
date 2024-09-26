@@ -15,15 +15,15 @@
             DevExpress.XtraEditors.LabelControl categoriaLabelControl)
         {
             var todosCamposPreenchidos = true;
-
             todosCamposPreenchidos &= !string.IsNullOrWhiteSpace(nomeTextEdit.Text);
             todosCamposPreenchidos &= !string.IsNullOrWhiteSpace(estoqueTextEdit.Text);
             todosCamposPreenchidos &= !string.IsNullOrWhiteSpace(precoVendaTextEdit.Text);
             todosCamposPreenchidos &= unidadeDeMedidaLookUpEdit.EditValue != null;
             todosCamposPreenchidos &= categoriaDeProdutosLookUpEdit.EditValue != null;
 
-            nomeLabelControl.Text =
-                string.IsNullOrWhiteSpace(nomeTextEdit.Text) ? "Nome: <color=red>*</color>" : "Nome: *";
+            nomeLabelControl.Text = string.IsNullOrWhiteSpace(nomeTextEdit.Text)
+                ? "Nome: <color=red>*</color>"
+                : "Nome: *";
             nomeLabelControl.AllowHtmlString = string.IsNullOrWhiteSpace(nomeTextEdit.Text);
 
             estoqueLabelControl.Text = string.IsNullOrWhiteSpace(estoqueTextEdit.Text)
