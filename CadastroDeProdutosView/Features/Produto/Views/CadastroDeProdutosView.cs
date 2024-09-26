@@ -20,6 +20,38 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             int? idProduto = produtoId;
             CarregarProduto(idProduto.Value);
         }
+        
+        // Metodo para utilizar a classe manipuladora de EnumService
+        private void InitializeLookUpEdit()
+        {
+            unidadeDeMedidaLookUpEdit.PreencherLookUpEditComOValorDoEnum<UnidadeDeMedidaView.UnidadeDeMedida>();
+            categoriaDeProdutosLookUpEdit.PreencherLookUpEditComOValorDoEnum<CategoriaDoProdutoView.CategoriaDeProdutos>();
+            marcaLookUpEdit.PreencherLookUpEditComOValorDoEnum<MarcaDoProdutoView.MarcaDoProduto>();
+            origemDaMercadoriaLookUpEdit.PreencherLookUpEditComOValorDoEnum<OrigemDaMercadoriaView.OrigemDaMercadoria>();
+            situacaoTributariaLookUpEdit.PreencherLookUpEditComOValorDoEnum<SituacaoTributariaView.SituacaoTributaria>();
+            naturezaDaOperacaoLookUpEdit.PreencherLookUpEditComOValorDoEnum<NaturezaDaOperacaoView.NaturezaDaOperacao>();
+        }
+
+        // Metodo para limpar as LookUpEdits e TextEdits
+        private void LimparLookUpEditsETextEdits()
+        {
+            nomeTextEdit.LimparTextEdit();
+            fornecedorTextEdit.LimparTextEdit();
+            codigodebarrasTextEdit.LimparTextEdit();
+            estoqueTextEdit.LimparTextEdit();
+            custoTextEdit.LimparTextEdit();
+            markupTextEdit.LimparTextEdit();
+            precoVendaTextEdit.LimparTextEdit();
+            ncmTextEdit.LimparTextEdit();
+            aliquotaDeIcmsTextEdit.LimparTextEdit();
+            reducaoDeCalculoIcmsTextEdit.LimparTextEdit();
+            categoriaDeProdutosLookUpEdit.LimparLookUpEdit();
+            unidadeDeMedidaLookUpEdit.LimparLookUpEdit();
+            marcaLookUpEdit.LimparLookUpEdit();
+            origemDaMercadoriaLookUpEdit.LimparLookUpEdit();
+            situacaoTributariaLookUpEdit.LimparLookUpEdit();
+            naturezaDaOperacaoLookUpEdit.LimparLookUpEdit();
+        }
 
         private bool isValidating;
         private const string connectionString =
@@ -67,16 +99,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             }
         }
 
-        private void InitializeLookUpEdit()
-        {
-            unidadeDeMedidaLookUpEdit.PreencherLookUpEditComOValorDoEnum<UnidadeDeMedidaView.UnidadeDeMedida>();
-            categoriaDeProdutosLookUpEdit.PreencherLookUpEditComOValorDoEnum<CategoriaDoProdutoView.CategoriaDeProdutos>();
-            marcaLookUpEdit.PreencherLookUpEditComOValorDoEnum<MarcaDoProdutoView.MarcaDoProduto>();
-            origemDaMercadoriaLookUpEdit.PreencherLookUpEditComOValorDoEnum<OrigemDaMercadoriaView.OrigemDaMercadoria>();
-            situacaoTributariaLookUpEdit.PreencherLookUpEditComOValorDoEnum<SituacaoTributariaView.SituacaoTributaria>();
-            naturezaDaOperacaoLookUpEdit.PreencherLookUpEditComOValorDoEnum<NaturezaDaOperacaoView.NaturezaDaOperacao>();
-        }
-
         private void codigodebarrasTextEdit_EditValueChanged(object sender, EventArgs e)
         {
             if (isValidating) return;
@@ -101,20 +123,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             }
 
             isValidating = false;
-        }
-
-        private void LimparTextEdits()
-        {
-            nomeTextEdit.Text = null;
-            fornecedorTextEdit.Text = null;
-            codigodebarrasTextEdit.Text = null;
-            estoqueTextEdit.Text = null;
-            precoVendaTextEdit.Text = null;
-            custoTextEdit.Text = null;
-            markupTextEdit.Text = null;
-            ncmTextEdit.Text = null;
-            aliquotaDeIcmsTextEdit.Text = null;
-            reducaoDeCalculoIcmsTextEdit.Text = null;
         }
 
         private void fornecedorTextEdit_EditValueChanged(object sender, EventArgs e)
@@ -253,16 +261,8 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
                         informacoesCommand.ExecuteNonQuery();
                     }
-
                     XtraMessageBox.Show("Produto cadastrado com sucesso");
-                    LimparTextEdits();
-                    LimparLookUpEdits.LimparLookUpEdit(
-                    unidadeDeMedidaLookUpEdit,
-                    categoriaDeProdutosLookUpEdit,
-                    marcaLookUpEdit,
-                    origemDaMercadoriaLookUpEdit,
-                    situacaoTributariaLookUpEdit,
-                    naturezaDaOperacaoLookUpEdit);
+                    LimparLookUpEditsETextEdits();
                     transaction.Commit();
                 }
                 catch (Exception ex)
