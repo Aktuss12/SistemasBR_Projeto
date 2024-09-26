@@ -4,7 +4,6 @@ using DevExpress.XtraEditors;
 using FirebirdSql.Data.FirebirdClient;
 using System;
 using System.Globalization;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace CadastroDeProdutosView.Features.Produto.Views
@@ -20,7 +19,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             InitializeComponent();
             InitializeLookUpEdit();
             codigodebarrasTextEdit_EditValueChanged(null, null);
-
             this.produtoId = produtoId; 
 
             if (produtoId > 0)
@@ -360,14 +358,13 @@ namespace CadastroDeProdutosView.Features.Produto.Views
         // Abertura do form de pesquisar os produtos cadastrados, com validação de não abrir outro cadastro caso ja tenha aberto pelo alterar
         private void pesquisarProdutoButtomItem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            if (Application.OpenForms.Cast<Form>().Any(form => form is PesquisarProdutosView))
-            {
-                XtraMessageBox.Show("A janela de pesquisa já está aberta", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
+            this.Hide();
             var pesquisarProdutos = new PesquisarProdutosView();
             pesquisarProdutos.ShowDialog();
+            this.Close();
+
         }
+
         private void fornecedorTextEdit_EditValueChanged(object sender, EventArgs e)
         {
             fornecedorTextEdit.Properties.MaxLength = 100;

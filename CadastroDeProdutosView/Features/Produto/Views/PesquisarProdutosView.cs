@@ -196,12 +196,21 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
             if (SelecionadorIdProduto != null)
             {
+                this.Hide();
                 var cadastroDeProdutos = new CadastroDeProdutosView(SelecionadorIdProduto.Value);
                 cadastroDeProdutos.ShowDialog();
+                this.Close();
             }
 
             CarregarBancoDeDados();
         }
 
+        private void cadastroButtonItem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            this.Hide();
+            var abrirCadastro = new CadastroDeProdutosView(0);
+            abrirCadastro.ShowDialog();
+            this.Close();
+        }
     }
 }
