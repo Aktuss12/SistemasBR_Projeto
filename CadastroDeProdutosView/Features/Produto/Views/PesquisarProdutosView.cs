@@ -189,9 +189,10 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             if (colunaSelecionada == null)
             {
                 XtraMessageBox.Show("Erro ao obter o produto selecionado");
+                return; 
             }
 
-            if (colunaSelecionada != null) SelecionadorIdProduto = Convert.ToInt32(colunaSelecionada["idProduto"]);
+            SelecionadorIdProduto = Convert.ToInt32(colunaSelecionada["idProduto"]);
 
             if (SelecionadorIdProduto != null)
             {
@@ -201,5 +202,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
             CarregarBancoDeDados();
         }
+
     }
 }

@@ -11,6 +11,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 {
     public partial class CadastroDeProdutosView : Form
     {
+        private int? produtoId;
         private const string connectionString =
             @"User ID=SYSDBA;Password=masterkey;Database=C:\Users\admin\Documents\BANCODEDADOSPRODUTOS.FDB;DataSource=localhost;Port=3050;Dialect=3;Charset=NONE;";
 
@@ -19,11 +20,14 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             InitializeComponent();
             InitializeLookUpEdit();
 
-            int? idProduto = produtoId;
-            CarregarProduto(idProduto.Value);
+            this.produtoId = produtoId; 
+
+            if (produtoId > 0)
+            {
+                CarregarProduto(this.produtoId.Value);
+            }
         }
 
-        // Metodo para utilizar a classe manipuladora de EnumService
         private void InitializeLookUpEdit()
         {
             unidadeDeMedidaLookUpEdit.PreencherLookUpEditComOValorDoEnum<UnidadeDeMedidaView.UnidadeDeMedida>();
@@ -53,6 +57,75 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             origemDaMercadoriaLookUpEdit.LimparLookUpEdit();
             situacaoTributariaLookUpEdit.LimparLookUpEdit();
             naturezaDaOperacaoLookUpEdit.LimparLookUpEdit();
+        }
+
+        public void AtualizarProduto(int idProduto)
+        {
+            try
+            {
+                using var conexao = new FbConnection(connectionString);
+                conexao.Open();
+
+                using var transacao = conexao.BeginTransaction();
+                try
+                {
+                    const string updateProdutoQuery = @"
+                UPDATE PRODUTO
+                SET Nome = @Nome, 
+                    Categoria = @Categoria, 
+                    Fornecedor = @Fornecedor, 
+                    CodigoDeBarras = @CodigoDeBarras, 
+                    UnidadeDeMedida = @UnidadeDeMedida, 
+                    Estoque = @Estoque, 
+                    Marca = @Marca, 
+                    Custo = @Custo, 
+                    Markup = @Markup, 
+                    PrecoDaVenda = @PrecoDaVenda
+                WHERE idProduto = @idProduto";
+
+                    using (var command = new FbCommand(updateProdutoQuery, conexao, transacao))
+                    {
+                        command.Parameters.Add("@Nome", FbDbType.VarChar).Value = nomeTextEdit.Text ?? (object)DBNull.Value;
+                        command.Parameters.Add("@Categoria", FbDbType.VarChar).Value = categoriaDeProdutosLookUpEdit.EditValue ?? DBNull.Value;
+                        command.Parameters.Add("@Fornecedor", FbDbType.VarChar).Value = fornecedorTextEdit.Text ?? (object)DBNull.Value;
+                        command.Parameters.Add("@CodigoDeBarras", FbDbType.VarChar).Value = codigodebarrasTextEdit.Text ?? (object)DBNull.Value;
+                        command.Parameters.Add("@UnidadeDeMedida", FbDbType.VarChar).Value = unidadeDeMedidaLookUpEdit.EditValue ?? DBNull.Value;
+                        command.Parameters.Add("@Estoque", FbDbType.Integer).Value = int.TryParse(estoqueTextEdit.EditValue.ToString(), out var estoque) ? estoque : DBNull.Value;
+                        command.Parameters.Add("@Marca", FbDbType.VarChar).Value = marcaLookUpEdit.EditValue ?? DBNull.Value;
+
+                        if (decimal.TryParse(custoTextEdit.Text, out var custo))
+                            command.Parameters.Add("@Custo", FbDbType.Decimal).Value = custo;
+                        else
+                            command.Parameters.Add("@Custo", FbDbType.Decimal).Value = DBNull.Value;
+
+                        if (decimal.TryParse(markupTextEdit.Text, out var markup))
+                            command.Parameters.Add("@Markup", FbDbType.Decimal).Value = markup;
+                        else
+                            command.Parameters.Add("@Markup", FbDbType.Decimal).Value = DBNull.Value;
+
+                        if (decimal.TryParse(precoVendaTextEdit.Text, out var precoVenda))
+                            command.Parameters.Add("@PrecoDaVenda", FbDbType.Decimal).Value = precoVenda;
+                        else
+                            command.Parameters.Add("@PrecoDaVenda", FbDbType.Decimal).Value = DBNull.Value;
+
+                        command.Parameters.Add("@idProduto", FbDbType.Integer).Value = idProduto;
+
+                        command.ExecuteNonQuery();
+                    }
+                    transacao.Commit();
+                    XtraMessageBox.Show("Produto atualizado com sucesso.");
+                    LimparLookUpEditsETextEdits();
+                }
+                catch (Exception ex)
+                {
+                    transacao.Rollback();
+                    throw new Exception("Erro ao atualizar o produto no banco de dados", ex);
+                }
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show($"Erro ao conectar ao banco de dados: {ex.Message}");
+            }
         }
 
         private void CarregarProduto(int idProduto)
@@ -160,6 +233,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
                 XtraMessageBox.Show("Todos os campos obrigatórios devem ser preenchidos!");
                 return;
             }
+
             AtualizarEstiloLabelCodigoBarras(true);
 
             try
@@ -168,12 +242,17 @@ namespace CadastroDeProdutosView.Features.Produto.Views
                 connection.Open();
 
                 using var transaction = connection.BeginTransaction();
-                try
+
+                if (produtoId is > 0)
+                {
+                    AtualizarProduto(produtoId.Value);
+                }
+                else 
                 {
                     const string insertProdutoQuery = @"
-                        INSERT INTO PRODUTO (Nome, Categoria, Fornecedor, CodigoDeBarras, UnidadeDeMedida, Estoque, Marca, Custo, Markup, PrecoDaVenda)
-                        VALUES (@nome, @categoria, @fornecedor, @codigoDeBarras, @unidadeDeMedida, @estoque, @marca, @custo, @markup, @precoDaVenda)
-                        RETURNING idProduto";
+                INSERT INTO PRODUTO (Nome, Categoria, Fornecedor, CodigoDeBarras, UnidadeDeMedida, Estoque, Marca, Custo, Markup, PrecoDaVenda)
+                VALUES (@nome, @categoria, @fornecedor, @codigoDeBarras, @unidadeDeMedida, @estoque, @marca, @custo, @markup, @precoDaVenda)
+                RETURNING idProduto";
 
                     int idProduto;
 
@@ -206,8 +285,8 @@ namespace CadastroDeProdutosView.Features.Produto.Views
                     }
 
                     const string insertInformacoesFiscaisQuery = @"
-                        INSERT INTO INFORMACOESFISCAIS (idProduto, origemDaMercadoria, situacaoTributaria, naturezaDaOperacao, ncm, aliquotaDeIcms, reducaoDeCalculo)
-                         VALUES (@idProduto, @origemDaMercadoria, @situacaoTributaria, @naturezaDaOperacao, @ncm, @aliquotaDeIcms, @reducaoDeCalculo)";
+                INSERT INTO INFORMACOESFISCAIS (idProduto, origemDaMercadoria, situacaoTributaria, naturezaDaOperacao, ncm, aliquotaDeIcms, reducaoDeCalculo)
+                VALUES (@idProduto, @origemDaMercadoria, @situacaoTributaria, @naturezaDaOperacao, @ncm, @aliquotaDeIcms, @reducaoDeCalculo)";
 
                     using (var informacoesCommand = new FbCommand(insertInformacoesFiscaisQuery, connection, transaction))
                     {
@@ -229,15 +308,12 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
                         informacoesCommand.ExecuteNonQuery();
                     }
+
                     XtraMessageBox.Show("Produto cadastrado com sucesso");
-                    LimparLookUpEditsETextEdits();
-                    transaction.Commit();
                 }
-                catch (Exception ex)
-                {
-                    transaction.Rollback();
-                    throw new Exception("Erro ao inserir produto no banco de dados", ex);
-                }
+
+                LimparLookUpEditsETextEdits();
+                transaction.Commit();
             }
             catch (Exception ex)
             {
