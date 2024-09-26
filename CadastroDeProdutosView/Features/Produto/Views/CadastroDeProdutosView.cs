@@ -70,18 +70,18 @@ namespace CadastroDeProdutosView.Features.Produto.Views
                 try
                 {
                     const string updateProdutoQuery = @"
-                UPDATE PRODUTO
-                SET Nome = @Nome, 
-                Categoria = @Categoria, 
-                Fornecedor = @Fornecedor, 
-                CodigoDeBarras = @CodigoDeBarras, 
-                UnidadeDeMedida = @UnidadeDeMedida, 
-                Estoque = @Estoque, 
-                Marca = @Marca, 
-                Custo = @Custo, 
-                Markup = @Markup, 
-                PrecoDaVenda = @PrecoDaVenda
-                WHERE idProduto = @idProduto";
+                        UPDATE PRODUTO
+                        SET Nome = @Nome, 
+                        Categoria = @Categoria, 
+                        Fornecedor = @Fornecedor, 
+                        CodigoDeBarras = @CodigoDeBarras, 
+                        UnidadeDeMedida = @UnidadeDeMedida, 
+                        Estoque = @Estoque, 
+                        Marca = @Marca, 
+                        Custo = @Custo, 
+                        Markup = @Markup, 
+                         PrecoDaVenda = @PrecoDaVenda
+                        WHERE idProduto = @idProduto";
 
                     using (var command = new FbCommand(updateProdutoQuery, conexao, transacao))
                     {
@@ -134,14 +134,14 @@ namespace CadastroDeProdutosView.Features.Produto.Views
         private void AtualizarInformacoesFiscais(int idProduto, FbConnection conexao, FbTransaction transacao)
         {
             const string updateInformacoesFiscaisQuery = @"
-        UPDATE INFORMACOESFISCAIS
-        SET origemDaMercadoria = @origemDaMercadoria,
-            situacaoTributaria = @situacaoTributaria,
-            naturezaDaOperacao = @naturezaDaOperacao,
-            ncm = @ncm,
-            aliquotaDeIcms = @aliquotaDeIcms,
-            reducaoDeCalculo = @reducaoDeCalculo
-        WHERE idProduto = @idProduto";
+                UPDATE INFORMACOESFISCAIS
+                SET origemDaMercadoria = @origemDaMercadoria,
+                situacaoTributaria = @situacaoTributaria,
+                naturezaDaOperacao = @naturezaDaOperacao,
+                ncm = @ncm,
+                aliquotaDeIcms = @aliquotaDeIcms,
+                reducaoDeCalculo = @reducaoDeCalculo
+                WHERE idProduto = @idProduto";
 
             using var command = new FbCommand(updateInformacoesFiscaisQuery, conexao, transacao);
             command.Parameters.Add("@idProduto", FbDbType.Integer).Value = idProduto;
@@ -170,7 +170,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             {
                 using var connection = new FbConnection(connectionString);
                 connection.Open();
-
                 const string query = @"
                     SELECT P.*, I.*
                     FROM PRODUTO P
