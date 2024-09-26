@@ -56,9 +56,9 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.produtosDesativadosToggleSwitchh = new DevExpress.XtraEditors.ToggleSwitch();
             this.pesquisarGridControl = new DevExpress.XtraGrid.GridControl();
             this.pesquisarGridView = new DevExpress.XtraGrid.Views.BandedGrid.AdvBandedGridView();
-            this.gridBand1 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             this.pesquisarTextEdit = new DevExpress.XtraEditors.TextEdit();
             this.pesquisarLabelControl = new DevExpress.XtraEditors.LabelControl();
+            this.produtosGridBand = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             ((System.ComponentModel.ISupportInitialize)(this.pesquisarBehaviorManager)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pesquisarBarManager)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
@@ -332,8 +332,10 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             // 
             // pesquisarGridView
             // 
+            this.pesquisarGridView.Appearance.BandPanel.Image = ((System.Drawing.Image)(resources.GetObject("pesquisarGridView.Appearance.BandPanel.Image")));
+            this.pesquisarGridView.Appearance.BandPanel.Options.UseImage = true;
             this.pesquisarGridView.Bands.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.GridBand[] {
-            this.gridBand1});
+            this.produtosGridBand});
             this.pesquisarGridView.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
             this.pesquisarGridView.GridControl = this.pesquisarGridControl;
             this.pesquisarGridView.Name = "pesquisarGridView";
@@ -343,14 +345,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.pesquisarGridView.OptionsView.ShowGroupPanel = false;
             this.pesquisarGridView.PaintStyleName = "Office2003";
             this.pesquisarGridView.VertScrollVisibility = DevExpress.XtraGrid.Views.Base.ScrollVisibility.Never;
-            // 
-            // gridBand1
-            // 
-            this.gridBand1.AppearanceHeader.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gridBand1.AppearanceHeader.Options.UseFont = true;
-            this.gridBand1.Caption = "Produtos";
-            this.gridBand1.Name = "gridBand1";
-            this.gridBand1.VisibleIndex = 0;
             // 
             // pesquisarTextEdit
             // 
@@ -371,6 +365,16 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.pesquisarLabelControl.Size = new System.Drawing.Size(101, 27);
             this.pesquisarLabelControl.TabIndex = 21;
             this.pesquisarLabelControl.Text = "Pesquisar";
+            // 
+            // produtosGridBand
+            // 
+            this.produtosGridBand.AppearanceHeader.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.produtosGridBand.AppearanceHeader.Options.UseFont = true;
+            this.produtosGridBand.Caption = "Produtos";
+            this.produtosGridBand.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("produtosGridBand.ImageOptions.Image")));
+            this.produtosGridBand.Name = "produtosGridBand";
+            this.produtosGridBand.VisibleIndex = 0;
+            this.produtosGridBand.Width = 1625;
             // 
             // PesquisarProdutosView
             // 
@@ -426,8 +430,8 @@ namespace CadastroDeProdutosView.Features.Produto.Views
         private DevExpress.XtraEditors.ToggleSwitch produtosDesativadosToggleSwitchh;
         private DevExpress.XtraGrid.GridControl pesquisarGridControl;
         private DevExpress.XtraGrid.Views.BandedGrid.AdvBandedGridView pesquisarGridView;
-        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand1;
         private DevExpress.XtraEditors.TextEdit pesquisarTextEdit;
         private DevExpress.XtraEditors.LabelControl pesquisarLabelControl;
+        private DevExpress.XtraGrid.Views.BandedGrid.GridBand produtosGridBand;
     }
 }
