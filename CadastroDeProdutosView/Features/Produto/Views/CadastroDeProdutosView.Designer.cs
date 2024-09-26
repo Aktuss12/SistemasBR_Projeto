@@ -214,10 +214,14 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.codigoDeBarrasButton.Appearance.BorderColor = System.Drawing.Color.Transparent;
             this.codigoDeBarrasButton.Appearance.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.codigoDeBarrasButton.Appearance.ForeColor = System.Drawing.Color.Transparent;
+            this.codigoDeBarrasButton.Appearance.Options.UseBorderColor = true;
+            this.codigoDeBarrasButton.Appearance.Options.UseFont = true;
+            this.codigoDeBarrasButton.Appearance.Options.UseForeColor = true;
             this.codigoDeBarrasButton.Appearance.Options.UseTextOptions = true;
             this.codigoDeBarrasButton.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.codigoDeBarrasButton.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             this.codigoDeBarrasButton.AppearanceDisabled.BorderColor = System.Drawing.Color.Transparent;
+            this.codigoDeBarrasButton.AppearanceDisabled.Options.UseBorderColor = true;
             this.codigoDeBarrasButton.AppearanceDisabled.Options.UseTextOptions = true;
             this.codigoDeBarrasButton.AppearanceDisabled.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.codigoDeBarrasButton.AppearanceDisabled.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
@@ -227,14 +231,13 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.codigoDeBarrasButton.AppearancePressed.Options.UseTextOptions = true;
             this.codigoDeBarrasButton.AppearancePressed.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.codigoDeBarrasButton.AppearancePressed.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.codigoDeBarrasButton.AutoSize = true;
             this.codigoDeBarrasButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.codigoDeBarrasButton.ButtonStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
+            this.codigoDeBarrasButton.ButtonStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.codigoDeBarrasButton.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("codigoDeBarrasButton.ImageOptions.Image")));
             this.codigoDeBarrasButton.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.BottomCenter;
-            this.codigoDeBarrasButton.Location = new System.Drawing.Point(649, 120);
+            this.codigoDeBarrasButton.Location = new System.Drawing.Point(405, 74);
             this.codigoDeBarrasButton.Name = "codigoDeBarrasButton";
-            this.codigoDeBarrasButton.Size = new System.Drawing.Size(40, 38);
+            this.codigoDeBarrasButton.Size = new System.Drawing.Size(31, 28);
             this.codigoDeBarrasButton.TabIndex = 33;
             this.codigoDeBarrasButton.TabStop = false;
             this.codigoDeBarrasButton.Click += new System.EventHandler(this.codigoDeBarrasButton_Click);
@@ -280,7 +283,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             // marcaLookUpEdit
             // 
             this.marcaLookUpEdit.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.marcaLookUpEdit.Location = new System.Drawing.Point(550, 174);
+            this.marcaLookUpEdit.Location = new System.Drawing.Point(580, 174);
             this.marcaLookUpEdit.Margin = new System.Windows.Forms.Padding(2);
             this.marcaLookUpEdit.Name = "marcaLookUpEdit";
             this.marcaLookUpEdit.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
@@ -289,7 +292,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.marcaLookUpEdit.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
             new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Value", "Marca")});
             this.marcaLookUpEdit.Properties.NullText = "";
-            this.marcaLookUpEdit.Size = new System.Drawing.Size(162, 22);
+            this.marcaLookUpEdit.Size = new System.Drawing.Size(132, 22);
             this.marcaLookUpEdit.TabIndex = 28;
             // 
             // categoriaDeProdutosLookUpEdit
@@ -322,7 +325,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             // unidadeDeMedidaLookUpEdit
             // 
             this.unidadeDeMedidaLookUpEdit.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.unidadeDeMedidaLookUpEdit.Location = new System.Drawing.Point(405, 80);
+            this.unidadeDeMedidaLookUpEdit.Location = new System.Drawing.Point(580, 80);
             this.unidadeDeMedidaLookUpEdit.Margin = new System.Windows.Forms.Padding(2);
             this.unidadeDeMedidaLookUpEdit.Name = "unidadeDeMedidaLookUpEdit";
             this.unidadeDeMedidaLookUpEdit.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
@@ -340,12 +343,13 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.codigodebarrasLabelControl.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.codigodebarrasLabelControl.Appearance.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.codigodebarrasLabelControl.Appearance.Options.UseFont = true;
-            this.codigodebarrasLabelControl.Location = new System.Drawing.Point(550, 55);
+            this.codigodebarrasLabelControl.Location = new System.Drawing.Point(404, 55);
             this.codigodebarrasLabelControl.Margin = new System.Windows.Forms.Padding(2);
             this.codigodebarrasLabelControl.Name = "codigodebarrasLabelControl";
-            this.codigodebarrasLabelControl.Size = new System.Drawing.Size(126, 21);
+            this.codigodebarrasLabelControl.Size = new System.Drawing.Size(148, 21);
             this.codigodebarrasLabelControl.TabIndex = 12;
-            this.codigodebarrasLabelControl.Text = "Codigo de Barras: ";
+            this.codigodebarrasLabelControl.Text = "Gerar Cod. De Barras:";
+            this.codigodebarrasLabelControl.Click += new System.EventHandler(this.codigodebarrasLabelControl_Click);
             // 
             // markupTextEdit
             // 
@@ -387,7 +391,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             // 
             this.marcaLabelControl.Appearance.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.marcaLabelControl.Appearance.Options.UseFont = true;
-            this.marcaLabelControl.Location = new System.Drawing.Point(550, 149);
+            this.marcaLabelControl.Location = new System.Drawing.Point(580, 149);
             this.marcaLabelControl.Margin = new System.Windows.Forms.Padding(2);
             this.marcaLabelControl.Name = "marcaLabelControl";
             this.marcaLabelControl.Size = new System.Drawing.Size(50, 21);
@@ -398,7 +402,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             // 
             this.unidadeDeMedidaLabelControl.Appearance.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.unidadeDeMedidaLabelControl.Appearance.Options.UseFont = true;
-            this.unidadeDeMedidaLabelControl.Location = new System.Drawing.Point(405, 55);
+            this.unidadeDeMedidaLabelControl.Location = new System.Drawing.Point(580, 55);
             this.unidadeDeMedidaLabelControl.Margin = new System.Windows.Forms.Padding(2);
             this.unidadeDeMedidaLabelControl.Name = "unidadeDeMedidaLabelControl";
             this.unidadeDeMedidaLabelControl.Size = new System.Drawing.Size(123, 21);
@@ -426,7 +430,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.estoqueTextEdit.Properties.Mask.EditMask = "d";
             this.estoqueTextEdit.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.estoqueTextEdit.Properties.Mask.UseMaskAsDisplayFormat = true;
-            this.estoqueTextEdit.Size = new System.Drawing.Size(132, 22);
+            this.estoqueTextEdit.Size = new System.Drawing.Size(158, 22);
             this.estoqueTextEdit.TabIndex = 27;
             this.estoqueTextEdit.EditValueChanged += new System.EventHandler(this.estoqueTextEdit_EditValueChanged_1);
             // 
@@ -500,7 +504,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             // 
             this.codigodebarrasTextEdit.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.codigodebarrasTextEdit.EditValue = "";
-            this.codigodebarrasTextEdit.Location = new System.Drawing.Point(590, 80);
+            this.codigodebarrasTextEdit.Location = new System.Drawing.Point(441, 80);
             this.codigodebarrasTextEdit.Margin = new System.Windows.Forms.Padding(2);
             this.codigodebarrasTextEdit.Name = "codigodebarrasTextEdit";
             this.codigodebarrasTextEdit.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;

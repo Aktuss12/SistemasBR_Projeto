@@ -312,7 +312,8 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
         private void codigoDeBarrasButton_Click(object sender, EventArgs e)
         {
-
+            var codigoDeBarras = CalculadorDeCodigoDeBarras.GerarCodigoDeBarrasEAN13();
+            codigodebarrasTextEdit.EditValue = codigoDeBarras;
         }
 
         private void AtualizarEstiloLabelCodigoBarras(bool valido)
@@ -389,6 +390,11 @@ namespace CadastroDeProdutosView.Features.Produto.Views
         private void ncmTextEdit_EditValueChanged(object sender, EventArgs e)
         {
             ncmTextEdit.Properties.MaxLength = 8;
+        }
+
+        private void codigodebarrasLabelControl_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
