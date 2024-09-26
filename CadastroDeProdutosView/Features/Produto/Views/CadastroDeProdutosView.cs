@@ -11,7 +11,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 {
     public partial class CadastroDeProdutosView : Form
     {
-        private readonly int? idProduto;
         private bool isValidating;
         private const string connectionString = 
             @"User ID=SYSDBA;Password=masterkey;Database=C:\Users\admin\Documents\BANCODEDADOSPRODUTOS.FDB;DataSource=localhost;Port=3050;Dialect=3;Charset=NONE;";
@@ -22,11 +21,8 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             InitializeComponent();
             InitializeLookUpEdit();
 
-            idProduto = produtoId;
-            if (idProduto.HasValue)
-            {
-                CarregarProduto(idProduto.Value);
-            }
+            int? idProduto = produtoId;
+            CarregarProduto(idProduto.Value);
         }
 
         private void CarregarProduto(int idProduto)
