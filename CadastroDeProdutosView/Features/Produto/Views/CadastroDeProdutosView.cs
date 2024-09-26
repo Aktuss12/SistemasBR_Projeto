@@ -312,8 +312,16 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
         private void codigoDeBarrasButton_Click(object sender, EventArgs e)
         {
-            var codigoDeBarras = CalculadorDeCodigoDeBarras.GerarCodigoDeBarrasEAN13();
-            codigodebarrasTextEdit.EditValue = codigoDeBarras;
+            var verificarCodigoDeBarras = CalculadorDeCodigoDeBarras.GerarCodigoDeBarrasEAN13();
+            if (CalculadorDeCodigoDeBarras.ValidarCodigoDeBarrasEAN13(verificarCodigoDeBarras))
+            {
+               var codigoDeBarras = CalculadorDeCodigoDeBarras.GerarCodigoDeBarrasEAN13();
+                codigodebarrasTextEdit.EditValue = codigoDeBarras;
+            }
+            else
+            {
+                XtraMessageBox.Show("O código de barras EAN-13 não é válido!");
+            }
         }
 
         private void AtualizarEstiloLabelCodigoBarras(bool valido)

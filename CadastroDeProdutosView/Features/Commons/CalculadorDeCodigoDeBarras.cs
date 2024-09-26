@@ -36,7 +36,7 @@ namespace CadastroDeProdutosView.Features.Commons
         {
             var random = new Random();
             var codigoParcial = "";
-            for (var i = 0; i < 12; i++)
+            for (var i = 0; i < 22; i++)
             {
                 codigoParcial += random.Next(0, 10).ToString();
             }
