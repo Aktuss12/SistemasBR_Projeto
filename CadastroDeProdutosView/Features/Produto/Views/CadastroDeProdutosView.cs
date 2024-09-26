@@ -11,10 +11,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 {
     public partial class CadastroDeProdutosView : Form
     {
-        private bool isValidating;
-        private const string connectionString = 
-            @"User ID=SYSDBA;Password=masterkey;Database=C:\Users\admin\Documents\BANCODEDADOSPRODUTOS.FDB;DataSource=localhost;Port=3050;Dialect=3;Charset=NONE;";
-
 
         public CadastroDeProdutosView(int produtoId)
         {
@@ -24,6 +20,10 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             int? idProduto = produtoId;
             CarregarProduto(idProduto.Value);
         }
+
+        private bool isValidating;
+        private const string connectionString =
+            @"User ID=SYSDBA;Password=masterkey;Database=C:\Users\admin\Documents\BANCODEDADOSPRODUTOS.FDB;DataSource=localhost;Port=3050;Dialect=3;Charset=NONE;";
 
         private void CarregarProduto(int idProduto)
         {
@@ -101,16 +101,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             }
 
             isValidating = false;
-        }
-
-        private void LimparLookUpEdits()
-        {
-            unidadeDeMedidaLookUpEdit.EditValue = null;
-            categoriaDeProdutosLookUpEdit.EditValue = null;
-            marcaLookUpEdit.EditValue = null;
-            origemDaMercadoriaLookUpEdit.EditValue = null;
-            situacaoTributariaLookUpEdit.EditValue = null;
-            naturezaDaOperacaoLookUpEdit.EditValue = null;
         }
 
         private void LimparTextEdits()
@@ -266,7 +256,13 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
                     XtraMessageBox.Show("Produto cadastrado com sucesso");
                     LimparTextEdits();
-                    LimparLookUpEdits();
+                    LimparLookUpEdits.LimparLookUpEdit(
+                    unidadeDeMedidaLookUpEdit,
+                    categoriaDeProdutosLookUpEdit,
+                    marcaLookUpEdit,
+                    origemDaMercadoriaLookUpEdit,
+                    situacaoTributariaLookUpEdit,
+                    naturezaDaOperacaoLookUpEdit);
                     transaction.Commit();
                 }
                 catch (Exception ex)
@@ -280,7 +276,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
                 XtraMessageBox.Show($"Erro ao salvar o produto: {ex.Message}");
             }
         }
-
 
         private void AtualizarEstiloLabelCodigoBarras(bool valido)
         {
@@ -300,16 +295,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             }
             var pesquisarProdutos = new PesquisarProdutosView();
             pesquisarProdutos.ShowDialog();
-        }
-
-        private void produtosGroupControl_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void nomeTextEdit_EditValueChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }

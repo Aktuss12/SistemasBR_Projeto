@@ -39,6 +39,7 @@
     <Reference Include="DevExpress.Printing.v18.1.Core, Version=18.1.18.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Sparkline.v18.1.Core, Version=18.1.18.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Utils.v18.1, Version=18.1.18.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Xpo.v18.1, Version=18.1.18.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraBars.v18.1, Version=18.1.18.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraEditors.v18.1, Version=18.1.18.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraGrid.v18.1, Version=18.1.18.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
@@ -73,6 +74,7 @@
   <ItemGroup>
     <Compile Include="Features\Commons\CalculadorDeCodigoDeBarras.cs" />
     <Compile Include="Features\Commons\CalculoDeCustoEMarkupParaPrecoVenda.cs" />
+    <Compile Include="Features\Commons\LimparLookUpEdits.cs" />
     <Compile Include="Features\Commons\ValidarCamposObrigatorios.cs" />
     <Compile Include="Features\Produto\Enums\CategoriaDeProdutos.cs" />
     <Compile Include="Features\Produto\Enums\MarcaDoProduto.cs" />

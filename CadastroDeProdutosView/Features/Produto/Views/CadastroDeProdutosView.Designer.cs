@@ -202,7 +202,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.produtosGroupControl.Name = "produtosGroupControl";
             this.produtosGroupControl.Size = new System.Drawing.Size(754, 377);
             this.produtosGroupControl.TabIndex = 0;
-            this.produtosGroupControl.Paint += new System.Windows.Forms.PaintEventHandler(this.produtosGroupControl_Paint);
             // 
             // produtosLabelControl
             // 
@@ -241,7 +240,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.nomeTextEdit.Properties.Mask.EditMask = "String";
             this.nomeTextEdit.Size = new System.Drawing.Size(298, 22);
             this.nomeTextEdit.TabIndex = 22;
-            this.nomeTextEdit.EditValueChanged += new System.EventHandler(this.nomeTextEdit_EditValueChanged);
             // 
             // marcaLookUpEdit
             // 

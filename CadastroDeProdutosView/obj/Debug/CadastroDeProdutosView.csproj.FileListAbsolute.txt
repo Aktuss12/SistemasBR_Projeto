@@ -746,3 +746,9 @@ C:\Users\admin\Desktop\Sistemasbr_Projeto\CadastroDeProdutosView\obj\Debug\Cadas
 C:\Users\admin\Desktop\Sistemasbr_Projeto\CadastroDeProdutosView\obj\Debug\CadastroDeProdutosView.csproj.CopyComplete
 C:\Users\admin\Desktop\Sistemasbr_Projeto\CadastroDeProdutosView\obj\Debug\CadastroDeProdutosView.exe
 C:\Users\admin\Desktop\Sistemasbr_Projeto\CadastroDeProdutosView\obj\Debug\CadastroDeProdutosView.pdb
+C:\Users\admin\Documents\Sistemasbr_Projeto\CadastroDeProdutosView\bin\Debug\DevExpress.Xpo.v18.1.dll
+C:\Users\admin\Documents\Sistemasbr_Projeto\CadastroDeProdutosView\bin\Debug\DevExpress.Xpo.v18.1.xml
+C:\Users\admin\Documents\Sistemasbr_Projeto\CadastroDeProdutosView\bin\Debug\de\DevExpress.Xpo.v18.1.resources.dll
+C:\Users\admin\Documents\Sistemasbr_Projeto\CadastroDeProdutosView\bin\Debug\es\DevExpress.Xpo.v18.1.resources.dll
+C:\Users\admin\Documents\Sistemasbr_Projeto\CadastroDeProdutosView\bin\Debug\ja\DevExpress.Xpo.v18.1.resources.dll
+C:\Users\admin\Documents\Sistemasbr_Projeto\CadastroDeProdutosView\bin\Debug\ru\DevExpress.Xpo.v18.1.resources.dll
