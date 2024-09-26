@@ -11,7 +11,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 {
     public partial class CadastroDeProdutosView : Form
     {
-        private int? produtoId;
+        private readonly int? produtoId;
         private const string connectionString =
             @"User ID=SYSDBA;Password=masterkey;Database=C:\Users\admin\Documents\BANCODEDADOSPRODUTOS.FDB;DataSource=localhost;Port=3050;Dialect=3;Charset=NONE;";
 
@@ -72,15 +72,15 @@ namespace CadastroDeProdutosView.Features.Produto.Views
                     const string updateProdutoQuery = @"
                 UPDATE PRODUTO
                 SET Nome = @Nome, 
-                    Categoria = @Categoria, 
-                    Fornecedor = @Fornecedor, 
-                    CodigoDeBarras = @CodigoDeBarras, 
-                    UnidadeDeMedida = @UnidadeDeMedida, 
-                    Estoque = @Estoque, 
-                    Marca = @Marca, 
-                    Custo = @Custo, 
-                    Markup = @Markup, 
-                    PrecoDaVenda = @PrecoDaVenda
+                Categoria = @Categoria, 
+                Fornecedor = @Fornecedor, 
+                CodigoDeBarras = @CodigoDeBarras, 
+                UnidadeDeMedida = @UnidadeDeMedida, 
+                Estoque = @Estoque, 
+                Marca = @Marca, 
+                Custo = @Custo, 
+                Markup = @Markup, 
+                PrecoDaVenda = @PrecoDaVenda
                 WHERE idProduto = @idProduto";
 
                     using (var command = new FbCommand(updateProdutoQuery, conexao, transacao))
@@ -112,6 +112,9 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
                         command.ExecuteNonQuery();
                     }
+
+                    AtualizarInformacoesFiscais(idProduto, conexao, transacao);
+
                     transacao.Commit();
                     XtraMessageBox.Show("Produto atualizado com sucesso.");
                     LimparLookUpEditsETextEdits();
@@ -127,6 +130,39 @@ namespace CadastroDeProdutosView.Features.Produto.Views
                 XtraMessageBox.Show($"Erro ao conectar ao banco de dados: {ex.Message}");
             }
         }
+
+        private void AtualizarInformacoesFiscais(int idProduto, FbConnection conexao, FbTransaction transacao)
+        {
+            const string updateInformacoesFiscaisQuery = @"
+        UPDATE INFORMACOESFISCAIS
+        SET origemDaMercadoria = @origemDaMercadoria,
+            situacaoTributaria = @situacaoTributaria,
+            naturezaDaOperacao = @naturezaDaOperacao,
+            ncm = @ncm,
+            aliquotaDeIcms = @aliquotaDeIcms,
+            reducaoDeCalculo = @reducaoDeCalculo
+        WHERE idProduto = @idProduto";
+
+            using var command = new FbCommand(updateInformacoesFiscaisQuery, conexao, transacao);
+            command.Parameters.Add("@idProduto", FbDbType.Integer).Value = idProduto;
+            command.Parameters.Add("@origemDaMercadoria", FbDbType.VarChar).Value = origemDaMercadoriaLookUpEdit.EditValue ?? DBNull.Value;
+            command.Parameters.Add("@situacaoTributaria", FbDbType.VarChar).Value = situacaoTributariaLookUpEdit.EditValue ?? DBNull.Value;
+            command.Parameters.Add("@naturezaDaOperacao", FbDbType.VarChar).Value = naturezaDaOperacaoLookUpEdit.EditValue ?? DBNull.Value;
+            command.Parameters.Add("@ncm", FbDbType.VarChar).Value = ncmTextEdit.Text ?? (object)DBNull.Value;
+
+            if (decimal.TryParse(aliquotaDeIcmsTextEdit.Text, NumberStyles.Any, CultureInfo.InvariantCulture, out var aliquotaIcms))
+                command.Parameters.Add("@aliquotaDeIcms", FbDbType.Decimal).Value = aliquotaIcms;
+            else
+                command.Parameters.Add("@aliquotaDeIcms", FbDbType.Decimal).Value = DBNull.Value;
+
+            if (decimal.TryParse(reducaoDeCalculoIcmsTextEdit.Text, NumberStyles.Any, CultureInfo.InvariantCulture, out var reducaoCalculo))
+                command.Parameters.Add("@reducaoDeCalculo", FbDbType.Decimal).Value = reducaoCalculo;
+            else
+                command.Parameters.Add("@reducaoDeCalculo", FbDbType.Decimal).Value = DBNull.Value;
+
+            command.ExecuteNonQuery();
+        }
+
 
         private void CarregarProduto(int idProduto)
         {
