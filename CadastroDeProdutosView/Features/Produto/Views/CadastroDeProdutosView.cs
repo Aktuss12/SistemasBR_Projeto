@@ -383,7 +383,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
         {
             precoVendaTextEdit.Properties.MaxLength = 16;
         }
-        private void ncmTextEdit_EditValueChanged(object sender, EventArgs e)
+        private void ncmTextEdit_EditValueChanged_1(object sender, EventArgs e)
         {
             ncmTextEdit.Properties.MaxLength = 8;
         }
