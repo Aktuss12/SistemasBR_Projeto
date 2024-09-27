@@ -4,6 +4,7 @@ using FirebirdSql.Data.FirebirdClient;
 using System;
 using System.Data;
 using System.Windows.Forms;
+using CadastroDeProdutosView.Features.Commons;
 
 namespace CadastroDeProdutosView.Features.Produto.Views
 {
@@ -88,12 +89,12 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
             var idProduto = Convert.ToInt32(colunaSelecionada["idProduto"]);
 
-            var confirmarResultado = XtraMessageBox.Show("Tem certeza que deseja excluir este produto?", "Confirmação",
-                MessageBoxButtons.OKCancel);
-            if (confirmarResultado != DialogResult.OK) return;
-
+            using var messageBox = new MessageBoxCustomizado("Tem certeza que deseja excluir esse produto?");
+            messageBox.ShowDialog();
+            if (!messageBox.Resultado)return;
+            
             ExcluirProduto(idProduto);
-            XtraMessageBox.Show("Produto excluído com sucesso.");
+            XtraMessageBox.Show("Produto excluido com sucesso");
             CarregarBancoDeDados();
         }
 
@@ -160,14 +161,13 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             }
 
             var idProduto = Convert.ToInt32(colunaSelecionada["idProduto"]);
-            var confirmarResultado = XtraMessageBox.Show("Tem certeza que deseja reativar esse produto?", "Confirmação",
-                MessageBoxButtons.OKCancel);
-            if (confirmarResultado != DialogResult.OK) return;
-            {
-                ReativarProduto(idProduto);
-                XtraMessageBox.Show("Produto reativado com sucesso");
-                CarregarBancoDeDados();
-            }
+            using var messageBox = new MessageBoxCustomizado("Tem certeza que deseja reativar esse produto?");
+            messageBox.ShowDialog();
+            if (!messageBox.Resultado) return;
+
+            ReativarProduto(idProduto);
+            XtraMessageBox.Show("Produto reativado com sucesso");
+            CarregarBancoDeDados();
         }
 
         private void alterarButtonItem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)

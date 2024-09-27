@@ -120,7 +120,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
                     transacao.Commit();
                     XtraMessageBox.Show("Produto atualizado com sucesso.");
                     LimparLookUpEditsETextEdits();
-                    Hide();
+                                        Hide();
                     Close();
                 }
                 catch (Exception ex)
