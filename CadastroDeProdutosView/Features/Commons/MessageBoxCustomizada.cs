@@ -5,8 +5,8 @@ namespace CadastroDeProdutosView.Features.Commons
 {
     public sealed class MessageBoxCustomizado : XtraForm
     {
-        private readonly SimpleButton buttonSim;
-        private readonly SimpleButton buttonNao;
+        private readonly SimpleButton botaoSim;
+        private readonly SimpleButton botaoNao;
 
         public bool Resultado { get; private set; }
 
@@ -16,14 +16,14 @@ namespace CadastroDeProdutosView.Features.Commons
             {
                 Text = mensagem,
                 AutoSize = true,
-                Font = new System.Drawing.Font("Segoe UI", 8.25f), 
+                Font = new System.Drawing.Font("Segoe UI", 8.25f),
                 TextAlign = System.Drawing.ContentAlignment.MiddleCenter,
                 Top = 30,
                 Left = (ClientSize.Width - 250) / 2,
-                Width = 250 
+                Width = 250
             };
 
-            buttonSim = new SimpleButton
+            botaoSim = new SimpleButton
             {
                 Text = "Sim",
                 DialogResult = DialogResult.Yes,
@@ -32,21 +32,21 @@ namespace CadastroDeProdutosView.Features.Commons
                 Left = (ClientSize.Width - 160) / 2 - 10
             };
 
-            buttonNao = new SimpleButton
+            botaoNao = new SimpleButton
             {
                 Text = "Não",
                 DialogResult = DialogResult.No,
                 Width = 75,
                 Top = 70,
-                Left = buttonSim.Right + 10
+                Left = botaoSim.Right + 10
             };
 
-            buttonSim.Click += (_, _) => { Resultado = true; Close(); };
-            buttonNao.Click += (_, _) => { Resultado = false; Close(); };
+            botaoSim.Click += (_, _) => { Resultado = true; Close(); };
+            botaoNao.Click += (_, _) => { Resultado = false; Close(); };
 
             Controls.Add(labelMensagem);
-            Controls.Add(buttonSim);
-            Controls.Add(buttonNao);
+            Controls.Add(botaoSim);
+            Controls.Add(botaoNao);
 
             Text = "Confirmação";
             StartPosition = FormStartPosition.CenterParent;
@@ -55,8 +55,8 @@ namespace CadastroDeProdutosView.Features.Commons
             MinimizeBox = false;
 
             ClientSize = new System.Drawing.Size(270, 110);
-            AcceptButton = buttonSim; 
-            CancelButton = buttonNao; 
+            AcceptButton = botaoSim;
+            CancelButton = botaoNao;
         }
     }
 }
