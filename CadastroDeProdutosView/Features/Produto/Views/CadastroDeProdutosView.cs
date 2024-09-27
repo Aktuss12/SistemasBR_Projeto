@@ -20,7 +20,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             InitializeComponent();
             InitializeLookUpEdit();
             codigodebarrasTextEdit_EditValueChanged(null, null);
-            EsconderBotao();
 
             this.produtoId = produtoId; 
 
@@ -369,15 +368,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             Close();
         }
 
-        private void EsconderBotao()
-        {
-            cancelarButtomItem.Visibility = BarItemVisibility.Never;
-        }
-        private void cancelarButtomItem_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            EsconderBotao();
-        }
-
         private void fornecedorTextEdit_EditValueChanged(object sender, EventArgs e)
         {
             fornecedorTextEdit.Properties.MaxLength = 100;
@@ -395,6 +385,12 @@ namespace CadastroDeProdutosView.Features.Produto.Views
         private void ncmTextEdit_EditValueChanged(object sender, EventArgs e)
         {
             ncmTextEdit.Properties.MaxLength = 8;
+        }
+
+        private void alterarBancoDeDadosButton_Click(object sender, EventArgs e)
+        {
+            var alterarBancoDeDados = new ConfigurarCaminhoDoBancoDeDadosView();
+            alterarBancoDeDados.ShowDialog();
         }
     }
 }

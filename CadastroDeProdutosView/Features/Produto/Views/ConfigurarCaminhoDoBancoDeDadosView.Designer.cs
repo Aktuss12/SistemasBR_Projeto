@@ -56,6 +56,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             // 
             // aplicarButton
             // 
+            this.aplicarButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.aplicarButton.Location = new System.Drawing.Point(314, 27);
             this.aplicarButton.Name = "aplicarButton";
             this.aplicarButton.Size = new System.Drawing.Size(75, 22);
