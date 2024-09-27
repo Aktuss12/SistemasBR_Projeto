@@ -75,6 +75,7 @@
   <ItemGroup>
     <Compile Include="Features\Commons\CalculadorDeCodigoDeBarras.cs" />
     <Compile Include="Features\Commons\CalculoDeCustoEMarkupParaPrecoVenda.cs" />
+    <Compile Include="Features\Commons\ConfiguracaoManager.cs" />
     <Compile Include="Features\Commons\LimparLookUpEditETextEdit.cs" />
     <Compile Include="Features\Commons\MessageBoxCustomizada.cs">
       <SubType>Form</SubType>
@@ -107,6 +108,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Features\Commons\MessageBoxCustomizada.resx">
+      <DependentUpon>MessageBoxCustomizada.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Features\Produto\Views\CadastroDeProdutosView.resx">
       <DependentUpon>CadastroDeProdutosView.cs</DependentUpon>
     </EmbeddedResource>

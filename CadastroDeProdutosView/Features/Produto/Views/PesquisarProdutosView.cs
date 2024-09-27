@@ -10,9 +10,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 {
     public partial class PesquisarProdutosView : Form
     {
-        private const string connectionString =
-            @"User ID=SYSDBA;Password=masterkey;Database=C:\Users\admin\Documents\BANCODEDADOSPRODUTOS.FDB;DataSource=localhost;Port=3050;Dialect=3;Charset=NONE;";
-
+        private readonly string connectionString;
         private bool mostrarAtivos = true;
         public int? SelecionadorIdProduto { get; private set; }
 
@@ -20,6 +18,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
         {
             InitializeComponent();
             DesativarBotoes();
+            this.connectionString = ConfiguracaoManager.ObterStringConexao();
             CarregarBancoDeDados();
         }
 
@@ -98,7 +97,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             CarregarBancoDeDados();
         }
 
-        private static void ExcluirProduto(int idProduto)
+        private void ExcluirProduto(int idProduto)
         {
             using var conexao = new FbConnection(connectionString);
             conexao.Open();
@@ -108,7 +107,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             command.ExecuteNonQuery();
         }
 
-        private static void ReativarProduto(int idProduto)
+        private void ReativarProduto(int idProduto)
         {
             using var conexao = new FbConnection(connectionString);
             conexao.Open();

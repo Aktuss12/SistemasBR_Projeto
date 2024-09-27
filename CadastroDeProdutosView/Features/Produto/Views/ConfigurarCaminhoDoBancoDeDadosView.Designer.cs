@@ -53,6 +53,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.bancoDeDadosTextEdit.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Simple;
             this.bancoDeDadosTextEdit.Size = new System.Drawing.Size(296, 20);
             this.bancoDeDadosTextEdit.TabIndex = 1;
+            this.bancoDeDadosTextEdit.EditValueChanged += new System.EventHandler(this.bancoDeDadosTextEdit_EditValueChanged);
             // 
             // aplicarButton
             // 
@@ -62,6 +63,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.aplicarButton.Size = new System.Drawing.Size(75, 22);
             this.aplicarButton.TabIndex = 2;
             this.aplicarButton.Text = "Aplicar";
+            this.aplicarButton.Click += new System.EventHandler(this.aplicarButton_Click);
             // 
             // ConfigurarCaminhoDoBancoDeDadosView
             // 

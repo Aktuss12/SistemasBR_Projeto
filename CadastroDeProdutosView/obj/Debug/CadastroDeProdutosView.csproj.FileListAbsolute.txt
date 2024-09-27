@@ -753,3 +753,4 @@ C:\Users\admin\Documents\Sistemasbr_Projeto\CadastroDeProdutosView\bin\Debug\es\
 C:\Users\admin\Documents\Sistemasbr_Projeto\CadastroDeProdutosView\bin\Debug\ja\DevExpress.Xpo.v18.1.resources.dll
 C:\Users\admin\Documents\Sistemasbr_Projeto\CadastroDeProdutosView\bin\Debug\ru\DevExpress.Xpo.v18.1.resources.dll
 C:\Users\admin\Documents\Sistemasbr_Projeto\CadastroDeProdutosView\obj\Debug\CadastroDeProdutosView.Features.Produto.Views.ConfigurarCaminhoDoBancoDeDadosView.resources
+C:\Users\admin\Documents\Sistemasbr_Projeto\CadastroDeProdutosView\obj\Debug\CadastroDeProdutosView.Features.Commons.MessageBoxCustomizado.resources

@@ -12,8 +12,8 @@ namespace CadastroDeProdutosView.Features.Produto.Views
     public partial class CadastroDeProdutosView : Form
     {
         private readonly int? produtoId;
-        private const string connectionString =
-            @"User ID=SYSDBA;Password=masterkey;Database=C:\Users\admin\Documents\BANCODEDADOSPRODUTOS.FDB;DataSource=localhost;Port=3050;Dialect=3;Charset=NONE;";
+        private readonly string connectionString;
+        
 
         public CadastroDeProdutosView(int produtoId)
         {
@@ -21,7 +21,8 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             InitializeLookUpEdit();
             codigodebarrasTextEdit_EditValueChanged(null, null);
 
-            this.produtoId = produtoId; 
+            this.produtoId = produtoId;
+            connectionString = ConfiguracaoManager.ObterStringConexao();
 
             if (produtoId > 0)
             {
