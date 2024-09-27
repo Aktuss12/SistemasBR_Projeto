@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.Xml.Serialization;
 
-namespace CadastroDeProdutosView.Features.Configuration
+namespace CadastroDeProdutosView.Features.Commons
 {
     public class ConfiguracaoBanco
     {
