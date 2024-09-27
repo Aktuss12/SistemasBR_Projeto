@@ -89,8 +89,8 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             var idProduto = Convert.ToInt32(colunaSelecionada["idProduto"]);
 
             var confirmarResultado = XtraMessageBox.Show("Tem certeza que deseja excluir este produto?", "Confirmação",
-                MessageBoxButtons.YesNo);
-            if (confirmarResultado != DialogResult.Yes) return;
+                MessageBoxButtons.OKCancel);
+            if (confirmarResultado != DialogResult.OK) return;
 
             ExcluirProduto(idProduto);
             XtraMessageBox.Show("Produto excluído com sucesso.");
@@ -161,8 +161,8 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
             var idProduto = Convert.ToInt32(colunaSelecionada["idProduto"]);
             var confirmarResultado = XtraMessageBox.Show("Tem certeza que deseja reativar esse produto?", "Confirmação",
-                MessageBoxButtons.YesNo);
-            if (confirmarResultado != DialogResult.Yes) return;
+                MessageBoxButtons.OKCancel);
+            if (confirmarResultado != DialogResult.OK) return;
             {
                 ReativarProduto(idProduto);
                 XtraMessageBox.Show("Produto reativado com sucesso");
@@ -196,10 +196,8 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
             if (SelecionadorIdProduto != null)
             {
-                this.Hide();
                 var cadastroDeProdutos = new CadastroDeProdutosView(SelecionadorIdProduto.Value);
                 cadastroDeProdutos.ShowDialog();
-                this.Close();
             }
 
             CarregarBancoDeDados();
@@ -207,10 +205,10 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
         private void cadastroButtonItem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            this.Hide();
+            Hide();
             var abrirCadastro = new CadastroDeProdutosView(0);
             abrirCadastro.ShowDialog();
-            this.Close();
+            Close();
         }
     }
 }

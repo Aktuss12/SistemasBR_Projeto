@@ -5,6 +5,7 @@ using FirebirdSql.Data.FirebirdClient;
 using System;
 using System.Globalization;
 using System.Windows.Forms;
+using DevExpress.XtraBars;
 
 namespace CadastroDeProdutosView.Features.Produto.Views
 {
@@ -19,6 +20,8 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             InitializeComponent();
             InitializeLookUpEdit();
             codigodebarrasTextEdit_EditValueChanged(null, null);
+            EsconderBotao();
+
             this.produtoId = produtoId; 
 
             if (produtoId > 0)
@@ -130,7 +133,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             }
         }
 
-        private void salvarButtomItem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        private void salvarButtomItem_ItemClick(object sender, ItemClickEventArgs e)
         {
             if (!ValidarCamposObrigatorios.ValidacaoDeCamposObrigatorios(
                     nomeTextEdit,
@@ -224,6 +227,8 @@ namespace CadastroDeProdutosView.Features.Produto.Views
                     }
 
                     XtraMessageBox.Show("Produto cadastrado com sucesso");
+                    Hide();
+                    Close();
                 }
 
                 LimparLookUpEditsETextEdits();
@@ -356,13 +361,21 @@ namespace CadastroDeProdutosView.Features.Produto.Views
         }
 
         // Abertura do form de pesquisar os produtos cadastrados, com validação de não abrir outro cadastro caso ja tenha aberto pelo alterar
-        private void pesquisarProdutoButtomItem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        private void pesquisarProdutoButtomItem_ItemClick(object sender, ItemClickEventArgs e)
         {
-            this.Hide();
+            Hide();
             var pesquisarProdutos = new PesquisarProdutosView();
             pesquisarProdutos.ShowDialog();
-            this.Close();
+            Close();
+        }
 
+        private void EsconderBotao()
+        {
+            cancelarButtomItem.Visibility = BarItemVisibility.Never;
+        }
+        private void cancelarButtomItem_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            EsconderBotao();
         }
 
         private void fornecedorTextEdit_EditValueChanged(object sender, EventArgs e)
@@ -382,11 +395,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
         private void ncmTextEdit_EditValueChanged(object sender, EventArgs e)
         {
             ncmTextEdit.Properties.MaxLength = 8;
-        }
-
-        private void codigodebarrasLabelControl_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }
