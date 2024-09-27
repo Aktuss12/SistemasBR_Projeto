@@ -58,23 +58,5 @@ namespace CadastroDeProdutosView.Features.Commons
             AcceptButton = botaoSim;
             CancelButton = botaoNao;
         }
-
-        private void InitializeComponent()
-        {
-            this.SuspendLayout();
-            // 
-            // MessageBoxCustomizado
-            // 
-            this.ClientSize = new System.Drawing.Size(284, 261);
-            this.Name = "MessageBoxCustomizado";
-            this.Load += new System.EventHandler(this.MessageBoxCustomizado_Load);
-            this.ResumeLayout(false);
-
-        }
-
-        private void MessageBoxCustomizado_Load(object sender, System.EventArgs e)
-        {
-
-        }
     }
 }

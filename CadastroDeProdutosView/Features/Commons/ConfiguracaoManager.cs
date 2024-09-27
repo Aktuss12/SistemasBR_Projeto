@@ -34,7 +34,7 @@ namespace CadastroDeProdutosView.Features.Commons
         public static string ObterStringConexao()
         {
             var config = CarregarConfiguracao();
-            return $@"User ID=SYSDBA;Password=masterkey;Database={config.CaminhoBanco};DataSource=localhost;Port=3050;Dialect=3;Charset=NONE;";
+            return $"User ID=SYSDBA;Password=masterkey;Database={config.CaminhoBanco};DataSource=localhost;Port=3050;Dialect=3;Charset=NONE;";
         }
     }
 }

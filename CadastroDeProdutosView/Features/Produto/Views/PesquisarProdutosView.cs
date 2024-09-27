@@ -18,7 +18,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
         {
             InitializeComponent();
             DesativarBotoes();
-            this.connectionString = ConfiguracaoManager.ObterStringConexao();
+            connectionString = ConfiguracaoManager.ObterStringConexao();
             CarregarBancoDeDados();
         }
 
