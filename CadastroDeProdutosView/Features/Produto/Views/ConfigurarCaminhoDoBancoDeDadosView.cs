@@ -1,7 +1,7 @@
-﻿using System;
-using System.Windows.Forms;
-using CadastroDeProdutosView.Features.Commons;
+﻿using CadastroDeProdutosView.Features.Commons;
 using DevExpress.XtraEditors;
+using System;
+using System.Windows.Forms;
 
 namespace CadastroDeProdutosView.Features.Produto.Views
 {
@@ -44,5 +44,28 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             XtraMessageBox.Show("Configuração salva com sucesso. Reinicie a aplicação para aplicar as mudanças.");
             Close();
         }
+
+        private void ConfigurarCaminhoDoBancoDeDadosView_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void exploradorBandoDeDadosButton_Click(object sender, EventArgs e)
+        {
+            var openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Arquivos de Banco de Dados Firebird (*.FDB)|*.FDB|Todos os arquivos (*.*)|*.*";
+
+            if (openFileDialog.ShowDialog() != DialogResult.OK) return;
+            try
+            {
+                var caminhoDoArquivo = openFileDialog.FileName;
+                bancoDeDadosTextEdit.Text = caminhoDoArquivo;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Erro ao selecionar o arquivo: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
     }
 }

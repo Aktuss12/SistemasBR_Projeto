@@ -752,7 +752,6 @@ C:\Users\admin\Documents\Sistemasbr_Projeto\CadastroDeProdutosView\bin\Debug\de\
 C:\Users\admin\Documents\Sistemasbr_Projeto\CadastroDeProdutosView\bin\Debug\es\DevExpress.Xpo.v18.1.resources.dll
 C:\Users\admin\Documents\Sistemasbr_Projeto\CadastroDeProdutosView\bin\Debug\ja\DevExpress.Xpo.v18.1.resources.dll
 C:\Users\admin\Documents\Sistemasbr_Projeto\CadastroDeProdutosView\bin\Debug\ru\DevExpress.Xpo.v18.1.resources.dll
-C:\Users\admin\Documents\Sistemasbr_Projeto\CadastroDeProdutosView\obj\Debug\CadastroDeProdutosView.Features.Produto.Views.ConfigurarCaminhoDoBancoDeDadosView.resources
 C:\Users\admin\Documents\Sistemasbr_Projeto\CadastroDeProdutosView\obj\Debug\CadastroDeProdutosView.Features.Commons.MessageBoxCustomizado.resources
 C:\Users\admin\Downloads\Sistemasbr_Projeto\CadastroDeProdutosView\bin\Debug\CadastroDeProdutosView.exe.config
 C:\Users\admin\Downloads\Sistemasbr_Projeto\CadastroDeProdutosView\bin\Debug\CadastroDeProdutosView.exe
@@ -877,3 +876,4 @@ C:\Users\admin\Downloads\Sistemasbr_Projeto\CadastroDeProdutosView\obj\Debug\Cad
 C:\Users\admin\Downloads\Sistemasbr_Projeto\CadastroDeProdutosView\obj\Debug\CadastroDeProdutosView.csproj.CopyComplete
 C:\Users\admin\Downloads\Sistemasbr_Projeto\CadastroDeProdutosView\obj\Debug\CadastroDeProdutosView.exe
 C:\Users\admin\Downloads\Sistemasbr_Projeto\CadastroDeProdutosView\obj\Debug\CadastroDeProdutosView.pdb
+C:\Users\admin\Documents\Sistemasbr_Projeto\CadastroDeProdutosView\obj\Debug\CadastroDeProdutosView.Features.Produto.Views.ConfigurarCaminhoDoBancoDeDadosView.resources
