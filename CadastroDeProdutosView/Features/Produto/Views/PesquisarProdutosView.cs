@@ -190,7 +190,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
                 XtraMessageBox.Show("Erro ao obter o produto selecionado");
                 return; 
             }
-
             SelecionadorIdProduto = Convert.ToInt32(colunaSelecionada["idProduto"]);
 
             if (SelecionadorIdProduto != null)
@@ -198,7 +197,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
                 var cadastroDeProdutos = new CadastroDeProdutosView(SelecionadorIdProduto.Value);
                 cadastroDeProdutos.ShowDialog();
             }
-
             CarregarBancoDeDados();
         }
 

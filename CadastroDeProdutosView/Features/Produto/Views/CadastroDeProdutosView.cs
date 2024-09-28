@@ -90,6 +90,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
                 }
                 else
                 {
+                    // Conexão com a tabela Produtos do banco de dados
                     const string insertProdutoQuery = @"
                 INSERT INTO PRODUTO (Nome, Categoria, Fornecedor, CodigoDeBarras, UnidadeDeMedida, Estoque, Marca, Custo, Markup, PrecoDaVenda)
                 VALUES (@nome, @categoria, @fornecedor, @codigoDeBarras, @unidadeDeMedida, @estoque, @marca, @custo, @markup, @precoDaVenda)
@@ -104,7 +105,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
                         command.Parameters.Add("@Fornecedor", FbDbType.VarChar).Value = fornecedorTextEdit.Text ?? (object)DBNull.Value;
                         command.Parameters.Add("@CodigoDeBarras", FbDbType.VarChar).Value = codigodebarrasTextEdit.Text ?? (object)DBNull.Value;
                         command.Parameters.Add("@UnidadeDeMedida", FbDbType.VarChar).Value = unidadeDeMedidaLookUpEdit.EditValue ?? DBNull.Value;
-                        command.Parameters.Add("@Estoque", FbDbType.Integer).Value = int.TryParse(estoqueTextEdit.EditValue.ToString(), out var estoque) ? estoque : DBNull.Value;
+                        command.Parameters.Add("@Estoque", FbDbType.VarChar).Value = estoqueTextEdit.Text ?? (object)DBNull.Value;
                         command.Parameters.Add("@Marca", FbDbType.VarChar).Value = marcaLookUpEdit.EditValue ?? DBNull.Value;
 
                         if (decimal.TryParse(custoTextEdit.Text, out var custo))
@@ -125,6 +126,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
                         idProduto = (int)command.ExecuteScalar();
                     }
 
+                    // Conexão com a tabela Informações Fiscais do banco de dados
                     const string insertInformacoesFiscaisQuery = @"
                 INSERT INTO INFORMACOESFISCAIS (idProduto, origemDaMercadoria, situacaoTributaria, naturezaDaOperacao, ncm, aliquotaDeIcms, reducaoDeCalculo)
                 VALUES (@idProduto, @origemDaMercadoria, @situacaoTributaria, @naturezaDaOperacao, @ncm, @aliquotaDeIcms, @reducaoDeCalculo)";
@@ -149,7 +151,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
                         informacoesCommand.ExecuteNonQuery();
                     }
-
                     XtraMessageBox.Show("Produto cadastrado com sucesso");
                 }
 
@@ -166,15 +167,16 @@ namespace CadastroDeProdutosView.Features.Produto.Views
         {
             try
             {
-                using var connection = new FbConnection(connectionString);
-                connection.Open();
+                // Conexão com o banco de dados para preencher o form de acordo com os produtos ja cadastrados
+                using var conexao = new FbConnection(connectionString);
+                conexao.Open();
                 const string query = @"
                     SELECT P.*, I.*
                     FROM PRODUTO P
                     LEFT JOIN INFORMACOESFISCAIS I ON P.idProduto = I.idProduto
                     WHERE P.idProduto = @idProduto";
 
-                using var command = new FbCommand(query, connection);
+                using var command = new FbCommand(query, conexao);
                 command.Parameters.AddWithValue("@idProduto", idProduto);
 
                 using var reader = command.ExecuteReader();
@@ -234,7 +236,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
                         command.Parameters.Add("@Fornecedor", FbDbType.VarChar).Value = fornecedorTextEdit.Text ?? (object)DBNull.Value;
                         command.Parameters.Add("@CodigoDeBarras", FbDbType.VarChar).Value = codigodebarrasTextEdit.Text ?? (object)DBNull.Value;
                         command.Parameters.Add("@UnidadeDeMedida", FbDbType.VarChar).Value = unidadeDeMedidaLookUpEdit.EditValue ?? DBNull.Value;
-                        command.Parameters.Add("@Estoque", FbDbType.Integer).Value = int.TryParse(estoqueTextEdit.EditValue.ToString(), out var estoque) ? estoque : DBNull.Value;
+                        command.Parameters.Add("@Estoque", FbDbType.VarChar).Value = estoqueTextEdit.Text ?? (object)DBNull.Value;
                         command.Parameters.Add("@Marca", FbDbType.VarChar).Value = marcaLookUpEdit.EditValue ?? DBNull.Value;
 
                         if (decimal.TryParse(custoTextEdit.Text, out var custo))
@@ -351,11 +353,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             fornecedorTextEdit.Properties.MaxLength = 100;
         }
 
-        private void estoqueTextEdit_EditValueChanged_1(object sender, EventArgs e)
-        {
-            estoqueTextEdit.Properties.MaxLength = 12;
-        }
-
         private void precoVendaTextEdit_EditValueChanged(object sender, EventArgs e)
         {
             precoVendaTextEdit.Properties.MaxLength = 16;
@@ -369,6 +366,11 @@ namespace CadastroDeProdutosView.Features.Produto.Views
         {
             var alterarBancoDeDados = new ConfigurarCaminhoDoBancoDeDadosView();
             alterarBancoDeDados.ShowDialog();
+        }
+
+        private void estoqueTextEdit_EditValueChanged(object sender, EventArgs e)
+        {
+            estoqueTextEdit.Properties.MaxLength = 50;
         }
     }
 }

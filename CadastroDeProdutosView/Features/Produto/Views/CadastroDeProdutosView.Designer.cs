@@ -125,7 +125,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             ((System.ComponentModel.ISupportInitialize)(this.reducaoDeCalculoIcmsTextEdit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.aliquotaDeIcmsTextEdit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager)).BeginInit();
-            codigodebarrasTextEdit.Enabled = false;
             this.SuspendLayout();
             // 
             // tabPage
@@ -493,7 +492,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.estoqueTextEdit.Properties.Mask.UseMaskAsDisplayFormat = true;
             this.estoqueTextEdit.Size = new System.Drawing.Size(201, 30);
             this.estoqueTextEdit.TabIndex = 7;
-            this.estoqueTextEdit.EditValueChanged += new System.EventHandler(this.estoqueTextEdit_EditValueChanged_1);
+            this.estoqueTextEdit.EditValueChanged += new System.EventHandler(this.estoqueTextEdit_EditValueChanged);
             // 
             // precoDaVendaLabelControl
             // 
@@ -560,6 +559,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             // 
             this.codigodebarrasTextEdit.Cursor = System.Windows.Forms.Cursors.No;
             this.codigodebarrasTextEdit.EditValue = "";
+            this.codigodebarrasTextEdit.Enabled = false;
             this.codigodebarrasTextEdit.Location = new System.Drawing.Point(520, 475);
             this.codigodebarrasTextEdit.Name = "codigodebarrasTextEdit";
             this.codigodebarrasTextEdit.Properties.AppearanceDisabled.BackColor = System.Drawing.Color.White;
