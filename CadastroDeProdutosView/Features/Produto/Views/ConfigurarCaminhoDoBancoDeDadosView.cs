@@ -42,7 +42,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             var config = new ConfiguracaoBanco { CaminhoBanco = novoCaminho };
             ConfiguracaoManager.SalvarConfiguracao(config);
             XtraMessageBox.Show("Configuração salva com sucesso. Reinicie a aplicação para aplicar as mudanças.");
-            Close();
         }
 
         private void ConfigurarCaminhoDoBancoDeDadosView_Load(object sender, EventArgs e)
@@ -66,6 +65,5 @@ namespace CadastroDeProdutosView.Features.Produto.Views
                 MessageBox.Show($"Erro ao selecionar o arquivo: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
     }
 }
