@@ -10,24 +10,19 @@ namespace CadastroDeProdutosView.Features.Produto.Views
         public ConfigurarCaminhoDoBancoDeDadosView()
         {
             InitializeComponent();
-            PosicaoInicial();
+/*            PosicaoInicialDoForm();*/
             CarregarConfiguracao();
         }
 
-        private void PosicaoInicial()
+/*        private void PosicaoInicialDoForm()
         {
             StartPosition = FormStartPosition.CenterParent;
-        }
+        }*/
 
         private void CarregarConfiguracao()
         {
-            var config = ConfiguracaoManager.CarregarConfiguracao();
+            var config = ConfiguracaoBancoDeDados.CarregarBancoDeDados();
             bancoDeDadosTextEdit.Text = config.CaminhoBanco;
-        }
-
-        private void bancoDeDadosTextEdit_EditValueChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void aplicarButton_Click(object sender, EventArgs e)
@@ -40,16 +35,11 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             }
 
             var config = new ConfiguracaoBanco { CaminhoBanco = novoCaminho };
-            ConfiguracaoManager.SalvarConfiguracao(config);
+            ConfiguracaoBancoDeDados.SalvarConfiguracao(config);
             XtraMessageBox.Show("Configuração salva com sucesso. Reinicie a aplicação para aplicar as mudanças.");
         }
 
-        private void ConfigurarCaminhoDoBancoDeDadosView_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void exploradorBandoDeDadosButton_Click(object sender, EventArgs e)
+        private void exploradorBancoDeDadosButton_Click(object sender, EventArgs e)
         {
             var openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "Arquivos de Banco de Dados Firebird (*.FDB)|*.FDB|Todos os arquivos (*.*)|*.*";
@@ -62,7 +52,8 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Erro ao selecionar o arquivo: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Erro ao selecionar o arquivo: {ex.Message}",
+                    "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

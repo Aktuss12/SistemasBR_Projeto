@@ -8,8 +8,14 @@ namespace CadastroDeProdutosView.Features.Commons
         public string CaminhoBanco { get; set; }
     }
 
-    public static class ConfiguracaoManager
+    public static class ConfiguracaoBancoDeDados
     {
+        public static string ObterStringDeConexao()
+        {
+            var carregarBanco = CarregarBancoDeDados();
+            return $"User ID=SYSDBA;Password=masterkey;Database={carregarBanco.CaminhoBanco};DataSource=localhost;Port=3050;Dialect=3;Charset=NONE;";
+        }
+
         private const string ArquivoConfiguracao = "config.xml";
 
         public static void SalvarConfiguracao(ConfiguracaoBanco config)
@@ -19,7 +25,7 @@ namespace CadastroDeProdutosView.Features.Commons
             serializer.Serialize(writer, config);
         }
 
-        public static ConfiguracaoBanco CarregarConfiguracao()
+        public static ConfiguracaoBanco CarregarBancoDeDados()
         {
             if (!File.Exists(ArquivoConfiguracao))
             {
@@ -29,12 +35,6 @@ namespace CadastroDeProdutosView.Features.Commons
             var serializer = new XmlSerializer(typeof(ConfiguracaoBanco));
             using var reader = new StreamReader(ArquivoConfiguracao);
             return (ConfiguracaoBanco)serializer.Deserialize(reader);
-        }
-
-        public static string ObterStringConexao()
-        {
-            var config = CarregarConfiguracao();
-            return $"User ID=SYSDBA;Password=masterkey;Database={config.CaminhoBanco};DataSource=localhost;Port=3050;Dialect=3;Charset=NONE;";
         }
     }
 }

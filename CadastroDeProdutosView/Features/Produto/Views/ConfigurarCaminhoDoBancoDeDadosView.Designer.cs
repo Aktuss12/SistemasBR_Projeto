@@ -1,4 +1,6 @@
 ﻿
+using System.Windows.Forms;
+
 namespace CadastroDeProdutosView.Features.Produto.Views
 {
     partial class ConfigurarCaminhoDoBancoDeDadosView
@@ -29,6 +31,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
         /// </summary>
         private void InitializeComponent()
         {
+            StartPosition = FormStartPosition.CenterParent;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ConfigurarCaminhoDoBancoDeDadosView));
             this.caminhoDoBancoDeDadosLabelControl = new System.Windows.Forms.Label();
             this.bancoDeDadosTextEdit = new DevExpress.XtraEditors.TextEdit();
@@ -57,7 +60,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.bancoDeDadosTextEdit.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Simple;
             this.bancoDeDadosTextEdit.Size = new System.Drawing.Size(336, 28);
             this.bancoDeDadosTextEdit.TabIndex = 1;
-            this.bancoDeDadosTextEdit.EditValueChanged += new System.EventHandler(this.bancoDeDadosTextEdit_EditValueChanged);
             // 
             // aplicarButton
             // 
@@ -80,7 +82,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.exploradorBandoDeDadosButton.Name = "exploradorBandoDeDadosButton";
             this.exploradorBandoDeDadosButton.Size = new System.Drawing.Size(57, 51);
             this.exploradorBandoDeDadosButton.TabIndex = 3;
-            this.exploradorBandoDeDadosButton.Click += new System.EventHandler(this.exploradorBandoDeDadosButton_Click);
+            this.exploradorBandoDeDadosButton.Click += new System.EventHandler(this.exploradorBancoDeDadosButton_Click);
             // 
             // ConfigurarCaminhoDoBancoDeDadosView
             // 
@@ -95,7 +97,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "ConfigurarCaminhoDoBancoDeDadosView";
             this.Text = "ConfigurarCaminhoDoBancoDeDadosView";
-            this.Load += new System.EventHandler(this.ConfigurarCaminhoDoBancoDeDadosView_Load);
             ((System.ComponentModel.ISupportInitialize)(this.bancoDeDadosTextEdit.Properties)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
