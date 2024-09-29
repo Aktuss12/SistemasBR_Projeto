@@ -97,7 +97,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
                 RETURNING idProduto";
 
                     int idProduto;
-
+                    
                     using (var command = new FbCommand(insertProdutoQuery, conexao, transacao))
                     {
                         command.Parameters.Add("@Nome", FbDbType.VarChar).Value = nomeTextEdit.Text ?? (object)DBNull.Value;
@@ -105,7 +105,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
                         command.Parameters.Add("@Fornecedor", FbDbType.VarChar).Value = fornecedorTextEdit.Text ?? (object)DBNull.Value;
                         command.Parameters.Add("@CodigoDeBarras", FbDbType.VarChar).Value = codigodebarrasTextEdit.Text ?? (object)DBNull.Value;
                         command.Parameters.Add("@UnidadeDeMedida", FbDbType.VarChar).Value = unidadeDeMedidaLookUpEdit.EditValue ?? DBNull.Value;
-                        /*command.Parameters.Add("@Estoque", FbDbType.Integer).Value = estoqueTextEdit.Text ?? (object)DBNull.Value;*/
                         command.Parameters.Add("@Marca", FbDbType.VarChar).Value = marcaLookUpEdit.EditValue ?? DBNull.Value;
                         var custo = ConversorParaDecimal.ParseDecimal(custoTextEdit.Text);
                         command.Parameters.Add("@Custo", FbDbType.Decimal).Value = custo;
@@ -116,7 +115,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
                         if (int.TryParse(estoqueTextEdit.Text, NumberStyles.Any, CultureInfo.InvariantCulture, out var estoque))
                             command.Parameters.Add("@Estoque", FbDbType.Integer).Value = estoque;
-                        else
+                        else 
                             command.Parameters.Add("@Estoque", FbDbType.Integer).Value = estoqueTextEdit.Text;
 
                         idProduto = (int)command.ExecuteScalar();
@@ -319,7 +318,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
         private void fornecedorTextEdit_EditValueChanged(object sender, EventArgs e)
         {
-            fornecedorTextEdit.Properties.MaxLength = 100;
+            fornecedorTextEdit.Properties.MaxLength = 50;
         }
 
         private void precoVendaTextEdit_EditValueChanged(object sender, EventArgs e)
@@ -333,7 +332,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
         private void estoqueTextEdit_EditValueChanged(object sender, EventArgs e)
         {
-            estoqueTextEdit.Properties.MaxLength = 10;
+            estoqueTextEdit.Properties.MaxLength = 9;
         }
 
         private void nomeTextEdit_EditValueChanged(object sender, EventArgs e)
