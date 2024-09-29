@@ -4,6 +4,7 @@ using DevExpress.XtraBars;
 using DevExpress.XtraEditors;
 using FirebirdSql.Data.FirebirdClient;
 using System;
+using System.Globalization;
 using System.Windows.Forms;
 
 namespace CadastroDeProdutosView.Features.Produto.Views
@@ -104,7 +105,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
                         command.Parameters.Add("@Fornecedor", FbDbType.VarChar).Value = fornecedorTextEdit.Text ?? (object)DBNull.Value;
                         command.Parameters.Add("@CodigoDeBarras", FbDbType.VarChar).Value = codigodebarrasTextEdit.Text ?? (object)DBNull.Value;
                         command.Parameters.Add("@UnidadeDeMedida", FbDbType.VarChar).Value = unidadeDeMedidaLookUpEdit.EditValue ?? DBNull.Value;
-                        command.Parameters.Add("@Estoque", FbDbType.Integer).Value = estoqueTextEdit.Text ?? (object)DBNull.Value;
+                        /*command.Parameters.Add("@Estoque", FbDbType.Integer).Value = estoqueTextEdit.Text ?? (object)DBNull.Value;*/
                         command.Parameters.Add("@Marca", FbDbType.VarChar).Value = marcaLookUpEdit.EditValue ?? DBNull.Value;
                         var custo = ConversorParaDecimal.ParseDecimal(custoTextEdit.Text);
                         command.Parameters.Add("@Custo", FbDbType.Decimal).Value = custo;
@@ -112,6 +113,12 @@ namespace CadastroDeProdutosView.Features.Produto.Views
                         command.Parameters.Add("@markup", FbDbType.Decimal).Value = markup;
                         var precoVenda = ConversorParaDecimal.ParseDecimal(precoVendaTextEdit.Text);
                         command.Parameters.Add("@PrecoDaVenda", FbDbType.Decimal).Value = precoVenda;
+
+                        if (int.TryParse(estoqueTextEdit.Text, NumberStyles.Any, CultureInfo.InvariantCulture, out var estoque))
+                            command.Parameters.Add("@Estoque", FbDbType.Integer).Value = estoque;
+                        else
+                            command.Parameters.Add("@Estoque", FbDbType.Integer).Value = estoqueTextEdit.Text;
+
                         idProduto = (int)command.ExecuteScalar();
                     }
 
@@ -284,6 +291,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
         private void custoTextEdit_EditValueChanged(object sender, EventArgs e)
         {
+            custoTextEdit.Properties.MaxLength = 6;
             if (decimal.TryParse(custoTextEdit.Text, out var custo) &&
                 decimal.TryParse(markupTextEdit.Text, out var markup))
             {
@@ -293,6 +301,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
         private void markupTextEdit_EditValueChanged_1(object sender, EventArgs e)
         {
+            markupTextEdit.Properties.MaxLength = 6;
             if (decimal.TryParse(custoTextEdit.Text, out var custo) &&
                 decimal.TryParse(markupTextEdit.Text, out var markup))
             {
@@ -315,22 +324,36 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
         private void precoVendaTextEdit_EditValueChanged(object sender, EventArgs e)
         {
-            precoVendaTextEdit.Properties.MaxLength = 16;
+            precoVendaTextEdit.Properties.MaxLength = 6;
         }
         private void ncmTextEdit_EditValueChanged_1(object sender, EventArgs e)
         {
             ncmTextEdit.Properties.MaxLength = 8;
         }
 
-        private void alterarBancoDeDadosButton_Click(object sender, EventArgs e)
-        {
-            var alterarBancoDeDados = new ConfigurarCaminhoDoBancoDeDadosView();
-            alterarBancoDeDados.ShowDialog();
-        }
-
         private void estoqueTextEdit_EditValueChanged(object sender, EventArgs e)
         {
-            estoqueTextEdit.Properties.MaxLength = 50;
+            estoqueTextEdit.Properties.MaxLength = 10;
+        }
+
+        private void nomeTextEdit_EditValueChanged(object sender, EventArgs e)
+        {
+            nomeTextEdit.Properties.MaxLength = 100;
+        }
+
+        private void marcaLookUpEdit_EditValueChanged(object sender, EventArgs e)
+        {
+            marcaLookUpEdit.Properties.MaxLength = 50;
+        }
+
+        private void reducaoDeCalculoIcmsTextEdit_EditValueChanged(object sender, EventArgs e)
+        {
+            reducaoDeCalculoIcmsTextEdit.Properties.MaxLength = 5;
+        }
+
+        private void aliquotaDeIcmsTextEdit_EditValueChanged(object sender, EventArgs e)
+        {
+            aliquotaDeIcmsTextEdit.Properties.MaxLength = 5;
         }
     }
 }
