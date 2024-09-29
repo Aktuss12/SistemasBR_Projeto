@@ -1,8 +1,8 @@
-﻿using DevExpress.XtraEditors;
-using System;
+﻿using System;
 using System.Linq;
+using DevExpress.XtraEditors;
 
-namespace CadastroDeProdutosView.Features.Commons
+namespace CadastroDeProdutosView.Features.Commons.Services
 { 
     public static class ManipuladorDeEnumService
     {

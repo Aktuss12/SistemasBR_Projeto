@@ -8,17 +8,17 @@ using CadastroDeProdutosView.Features.Commons;
 
 namespace CadastroDeProdutosView.Features.Produto.Views
 {
-    public partial class PesquisarProdutosView : Form
+    public partial class PesquisaDeProdutosView : Form
     {
         private readonly string connectionString;
         private bool mostrarAtivos = true;
         public int? SelecionadorIdProduto { get; private set; }
 
-        public PesquisarProdutosView()
+        public PesquisaDeProdutosView()
         {
             InitializeComponent();
             DesativarBotoes();
-            connectionString = ConfiguracaoBancoDeDados.ObterStringDeConexao();
+            connectionString = ConfiguracaoDoBancoDeDados.ObterStringDeConexao();
             CarregarBancoDeDados();
         }
 

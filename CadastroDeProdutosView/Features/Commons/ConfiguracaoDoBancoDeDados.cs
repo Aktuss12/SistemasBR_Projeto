@@ -8,7 +8,7 @@ namespace CadastroDeProdutosView.Features.Commons
         public string CaminhoBanco { get; set; }
     }
 
-    public static class ConfiguracaoBancoDeDados
+    public static class ConfiguracaoDoBancoDeDados
     {
         public static string ObterStringDeConexao()
         {

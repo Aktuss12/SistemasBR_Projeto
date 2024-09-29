@@ -1,8 +1,8 @@
 ﻿namespace CadastroDeProdutosView.Features.Commons
 {
-    public static class ValidarCamposObrigatorios
+    public static class ValidacaoDeCamposObrigatorios
     {
-        public static bool ValidacaoDeCamposObrigatorios(
+        public static bool ValidacaoParaCamposObrigatorios(
             DevExpress.XtraEditors.TextEdit nomeTextEdit,
             DevExpress.XtraEditors.TextEdit estoqueTextEdit,
             DevExpress.XtraEditors.TextEdit precoVendaTextEdit,

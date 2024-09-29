@@ -1,7 +1,7 @@
 ﻿
 namespace CadastroDeProdutosView.Features.Produto.Views
 {
-    partial class PesquisarProdutosView
+    partial class PesquisaDeProdutosView
     {
         /// <summary>
         /// Required designer variable.
@@ -30,7 +30,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PesquisarProdutosView));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PesquisaDeProdutosView));
             this.pesquisarBehaviorManager = new DevExpress.Utils.Behaviors.BehaviorManager(this.components);
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.pesquisarBarManager = new DevExpress.XtraBars.BarManager(this.components);

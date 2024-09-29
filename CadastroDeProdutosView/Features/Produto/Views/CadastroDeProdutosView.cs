@@ -1,10 +1,10 @@
 ﻿using CadastroDeProdutosView.Features.Commons;
+using CadastroDeProdutosView.Features.Commons.Services;
 using CadastroDeProdutosView.Features.Produto.Enums;
 using DevExpress.XtraBars;
 using DevExpress.XtraEditors;
 using FirebirdSql.Data.FirebirdClient;
 using System;
-using System.Globalization;
 using System.Windows.Forms;
 
 namespace CadastroDeProdutosView.Features.Produto.Views
@@ -13,7 +13,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
     {
         private readonly int? produtoId;
         private readonly string connectionString;
-        
 
         public CadastroDeProdutosView(int produtoId)
         {
@@ -21,7 +20,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             InitializeLookUpEdit();
 
             this.produtoId = produtoId;
-            connectionString = ConfiguracaoBancoDeDados.ObterStringDeConexao();
+            connectionString = ConfiguracaoDoBancoDeDados.ObterStringDeConexao();
             if (produtoId > 0)
             {
                 CarregarProduto(this.produtoId.Value);
@@ -42,27 +41,27 @@ namespace CadastroDeProdutosView.Features.Produto.Views
         // Metodo para limpar as LookUpEdits e TextEdits
         private void LimparLookUpEditsETextEdits()
         {
-            nomeTextEdit.LimparTextEdit();
-            fornecedorTextEdit.LimparTextEdit();
-            codigodebarrasTextEdit.LimparTextEdit();
-            estoqueTextEdit.LimparTextEdit();
-            custoTextEdit.LimparTextEdit();
-            markupTextEdit.LimparTextEdit();
-            precoVendaTextEdit.LimparTextEdit();
-            ncmTextEdit.LimparTextEdit();
-            aliquotaDeIcmsTextEdit.LimparTextEdit();
-            reducaoDeCalculoIcmsTextEdit.LimparTextEdit();
-            categoriaDeProdutosLookUpEdit.LimparLookUpEdit();
-            unidadeDeMedidaLookUpEdit.LimparLookUpEdit();
-            marcaLookUpEdit.LimparLookUpEdit();
-            origemDaMercadoriaLookUpEdit.LimparLookUpEdit();
-            situacaoTributariaLookUpEdit.LimparLookUpEdit();
-            naturezaDaOperacaoLookUpEdit.LimparLookUpEdit();
+            nomeTextEdit.LimpezaDeTextEdit();
+            fornecedorTextEdit.LimpezaDeTextEdit();
+            codigodebarrasTextEdit.LimpezaDeTextEdit();
+            estoqueTextEdit.LimpezaDeTextEdit();
+            custoTextEdit.LimpezaDeTextEdit();
+            markupTextEdit.LimpezaDeTextEdit();
+            precoVendaTextEdit.LimpezaDeTextEdit();
+            ncmTextEdit.LimpezaDeTextEdit();
+            aliquotaDeIcmsTextEdit.LimpezaDeTextEdit();
+            reducaoDeCalculoIcmsTextEdit.LimpezaDeTextEdit();
+            categoriaDeProdutosLookUpEdit.LimpezaDeLookUpEdit();
+            unidadeDeMedidaLookUpEdit.LimpezaDeLookUpEdit();
+            marcaLookUpEdit.LimpezaDeLookUpEdit();
+            origemDaMercadoriaLookUpEdit.LimpezaDeLookUpEdit();
+            situacaoTributariaLookUpEdit.LimpezaDeLookUpEdit();
+            naturezaDaOperacaoLookUpEdit.LimpezaDeLookUpEdit();
         }
 
         private void salvarButtomItem_ItemClick(object sender, ItemClickEventArgs e)
         {
-            if (!ValidarCamposObrigatorios.ValidacaoDeCamposObrigatorios(
+            if (!ValidacaoDeCamposObrigatorios.ValidacaoParaCamposObrigatorios(
                     nomeTextEdit,
                     estoqueTextEdit,
                     precoVendaTextEdit,
@@ -86,15 +85,35 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
                 if (produtoId is > 0)
                 {
-                    AtualizarProduto(produtoId.Value);
+                    AlterarProduto(produtoId.Value);
                 }
                 else
                 {
                     // Conexão com a tabela Produtos do banco de dados
                     const string insertProdutoQuery = @"
-                INSERT INTO PRODUTO (Nome, Categoria, Fornecedor, CodigoDeBarras, UnidadeDeMedida, Estoque, Marca, Custo, Markup, PrecoDaVenda)
-                VALUES (@nome, @categoria, @fornecedor, @codigoDeBarras, @unidadeDeMedida, @estoque, @marca, @custo, @markup, @precoDaVenda)
-                RETURNING idProduto";
+                        INSERT INTO PRODUTO (
+                            Nome,
+                            Categoria,
+                            Fornecedor,
+                            CodigoDeBarras,
+                            UnidadeDeMedida,
+                            Estoque,
+                            Marca,
+                            Custo,
+                            Markup,
+                            PrecoDaVenda)
+                            VALUES 
+                            (@Nome,
+                            @Categoria,
+                            @Fornecedor,
+                            @codigoDeBarras,
+                            @unidadeDeMedida,
+                            @Estoque,
+                            @Marca,
+                            @Custo,
+                            @Markup,
+                            @precoDaVenda)
+                        RETURNING idProduto";
 
                     int idProduto;
                     
@@ -106,6 +125,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
                         command.Parameters.Add("@CodigoDeBarras", FbDbType.VarChar).Value = codigodebarrasTextEdit.Text ?? (object)DBNull.Value;
                         command.Parameters.Add("@UnidadeDeMedida", FbDbType.VarChar).Value = unidadeDeMedidaLookUpEdit.EditValue ?? DBNull.Value;
                         command.Parameters.Add("@Marca", FbDbType.VarChar).Value = marcaLookUpEdit.EditValue ?? DBNull.Value;
+                        command.Parameters.Add("@Estoque", FbDbType.Integer).Value = estoqueTextEdit.Text ?? (object)DBNull.Value;
                         var custo = ConversorParaDecimal.ParseDecimal(custoTextEdit.Text);
                         command.Parameters.Add("@Custo", FbDbType.Decimal).Value = custo;
                         var markup = ConversorParaDecimal.ParseDecimal(markupTextEdit.Text);
@@ -113,18 +133,27 @@ namespace CadastroDeProdutosView.Features.Produto.Views
                         var precoVenda = ConversorParaDecimal.ParseDecimal(precoVendaTextEdit.Text);
                         command.Parameters.Add("@PrecoDaVenda", FbDbType.Decimal).Value = precoVenda;
 
-                        if (int.TryParse(estoqueTextEdit.Text, NumberStyles.Any, CultureInfo.InvariantCulture, out var estoque))
-                            command.Parameters.Add("@Estoque", FbDbType.Integer).Value = estoque;
-                        else 
-                            command.Parameters.Add("@Estoque", FbDbType.Integer).Value = estoqueTextEdit.Text;
-
                         idProduto = (int)command.ExecuteScalar();
                     }
 
                     // Conexão com a tabela Informações Fiscais do banco de dados
                     const string insertInformacoesFiscaisQuery = @"
-                INSERT INTO INFORMACOESFISCAIS (idProduto, origemDaMercadoria, situacaoTributaria, naturezaDaOperacao, ncm, aliquotaDeIcms, reducaoDeCalculo)
-                VALUES (@idProduto, @origemDaMercadoria, @situacaoTributaria, @naturezaDaOperacao, @ncm, @aliquotaDeIcms, @reducaoDeCalculo)";
+                        INSERT INTO INFORMACOESFISCAIS
+                            (idProduto,
+                            origemDaMercadoria,
+                            situacaoTributaria,
+                            naturezaDaOperacao,
+                            Ncm,
+                            aliquotaDeIcms,
+                            reducaoDeCalculo)
+                            VALUES
+                            (@idProduto,
+                            @origemDaMercadoria,
+                            @situacaoTributaria,
+                            @naturezaDaOperacao,
+                            @Ncm,
+                            @aliquotaDeIcms,
+                            @reducaoDeCalculo)";
 
                     using (var informacoesCommand = new FbCommand(insertInformacoesFiscaisQuery, conexao, transacao))
                     {
@@ -157,34 +186,33 @@ namespace CadastroDeProdutosView.Features.Produto.Views
                 // Conexão com o banco de dados para preencher o form de acordo com os produtos ja cadastrados
                 using var conexao = new FbConnection(connectionString);
                 conexao.Open();
-                const string query = @"
+                const string preenchimentoDeTabelasQuery = @"
                     SELECT P.*, I.*
                     FROM PRODUTO P
                     LEFT JOIN INFORMACOESFISCAIS I ON P.idProduto = I.idProduto
                     WHERE P.idProduto = @idProduto";
 
-                using var command = new FbCommand(query, conexao);
+                using var command = new FbCommand(preenchimentoDeTabelasQuery, conexao);
                 command.Parameters.AddWithValue("@idProduto", idProduto);
+                using var leituraDeDados = command.ExecuteReader();
 
-                using var reader = command.ExecuteReader();
-                if (!reader.Read()) return;
-                nomeTextEdit.Text = reader["Nome"].ToString();
-                categoriaDeProdutosLookUpEdit.EditValue = reader["Categoria"];
-                fornecedorTextEdit.Text = reader["Fornecedor"].ToString();
-                codigodebarrasTextEdit.Text = reader["CodigoDeBarras"].ToString();
-                unidadeDeMedidaLookUpEdit.EditValue = reader["UnidadeDeMedida"];
-                estoqueTextEdit.Text = reader["Estoque"].ToString();
-                marcaLookUpEdit.EditValue = reader["Marca"];
-                custoTextEdit.Text = reader["Custo"].ToString();
-                markupTextEdit.Text = reader["Markup"].ToString();
-                precoVendaTextEdit.Text = reader["PrecoDaVenda"].ToString();
-
-                origemDaMercadoriaLookUpEdit.EditValue = reader["origemDaMercadoria"];
-                situacaoTributariaLookUpEdit.EditValue = reader["situacaoTributaria"];
-                naturezaDaOperacaoLookUpEdit.EditValue = reader["naturezaDaOperacao"];
-                ncmTextEdit.Text = reader["ncm"].ToString();
-                aliquotaDeIcmsTextEdit.Text = reader["aliquotaDeIcms"].ToString();
-                reducaoDeCalculoIcmsTextEdit.Text = reader["reducaoDeCalculo"].ToString();
+                if (!leituraDeDados.Read()) return;
+                nomeTextEdit.Text = leituraDeDados["Nome"].ToString();
+                categoriaDeProdutosLookUpEdit.EditValue = leituraDeDados["Categoria"];
+                fornecedorTextEdit.Text = leituraDeDados["Fornecedor"].ToString();
+                codigodebarrasTextEdit.Text = leituraDeDados["CodigoDeBarras"].ToString();
+                unidadeDeMedidaLookUpEdit.EditValue = leituraDeDados["UnidadeDeMedida"];
+                estoqueTextEdit.Text = leituraDeDados["Estoque"].ToString();
+                marcaLookUpEdit.EditValue = leituraDeDados["Marca"];
+                custoTextEdit.Text = leituraDeDados["Custo"].ToString();
+                markupTextEdit.Text = leituraDeDados["Markup"].ToString();
+                precoVendaTextEdit.Text = leituraDeDados["PrecoDaVenda"].ToString();
+                origemDaMercadoriaLookUpEdit.EditValue = leituraDeDados["origemDaMercadoria"];
+                situacaoTributariaLookUpEdit.EditValue = leituraDeDados["situacaoTributaria"];
+                naturezaDaOperacaoLookUpEdit.EditValue = leituraDeDados["naturezaDaOperacao"];
+                ncmTextEdit.Text = leituraDeDados["ncm"].ToString();
+                aliquotaDeIcmsTextEdit.Text = leituraDeDados["aliquotaDeIcms"].ToString();
+                reducaoDeCalculoIcmsTextEdit.Text = leituraDeDados["reducaoDeCalculo"].ToString();
             }
             catch (Exception ex)
             {
@@ -192,17 +220,15 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             }
         }
 
-        public void AtualizarProduto(int idProduto)
+        public void AlterarProduto(int idProduto)
         {
+            using var conexao = new FbConnection(connectionString);
+            conexao.Open();
+
+            using var transacao = conexao.BeginTransaction();
             try
             {
-                using var conexao = new FbConnection(connectionString);
-                conexao.Open();
-
-                using var transacao = conexao.BeginTransaction();
-                try
-                {
-                    const string updateProdutoQuery = @"
+                const string updateProdutoQuery = @"
                         UPDATE PRODUTO
                         SET Nome = @Nome, 
                         Categoria = @Categoria, 
@@ -213,46 +239,38 @@ namespace CadastroDeProdutosView.Features.Produto.Views
                         Marca = @Marca, 
                         Custo = @Custo, 
                         Markup = @Markup, 
-                         PrecoDaVenda = @PrecoDaVenda
+                        PrecoDaVenda = @PrecoDaVenda
                         WHERE idProduto = @idProduto";
 
-                    using (var command = new FbCommand(updateProdutoQuery, conexao, transacao))
-                    {
-                        command.Parameters.Add("@Nome", FbDbType.VarChar).Value = nomeTextEdit.Text ?? (object)DBNull.Value;
-                        command.Parameters.Add("@Categoria", FbDbType.VarChar).Value = categoriaDeProdutosLookUpEdit.EditValue ?? DBNull.Value;
-                        command.Parameters.Add("@Fornecedor", FbDbType.VarChar).Value = fornecedorTextEdit.Text ?? (object)DBNull.Value;
-                        command.Parameters.Add("@CodigoDeBarras", FbDbType.VarChar).Value = codigodebarrasTextEdit.Text ?? (object)DBNull.Value;
-                        command.Parameters.Add("@UnidadeDeMedida", FbDbType.VarChar).Value = unidadeDeMedidaLookUpEdit.EditValue ?? DBNull.Value;
-                        command.Parameters.Add("@Estoque", FbDbType.VarChar).Value = estoqueTextEdit.Text ?? (object)DBNull.Value;
-                        command.Parameters.Add("@Marca", FbDbType.VarChar).Value = marcaLookUpEdit.EditValue ?? DBNull.Value;
-                        var custo = ConversorParaDecimal.ParseDecimal(custoTextEdit.Text);
-                        command.Parameters.Add("@Custo", FbDbType.Decimal).Value = custo;
-                        var markup = ConversorParaDecimal.ParseDecimal(markupTextEdit.Text);
-                        command.Parameters.Add("@markup", FbDbType.Decimal).Value = markup;
-                        var precoVenda = ConversorParaDecimal.ParseDecimal(precoVendaTextEdit.Text);
-                        command.Parameters.Add("@PrecoDaVenda", FbDbType.Decimal).Value = precoVenda;
-                        command.Parameters.Add("@idProduto", FbDbType.Integer).Value = idProduto;
-
-                        command.ExecuteNonQuery();
-                    }
-
-                    AtualizarInformacoesFiscais(idProduto, conexao, transacao);
-
-                    transacao.Commit();
-                    XtraMessageBox.Show("Produto atualizado com sucesso.");
-                    LimparLookUpEditsETextEdits();
-                    Hide();
-                    Close();
-                }
-                catch (Exception ex)
+                using (var command = new FbCommand(updateProdutoQuery, conexao, transacao))
                 {
-                    transacao.Rollback();
-                    throw new Exception("Erro ao atualizar o produto no banco de dados", ex);
+                    command.Parameters.Add("@idProduto", FbDbType.Integer).Value = idProduto;
+                    command.Parameters.Add("@Nome", FbDbType.VarChar).Value = nomeTextEdit.Text ?? (object)DBNull.Value;
+                    command.Parameters.Add("@Categoria", FbDbType.VarChar).Value = categoriaDeProdutosLookUpEdit.EditValue ?? DBNull.Value;
+                    command.Parameters.Add("@Fornecedor", FbDbType.VarChar).Value = fornecedorTextEdit.Text ?? (object)DBNull.Value;
+                    command.Parameters.Add("@CodigoDeBarras", FbDbType.VarChar).Value = codigodebarrasTextEdit.Text ?? (object)DBNull.Value;
+                    command.Parameters.Add("@UnidadeDeMedida", FbDbType.VarChar).Value = unidadeDeMedidaLookUpEdit.EditValue ?? DBNull.Value;
+                    command.Parameters.Add("@Estoque", FbDbType.VarChar).Value = estoqueTextEdit.Text ?? (object)DBNull.Value;
+                    command.Parameters.Add("@Marca", FbDbType.VarChar).Value = marcaLookUpEdit.EditValue ?? DBNull.Value;
+                    var custo = ConversorParaDecimal.ParseDecimal(custoTextEdit.Text);
+                    command.Parameters.Add("@Custo", FbDbType.Decimal).Value = custo;
+                    var markup = ConversorParaDecimal.ParseDecimal(markupTextEdit.Text);
+                    command.Parameters.Add("@Markup", FbDbType.Decimal).Value = markup;
+                    var precoVenda = ConversorParaDecimal.ParseDecimal(precoVendaTextEdit.Text);
+                    command.Parameters.Add("@PrecoDaVenda", FbDbType.Decimal).Value = precoVenda;
+                    command.ExecuteNonQuery();
                 }
+                XtraMessageBox.Show("Produto atualizado com sucesso.");
+                AtualizarInformacoesFiscais(idProduto, conexao, transacao);
+                transacao.Commit();
+                LimparLookUpEditsETextEdits();
+                Hide();
+                Close();
             }
             catch (Exception ex)
             {
-                XtraMessageBox.Show($"Erro ao conectar ao banco de dados: {ex.Message}");
+                transacao.Rollback();
+                throw new Exception("Erro ao atualizar o produto no banco de dados", ex);
             }
         }
 
@@ -263,7 +281,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
                 SET origemDaMercadoria = @origemDaMercadoria,
                 situacaoTributaria = @situacaoTributaria,
                 naturezaDaOperacao = @naturezaDaOperacao,
-                ncm = @ncm,
+                Ncm = @Ncm,
                 aliquotaDeIcms = @aliquotaDeIcms,
                 reducaoDeCalculo = @reducaoDeCalculo
                 WHERE idProduto = @idProduto";
@@ -273,7 +291,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             command.Parameters.Add("@origemDaMercadoria", FbDbType.VarChar).Value = origemDaMercadoriaLookUpEdit.EditValue ?? DBNull.Value;
             command.Parameters.Add("@situacaoTributaria", FbDbType.VarChar).Value = situacaoTributariaLookUpEdit.EditValue ?? DBNull.Value;
             command.Parameters.Add("@naturezaDaOperacao", FbDbType.VarChar).Value = naturezaDaOperacaoLookUpEdit.EditValue ?? DBNull.Value;
-            command.Parameters.Add("@ncm", FbDbType.VarChar).Value = (object)ncmTextEdit.Text ?? DBNull.Value;
+            command.Parameters.Add("@Ncm", FbDbType.VarChar).Value = (object)ncmTextEdit.Text ?? DBNull.Value;
             var aliquotaDeIcms = ConversorParaDecimal.ParseDecimal(aliquotaDeIcmsTextEdit.Text);
             command.Parameters.Add("@aliquotaDeIcms", FbDbType.Decimal).Value = aliquotaDeIcms;
             var reducaoDeCalculo = ConversorParaDecimal.ParseDecimal(reducaoDeCalculoIcmsTextEdit.Text);
@@ -311,7 +329,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
         private void pesquisarProdutoButtomItem_ItemClick(object sender, ItemClickEventArgs e)
         {
             Hide();
-            var pesquisarProdutos = new PesquisarProdutosView();
+            var pesquisarProdutos = new PesquisaDeProdutosView();
             pesquisarProdutos.ShowDialog();
             Close();
         }

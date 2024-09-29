@@ -21,7 +21,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
         private void CarregarConfiguracao()
         {
-            var config = ConfiguracaoBancoDeDados.CarregarBancoDeDados();
+            var config = ConfiguracaoDoBancoDeDados.CarregarBancoDeDados();
             bancoDeDadosTextEdit.Text = config.CaminhoBanco;
         }
 
@@ -35,7 +35,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             }
 
             var config = new ConfiguracaoBanco { CaminhoBanco = novoCaminho };
-            ConfiguracaoBancoDeDados.SalvarConfiguracao(config);
+            ConfiguracaoDoBancoDeDados.SalvarConfiguracao(config);
             XtraMessageBox.Show("Configuração salva com sucesso. Reinicie a aplicação para aplicar as mudanças.");
         }
 
