@@ -75,7 +75,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
             if (focusedRowHandle < 0)
             {
-                XtraMessageBox.Show("Selecione um produto para excluir.");
+                XtraMessageBox.Show("Selecione um produto para desativar.");
                 return;
             }
 
@@ -88,16 +88,16 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
             var idProduto = Convert.ToInt32(colunaSelecionada["idProduto"]);
 
-            using var messageBox = new MessageBoxCustomizado("Tem certeza que deseja excluir esse produto?");
+            using var messageBox = new MessageBoxCustomizado("Tem certeza que deseja desativar esse produto?");
             messageBox.ShowDialog();
             if (!messageBox.Resultado)return;
             
-            ExcluirProduto(idProduto);
-            XtraMessageBox.Show("Produto excluido com sucesso");
+            DesativarProduto(idProduto);
+            XtraMessageBox.Show("Produto desativado com sucesso");
             CarregarBancoDeDados();
         }
 
-        private void ExcluirProduto(int idProduto)
+        private void DesativarProduto(int idProduto)
         {
             using var conexao = new FbConnection(connectionString);
             conexao.Open();

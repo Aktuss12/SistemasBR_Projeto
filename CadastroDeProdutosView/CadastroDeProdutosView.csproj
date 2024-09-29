@@ -76,6 +76,7 @@
     <Compile Include="Features\Commons\CalculadorDeCodigoDeBarras.cs" />
     <Compile Include="Features\Commons\CalculoDeCustoEMarkupParaPrecoVenda.cs" />
     <Compile Include="Features\Commons\ConfiguracaoBancoDeDados.cs" />
+    <Compile Include="Features\Commons\ConversaoParaDecimal.cs" />
     <Compile Include="Features\Commons\LimparLookUpEditETextEdit.cs" />
     <Compile Include="Features\Commons\MessageBoxCustomizada.cs">
       <SubType>Form</SubType>

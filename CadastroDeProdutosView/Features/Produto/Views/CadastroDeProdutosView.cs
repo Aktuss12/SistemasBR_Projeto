@@ -1,11 +1,11 @@
 ﻿using CadastroDeProdutosView.Features.Commons;
 using CadastroDeProdutosView.Features.Produto.Enums;
+using DevExpress.XtraBars;
 using DevExpress.XtraEditors;
 using FirebirdSql.Data.FirebirdClient;
 using System;
 using System.Globalization;
 using System.Windows.Forms;
-using DevExpress.XtraBars;
 
 namespace CadastroDeProdutosView.Features.Produto.Views
 {
@@ -105,23 +105,20 @@ namespace CadastroDeProdutosView.Features.Produto.Views
                         command.Parameters.Add("@Fornecedor", FbDbType.VarChar).Value = fornecedorTextEdit.Text ?? (object)DBNull.Value;
                         command.Parameters.Add("@CodigoDeBarras", FbDbType.VarChar).Value = codigodebarrasTextEdit.Text ?? (object)DBNull.Value;
                         command.Parameters.Add("@UnidadeDeMedida", FbDbType.VarChar).Value = unidadeDeMedidaLookUpEdit.EditValue ?? DBNull.Value;
-                        command.Parameters.Add("@Estoque", FbDbType.VarChar).Value = estoqueTextEdit.Text ?? (object)DBNull.Value;
+                        command.Parameters.Add("@Estoque", FbDbType.Integer).Value = estoqueTextEdit.Text ?? (object)DBNull.Value;
                         command.Parameters.Add("@Marca", FbDbType.VarChar).Value = marcaLookUpEdit.EditValue ?? DBNull.Value;
+                        /*                        command.Parameters.Add("@Custo", FbDbType.Decimal).Value = custoTextEdit.Text ?? (object)DBNull.Value;
+                                                command.Parameters.Add("@Markup", FbDbType.Decimal).Value = markupTextEdit.Text ?? (object)DBNull.Value;
+                                                command.Parameters.Add("@PrecoDaVenda", FbDbType.Decimal).Value = precoVendaTextEdit.Text ?? (object)DBNull.Value;*/
 
-                        if (decimal.TryParse(custoTextEdit.Text, out var custo))
+                            var custo = ConversorParaDecimal.ParseDecimal(custoTextEdit.Text);
                             command.Parameters.Add("@Custo", FbDbType.Decimal).Value = custo;
-                        else
-                            command.Parameters.Add("@Custo", FbDbType.Decimal).Value = DBNull.Value;
 
-                        if (decimal.TryParse(markupTextEdit.Text, out var markup))
-                            command.Parameters.Add("@Markup", FbDbType.Decimal).Value = markup;
-                        else
-                            command.Parameters.Add("@Markup", FbDbType.Decimal).Value = DBNull.Value;
+                            var markup = ConversorParaDecimal.ParseDecimal(markupTextEdit.Text);
+                            command.Parameters.Add("@Custo", FbDbType.Decimal).Value = markup;
 
-                        if (decimal.TryParse(precoVendaTextEdit.Text, out var precoVenda))
+                            var precoVenda = ConversorParaDecimal.ParseDecimal(precoVendaTextEdit.Text);
                             command.Parameters.Add("@PrecoDaVenda", FbDbType.Decimal).Value = precoVenda;
-                        else
-                            command.Parameters.Add("@PrecoDaVenda", FbDbType.Decimal).Value = DBNull.Value;
 
                         idProduto = (int)command.ExecuteScalar();
                     }
@@ -138,22 +135,13 @@ namespace CadastroDeProdutosView.Features.Produto.Views
                         informacoesCommand.Parameters.Add("@situacaoTributaria", FbDbType.VarChar).Value = situacaoTributariaLookUpEdit.EditValue ?? DBNull.Value;
                         informacoesCommand.Parameters.Add("@naturezaDaOperacao", FbDbType.VarChar).Value = naturezaDaOperacaoLookUpEdit.EditValue ?? DBNull.Value;
                         informacoesCommand.Parameters.Add("@ncm", FbDbType.VarChar).Value = ncmTextEdit.Text ?? (object)DBNull.Value;
-
-                        if (decimal.TryParse(aliquotaDeIcmsTextEdit.Text, NumberStyles.Any, CultureInfo.InvariantCulture, out var aliquotaIcms))
-                            informacoesCommand.Parameters.Add("@aliquotaDeIcms", FbDbType.Decimal).Value = aliquotaIcms;
-                        else
-                            informacoesCommand.Parameters.Add("@aliquotaDeIcms", FbDbType.Decimal).Value = DBNull.Value;
-
-                        if (decimal.TryParse(reducaoDeCalculoIcmsTextEdit.Text, NumberStyles.Any, CultureInfo.InvariantCulture, out var reducaoCalculo))
-                            informacoesCommand.Parameters.Add("@reducaoDeCalculo", FbDbType.Decimal).Value = reducaoCalculo;
-                        else
-                            informacoesCommand.Parameters.Add("@reducaoDeCalculo", FbDbType.Decimal).Value = DBNull.Value;
+                        informacoesCommand.Parameters.Add("@aliquotaDeIcms", FbDbType.Decimal).Value = ncmTextEdit.Text ?? (object) DBNull.Value;
+                        informacoesCommand.Parameters.Add("@reducaoDeCalculo", FbDbType.Decimal).Value = reducaoDeCalculoIcmsTextEdit ?? (object)DBNull.Value;
 
                         informacoesCommand.ExecuteNonQuery();
                     }
                     XtraMessageBox.Show("Produto cadastrado com sucesso");
                 }
-
                 LimparLookUpEditsETextEdits();
                 transacao.Commit();
             }
@@ -296,15 +284,15 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             command.Parameters.Add("@origemDaMercadoria", FbDbType.VarChar).Value = origemDaMercadoriaLookUpEdit.EditValue ?? DBNull.Value;
             command.Parameters.Add("@situacaoTributaria", FbDbType.VarChar).Value = situacaoTributariaLookUpEdit.EditValue ?? DBNull.Value;
             command.Parameters.Add("@naturezaDaOperacao", FbDbType.VarChar).Value = naturezaDaOperacaoLookUpEdit.EditValue ?? DBNull.Value;
-            command.Parameters.Add("@ncm", FbDbType.VarChar).Value = ncmTextEdit.Text ?? (object)DBNull.Value;
+            command.Parameters.Add("@ncm", FbDbType.VarChar).Value = (object)ncmTextEdit.Text ?? DBNull.Value; 
 
             if (decimal.TryParse(aliquotaDeIcmsTextEdit.Text, NumberStyles.Any, CultureInfo.InvariantCulture, out var aliquotaIcms))
                 command.Parameters.Add("@aliquotaDeIcms", FbDbType.Decimal).Value = aliquotaIcms;
             else
                 command.Parameters.Add("@aliquotaDeIcms", FbDbType.Decimal).Value = DBNull.Value;
 
-            if (decimal.TryParse(reducaoDeCalculoIcmsTextEdit.Text, NumberStyles.Any, CultureInfo.InvariantCulture, out var reducaoCalculo))
-                command.Parameters.Add("@reducaoDeCalculo", FbDbType.Decimal).Value = reducaoCalculo;
+            if (decimal.TryParse(reducaoDeCalculoIcmsTextEdit.Text, NumberStyles.Any, CultureInfo.InvariantCulture, out var reducaoDeCalculo))
+                command.Parameters.Add("@reducaoDeCalculo", FbDbType.Decimal).Value = reducaoDeCalculo;
             else
                 command.Parameters.Add("@reducaoDeCalculo", FbDbType.Decimal).Value = DBNull.Value;
 
@@ -319,7 +307,8 @@ namespace CadastroDeProdutosView.Features.Produto.Views
                var codigoDeBarras = CalculadorDeCodigoDeBarras.GerarCodigoDeBarrasEAN13();
                codigodebarrasTextEdit.EditValue = codigoDeBarras;
             }
-            else XtraMessageBox.Show("O código de barras EAN-13 não é válido!");
+            else 
+                XtraMessageBox.Show("O código de barras EAN-13 não é válido!");
         }
 
         private void custoTextEdit_EditValueChanged(object sender, EventArgs e)
