@@ -62,25 +62,25 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             origemDaMercadoriaLookUpEdit.LimpezaDeLookUpEdit();
             situacaoTributariaLookUpEdit.LimpezaDeLookUpEdit();
             naturezaDaOperacaoLookUpEdit.LimpezaDeLookUpEdit();
+            imagemDoProdutoPictureBox.LimpezaDeImageBox();
         }
 
         private void salvarButtomItem_ItemClick(object sender, ItemClickEventArgs e)
         {
             var codigoDeBarras = codigodebarrasTextEdit.Text;
 
-            if (codigoDeBarras.Length > 0 && (codigoDeBarras.Length != 13 || !CalculadorDeCodigoDeBarras.ValidarCodigoDeBarrasEAN13(codigoDeBarras)))
+            switch (codigoDeBarras.Length)
             {
-                XtraMessageBox.Show("O Código de barras deve ser um EAN-13 válido");
+                case > 0 when (codigoDeBarras.Length != 13 || !CalculadorDeCodigoDeBarras.ValidarCodigoDeBarrasEAN13(codigoDeBarras)):
+                    XtraMessageBox.Show("O Código de barras deve ser um EAN-13 válido");
 
-                codigodebarrasLabelControl.Text = "Codigo de Barras: <color=red>*</color>";
-                codigodebarrasLabelControl.AllowHtmlString = true; 
-                return;
-            }
-
-            if (codigoDeBarras.Length == 13 && CalculadorDeCodigoDeBarras.ValidarCodigoDeBarrasEAN13(codigoDeBarras))
-            {
-                codigodebarrasLabelControl.Text = "Codigo de Barras:";
-                codigodebarrasLabelControl.AllowHtmlString = false;
+                    codigodebarrasLabelControl.Text = "Codigo de Barras: <color=red>*</color>";
+                    codigodebarrasLabelControl.AllowHtmlString = true; 
+                    return;
+                case 13 when CalculadorDeCodigoDeBarras.ValidarCodigoDeBarrasEAN13(codigoDeBarras):
+                    codigodebarrasLabelControl.Text = "Codigo de Barras:";
+                    codigodebarrasLabelControl.AllowHtmlString = false;
+                    break;
             }
 
             if (!ValidacaoDeCamposObrigatorios.ValidacaoParaCamposObrigatorios(
@@ -387,7 +387,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
         private void adicionarImagemButton_Click(object sender, EventArgs e)
         {
             using var abrirExploradoDeArquivo = new OpenFileDialog();
-            abrirExploradoDeArquivo.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp";
+            abrirExploradoDeArquivo.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp;*.gif;*.tiff;*.tif;*.webp;*.heic;*.svg;*.cr2;*.nef;*.arw";
 
             if (abrirExploradoDeArquivo.ShowDialog() != DialogResult.OK) return;
 
@@ -418,5 +418,9 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             return imagemRedimensionada;
         }
 
+        private void excluirImagemButton_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

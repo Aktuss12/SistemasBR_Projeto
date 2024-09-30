@@ -16,8 +16,7 @@ namespace CadastroDeProdutosView.Features.Commons
 
         public static void LimpezaDeImageBox(this DevExpress.XtraEditors.PictureEdit pictureBoxNull)
         {
-
+            pictureBoxNull.Image = null;
         }
-
     }
 }

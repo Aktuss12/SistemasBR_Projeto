@@ -233,6 +233,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.excluirImagemButton.Name = "excluirImagemButton";
             this.excluirImagemButton.Size = new System.Drawing.Size(21, 23);
             this.excluirImagemButton.TabIndex = 2;
+            this.excluirImagemButton.Click += new System.EventHandler(this.excluirImagemButton_Click);
             // 
             // adicionarImagemButton
             // 
@@ -263,6 +264,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.imagemDoProdutoPictureBox.MenuManager = this.barManager;
             this.imagemDoProdutoPictureBox.Name = "imagemDoProdutoPictureBox";
             this.imagemDoProdutoPictureBox.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Style3D;
+            this.imagemDoProdutoPictureBox.Properties.NullText = "Adicionar Imagem";
             this.imagemDoProdutoPictureBox.Properties.ShowCameraMenuItem = DevExpress.XtraEditors.Controls.CameraMenuItemVisibility.Auto;
             this.imagemDoProdutoPictureBox.Properties.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Stretch;
             this.imagemDoProdutoPictureBox.Size = new System.Drawing.Size(190, 241);
