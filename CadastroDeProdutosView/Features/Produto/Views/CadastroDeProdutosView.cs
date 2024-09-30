@@ -6,6 +6,7 @@ using DevExpress.XtraEditors;
 using FirebirdSql.Data.FirebirdClient;
 using System;
 using System.Windows.Forms;
+using CalculadorDeCodigoDeBarras = CadastroDeProdutosView.Features.Commons.CalculadorDeCodigoDeBarras;
 
 namespace CadastroDeProdutosView.Features.Produto.Views
 {
@@ -66,6 +67,14 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
         private void salvarButtomItem_ItemClick(object sender, ItemClickEventArgs e)
         {
+            var codigoDeBarras = codigodebarrasTextEdit.Text;
+
+            if (codigoDeBarras.Length == 13 && !CalculadorDeCodigoDeBarras.ValidarCodigoDeBarrasEAN13(codigoDeBarras))
+            {
+                XtraMessageBox.Show("O codigo de barras deve ser um EAN-13 valido");
+                return;
+            }
+
             if (!ValidacaoDeCamposObrigatorios.ValidacaoParaCamposObrigatorios(
                     nomeTextEdit,
                     estoqueTextEdit,
@@ -308,7 +317,26 @@ namespace CadastroDeProdutosView.Features.Produto.Views
                 throw new Exception("Produto não foi alterado no banco de dados!", ex);
             }
         }
-    
+
+        private void codigodebarrasTextEdit_EditValueChanged(object sender, EventArgs e)
+        {
+            codigodebarrasTextEdit.Properties.MaxLength = 13;
+            var codigoDeBarras = codigodebarrasTextEdit.Text;
+
+            if (codigoDeBarras.Length != 13)return;
+                if (CalculadorDeCodigoDeBarras.ValidarCodigoDeBarrasEAN13(codigoDeBarras))
+                {
+                    codigodebarrasLabelControl.Text = "Código de Barras: *";
+                    codigodebarrasLabelControl.AllowHtmlString = false;
+                }
+
+                else
+                {
+                XtraMessageBox.Show("O Código de barras deve ser um EAN-13 válido");
+                codigodebarrasLabelControl.Text = "Codigo de Barras: <color=red>*</color>";
+                codigodebarrasLabelControl.AllowHtmlString = true;
+                }
+        }
 
         private void codigoDeBarrasButton_Click(object sender, EventArgs e)
         {
