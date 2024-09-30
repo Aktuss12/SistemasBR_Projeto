@@ -1,4 +1,6 @@
-﻿namespace CadastroDeProdutosView.Features.Commons
+﻿using System.Runtime.CompilerServices;
+
+namespace CadastroDeProdutosView.Features.Commons
 {
     public static class LimparLookUpEditETextEdit
     {
@@ -11,5 +13,11 @@
         {
             textEditsNull.Text = null;
         }
+
+        public static void LimpezaDeImageBox(this DevExpress.XtraEditors.PictureEdit pictureBoxNull)
+        {
+
+        }
+
     }
 }

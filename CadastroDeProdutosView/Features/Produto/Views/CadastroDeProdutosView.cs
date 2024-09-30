@@ -15,6 +15,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
     public partial class CadastroDeProdutosView : Form
     {
         private readonly int? produtoId;
+        private byte[] imagemDoProduto;
         private readonly string connectionString;
 
         public CadastroDeProdutosView(int produtoId)
@@ -122,7 +123,8 @@ namespace CadastroDeProdutosView.Features.Produto.Views
                             Marca,
                             Custo,
                             Markup,
-                            PrecoDaVenda)
+                            PrecoDaVenda,
+                            imagem)
                             VALUES 
                             (@Nome,
                             @Categoria,
@@ -133,7 +135,8 @@ namespace CadastroDeProdutosView.Features.Produto.Views
                             @Marca,
                             @Custo,
                             @Markup,
-                            @precoDaVenda)
+                            @precoDaVenda,
+                            @Imagem)
                         RETURNING idProduto";
 
                     int idProduto;
@@ -153,6 +156,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
                         command.Parameters.Add("@markup", FbDbType.Decimal).Value = markup;
                         var precoVenda = ConversorParaDecimal.ParseDecimal(precoVendaTextEdit.Text);
                         command.Parameters.Add("@PrecoDaVenda", FbDbType.Decimal).Value = precoVenda;
+                        command.Parameters.Add("@Imagem", FbDbType.Binary).Value = imagemDoProduto;
 
                         idProduto = (int)command.ExecuteScalar();
                     }
@@ -234,6 +238,14 @@ namespace CadastroDeProdutosView.Features.Produto.Views
                 ncmTextEdit.Text = leituraDeDados["ncm"].ToString();
                 aliquotaDeIcmsTextEdit.Text = leituraDeDados["aliquotaDeIcms"].ToString();
                 reducaoDeCalculoIcmsTextEdit.Text = leituraDeDados["reducaoDeCalculo"].ToString();
+                if (leituraDeDados["Imagem"] != DBNull.Value)
+                { 
+                 var imagemBytes = (byte[])leituraDeDados["Imagem"];
+                 using var ms = new MemoryStream(imagemBytes);
+                 imagemDoProdutoPictureBox.Image = Image.FromStream(ms);
+                }
+                else
+                    imagemDoProdutoPictureBox.Image = null;
             }
             catch (Exception ex)
             {
@@ -378,25 +390,33 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             abrirExploradoDeArquivo.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp";
 
             if (abrirExploradoDeArquivo.ShowDialog() != DialogResult.OK) return;
+
             var caminhoDaImagem = abrirExploradoDeArquivo.FileName;
-            imagemDoProdutoPictureBox.Image = Image.FromFile(caminhoDaImagem);
-            var imagemBytes = File.ReadAllBytes(caminhoDaImagem);
+            var imagemOriginal = Image.FromFile(caminhoDaImagem);
+            var imagemRedimensionada = RedimensionarImagem(imagemOriginal, 190, 241);
 
-            SalvarImagemNoBancoDeDados(imagemBytes);
+            imagemDoProdutoPictureBox.Image = imagemRedimensionada;
+
+            using var ms = new MemoryStream();
+            imagemRedimensionada.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+            imagemDoProduto = ms.ToArray();
         }
 
-        private void SalvarImagemNoBancoDeDados(byte[] imageBytes)
+        private static Image RedimensionarImagem(Image imagemOriginal, int largura, int altura)
         {
-            using var conexao = new FbConnection(connectionString);
+            var proporcao = Math.Min((float)largura / imagemOriginal.Width, (float)altura / imagemOriginal.Height);
 
-            const string sqlImagem = "UPDATE PRODUTO SET IMAGEM = @imagem WHERE idProduto = @idProduto";
+            var novaLargura = (int)(imagemOriginal.Width * proporcao);
+            var novaAltura = (int)(imagemOriginal.Height * proporcao);
 
-            using var comando = new FbCommand(sqlImagem, conexao);
+            var imagemRedimensionada = new Bitmap(novaLargura, novaAltura);
+            using var g = Graphics.FromImage(imagemRedimensionada);
 
-            comando.Parameters.Add("@Imagem", FbDbType.Binary).Value = imageBytes;
-            comando.Parameters.Add("@idProduto", FbDbType.Integer).Value = produtoId;
-            conexao.Open();
-            comando.ExecuteNonQuery();
+            g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+            g.DrawImage(imagemOriginal, 0, 0, novaLargura, novaAltura);
+            
+            return imagemRedimensionada;
         }
+
     }
 }
