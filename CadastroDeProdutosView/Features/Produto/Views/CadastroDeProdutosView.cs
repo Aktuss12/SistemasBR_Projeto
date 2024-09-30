@@ -272,7 +272,8 @@ namespace CadastroDeProdutosView.Features.Produto.Views
                         Marca = @Marca, 
                         Custo = @Custo, 
                         Markup = @Markup, 
-                        PrecoDaVenda = @PrecoDaVenda
+                        PrecoDaVenda = @PrecoDaVenda,
+                        imagem = @imagem
                         WHERE idProduto = @idProduto";
 
                 using (var command = new FbCommand(updateProdutoQuery, conexao, transacao))
@@ -291,6 +292,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
                     command.Parameters.Add("@Markup", FbDbType.Decimal).Value = markup;
                     var precoVenda = ConversorParaDecimal.ParseDecimal(precoVendaTextEdit.Text);
                     command.Parameters.Add("@PrecoDaVenda", FbDbType.Decimal).Value = precoVenda;
+                    command.Parameters.Add("@Imagem", FbDbType.Binary).Value = imagemDoProduto;
                     command.ExecuteNonQuery();
                 }
 
@@ -420,7 +422,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
         private void excluirImagemButton_Click(object sender, EventArgs e)
         {
-
+            imagemDoProdutoPictureBox.Image = null;
         }
     }
 }
