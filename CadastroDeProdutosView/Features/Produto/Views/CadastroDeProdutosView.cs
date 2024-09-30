@@ -5,6 +5,8 @@ using DevExpress.XtraBars;
 using DevExpress.XtraEditors;
 using FirebirdSql.Data.FirebirdClient;
 using System;
+using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 using CalculadorDeCodigoDeBarras = CadastroDeProdutosView.Features.Commons.CalculadorDeCodigoDeBarras;
 
@@ -372,7 +374,29 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
         private void adicionarImagemButton_Click(object sender, EventArgs e)
         {
+            using var abrirExploradoDeArquivo = new OpenFileDialog();
+            abrirExploradoDeArquivo.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp";
 
+            if (abrirExploradoDeArquivo.ShowDialog() != DialogResult.OK) return;
+            var caminhoDaImagem = abrirExploradoDeArquivo.FileName;
+            imagemDoProdutoPictureBox.Image = Image.FromFile(caminhoDaImagem);
+            var imagemBytes = File.ReadAllBytes(caminhoDaImagem);
+
+            SalvarImagemNoBancoDeDados(imagemBytes);
+        }
+
+        private void SalvarImagemNoBancoDeDados(byte[] imageBytes)
+        {
+            using var conexao = new FbConnection(connectionString);
+
+            const string sqlImagem = "UPDATE PRODUTO SET IMAGEM = @imagem WHERE idProduto = @idProduto";
+
+            using var comando = new FbCommand(sqlImagem, conexao);
+
+            comando.Parameters.Add("@Imagem", FbDbType.Binary).Value = imageBytes;
+            comando.Parameters.Add("@idProduto", FbDbType.Integer).Value = produtoId;
+            conexao.Open();
+            comando.ExecuteNonQuery();
         }
     }
 }
