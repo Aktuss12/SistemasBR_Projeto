@@ -33,15 +33,11 @@ namespace CadastroDeProdutosView.Features.Produto.Views
         private void InitializeLookUpEdit()
         {
             unidadeDeMedidaLookUpEdit.PreencherLookUpEditComOValorDoEnum<UnidadeDeMedidaView.UnidadeDeMedida>();
-            categoriaDeProdutosLookUpEdit
-                .PreencherLookUpEditComOValorDoEnum<CategoriaDoProdutoView.CategoriaDeProdutos>();
+            categoriaDeProdutosLookUpEdit.PreencherLookUpEditComOValorDoEnum<CategoriaDoProdutoView.CategoriaDeProdutos>();
             marcaLookUpEdit.PreencherLookUpEditComOValorDoEnum<MarcaDoProdutoView.MarcaDoProduto>();
-            origemDaMercadoriaLookUpEdit
-                .PreencherLookUpEditComOValorDoEnum<OrigemDaMercadoriaView.OrigemDaMercadoria>();
-            situacaoTributariaLookUpEdit
-                .PreencherLookUpEditComOValorDoEnum<SituacaoTributariaView.SituacaoTributaria>();
-            naturezaDaOperacaoLookUpEdit
-                .PreencherLookUpEditComOValorDoEnum<NaturezaDaOperacaoView.NaturezaDaOperacao>();
+            origemDaMercadoriaLookUpEdit.PreencherLookUpEditComOValorDoEnum<OrigemDaMercadoriaView.OrigemDaMercadoria>();
+            situacaoTributariaLookUpEdit.PreencherLookUpEditComOValorDoEnum<SituacaoTributariaView.SituacaoTributaria>();
+            naturezaDaOperacaoLookUpEdit.PreencherLookUpEditComOValorDoEnum<NaturezaDaOperacaoView.NaturezaDaOperacao>();
         }
 
         // Metodo para limpar as LookUpEdits e TextEdits
@@ -69,10 +65,19 @@ namespace CadastroDeProdutosView.Features.Produto.Views
         {
             var codigoDeBarras = codigodebarrasTextEdit.Text;
 
-            if (codigoDeBarras.Length == 13 && !CalculadorDeCodigoDeBarras.ValidarCodigoDeBarrasEAN13(codigoDeBarras))
+            if (codigoDeBarras.Length > 0 && (codigoDeBarras.Length != 13 || !CalculadorDeCodigoDeBarras.ValidarCodigoDeBarrasEAN13(codigoDeBarras)))
             {
-                XtraMessageBox.Show("O codigo de barras deve ser um EAN-13 valido");
+                XtraMessageBox.Show("O Código de barras deve ser um EAN-13 válido");
+
+                codigodebarrasLabelControl.Text = "Codigo de Barras: <color=red>*</color>";
+                codigodebarrasLabelControl.AllowHtmlString = true; 
                 return;
+            }
+
+            if (codigoDeBarras.Length == 13 && CalculadorDeCodigoDeBarras.ValidarCodigoDeBarrasEAN13(codigoDeBarras))
+            {
+                codigodebarrasLabelControl.Text = "Codigo de Barras:";
+                codigodebarrasLabelControl.AllowHtmlString = false;
             }
 
             if (!ValidacaoDeCamposObrigatorios.ValidacaoParaCamposObrigatorios(
@@ -260,18 +265,12 @@ namespace CadastroDeProdutosView.Features.Produto.Views
                 {
                     command.Parameters.Add("@idProduto", FbDbType.Integer).Value = idProduto;
                     command.Parameters.Add("@Nome", FbDbType.VarChar).Value = nomeTextEdit.Text ?? (object)DBNull.Value;
-                    command.Parameters.Add("@Categoria", FbDbType.VarChar).Value =
-                        categoriaDeProdutosLookUpEdit.EditValue ?? DBNull.Value;
-                    command.Parameters.Add("@Fornecedor", FbDbType.VarChar).Value =
-                        fornecedorTextEdit.Text ?? (object)DBNull.Value;
-                    command.Parameters.Add("@CodigoDeBarras", FbDbType.VarChar).Value =
-                        codigodebarrasTextEdit.Text ?? (object)DBNull.Value;
-                    command.Parameters.Add("@UnidadeDeMedida", FbDbType.VarChar).Value =
-                        unidadeDeMedidaLookUpEdit.EditValue ?? DBNull.Value;
-                    command.Parameters.Add("@Estoque", FbDbType.VarChar).Value =
-                        estoqueTextEdit.Text ?? (object)DBNull.Value;
-                    command.Parameters.Add("@Marca", FbDbType.VarChar).Value =
-                        marcaLookUpEdit.EditValue ?? DBNull.Value;
+                    command.Parameters.Add("@Categoria", FbDbType.VarChar).Value = categoriaDeProdutosLookUpEdit.EditValue ?? DBNull.Value;
+                    command.Parameters.Add("@Fornecedor", FbDbType.VarChar).Value = fornecedorTextEdit.Text ?? (object)DBNull.Value;
+                    command.Parameters.Add("@CodigoDeBarras", FbDbType.VarChar).Value = codigodebarrasTextEdit.Text ?? (object)DBNull.Value;
+                    command.Parameters.Add("@UnidadeDeMedida", FbDbType.VarChar).Value = unidadeDeMedidaLookUpEdit.EditValue ?? DBNull.Value;
+                    command.Parameters.Add("@Estoque", FbDbType.VarChar).Value = estoqueTextEdit.Text ?? (object)DBNull.Value;
+                    command.Parameters.Add("@Marca", FbDbType.VarChar).Value = marcaLookUpEdit.EditValue ?? DBNull.Value;
                     var custo = ConversorParaDecimal.ParseDecimal(custoTextEdit.Text);
                     command.Parameters.Add("@Custo", FbDbType.Decimal).Value = custo;
                     var markup = ConversorParaDecimal.ParseDecimal(markupTextEdit.Text);
@@ -318,24 +317,17 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             }
         }
 
-        private void codigodebarrasTextEdit_EditValueChanged(object sender, EventArgs e)
+        private void LimitadorDeCaracteres()
         {
+            fornecedorTextEdit.Properties.MaxLength = 50;
+            precoVendaTextEdit.Properties.MaxLength = 6;
             codigodebarrasTextEdit.Properties.MaxLength = 13;
-            var codigoDeBarras = codigodebarrasTextEdit.Text;
-
-            if (codigoDeBarras.Length != 13)return;
-                if (CalculadorDeCodigoDeBarras.ValidarCodigoDeBarrasEAN13(codigoDeBarras))
-                {
-                    codigodebarrasLabelControl.Text = "Código de Barras: *";
-                    codigodebarrasLabelControl.AllowHtmlString = false;
-                }
-
-                else
-                {
-                XtraMessageBox.Show("O Código de barras deve ser um EAN-13 válido");
-                codigodebarrasLabelControl.Text = "Codigo de Barras: <color=red>*</color>";
-                codigodebarrasLabelControl.AllowHtmlString = true;
-                }
+            ncmTextEdit.Properties.MaxLength = 8;
+            estoqueTextEdit.Properties.MaxLength = 9;
+            nomeTextEdit.Properties.MaxLength = 100;
+            marcaLookUpEdit.Properties.MaxLength = 50;
+            reducaoDeCalculoIcmsTextEdit.Properties.MaxLength = 6;
+            aliquotaDeIcmsTextEdit.Properties.MaxLength = 6;
         }
 
         private void codigoDeBarrasButton_Click(object sender, EventArgs e)
@@ -372,22 +364,15 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             Close();
         }
 
-        private void LimitadorDeCaracteres()
-        {
-            fornecedorTextEdit.Properties.MaxLength = 50;
-            precoVendaTextEdit.Properties.MaxLength = 6;
-            ncmTextEdit.Properties.MaxLength = 8;
-            estoqueTextEdit.Properties.MaxLength = 9;
-            nomeTextEdit.Properties.MaxLength = 100;
-            marcaLookUpEdit.Properties.MaxLength = 50;
-            reducaoDeCalculoIcmsTextEdit.Properties.MaxLength = 6;
-            aliquotaDeIcmsTextEdit.Properties.MaxLength = 6;
-        }
-
         private void alterarBancoDeDadosButton_Click_1(object sender, EventArgs e)
         {
             var alterarBancoDeDados = new ConfigurarCaminhoDoBancoDeDadosView();
             alterarBancoDeDados.ShowDialog();
+        }
+
+        private void adicionarImagemButton_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
