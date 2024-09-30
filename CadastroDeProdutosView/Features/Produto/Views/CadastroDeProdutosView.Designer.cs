@@ -279,6 +279,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.alterarBancoDeDadosButton.Name = "alterarBancoDeDadosButton";
             this.alterarBancoDeDadosButton.Size = new System.Drawing.Size(51, 66);
             this.alterarBancoDeDadosButton.TabIndex = 33;
+            this.alterarBancoDeDadosButton.Click += new System.EventHandler(this.alterarBancoDeDadosButton_Click_1);
             // 
             // codigoDeBarrasButton
             // 
@@ -338,7 +339,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.fornecedorTextEdit.Properties.Mask.EditMask = "String";
             this.fornecedorTextEdit.Size = new System.Drawing.Size(255, 30);
             this.fornecedorTextEdit.TabIndex = 3;
-            this.fornecedorTextEdit.EditValueChanged += new System.EventHandler(this.fornecedorTextEdit_EditValueChanged);
             // 
             // nomeTextEdit
             // 
@@ -351,7 +351,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.nomeTextEdit.Properties.Mask.EditMask = "String";
             this.nomeTextEdit.Size = new System.Drawing.Size(250, 30);
             this.nomeTextEdit.TabIndex = 1;
-            this.nomeTextEdit.EditValueChanged += new System.EventHandler(this.nomeTextEdit_EditValueChanged);
             // 
             // marcaLookUpEdit
             // 
@@ -366,7 +365,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.marcaLookUpEdit.Properties.NullText = "";
             this.marcaLookUpEdit.Size = new System.Drawing.Size(244, 30);
             this.marcaLookUpEdit.TabIndex = 8;
-            this.marcaLookUpEdit.EditValueChanged += new System.EventHandler(this.marcaLookUpEdit_EditValueChanged);
             // 
             // categoriaDeProdutosLookUpEdit
             // 
@@ -493,7 +491,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.estoqueTextEdit.Properties.Mask.UseMaskAsDisplayFormat = true;
             this.estoqueTextEdit.Size = new System.Drawing.Size(201, 30);
             this.estoqueTextEdit.TabIndex = 7;
-            this.estoqueTextEdit.EditValueChanged += new System.EventHandler(this.estoqueTextEdit_EditValueChanged);
             // 
             // precoDaVendaLabelControl
             // 
@@ -516,7 +513,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.precoVendaTextEdit.Properties.Mask.UseMaskAsDisplayFormat = true;
             this.precoVendaTextEdit.Size = new System.Drawing.Size(244, 30);
             this.precoVendaTextEdit.TabIndex = 11;
-            this.precoVendaTextEdit.EditValueChanged += new System.EventHandler(this.precoVendaTextEdit_EditValueChanged);
             // 
             // estoqueLabelControl
             // 
@@ -670,7 +666,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.ncmTextEdit.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.ncmTextEdit.Size = new System.Drawing.Size(350, 30);
             this.ncmTextEdit.TabIndex = 46;
-            this.ncmTextEdit.EditValueChanged += new System.EventHandler(this.ncmTextEdit_EditValueChanged_1);
             // 
             // origemDaMercadoriaLookUpEdit
             // 
@@ -733,7 +728,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.reducaoDeCalculoIcmsTextEdit.Properties.Mask.UseMaskAsDisplayFormat = true;
             this.reducaoDeCalculoIcmsTextEdit.Size = new System.Drawing.Size(350, 30);
             this.reducaoDeCalculoIcmsTextEdit.TabIndex = 48;
-            this.reducaoDeCalculoIcmsTextEdit.EditValueChanged += new System.EventHandler(this.reducaoDeCalculoIcmsTextEdit_EditValueChanged);
             // 
             // reducaoDeCalculoIcmsLabelControl
             // 
@@ -766,7 +760,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.aliquotaDeIcmsTextEdit.Properties.Mask.UseMaskAsDisplayFormat = true;
             this.aliquotaDeIcmsTextEdit.Size = new System.Drawing.Size(350, 30);
             this.aliquotaDeIcmsTextEdit.TabIndex = 47;
-            this.aliquotaDeIcmsTextEdit.EditValueChanged += new System.EventHandler(this.aliquotaDeIcmsTextEdit_EditValueChanged);
             // 
             // aliquotaDeIcmsLabelControl
             // 

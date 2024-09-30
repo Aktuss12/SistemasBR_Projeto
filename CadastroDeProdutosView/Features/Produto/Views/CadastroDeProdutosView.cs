@@ -18,6 +18,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
         {
             InitializeComponent();
             InitializeLookUpEdit();
+            LimitadorDeCaracteres();
 
             this.produtoId = produtoId;
             connectionString = ConfiguracaoDoBancoDeDados.ObterStringDeConexao();
@@ -31,11 +32,15 @@ namespace CadastroDeProdutosView.Features.Produto.Views
         private void InitializeLookUpEdit()
         {
             unidadeDeMedidaLookUpEdit.PreencherLookUpEditComOValorDoEnum<UnidadeDeMedidaView.UnidadeDeMedida>();
-            categoriaDeProdutosLookUpEdit.PreencherLookUpEditComOValorDoEnum<CategoriaDoProdutoView.CategoriaDeProdutos>();
+            categoriaDeProdutosLookUpEdit
+                .PreencherLookUpEditComOValorDoEnum<CategoriaDoProdutoView.CategoriaDeProdutos>();
             marcaLookUpEdit.PreencherLookUpEditComOValorDoEnum<MarcaDoProdutoView.MarcaDoProduto>();
-            origemDaMercadoriaLookUpEdit.PreencherLookUpEditComOValorDoEnum<OrigemDaMercadoriaView.OrigemDaMercadoria>();
-            situacaoTributariaLookUpEdit.PreencherLookUpEditComOValorDoEnum<SituacaoTributariaView.SituacaoTributaria>();
-            naturezaDaOperacaoLookUpEdit.PreencherLookUpEditComOValorDoEnum<NaturezaDaOperacaoView.NaturezaDaOperacao>();
+            origemDaMercadoriaLookUpEdit
+                .PreencherLookUpEditComOValorDoEnum<OrigemDaMercadoriaView.OrigemDaMercadoria>();
+            situacaoTributariaLookUpEdit
+                .PreencherLookUpEditComOValorDoEnum<SituacaoTributariaView.SituacaoTributaria>();
+            naturezaDaOperacaoLookUpEdit
+                .PreencherLookUpEditComOValorDoEnum<NaturezaDaOperacaoView.NaturezaDaOperacao>();
         }
 
         // Metodo para limpar as LookUpEdits e TextEdits
@@ -116,7 +121,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
                         RETURNING idProduto";
 
                     int idProduto;
-                    
+
                     using (var command = new FbCommand(insertProdutoQuery, conexao, transacao))
                     {
                         command.Parameters.Add("@Nome", FbDbType.VarChar).Value = nomeTextEdit.Text ?? (object)DBNull.Value;
@@ -169,8 +174,8 @@ namespace CadastroDeProdutosView.Features.Produto.Views
                         informacoesCommand.ExecuteNonQuery();
                     }
                     XtraMessageBox.Show("Produto cadastrado com sucesso");
+                    LimparLookUpEditsETextEdits();
                 }
-                LimparLookUpEditsETextEdits();
                 transacao.Commit();
             }
             catch (Exception ex)
@@ -246,12 +251,18 @@ namespace CadastroDeProdutosView.Features.Produto.Views
                 {
                     command.Parameters.Add("@idProduto", FbDbType.Integer).Value = idProduto;
                     command.Parameters.Add("@Nome", FbDbType.VarChar).Value = nomeTextEdit.Text ?? (object)DBNull.Value;
-                    command.Parameters.Add("@Categoria", FbDbType.VarChar).Value = categoriaDeProdutosLookUpEdit.EditValue ?? DBNull.Value;
-                    command.Parameters.Add("@Fornecedor", FbDbType.VarChar).Value = fornecedorTextEdit.Text ?? (object)DBNull.Value;
-                    command.Parameters.Add("@CodigoDeBarras", FbDbType.VarChar).Value = codigodebarrasTextEdit.Text ?? (object)DBNull.Value;
-                    command.Parameters.Add("@UnidadeDeMedida", FbDbType.VarChar).Value = unidadeDeMedidaLookUpEdit.EditValue ?? DBNull.Value;
-                    command.Parameters.Add("@Estoque", FbDbType.VarChar).Value = estoqueTextEdit.Text ?? (object)DBNull.Value;
-                    command.Parameters.Add("@Marca", FbDbType.VarChar).Value = marcaLookUpEdit.EditValue ?? DBNull.Value;
+                    command.Parameters.Add("@Categoria", FbDbType.VarChar).Value =
+                        categoriaDeProdutosLookUpEdit.EditValue ?? DBNull.Value;
+                    command.Parameters.Add("@Fornecedor", FbDbType.VarChar).Value =
+                        fornecedorTextEdit.Text ?? (object)DBNull.Value;
+                    command.Parameters.Add("@CodigoDeBarras", FbDbType.VarChar).Value =
+                        codigodebarrasTextEdit.Text ?? (object)DBNull.Value;
+                    command.Parameters.Add("@UnidadeDeMedida", FbDbType.VarChar).Value =
+                        unidadeDeMedidaLookUpEdit.EditValue ?? DBNull.Value;
+                    command.Parameters.Add("@Estoque", FbDbType.VarChar).Value =
+                        estoqueTextEdit.Text ?? (object)DBNull.Value;
+                    command.Parameters.Add("@Marca", FbDbType.VarChar).Value =
+                        marcaLookUpEdit.EditValue ?? DBNull.Value;
                     var custo = ConversorParaDecimal.ParseDecimal(custoTextEdit.Text);
                     command.Parameters.Add("@Custo", FbDbType.Decimal).Value = custo;
                     var markup = ConversorParaDecimal.ParseDecimal(markupTextEdit.Text);
@@ -260,23 +271,8 @@ namespace CadastroDeProdutosView.Features.Produto.Views
                     command.Parameters.Add("@PrecoDaVenda", FbDbType.Decimal).Value = precoVenda;
                     command.ExecuteNonQuery();
                 }
-                XtraMessageBox.Show("Produto atualizado com sucesso.");
-                AtualizarInformacoesFiscais(idProduto, conexao, transacao);
-                transacao.Commit();
-                LimparLookUpEditsETextEdits();
-                Hide();
-                Close();
-            }
-            catch (Exception ex)
-            {
-                transacao.Rollback();
-                throw new Exception("Erro ao atualizar o produto no banco de dados", ex);
-            }
-        }
 
-        private void AtualizarInformacoesFiscais(int idProduto, FbConnection conexao, FbTransaction transacao)
-        {
-            const string updateInformacoesFiscaisQuery = @"
+                const string updateInformacoesFiscaisQuery = @"
                 UPDATE INFORMACOESFISCAIS
                 SET origemDaMercadoria = @origemDaMercadoria,
                 situacaoTributaria = @situacaoTributaria,
@@ -285,20 +281,35 @@ namespace CadastroDeProdutosView.Features.Produto.Views
                 aliquotaDeIcms = @aliquotaDeIcms,
                 reducaoDeCalculo = @reducaoDeCalculo
                 WHERE idProduto = @idProduto";
+                using (var commandInformacoesFiscais = new FbCommand(updateInformacoesFiscaisQuery, conexao, transacao))
+                {
+                    commandInformacoesFiscais.Parameters.Add("@idProduto", FbDbType.Integer).Value = idProduto;
+                    commandInformacoesFiscais.Parameters.Add("@origemDaMercadoria", FbDbType.VarChar).Value = origemDaMercadoriaLookUpEdit.EditValue ?? DBNull.Value;
+                    commandInformacoesFiscais.Parameters.Add("@situacaoTributaria", FbDbType.VarChar).Value = situacaoTributariaLookUpEdit.EditValue ?? DBNull.Value;
+                    commandInformacoesFiscais.Parameters.Add("@naturezaDaOperacao", FbDbType.VarChar).Value = naturezaDaOperacaoLookUpEdit.EditValue ?? DBNull.Value;
+                    commandInformacoesFiscais.Parameters.Add("@Ncm", FbDbType.VarChar).Value = (object)ncmTextEdit.Text ?? DBNull.Value;
+                    var aliquotaDeIcms = ConversorParaDecimal.ParseDecimal(aliquotaDeIcmsTextEdit.Text);
+                    commandInformacoesFiscais.Parameters.Add("@aliquotaDeIcms", FbDbType.Decimal).Value = aliquotaDeIcms;
+                    var reducaoDeCalculo = ConversorParaDecimal.ParseDecimal(reducaoDeCalculoIcmsTextEdit.Text);
+                    commandInformacoesFiscais.Parameters.Add("reducaoDeCalculo", FbDbType.Decimal).Value = reducaoDeCalculo;
+                    commandInformacoesFiscais.ExecuteNonQuery();
 
-            using var command = new FbCommand(updateInformacoesFiscaisQuery, conexao, transacao);
-            command.Parameters.Add("@idProduto", FbDbType.Integer).Value = idProduto;
-            command.Parameters.Add("@origemDaMercadoria", FbDbType.VarChar).Value = origemDaMercadoriaLookUpEdit.EditValue ?? DBNull.Value;
-            command.Parameters.Add("@situacaoTributaria", FbDbType.VarChar).Value = situacaoTributariaLookUpEdit.EditValue ?? DBNull.Value;
-            command.Parameters.Add("@naturezaDaOperacao", FbDbType.VarChar).Value = naturezaDaOperacaoLookUpEdit.EditValue ?? DBNull.Value;
-            command.Parameters.Add("@Ncm", FbDbType.VarChar).Value = (object)ncmTextEdit.Text ?? DBNull.Value;
-            var aliquotaDeIcms = ConversorParaDecimal.ParseDecimal(aliquotaDeIcmsTextEdit.Text);
-            command.Parameters.Add("@aliquotaDeIcms", FbDbType.Decimal).Value = aliquotaDeIcms;
-            var reducaoDeCalculo = ConversorParaDecimal.ParseDecimal(reducaoDeCalculoIcmsTextEdit.Text);
-            command.Parameters.Add("reducaoDeCalculo", FbDbType.Decimal).Value = reducaoDeCalculo;
-
-            command.ExecuteNonQuery();
+                    var messageBox = new MessageBoxCustomizado("Tem certeza que deseja alterar esse produto?");
+                    messageBox.ShowDialog();
+                    if (!messageBox.Resultado) return;
+                }
+                XtraMessageBox.Show("Produto alterado com sucesso");
+                LimparLookUpEditsETextEdits();
+                transacao.Commit();
+                Close();
+            }
+            catch (Exception ex)
+            {
+                transacao.Rollback();
+                throw new Exception("Produto não foi alterado no banco de dados!", ex);
+            }
         }
+    
 
         private void codigoDeBarrasButton_Click(object sender, EventArgs e)
         {
@@ -334,43 +345,22 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             Close();
         }
 
-        private void fornecedorTextEdit_EditValueChanged(object sender, EventArgs e)
+        private void LimitadorDeCaracteres()
         {
             fornecedorTextEdit.Properties.MaxLength = 50;
-        }
-
-        private void precoVendaTextEdit_EditValueChanged(object sender, EventArgs e)
-        {
             precoVendaTextEdit.Properties.MaxLength = 6;
-        }
-        private void ncmTextEdit_EditValueChanged_1(object sender, EventArgs e)
-        {
             ncmTextEdit.Properties.MaxLength = 8;
-        }
-
-        private void estoqueTextEdit_EditValueChanged(object sender, EventArgs e)
-        {
             estoqueTextEdit.Properties.MaxLength = 9;
-        }
-
-        private void nomeTextEdit_EditValueChanged(object sender, EventArgs e)
-        {
             nomeTextEdit.Properties.MaxLength = 100;
-        }
-
-        private void marcaLookUpEdit_EditValueChanged(object sender, EventArgs e)
-        {
             marcaLookUpEdit.Properties.MaxLength = 50;
+            reducaoDeCalculoIcmsTextEdit.Properties.MaxLength = 6;
+            aliquotaDeIcmsTextEdit.Properties.MaxLength = 6;
         }
 
-        private void reducaoDeCalculoIcmsTextEdit_EditValueChanged(object sender, EventArgs e)
+        private void alterarBancoDeDadosButton_Click_1(object sender, EventArgs e)
         {
-            reducaoDeCalculoIcmsTextEdit.Properties.MaxLength = 5;
-        }
-
-        private void aliquotaDeIcmsTextEdit_EditValueChanged(object sender, EventArgs e)
-        {
-            aliquotaDeIcmsTextEdit.Properties.MaxLength = 5;
+            var alterarBancoDeDados = new ConfigurarCaminhoDoBancoDeDadosView();
+            alterarBancoDeDados.ShowDialog();
         }
     }
 }

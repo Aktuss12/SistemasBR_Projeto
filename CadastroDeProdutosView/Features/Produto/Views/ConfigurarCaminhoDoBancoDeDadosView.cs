@@ -41,13 +41,13 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
         private void exploradorBancoDeDadosButton_Click(object sender, EventArgs e)
         {
-            var openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "Arquivos de Banco de Dados Firebird (*.FDB)|*.FDB|Todos os arquivos (*.*)|*.*";
+            var abrirExploradorDeArquivos = new OpenFileDialog();
+            abrirExploradorDeArquivos.Filter = "Arquivos de Banco de Dados Firebird (*.FDB)|*.FDB|Todos os arquivos (*.*)|*.*";
 
-            if (openFileDialog.ShowDialog() != DialogResult.OK) return;
+            if (abrirExploradorDeArquivos.ShowDialog() != DialogResult.OK) return;
             try
             {
-                var caminhoDoArquivo = openFileDialog.FileName;
+                var caminhoDoArquivo = abrirExploradorDeArquivos.FileName;
                 bancoDeDadosTextEdit.Text = caminhoDoArquivo;
             }
             catch (Exception ex)

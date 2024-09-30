@@ -41,8 +41,8 @@ namespace CadastroDeProdutosView.Features.Commons
                 Left = botaoSim.Right + 10
             };
 
-            botaoSim.Click += (_, _) => { Resultado = true; Close(); };
-            botaoNao.Click += (_, _) => { Resultado = false; Close(); };
+            botaoSim.Click += (_, _) => { Resultado = true; Hide(); Close(); };
+            botaoNao.Click += (_, _) => { Resultado = false; Hide(); Close(); };
 
             Controls.Add(labelMensagem);
             Controls.Add(botaoSim);
