@@ -293,11 +293,10 @@ namespace CadastroDeProdutosView.Features.Produto.Views
                     var reducaoDeCalculo = ConversorParaDecimal.ParseDecimal(reducaoDeCalculoIcmsTextEdit.Text);
                     commandInformacoesFiscais.Parameters.Add("reducaoDeCalculo", FbDbType.Decimal).Value = reducaoDeCalculo;
                     commandInformacoesFiscais.ExecuteNonQuery();
-
-                    var messageBox = new MessageBoxCustomizado("Tem certeza que deseja alterar esse produto?");
-                    messageBox.ShowDialog();
-                    if (!messageBox.Resultado) return;
                 }
+                var messageBox = new MessageBoxCustomizado("Tem certeza que deseja alterar esse produto?");
+                messageBox.ShowDialog();
+                if (!messageBox.Resultado) return;
                 XtraMessageBox.Show("Produto alterado com sucesso");
                 LimparLookUpEditsETextEdits();
                 transacao.Commit();
