@@ -83,19 +83,22 @@ namespace CadastroDeProdutosView.Features.Produto.Views
         private void salvarButtomItem_ItemClick(object sender, ItemClickEventArgs e)
         {
             codigodebarrasTextEdit.Properties.MaxLength = 13;
-            var codigoDeBarrasValido = CalculadorDeCodigoDeBarras.ValidarCodigoDeBarrasEAN13(codigodebarrasTextEdit.Text);
 
-            if (!codigoDeBarrasValido)
+            if (!string.IsNullOrWhiteSpace(codigodebarrasTextEdit.Text))
             {
-                XtraMessageBox.Show("O código de barras não é um tipo EAN-13");
-                codigodebarrasLabelControl.Text = "Código de Barras: <color=red>*</color>";
-                codigodebarrasLabelControl.AllowHtmlString = true;
+                var codigoDeBarrasValido = CalculadorDeCodigoDeBarras.ValidarCodigoDeBarrasEAN13(codigodebarrasTextEdit.Text);
+
+                if (!codigoDeBarrasValido)
+                {
+                    XtraMessageBox.Show("O código de barras não é um tipo EAN-13");
+                    codigodebarrasLabelControl.Text = "Código de Barras: <color=red>*</color>";
+                    codigodebarrasLabelControl.AllowHtmlString = true;
+                    return;
+                }
             }
-            else
-            {
-                codigodebarrasLabelControl.Text = "Código de Barras:";
-                codigodebarrasLabelControl.AllowHtmlString = false;
-            }
+
+            codigodebarrasLabelControl.Text = "Codigo de Barras:";
+            codigodebarrasLabelControl.AllowHtmlString = false;
 
             if (!ValidacaoDeCamposObrigatorios.ValidacaoParaCamposObrigatorios(
                     nomeTextEdit,
