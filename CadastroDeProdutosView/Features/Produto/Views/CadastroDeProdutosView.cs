@@ -67,20 +67,20 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
         private void salvarButtomItem_ItemClick(object sender, ItemClickEventArgs e)
         {
-            var codigoDeBarras = codigodebarrasTextEdit.Text;
+            codigodebarrasTextEdit.Properties.MaxLength = 13;
+            var codigoDeBarrasValido = CalculadorDeCodigoDeBarras.ValidarCodigoDeBarrasEAN13(codigodebarrasTextEdit.Text);
 
-            switch (codigoDeBarras.Length)
+            if (codigoDeBarrasValido)
             {
-                case > 0 when (codigoDeBarras.Length != 13 || !CalculadorDeCodigoDeBarras.ValidarCodigoDeBarrasEAN13(codigoDeBarras)):
-                    XtraMessageBox.Show("O Código de barras deve ser um EAN-13 válido");
-
-                    codigodebarrasLabelControl.Text = "Codigo de Barras: <color=red>*</color>";
-                    codigodebarrasLabelControl.AllowHtmlString = true; 
-                    return;
-                case 13 when CalculadorDeCodigoDeBarras.ValidarCodigoDeBarrasEAN13(codigoDeBarras):
-                    codigodebarrasLabelControl.Text = "Codigo de Barras:";
-                    codigodebarrasLabelControl.AllowHtmlString = false;
-                    break;
+                codigodebarrasLabelControl.Text = "Código de Barras:";
+                codigodebarrasLabelControl.AllowHtmlString = false;
+            }
+            else
+            {
+                XtraMessageBox.Show("O código de barras não é um tipo EAN-13");
+                codigodebarrasLabelControl.Text = "Código de Barras: <color=red>*</color>";
+                codigodebarrasLabelControl.AllowHtmlString = true;
+                return;
             }
 
             if (!ValidacaoDeCamposObrigatorios.ValidacaoParaCamposObrigatorios(
@@ -100,7 +100,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             }
 
             try
-            {
+            { 
                 // Conexão com a tabela Produtos do banco de dados
                 using var conexao = new FbConnection(connectionString);
                 conexao.Open();
