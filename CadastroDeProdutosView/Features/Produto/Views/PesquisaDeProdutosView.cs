@@ -10,15 +10,16 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 {
     public partial class PesquisaDeProdutosView : Form
     {
+        public int? SelecionadorIdProduto { get; private set; }
         private readonly string connectionString;
         private bool mostrarAtivos = true;
-        public int? SelecionadorIdProduto { get; private set; }
+        
 
         public PesquisaDeProdutosView()
         {
+            connectionString = ConfiguracaoDoBancoDeDados.ObterStringDeConexao();
             InitializeComponent();
             DesativarBotoes();
-            connectionString = ConfiguracaoDoBancoDeDados.ObterStringDeConexao();
             CarregarBancoDeDados();
         }
 
@@ -57,10 +58,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             dataAdapter.Fill(tabelaDados);
 
             return tabelaDados;
-        }
-
-        private void pesquisarGridControl_Click(object sender, EventArgs e)
-        {
         }
 
         private void desativarProdutoButtomItem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -194,8 +191,10 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
             if (SelecionadorIdProduto != null)
             {
+                Hide();
                 var cadastroDeProdutos = new CadastroDeProdutosView(SelecionadorIdProduto.Value);
                 cadastroDeProdutos.ShowDialog();
+                Close();
             }
             CarregarBancoDeDados();
         }

@@ -327,7 +327,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.pesquisarGridControl.TabIndex = 23;
             this.pesquisarGridControl.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.pesquisarGridView});
-            this.pesquisarGridControl.Click += new System.EventHandler(this.pesquisarGridControl_Click);
             // 
             // pesquisarGridView
             // 

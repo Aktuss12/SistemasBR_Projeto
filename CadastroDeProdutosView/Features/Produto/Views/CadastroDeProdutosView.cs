@@ -101,6 +101,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
             try
             {
+                // Conexão com a tabela Produtos do banco de dados
                 using var conexao = new FbConnection(connectionString);
                 conexao.Open();
                 using var transacao = conexao.BeginTransaction();
@@ -111,7 +112,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
                 }
                 else
                 {
-                    // Conexão com a tabela Produtos do banco de dados
                     const string insertProdutoQuery = @"
                         INSERT INTO PRODUTO (
                             Nome,
@@ -257,8 +257,8 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             using var reader = command.ExecuteReader();
         }
 
-        private void Conversor(FbDataReader leituraDeDados)
-        {
+        private void Conversor(FbDataReader leituraDeDados) 
+        { 
             if (leituraDeDados["Imagem"] != DBNull.Value)
             {
                 var imagemBytes = (byte[])leituraDeDados["Imagem"];
@@ -339,6 +339,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
                 XtraMessageBox.Show("Produto alterado com sucesso");
                 LimparLookUpEditsETextEdits();
                 transacao.Commit();
+
                 Close();
             }
             catch (Exception ex)
@@ -403,7 +404,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
         private void pesquisarProdutoButtomItem_ItemClick(object sender, ItemClickEventArgs e)
         {
-            Hide();
             var pesquisarProdutos = new PesquisaDeProdutosView();
             pesquisarProdutos.ShowDialog();
             Close();
@@ -411,8 +411,10 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
         private void alterarBancoDeDadosButton_Click_1(object sender, EventArgs e)
         {
+            Hide();
             var alterarBancoDeDados = new ConfigurarCaminhoDoBancoDeDadosView();
             alterarBancoDeDados.ShowDialog();
+            Close();
         }
 
         private void excluirImagemButton_Click(object sender, EventArgs e)
