@@ -77,6 +77,7 @@
     <Compile Include="Features\Commons\CalculoDeCustoEMarkupParaPrecoDaVenda.cs" />
     <Compile Include="Features\Commons\ConfiguracaoDoBancoDeDados.cs" />
     <Compile Include="Features\Commons\ConversaoDeValoresParaDecimal.cs" />
+    <Compile Include="Features\Commons\ConversorDeImagemParaByte.cs" />
     <Compile Include="Features\Commons\LimpezaDeLookUpEditETextEdit.cs" />
     <Compile Include="Features\Commons\MessageBoxCustomizada.cs">
       <SubType>Form</SubType>

@@ -568,9 +568,9 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.codigodebarrasLabelControl.Location = new System.Drawing.Point(347, 284);
             this.codigodebarrasLabelControl.Margin = new System.Windows.Forms.Padding(2);
             this.codigodebarrasLabelControl.Name = "codigodebarrasLabelControl";
-            this.codigodebarrasLabelControl.Size = new System.Drawing.Size(148, 21);
+            this.codigodebarrasLabelControl.Size = new System.Drawing.Size(122, 21);
             this.codigodebarrasLabelControl.TabIndex = 12;
-            this.codigodebarrasLabelControl.Text = "Gerar Cod. De Barras:";
+            this.codigodebarrasLabelControl.Text = "Codigo de barras:";
             // 
             // markupTextEdit
             // 

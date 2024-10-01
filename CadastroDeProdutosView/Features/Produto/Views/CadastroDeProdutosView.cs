@@ -8,7 +8,6 @@ using System;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
-using CalculadorDeCodigoDeBarras = CadastroDeProdutosView.Features.Commons.CalculadorDeCodigoDeBarras;
 
 namespace CadastroDeProdutosView.Features.Produto.Views
 {
@@ -23,6 +22,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             InitializeComponent();
             InitializeLookUpEdit();
             LimitadorDeCaracteres();
+            
 
             this.produtoId = produtoId;
             connectionString = ConfiguracaoDoBancoDeDados.ObterStringDeConexao();
@@ -31,8 +31,8 @@ namespace CadastroDeProdutosView.Features.Produto.Views
                 CarregarProduto(this.produtoId.Value);
             }
         }
-
-        // Chamando as enums para as LookUpEdit
+        
+        // Adicionando as enums services para as LookUpEdit
         private void InitializeLookUpEdit()
         {
             unidadeDeMedidaLookUpEdit.PreencherLookUpEditComOValorDoEnum<UnidadeDeMedidaView.UnidadeDeMedida>();
@@ -43,7 +43,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             naturezaDaOperacaoLookUpEdit.PreencherLookUpEditComOValorDoEnum<NaturezaDaOperacaoView.NaturezaDaOperacao>();
         }
 
-        // Metodo para limpar as LookUpEdits e TextEdits
+        // Limpando as LookUpEdits, TextEdit e ImageEdit
         private void LimparLookUpEditsETextEdits()
         {
             nomeTextEdit.LimpezaDeTextEdit();
@@ -56,7 +56,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             ncmTextEdit.LimpezaDeTextEdit();
             aliquotaDeIcmsTextEdit.LimpezaDeTextEdit();
             reducaoDeCalculoIcmsTextEdit.LimpezaDeTextEdit();
-            categoriaDeProdutosLookUpEdit.LimpezaDeLookUpEdit();
+            categoriaDeProdutosLookUpEdit.LimpezaDeTextEdit();
             unidadeDeMedidaLookUpEdit.LimpezaDeLookUpEdit();
             marcaLookUpEdit.LimpezaDeLookUpEdit();
             origemDaMercadoriaLookUpEdit.LimpezaDeLookUpEdit();
@@ -159,6 +159,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
                         command.Parameters.Add("@Imagem", FbDbType.Binary).Value = imagemDoProduto;
 
                         idProduto = (int)command.ExecuteScalar();
+                        AtualizarGridDeProdutos();
                     }
 
                     // Conexão com a tabela Informações Fiscais do banco de dados
@@ -238,19 +239,33 @@ namespace CadastroDeProdutosView.Features.Produto.Views
                 ncmTextEdit.Text = leituraDeDados["ncm"].ToString();
                 aliquotaDeIcmsTextEdit.Text = leituraDeDados["aliquotaDeIcms"].ToString();
                 reducaoDeCalculoIcmsTextEdit.Text = leituraDeDados["reducaoDeCalculo"].ToString();
-                if (leituraDeDados["Imagem"] != DBNull.Value)
-                { 
-                 var imagemBytes = (byte[])leituraDeDados["Imagem"];
-                 using var ms = new MemoryStream(imagemBytes);
-                 imagemDoProdutoPictureBox.Image = Image.FromStream(ms);
-                }
-                else
-                    imagemDoProdutoPictureBox.Image = null;
+                Conversor(leituraDeDados);
+
             }
             catch (Exception ex)
             {
                 XtraMessageBox.Show($"Erro ao carregar o produto: {ex.Message}");
             }
+        }
+
+        private void AtualizarGridDeProdutos()
+        {
+            const string selectProdutosQuery = "SELECT * FROM PRODUTO ORDER BY Nome";
+            using var conexao = new FbConnection(connectionString);
+            conexao.Open();
+            using var command = new FbCommand(selectProdutosQuery, conexao);
+            using var reader = command.ExecuteReader();
+        }
+
+        private void Conversor(FbDataReader leituraDeDados)
+        {
+            if (leituraDeDados["Imagem"] != DBNull.Value)
+            {
+                var imagemBytes = (byte[])leituraDeDados["Imagem"];
+                using var ms = new MemoryStream(imagemBytes);
+                imagemDoProdutoPictureBox.Image = Image.FromStream(ms);
+            }
+            else  imagemDoProdutoPictureBox.Image = null;
         }
 
         public void AlterarProduto(int idProduto)
@@ -333,6 +348,20 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             }
         }
 
+        private void adicionarImagemButton_Click(object sender, EventArgs e)
+        {
+            using var abrirExploradoDeArquivo = new OpenFileDialog();
+            abrirExploradoDeArquivo.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp;*.gif;*.tiff;*.tif;*.webp;*.heic;*.svg;*.cr2;*.nef;*.arw";
+
+            if (abrirExploradoDeArquivo.ShowDialog() != DialogResult.OK) return;
+
+            var caminhoDaImagem = abrirExploradoDeArquivo.FileName;
+            imagemDoProduto = ConversorDeImagemParaByte.ConversorDeValoresDeImagemParaByte(caminhoDaImagem, 190, 241);
+
+            using var imagemOriginal = Image.FromFile(caminhoDaImagem);
+            imagemDoProdutoPictureBox.Image = new Bitmap(imagemOriginal, new Size(190, 241));
+        }
+
         private void LimitadorDeCaracteres()
         {
             fornecedorTextEdit.Properties.MaxLength = 50;
@@ -384,40 +413,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
         {
             var alterarBancoDeDados = new ConfigurarCaminhoDoBancoDeDadosView();
             alterarBancoDeDados.ShowDialog();
-        }
-
-        private void adicionarImagemButton_Click(object sender, EventArgs e)
-        {
-            using var abrirExploradoDeArquivo = new OpenFileDialog();
-            abrirExploradoDeArquivo.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp;*.gif;*.tiff;*.tif;*.webp;*.heic;*.svg;*.cr2;*.nef;*.arw";
-
-            if (abrirExploradoDeArquivo.ShowDialog() != DialogResult.OK) return;
-
-            var caminhoDaImagem = abrirExploradoDeArquivo.FileName;
-            var imagemOriginal = Image.FromFile(caminhoDaImagem);
-            var imagemRedimensionada = RedimensionarImagem(imagemOriginal, 190, 241);
-
-            imagemDoProdutoPictureBox.Image = imagemRedimensionada;
-
-            using var ms = new MemoryStream();
-            imagemRedimensionada.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
-            imagemDoProduto = ms.ToArray();
-        }
-
-        private static Image RedimensionarImagem(Image imagemOriginal, int largura, int altura)
-        {
-            var proporcao = Math.Min((float)largura / imagemOriginal.Width, (float)altura / imagemOriginal.Height);
-
-            var novaLargura = (int)(imagemOriginal.Width * proporcao);
-            var novaAltura = (int)(imagemOriginal.Height * proporcao);
-
-            var imagemRedimensionada = new Bitmap(novaLargura, novaAltura);
-            using var g = Graphics.FromImage(imagemRedimensionada);
-
-            g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
-            g.DrawImage(imagemOriginal, 0, 0, novaLargura, novaAltura);
-            
-            return imagemRedimensionada;
         }
 
         private void excluirImagemButton_Click(object sender, EventArgs e)
