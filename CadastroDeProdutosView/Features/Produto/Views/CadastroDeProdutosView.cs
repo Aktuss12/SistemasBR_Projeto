@@ -65,22 +65,36 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             imagemDoProdutoPictureBox.LimpezaDeImageBox();
         }
 
+        // Limitando a quantidade de caracteres dos campos para que seja responsivo com o Banco de Dados
+        private void LimitadorDeCaracteres()
+        {
+            fornecedorTextEdit.Properties.MaxLength = 50;
+            precoVendaTextEdit.Properties.MaxLength = 6;
+            codigodebarrasTextEdit.Properties.MaxLength = 13;
+            ncmTextEdit.Properties.MaxLength = 8;
+            estoqueTextEdit.Properties.MaxLength = 9;
+            nomeTextEdit.Properties.MaxLength = 100;
+            marcaLookUpEdit.Properties.MaxLength = 50;
+            reducaoDeCalculoIcmsTextEdit.Properties.MaxLength = 6;
+            aliquotaDeIcmsTextEdit.Properties.MaxLength = 6;
+        }
+
+
         private void salvarButtomItem_ItemClick(object sender, ItemClickEventArgs e)
         {
             codigodebarrasTextEdit.Properties.MaxLength = 13;
             var codigoDeBarrasValido = CalculadorDeCodigoDeBarras.ValidarCodigoDeBarrasEAN13(codigodebarrasTextEdit.Text);
 
-            if (codigoDeBarrasValido)
-            {
-                codigodebarrasLabelControl.Text = "Código de Barras:";
-                codigodebarrasLabelControl.AllowHtmlString = false;
-            }
-            else
+            if (!codigoDeBarrasValido)
             {
                 XtraMessageBox.Show("O código de barras não é um tipo EAN-13");
                 codigodebarrasLabelControl.Text = "Código de Barras: <color=red>*</color>";
                 codigodebarrasLabelControl.AllowHtmlString = true;
-                return;
+            }
+            else
+            {
+                codigodebarrasLabelControl.Text = "Código de Barras:";
+                codigodebarrasLabelControl.AllowHtmlString = false;
             }
 
             if (!ValidacaoDeCamposObrigatorios.ValidacaoParaCamposObrigatorios(
@@ -113,30 +127,9 @@ namespace CadastroDeProdutosView.Features.Produto.Views
                 else
                 {
                     const string insertProdutoQuery = @"
-                        INSERT INTO PRODUTO (
-                            Nome,
-                            Categoria,
-                            Fornecedor,
-                            CodigoDeBarras,
-                            UnidadeDeMedida,
-                            Estoque,
-                            Marca,
-                            Custo,
-                            Markup,
-                            PrecoDaVenda,
-                            imagem)
-                            VALUES 
-                            (@Nome,
-                            @Categoria,
-                            @Fornecedor,
-                            @codigoDeBarras,
-                            @unidadeDeMedida,
-                            @Estoque,
-                            @Marca,
-                            @Custo,
-                            @Markup,
-                            @precoDaVenda,
-                            @Imagem)
+                        INSERT INTO PRODUTO
+                        (nome, categoria, Fornecedor, codigoDeBarras, unidadeDeMedida, estoque, marca, custo, markup, precoDaVenda, imagem)
+                        VALUES (@Nome, @Categoria, @Fornecedor, @codigoDeBarras, @unidadeDeMedida, @Estoque, @Marca, @Custo, @Markup, @precoDaVenda, @Imagem)
                         RETURNING idProduto";
 
                     int idProduto;
@@ -153,7 +146,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
                         var custo = ConversorParaDecimal.ParseDecimal(custoTextEdit.Text);
                         command.Parameters.Add("@Custo", FbDbType.Decimal).Value = custo;
                         var markup = ConversorParaDecimal.ParseDecimal(markupTextEdit.Text);
-                        command.Parameters.Add("@markup", FbDbType.Decimal).Value = markup;
+                        command.Parameters.Add("@Markup", FbDbType.Decimal).Value = markup;
                         var precoVenda = ConversorParaDecimal.ParseDecimal(precoVendaTextEdit.Text);
                         command.Parameters.Add("@PrecoDaVenda", FbDbType.Decimal).Value = precoVenda;
                         command.Parameters.Add("@Imagem", FbDbType.Binary).Value = imagemDoProduto;
@@ -165,21 +158,8 @@ namespace CadastroDeProdutosView.Features.Produto.Views
                     // Conexão com a tabela Informações Fiscais do banco de dados
                     const string insertInformacoesFiscaisQuery = @"
                         INSERT INTO INFORMACOESFISCAIS
-                            (idProduto,
-                            origemDaMercadoria,
-                            situacaoTributaria,
-                            naturezaDaOperacao,
-                            Ncm,
-                            aliquotaDeIcms,
-                            reducaoDeCalculo)
-                            VALUES
-                            (@idProduto,
-                            @origemDaMercadoria,
-                            @situacaoTributaria,
-                            @naturezaDaOperacao,
-                            @Ncm,
-                            @aliquotaDeIcms,
-                            @reducaoDeCalculo)";
+                        (idProduto, origemDaMercadoria, situacaoTributaria, naturezaDaOperacao, ncm, aliquotaDeIcms, reducaoDeCalculo)
+                        VALUES (@idProduto, @origemDaMercadoria, @situacaoTributaria, @naturezaDaOperacao, @Ncm, @aliquotaDeIcms, @reducaoDeCalculo)";
 
                     using (var informacoesCommand = new FbCommand(insertInformacoesFiscaisQuery, conexao, transacao))
                     {
@@ -187,7 +167,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
                         informacoesCommand.Parameters.Add("@origemDaMercadoria", FbDbType.VarChar).Value = origemDaMercadoriaLookUpEdit.EditValue ?? DBNull.Value;
                         informacoesCommand.Parameters.Add("@situacaoTributaria", FbDbType.VarChar).Value = situacaoTributariaLookUpEdit.EditValue ?? DBNull.Value;
                         informacoesCommand.Parameters.Add("@naturezaDaOperacao", FbDbType.VarChar).Value = naturezaDaOperacaoLookUpEdit.EditValue ?? DBNull.Value;
-                        informacoesCommand.Parameters.Add("@ncm", FbDbType.VarChar).Value = ncmTextEdit.Text ?? (object)DBNull.Value;
+                        informacoesCommand.Parameters.Add("@Ncm", FbDbType.VarChar).Value = ncmTextEdit.Text ?? (object)DBNull.Value;
                         var aliquotaDeIcms = ConversorParaDecimal.ParseDecimal(aliquotaDeIcmsTextEdit.Text);
                         informacoesCommand.Parameters.Add("@aliquotaDeIcms", FbDbType.Decimal).Value = aliquotaDeIcms;
                         var reducaoDeCalculo = ConversorParaDecimal.ParseDecimal(reducaoDeCalculoIcmsTextEdit.Text);
@@ -361,19 +341,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
             using var imagemOriginal = Image.FromFile(caminhoDaImagem);
             imagemDoProdutoPictureBox.Image = new Bitmap(imagemOriginal, new Size(190, 241));
-        }
-
-        private void LimitadorDeCaracteres()
-        {
-            fornecedorTextEdit.Properties.MaxLength = 50;
-            precoVendaTextEdit.Properties.MaxLength = 6;
-            codigodebarrasTextEdit.Properties.MaxLength = 13;
-            ncmTextEdit.Properties.MaxLength = 8;
-            estoqueTextEdit.Properties.MaxLength = 9;
-            nomeTextEdit.Properties.MaxLength = 100;
-            marcaLookUpEdit.Properties.MaxLength = 50;
-            reducaoDeCalculoIcmsTextEdit.Properties.MaxLength = 6;
-            aliquotaDeIcmsTextEdit.Properties.MaxLength = 6;
         }
 
         private void codigoDeBarrasButton_Click(object sender, EventArgs e)
