@@ -104,7 +104,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             command.Parameters.AddWithValue("@idProduto", idProduto);
             command.ExecuteNonQuery();
         }
-        //
+        
         private void ReativarProduto(int idProduto)
         {
             using var conexao = new FbConnection(connectionString);
