@@ -5,7 +5,7 @@ namespace CadastroDeProdutosView.Features.Commons
 {
     public class ConfiguracaoBanco
     {
-        public string CaminhoBanco { get; set; }
+        public string? CaminhoBanco { get; set; }
     }
 
     public static class ConfiguracaoDoBancoDeDados

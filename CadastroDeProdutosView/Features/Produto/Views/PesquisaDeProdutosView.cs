@@ -3,6 +3,7 @@ using DevExpress.XtraGrid.Views.Grid;
 using FirebirdSql.Data.FirebirdClient;
 using System;
 using System.Data;
+using System.Linq;
 using System.Windows.Forms;
 using CadastroDeProdutosView.Features.Commons;
 
@@ -193,16 +194,31 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             {
                 var cadastroDeProdutos = new CadastroDeProdutosView(SelecionadorIdProduto.Value);
                 cadastroDeProdutos.ShowDialog();
+
+                var formAberto = Application.OpenForms.OfType<CadastroDeProdutosView>().FirstOrDefault();
+                if (formAberto != null)
+                {  
+                    formAberto.BringToFront();
+                    formAberto.WindowState = FormWindowState.Normal;
+                    return;
+                }
             }
             CarregarBancoDeDados();
         }
 
         private void cadastroButtonItem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            Hide();
+            var formAberto = Application.OpenForms.OfType<CadastroDeProdutosView>().FirstOrDefault();
+            if (formAberto != null)
+            {
+                formAberto.BringToFront();
+                formAberto.WindowState = FormWindowState.Normal;
+                return;
+            }
+
             var abrirCadastro = new CadastroDeProdutosView(0);
             abrirCadastro.ShowDialog();
-            Close();
+
         }
     }
 }

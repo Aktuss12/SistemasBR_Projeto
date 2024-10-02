@@ -7,6 +7,7 @@ using FirebirdSql.Data.FirebirdClient;
 using System;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace CadastroDeProdutosView.Features.Produto.Views
@@ -312,7 +313,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
                 LimparLookUpEditsETextEdits(); 
                 transacao.Commit();
 
-                Close();
+                 
             }
             catch (Exception ex)
             {
@@ -375,17 +376,30 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
         private void pesquisarProdutoButtomItem_ItemClick(object sender, ItemClickEventArgs e)
         {
+            var formAberto = Application.OpenForms.OfType<PesquisaDeProdutosView>().FirstOrDefault();
+            if (formAberto != null)
+            {
+                formAberto.BringToFront();
+                formAberto.WindowState = FormWindowState.Normal;
+                return;
+            }
+
             var pesquisarProdutos = new PesquisaDeProdutosView();
-            pesquisarProdutos.ShowDialog();
-            Close();
+            pesquisarProdutos.Show();
         }
 
         private void alterarBancoDeDadosButton_Click_1(object sender, EventArgs e)
         {
-            Hide();
+            var formAberto = Application.OpenForms.OfType<ConfigurarCaminhoDoBancoDeDadosView>().FirstOrDefault();
+            if (formAberto != null)
+            {
+                formAberto.BringToFront();
+                formAberto.WindowState = FormWindowState.Normal;
+                return;
+            }
+
             var alterarBancoDeDados = new ConfigurarCaminhoDoBancoDeDadosView();
-            alterarBancoDeDados.ShowDialog();
-            Close();
+            alterarBancoDeDados.Show();
         }
 
         private void excluirImagemButton_Click(object sender, EventArgs e)
