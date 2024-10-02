@@ -62,7 +62,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             origemDaMercadoriaLookUpEdit.LimpezaDeLookUpEdit();
             situacaoTributariaLookUpEdit.LimpezaDeLookUpEdit();
             naturezaDaOperacaoLookUpEdit.LimpezaDeLookUpEdit();
-            imagemDoProdutoPictureBox.LimpezaDeImageBox();
+            imagemDoProdutoPictureEdit.LimpezaDeImageBox();
         }
 
         // Limitando a quantidade de caracteres dos campos para que seja responsivo com o Banco de Dados
@@ -240,17 +240,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             using var reader = command.ExecuteReader();
         }
 
-        private void Conversor(FbDataReader leituraDeDados)
-        {
-            if (leituraDeDados["Imagem"] != DBNull.Value)
-            {
-                var imagemBytes = (byte[])leituraDeDados["Imagem"];
-                using var ms = new MemoryStream(imagemBytes);
-                imagemDoProdutoPictureBox.Image = Image.FromStream(ms);
-            }
-            else imagemDoProdutoPictureBox.Image = null;
-        }
-
         public void AlterarProduto(int idProduto)
         {
             using var conexao = new FbConnection(connectionString);
@@ -331,7 +320,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
                 throw new Exception("Produto não foi alterado no banco de dados!", ex);
             }
         }
-
         private void adicionarImagemButton_Click(object sender, EventArgs e)
         {
             using var abrirExploradoDeArquivo = new OpenFileDialog();
@@ -343,9 +331,22 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             imagemDoProduto = ConversorDeImagemParaByte.ConversorDeValoresDeImagemParaByte(caminhoDaImagem, 190, 241);
 
             using var imagemOriginal = Image.FromFile(caminhoDaImagem);
-            imagemDoProdutoPictureBox.Image = new Bitmap(imagemOriginal, new Size(190, 241));
+            imagemDoProdutoPictureEdit.Image = new Bitmap(imagemOriginal, new Size(190, 241));
         }
 
+        // Converte o array de bytes da imagem do banco de dados em uma imagem para exibir no picturebox
+        private void Conversor(FbDataReader leituraDeDados)
+        {
+            if (leituraDeDados["Imagem"] != DBNull.Value)
+            {
+                var imagemBytes = (byte[])leituraDeDados["Imagem"];
+                using var ms = new MemoryStream(imagemBytes);
+                imagemDoProdutoPictureEdit.Image = Image.FromStream(ms);
+            }
+            else imagemDoProdutoPictureEdit.Image = null;
+        }
+        
+        // Edita o valor da TextEdit do codigo de barras para o tipo EAN13 caso seja clicado no botão
         private void codigoDeBarrasButton_Click(object sender, EventArgs e)
         {
             var geradorDeCodigoDeBarras = CalculadorDeCodigoDeBarras.GerarCodigoDeBarrasEAN13();
@@ -389,7 +390,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
         private void excluirImagemButton_Click(object sender, EventArgs e)
         {
-            imagemDoProdutoPictureBox.Image = null;
+            imagemDoProdutoPictureEdit.Image = null;
         }
     }
 }

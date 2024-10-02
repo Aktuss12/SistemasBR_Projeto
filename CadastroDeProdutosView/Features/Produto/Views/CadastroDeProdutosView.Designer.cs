@@ -36,7 +36,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.produtosGroupControl = new DevExpress.XtraEditors.GroupControl();
             this.adicionarImagemButton = new DevExpress.XtraEditors.SimpleButton();
             this.imagemDoProdutoGroupBox = new DevExpress.XtraEditors.GroupControl();
-            this.imagemDoProdutoPictureBox = new DevExpress.XtraEditors.PictureEdit();
+            this.imagemDoProdutoPictureEdit = new DevExpress.XtraEditors.PictureEdit();
             this.barManager = new DevExpress.XtraBars.BarManager(this.components);
             this.bar = new DevExpress.XtraBars.Bar();
             this.salvarProdutoButtomItem = new DevExpress.XtraBars.BarButtonItem();
@@ -101,7 +101,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.produtosGroupControl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imagemDoProdutoGroupBox)).BeginInit();
             this.imagemDoProdutoGroupBox.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.imagemDoProdutoPictureBox.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imagemDoProdutoPictureEdit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fornecedorTextEdit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nomeTextEdit.Properties)).BeginInit();
@@ -242,7 +242,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.imagemDoProdutoGroupBox.AppearanceCaption.Font = new System.Drawing.Font("Trebuchet MS", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.imagemDoProdutoGroupBox.AppearanceCaption.Options.UseFont = true;
             this.imagemDoProdutoGroupBox.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Style3D;
-            this.imagemDoProdutoGroupBox.Controls.Add(this.imagemDoProdutoPictureBox);
+            this.imagemDoProdutoGroupBox.Controls.Add(this.imagemDoProdutoPictureEdit);
             this.imagemDoProdutoGroupBox.GroupStyle = DevExpress.Utils.GroupStyle.Light;
             this.imagemDoProdutoGroupBox.Location = new System.Drawing.Point(717, 41);
             this.imagemDoProdutoGroupBox.Name = "imagemDoProdutoGroupBox";
@@ -250,21 +250,21 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.imagemDoProdutoGroupBox.TabIndex = 34;
             this.imagemDoProdutoGroupBox.Text = "Imagem Do Produto";
             // 
-            // imagemDoProdutoPictureBox
+            // imagemDoProdutoPictureEdit
             // 
-            this.imagemDoProdutoPictureBox.Location = new System.Drawing.Point(5, 30);
-            this.imagemDoProdutoPictureBox.MenuManager = this.barManager;
-            this.imagemDoProdutoPictureBox.Name = "imagemDoProdutoPictureBox";
-            this.imagemDoProdutoPictureBox.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.imagemDoProdutoPictureBox.Properties.Appearance.Options.UseFont = true;
-            this.imagemDoProdutoPictureBox.Properties.Appearance.Options.UseTextOptions = true;
-            this.imagemDoProdutoPictureBox.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.imagemDoProdutoPictureBox.Properties.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Bottom;
-            this.imagemDoProdutoPictureBox.Properties.NullText = "Adicione uma Imagem";
-            this.imagemDoProdutoPictureBox.Properties.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Stretch;
-            this.imagemDoProdutoPictureBox.Size = new System.Drawing.Size(314, 343);
-            this.imagemDoProdutoPictureBox.TabIndex = 0;
-            this.imagemDoProdutoPictureBox.Tag = "";
+            this.imagemDoProdutoPictureEdit.Location = new System.Drawing.Point(5, 30);
+            this.imagemDoProdutoPictureEdit.MenuManager = this.barManager;
+            this.imagemDoProdutoPictureEdit.Name = "imagemDoProdutoPictureEdit";
+            this.imagemDoProdutoPictureEdit.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.imagemDoProdutoPictureEdit.Properties.Appearance.Options.UseFont = true;
+            this.imagemDoProdutoPictureEdit.Properties.Appearance.Options.UseTextOptions = true;
+            this.imagemDoProdutoPictureEdit.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.imagemDoProdutoPictureEdit.Properties.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Bottom;
+            this.imagemDoProdutoPictureEdit.Properties.NullText = "Adicione uma Imagem";
+            this.imagemDoProdutoPictureEdit.Properties.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Stretch;
+            this.imagemDoProdutoPictureEdit.Size = new System.Drawing.Size(314, 343);
+            this.imagemDoProdutoPictureEdit.TabIndex = 0;
+            this.imagemDoProdutoPictureEdit.Tag = "";
             // 
             // barManager
             // 
@@ -992,7 +992,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.produtosGroupControl.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imagemDoProdutoGroupBox)).EndInit();
             this.imagemDoProdutoGroupBox.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.imagemDoProdutoPictureBox.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imagemDoProdutoPictureEdit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fornecedorTextEdit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nomeTextEdit.Properties)).EndInit();
@@ -1087,7 +1087,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
         private DevExpress.XtraEditors.LabelControl aliquotaDeIcmsLabelControl;
         private DevExpress.XtraEditors.LabelControl situacaoTributariaLabelControl;
         private DevExpress.XtraEditors.LabelControl informacoesFiscaisLabelControl;
-        private DevExpress.XtraEditors.PictureEdit imagemDoProdutoPictureBox;
+        private DevExpress.XtraEditors.PictureEdit imagemDoProdutoPictureEdit;
         private DevExpress.Utils.Behaviors.BehaviorManager behaviorManager1;
     }
 }
