@@ -191,10 +191,8 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
             if (SelecionadorIdProduto != null)
             {
-                Hide();
                 var cadastroDeProdutos = new CadastroDeProdutosView(SelecionadorIdProduto.Value);
                 cadastroDeProdutos.ShowDialog();
-                Close();
             }
             CarregarBancoDeDados();
         }

@@ -14,7 +14,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
     public partial class CadastroDeProdutosView : Form
     {
         private readonly int? produtoId;
-        private byte[] imagemDoProduto;
+        private byte[] imagemDoProduto = null!;
         private readonly string connectionString;
 
         public CadastroDeProdutosView(int produtoId)
@@ -123,7 +123,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
                 conexao.Open();
                 using var transacao = conexao.BeginTransaction();
 
-                if (produtoId is > 0)
+                if (produtoId is > 0) 
                 {
                     AlterarProduto(produtoId.Value);
                 }
@@ -240,15 +240,15 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             using var reader = command.ExecuteReader();
         }
 
-        private void Conversor(FbDataReader leituraDeDados) 
-        { 
+        private void Conversor(FbDataReader leituraDeDados)
+        {
             if (leituraDeDados["Imagem"] != DBNull.Value)
             {
                 var imagemBytes = (byte[])leituraDeDados["Imagem"];
                 using var ms = new MemoryStream(imagemBytes);
                 imagemDoProdutoPictureBox.Image = Image.FromStream(ms);
             }
-            else  imagemDoProdutoPictureBox.Image = null;
+            else imagemDoProdutoPictureBox.Image = null;
         }
 
         public void AlterarProduto(int idProduto)
@@ -271,7 +271,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
                         Custo = @Custo, 
                         Markup = @Markup, 
                         PrecoDaVenda = @PrecoDaVenda,
-                        imagem = @imagem
+                        imagem = @Imagem
                         WHERE idProduto = @idProduto";
 
                 using (var command = new FbCommand(updateProdutoQuery, conexao, transacao))
@@ -320,7 +320,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
                 messageBox.ShowDialog();
                 if (!messageBox.Resultado) return;
                 XtraMessageBox.Show("Produto alterado com sucesso");
-                LimparLookUpEditsETextEdits();
+                LimparLookUpEditsETextEdits(); 
                 transacao.Commit();
 
                 Close();
