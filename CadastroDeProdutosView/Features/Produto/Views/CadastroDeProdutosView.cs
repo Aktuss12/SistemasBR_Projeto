@@ -14,22 +14,22 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 {
     public partial class CadastroDeProdutosView : Form
     {
-        private readonly int? produtoId;
-        private byte[] imagemDoProduto = null!;
-        private readonly string connectionString;
+        private readonly int? _produtoId;
+        private byte[] _imagemDoProduto = null!;
+        private readonly string _connectionString;
 
         public CadastroDeProdutosView(int produtoId)
         {
             InitializeComponent();
             InitializeLookUpEdit();
             LimitadorDeCaracteres();
-            
 
-            this.produtoId = produtoId;
-            connectionString = ConfiguracaoDoBancoDeDados.ObterStringDeConexao();
-            if (produtoId > 0)
+
+            _produtoId = produtoId;
+            _connectionString = ConfiguracaoDoBancoDeDados.ObterStringDeConexao();
+            if (_produtoId > 0)
             {
-                CarregarProduto(this.produtoId.Value);
+                CarregarProduto(_produtoId.Value);
             }
         }
         
@@ -120,13 +120,13 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             try
             { 
                 // Conexão com a tabela Produtos do banco de dados
-                using var conexao = new FbConnection(connectionString);
+                using var conexao = new FbConnection(_connectionString);
                 conexao.Open();
                 using var transacao = conexao.BeginTransaction();
 
-                if (produtoId is > 0) 
+                if (_produtoId is > 0) 
                 {
-                    AlterarProduto(produtoId.Value);
+                    AlterarProduto(_produtoId.Value);
                 }
                 else
                 {
@@ -153,7 +153,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
                         command.Parameters.Add("@Markup", FbDbType.Decimal).Value = markup;
                         var precoVenda = ConversorParaDecimal.ParseDecimal(precoVendaTextEdit.Text);
                         command.Parameters.Add("@PrecoDaVenda", FbDbType.Decimal).Value = precoVenda;
-                        command.Parameters.Add("@Imagem", FbDbType.Binary).Value = imagemDoProduto;
+                        command.Parameters.Add("@Imagem", FbDbType.Binary).Value = _imagemDoProduto;
 
                         idProduto = (int)command.ExecuteScalar();
                         AtualizarGridDeProdutos();
@@ -194,7 +194,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             try
             {
                 // Conexão com o banco de dados para preencher o form de acordo com os produtos ja cadastrados
-                using var conexao = new FbConnection(connectionString);
+                using var conexao = new FbConnection(_connectionString);
                 conexao.Open();
                 const string preenchimentoDeTabelasQuery = @"
                     SELECT P.*, I.*
@@ -235,7 +235,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
         private void AtualizarGridDeProdutos()
         {
             const string selectProdutosQuery = "SELECT * FROM PRODUTO ORDER BY Nome";
-            using var conexao = new FbConnection(connectionString);
+            using var conexao = new FbConnection(_connectionString);
             conexao.Open();
             using var command = new FbCommand(selectProdutosQuery, conexao);
             using var reader = command.ExecuteReader();
@@ -243,26 +243,26 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
         public void AlterarProduto(int idProduto)
         {
-            using var conexao = new FbConnection(connectionString);
+            using var conexao = new FbConnection(_connectionString);
             conexao.Open();
 
             using var transacao = conexao.BeginTransaction();
             try
             {
                 const string updateProdutoQuery = @"
-                        UPDATE PRODUTO
-                        SET Nome = @Nome, 
-                        Categoria = @Categoria, 
-                        Fornecedor = @Fornecedor, 
-                        CodigoDeBarras = @CodigoDeBarras, 
-                        UnidadeDeMedida = @UnidadeDeMedida, 
-                        Estoque = @Estoque, 
-                        Marca = @Marca, 
-                        Custo = @Custo, 
-                        Markup = @Markup, 
-                        PrecoDaVenda = @PrecoDaVenda,
-                        imagem = @Imagem
-                        WHERE idProduto = @idProduto";
+                UPDATE PRODUTO
+                SET Nome = @Nome, 
+                Categoria = @Categoria, 
+                Fornecedor = @Fornecedor, 
+                CodigoDeBarras = @CodigoDeBarras, 
+                UnidadeDeMedida = @UnidadeDeMedida, 
+                Estoque = @Estoque, 
+                Marca = @Marca, 
+                Custo = @Custo, 
+                Markup = @Markup, 
+                PrecoDaVenda = @PrecoDaVenda,
+                imagem = @Imagem
+                WHERE idProduto = @idProduto";
 
                 using (var command = new FbCommand(updateProdutoQuery, conexao, transacao))
                 {
@@ -280,7 +280,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
                     command.Parameters.Add("@Markup", FbDbType.Decimal).Value = markup;
                     var precoVenda = ConversorParaDecimal.ParseDecimal(precoVendaTextEdit.Text);
                     command.Parameters.Add("@PrecoDaVenda", FbDbType.Decimal).Value = precoVenda;
-                    command.Parameters.Add("@Imagem", FbDbType.Binary).Value = imagemDoProduto;
+                    command.Parameters.Add("@Imagem", FbDbType.Binary).Value = _imagemDoProduto;
                     command.ExecuteNonQuery();
                 }
 
@@ -293,6 +293,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
                 aliquotaDeIcms = @aliquotaDeIcms,
                 reducaoDeCalculo = @reducaoDeCalculo
                 WHERE idProduto = @idProduto";
+
                 using (var commandInformacoesFiscais = new FbCommand(updateInformacoesFiscaisQuery, conexao, transacao))
                 {
                     commandInformacoesFiscais.Parameters.Add("@idProduto", FbDbType.Integer).Value = idProduto;
@@ -306,21 +307,25 @@ namespace CadastroDeProdutosView.Features.Produto.Views
                     commandInformacoesFiscais.Parameters.Add("reducaoDeCalculo", FbDbType.Decimal).Value = reducaoDeCalculo;
                     commandInformacoesFiscais.ExecuteNonQuery();
                 }
+
                 var messageBox = new MessageBoxCustomizado("Tem certeza que deseja alterar esse produto?");
                 messageBox.ShowDialog();
                 if (!messageBox.Resultado) return;
+
                 XtraMessageBox.Show("Produto alterado com sucesso");
-                LimparLookUpEditsETextEdits(); 
+                LimparLookUpEditsETextEdits();
                 transacao.Commit();
 
-                Close();
+                // A linha Close() foi removida daqui
             }
             catch (Exception ex)
             {
                 transacao.Rollback();
                 throw new Exception("Produto não foi alterado no banco de dados!", ex);
             }
+            Close();
         }
+
         private void adicionarImagemButton_Click(object sender, EventArgs e)
         {
             using var abrirExploradoDeArquivo = new OpenFileDialog();
@@ -329,7 +334,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             if (abrirExploradoDeArquivo.ShowDialog() != DialogResult.OK) return;
 
             var caminhoDaImagem = abrirExploradoDeArquivo.FileName;
-            imagemDoProduto = ConversorDeImagemParaByte.ConversorDeValoresDeImagemParaByte(caminhoDaImagem, 190, 241);
+            _imagemDoProduto = ConversorDeImagemParaByte.ConversorDeValoresDeImagemParaByte(caminhoDaImagem, 190, 241);
 
             using var imagemOriginal = Image.FromFile(caminhoDaImagem);
             imagemDoProdutoPictureEdit.Image = new Bitmap(imagemOriginal, new Size(190, 241));
