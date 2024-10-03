@@ -197,7 +197,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
                     cadastroForm = null;
                     CarregarBancoDeDados();
                 };
-                cadastroForm.Show();
+                cadastroForm.ShowDialog();
             }
         }
 
