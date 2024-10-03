@@ -410,7 +410,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             }
 
             var alterarBancoDeDados = new ConfigurarCaminhoDoBancoDeDadosView();
-            alterarBancoDeDados.Show();
+            alterarBancoDeDados.ShowDialog();
         }
 
         private void excluirImagemButton_Click(object sender, EventArgs e)
