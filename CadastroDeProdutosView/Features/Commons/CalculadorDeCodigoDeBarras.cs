@@ -1,31 +1,22 @@
 ﻿using System;
+using System.Linq;
 
 namespace CadastroDeProdutosView.Features.Commons
 {
     public static class CalculadorDeCodigoDeBarras
     {
-
         public static bool ValidarCodigoDeBarrasEAN13(string codigoDeBarras)
         {
-            if (codigoDeBarras.Length != 13 || !long.TryParse(codigoDeBarras, out _))
+            if (codigoDeBarras.Length != 13 || !codigoDeBarras.All(char.IsDigit))
                 return false;
-            var numeros = new int[12];
-            for (var i = 0; i < 12; i++)
-            {
-                numeros[i] = int.Parse(codigoDeBarras[i].ToString());
-            }
-            var somaPar = 0;
-            var somaImpar = 0;
-            for (var i = 0; i < 12; i++)
-            {
-                if (i % 2 == 0)
-                    somaImpar += numeros[i];
-                else
-                    somaPar += numeros[i];
-            }
-            var somaTotal = somaImpar + (somaPar * 3);
-            var digitoVerificadorCalculado = (10 - (somaTotal % 10)) % 10;
-            var digitoVerificadorInformado = int.Parse(codigoDeBarras[12].ToString());
+
+            var codigoParcial = codigoDeBarras.Substring(0, 12);
+
+            if (!int.TryParse(codigoDeBarras[12].ToString(), out var digitoVerificadorInformado))
+                return false;
+
+            var digitoVerificadorCalculado = CalcularDigitoVerificador(codigoParcial);
+
             return digitoVerificadorCalculado == digitoVerificadorInformado;
         }
 
@@ -42,28 +33,23 @@ namespace CadastroDeProdutosView.Features.Commons
             return codigoParcial + digitoVerificador;
         }
 
-        private static string CalcularDigitoVerificador(string codigoParcial)
+        private static int CalcularDigitoVerificador(string codigoParcial)
         {
-            var numeros = new int[12];
-            for (var i = 0; i < 12; i++)
-            {
-                numeros[i] = int.Parse(codigoParcial[i].ToString());
-            }
+            int somaPar = 0, somaImpar = 0;
 
-            var somaPar = 0;
-            var somaImpar = 0;
-            for (var i = 0; i < 12; i++)
+            for (var i = 0; i < codigoParcial.Length; i++)
             {
+                var numero = int.Parse(codigoParcial[i].ToString());
                 if (i % 2 == 0)
-                    somaImpar += numeros[i];
+                    somaImpar += numero;
                 else
-                    somaPar += numeros[i];
+                    somaPar += numero;
             }
 
             var somaTotal = somaImpar + (somaPar * 3);
             var digitoVerificador = (10 - (somaTotal % 10)) % 10;
 
-            return digitoVerificador.ToString();
+            return digitoVerificador;
         }
     }
 }
