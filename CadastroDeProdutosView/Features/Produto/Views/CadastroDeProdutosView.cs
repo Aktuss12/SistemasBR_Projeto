@@ -57,7 +57,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             ncmTextEdit.LimpezaDeTextEdit();
             aliquotaDeIcmsTextEdit.LimpezaDeTextEdit();
             reducaoDeCalculoIcmsTextEdit.LimpezaDeTextEdit();
-            categoriaDeProdutosLookUpEdit.LimpezaDeTextEdit();
+            categoriaDeProdutosLookUpEdit.LimpezaDeLookUpEdit();
             unidadeDeMedidaLookUpEdit.LimpezaDeLookUpEdit();
             marcaLookUpEdit.LimpezaDeLookUpEdit();
             origemDaMercadoriaLookUpEdit.LimpezaDeLookUpEdit();
