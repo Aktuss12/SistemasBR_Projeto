@@ -382,10 +382,8 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
         private void alterarBancoDeDadosButton_Click_1(object sender, EventArgs e)
         {
-            Hide();
             var alterarBancoDeDados = new ConfigurarCaminhoDoBancoDeDadosView();
             alterarBancoDeDados.ShowDialog();
-            Close();
         }
 
         private void excluirImagemButton_Click(object sender, EventArgs e)
