@@ -401,6 +401,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
         private void alterarBancoDeDadosButton_Click_1(object sender, EventArgs e)
         {
+<<<<<<< HEAD
             var formAberto = Application.OpenForms.OfType<ConfigurarCaminhoDoBancoDeDadosView>().FirstOrDefault();
             if (formAberto != null)
             {
@@ -409,6 +410,8 @@ namespace CadastroDeProdutosView.Features.Produto.Views
                 return;
             }
 
+=======
+>>>>>>> Recrutas
             var alterarBancoDeDados = new ConfigurarCaminhoDoBancoDeDadosView();
             alterarBancoDeDados.ShowDialog();
         }

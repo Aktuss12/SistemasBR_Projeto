@@ -89,29 +89,14 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             messageBox.ShowDialog();
             if (!messageBox.Resultado) return;
 
+<<<<<<< HEAD
             DesativarProduto(idProduto);
+=======
+            DesativarEReativarProduto.DesativarProduto(connectionString, idProduto);
+
+>>>>>>> Recrutas
             XtraMessageBox.Show("Produto desativado com sucesso");
             CarregarBancoDeDados();
-        }
-
-        private void DesativarProduto(int idProduto)
-        {
-            using var conexao = new FbConnection(connectionString);
-            conexao.Open();
-            const string updateProductQuery = "UPDATE PRODUTO SET ativo = 0 WHERE idProduto = @idProduto";
-            using var command = new FbCommand(updateProductQuery, conexao);
-            command.Parameters.AddWithValue("@idProduto", idProduto);
-            command.ExecuteNonQuery();
-        }
-
-        private void ReativarProduto(int idProduto)
-        {
-            using var conexao = new FbConnection(connectionString);
-            conexao.Open();
-            const string updateProductQuery = "UPDATE PRODUTO SET ativo = 1 WHERE idProduto = @idProduto";
-            using var command = new FbCommand(updateProductQuery, conexao);
-            command.Parameters.AddWithValue("idProduto", idProduto);
-            command.ExecuteNonQuery();
         }
 
         private void DesativarBotoes()
@@ -138,30 +123,33 @@ namespace CadastroDeProdutosView.Features.Produto.Views
         {
             if (pesquisarGridControl.MainView is not GridView gridView)
             {
-                XtraMessageBox.Show("O produto não foi selecionado");
+                XtraMessageBox.Show("O grid não é um GridView.");
                 return;
             }
 
-            var FocusedHowHandle = gridView.FocusedRowHandle;
-            if (FocusedHowHandle < 0)
+            var focusedRowHandle = gridView.FocusedRowHandle;
+
+            if (focusedRowHandle < 0)
             {
-                XtraMessageBox.Show("Selecione um produto para reativar");
+                XtraMessageBox.Show("Selecione um produto para reativar.");
                 return;
             }
 
-            var colunaSelecionada = gridView.GetDataRow(FocusedHowHandle);
+            var colunaSelecionada = gridView.GetDataRow(focusedRowHandle);
             if (colunaSelecionada == null)
             {
-                XtraMessageBox.Show("Ocorreu um erro ao reativar o produto selecionado");
+                XtraMessageBox.Show("Erro ao obter o produto selecionado.");
                 return;
             }
 
             var idProduto = Convert.ToInt32(colunaSelecionada["idProduto"]);
+
             using var messageBox = new MessageBoxCustomizado("Tem certeza que deseja reativar esse produto?");
             messageBox.ShowDialog();
             if (!messageBox.Resultado) return;
 
-            ReativarProduto(idProduto);
+            DesativarEReativarProduto.ReativarProduto(connectionString, idProduto);
+
             XtraMessageBox.Show("Produto reativado com sucesso");
             CarregarBancoDeDados();
         }
