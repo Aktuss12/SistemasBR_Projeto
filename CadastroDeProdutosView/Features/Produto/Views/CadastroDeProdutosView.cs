@@ -7,7 +7,6 @@ using FirebirdSql.Data.FirebirdClient;
 using System;
 using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace CadastroDeProdutosView.Features.Produto.Views
@@ -23,22 +22,16 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             InitializeComponent();
             InitializeLookUpEdit();
             LimitadorDeCaracteres();
-
+            
 
             this.produtoId = produtoId;
             connectionString = ConfiguracaoDoBancoDeDados.ObterStringDeConexao();
-
             if (produtoId > 0)
             {
-                CarregarProduto(produtoId);
-                pesquisarProdutoButtomItem.Enabled = false;
-            }
-            else
-            {
-                pesquisarProdutoButtomItem.Enabled = true;
+                CarregarProduto(this.produtoId.Value);
             }
         }
-
+        
         // Adicionando as enums services para as LookUpEdit
         private void InitializeLookUpEdit()
         {
@@ -319,7 +312,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
                 LimparLookUpEditsETextEdits(); 
                 transacao.Commit();
 
-                 
+                Close();
             }
             catch (Exception ex)
             {
@@ -382,38 +375,17 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
         private void pesquisarProdutoButtomItem_ItemClick(object sender, ItemClickEventArgs e)
         {
-            var formAberto = Application.OpenForms.OfType<PesquisaDeProdutosView>().FirstOrDefault();
-            if (formAberto != null)
-            {
-                formAberto.BringToFront();
-                return;
-            }
-
             var pesquisarProdutos = new PesquisaDeProdutosView();
             pesquisarProdutos.ShowDialog();
-            
-        }
-
-        public void ReativarBotaoPesquisa()
-        {
-            pesquisarProdutoButtomItem.Enabled = true;
+            Close();
         }
 
         private void alterarBancoDeDadosButton_Click_1(object sender, EventArgs e)
         {
-<<<<<<< HEAD
-            var formAberto = Application.OpenForms.OfType<ConfigurarCaminhoDoBancoDeDadosView>().FirstOrDefault();
-            if (formAberto != null)
-            {
-                formAberto.BringToFront();
-                formAberto.WindowState = FormWindowState.Normal;
-                return;
-            }
-
-=======
->>>>>>> Recrutas
+            Hide();
             var alterarBancoDeDados = new ConfigurarCaminhoDoBancoDeDadosView();
             alterarBancoDeDados.ShowDialog();
+            Close();
         }
 
         private void excluirImagemButton_Click(object sender, EventArgs e)

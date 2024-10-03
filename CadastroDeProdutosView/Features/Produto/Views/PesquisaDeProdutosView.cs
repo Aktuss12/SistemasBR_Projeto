@@ -1,24 +1,24 @@
-﻿using CadastroDeProdutosView.Features.Commons;
-using DevExpress.XtraEditors;
+﻿using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Views.Grid;
 using FirebirdSql.Data.FirebirdClient;
 using System;
 using System.Data;
 using System.Windows.Forms;
+using CadastroDeProdutosView.Features.Commons;
 
 namespace CadastroDeProdutosView.Features.Produto.Views
 {
     public partial class PesquisaDeProdutosView : Form
     {
+        public int? SelecionadorIdProduto { get; private set; }
         private readonly string connectionString;
         private bool mostrarAtivos = true;
-        private readonly CadastroDeProdutosView? cadastroForm;
+        
 
-        public PesquisaDeProdutosView(CadastroDeProdutosView cadastroForm = null!)
+        public PesquisaDeProdutosView()
         {
-            InitializeComponent();
             connectionString = ConfiguracaoDoBancoDeDados.ObterStringDeConexao();
-            this.cadastroForm = cadastroForm;
+            InitializeComponent();
             DesativarBotoes();
             CarregarBancoDeDados();
         }
@@ -89,12 +89,8 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             messageBox.ShowDialog();
             if (!messageBox.Resultado) return;
 
-<<<<<<< HEAD
-            DesativarProduto(idProduto);
-=======
             DesativarEReativarProduto.DesativarProduto(connectionString, idProduto);
 
->>>>>>> Recrutas
             XtraMessageBox.Show("Produto desativado com sucesso");
             CarregarBancoDeDados();
         }
@@ -116,7 +112,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
         {
             var nomeProduto = pesquisarTextEdit.Text.Trim();
             pesquisarGridView.ActiveFilterString =
-                !string.IsNullOrEmpty(nomeProduto) ? $"[nome] LIKE '%{nomeProduto}%'" : string.Empty;
+               !string.IsNullOrEmpty(nomeProduto) ? $"[nome] LIKE '%{nomeProduto}%'" : string.Empty;
         }
 
         private void reativarProdutoButtomItem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -173,29 +169,24 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             if (colunaSelecionada == null)
             {
                 XtraMessageBox.Show("Erro ao obter o produto selecionado");
-                return;
+                return; 
             }
+            SelecionadorIdProduto = Convert.ToInt32(colunaSelecionada["idProduto"]);
 
-            var idProduto = Convert.ToInt32(colunaSelecionada["idProduto"]);
-
-            var novoCadastro = new CadastroDeProdutosView(idProduto);
-            novoCadastro.Show();
-            Close();
+            if (SelecionadorIdProduto != null)
+            {
+                var cadastroDeProdutos = new CadastroDeProdutosView(SelecionadorIdProduto.Value);
+                cadastroDeProdutos.ShowDialog();
+            }
+            CarregarBancoDeDados();
         }
 
         private void cadastroButtonItem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            var novoCadastro = new CadastroDeProdutosView(0);
-            novoCadastro.Show();
+            Hide();
+            var abrirCadastro = new CadastroDeProdutosView(0);
+            abrirCadastro.ShowDialog();
             Close();
-        }
-
-        protected override void OnFormClosing(FormClosingEventArgs e)
-        {
-            base.OnFormClosing(e);
-            if (cadastroForm == null) return;
-            cadastroForm.BringToFront();
-            cadastroForm.ReativarBotaoPesquisa();
         }
     }
 }
