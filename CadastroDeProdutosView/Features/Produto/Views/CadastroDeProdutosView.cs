@@ -23,16 +23,22 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             InitializeComponent();
             InitializeLookUpEdit();
             LimitadorDeCaracteres();
-            
+
 
             this.produtoId = produtoId;
             connectionString = ConfiguracaoDoBancoDeDados.ObterStringDeConexao();
+
             if (produtoId > 0)
             {
-                CarregarProduto(this.produtoId.Value);
+                CarregarProduto(produtoId);
+                pesquisarProdutoButtomItem.Enabled = false;
+            }
+            else
+            {
+                pesquisarProdutoButtomItem.Enabled = true;
             }
         }
-        
+
         // Adicionando as enums services para as LookUpEdit
         private void InitializeLookUpEdit()
         {
@@ -380,12 +386,17 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             if (formAberto != null)
             {
                 formAberto.BringToFront();
-                formAberto.WindowState = FormWindowState.Normal;
                 return;
             }
 
             var pesquisarProdutos = new PesquisaDeProdutosView();
-            pesquisarProdutos.Show();
+            pesquisarProdutos.ShowDialog();
+            
+        }
+
+        public void ReativarBotaoPesquisa()
+        {
+            pesquisarProdutoButtomItem.Enabled = true;
         }
 
         private void alterarBancoDeDadosButton_Click_1(object sender, EventArgs e)
