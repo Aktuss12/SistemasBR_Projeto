@@ -3,6 +3,7 @@ using DevExpress.XtraGrid.Views.Grid;
 using FirebirdSql.Data.FirebirdClient;
 using System;
 using System.Data;
+using System.Linq;
 using System.Windows.Forms;
 using CadastroDeProdutosView.Features.Commons;
 
@@ -13,7 +14,8 @@ namespace CadastroDeProdutosView.Features.Produto.Views
         public int? SelecionadorIdProduto { get; private set; }
         private readonly string connectionString;
         private bool mostrarAtivos = true;
-        
+        private CadastroDeProdutosView? cadastroForm;
+
 
         public PesquisaDeProdutosView()
         {
@@ -150,11 +152,17 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             CarregarBancoDeDados();
         }
 
+        private static Form? GetOpenForm<T>() where T : Form
+        {
+            return Application.OpenForms.OfType<T>().FirstOrDefault();
+        }
+
+
         private void alterarButtonItem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             if (pesquisarGridControl.MainView is not GridView gridview)
             {
-                XtraMessageBox.Show("Por favor, Selecione a aba de pesquisa");
+                XtraMessageBox.Show("Por favor, selecione a aba de pesquisa");
                 return;
             }
 
@@ -169,24 +177,43 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             if (colunaSelecionada == null)
             {
                 XtraMessageBox.Show("Erro ao obter o produto selecionado");
-                return; 
+                return;
             }
+
             SelecionadorIdProduto = Convert.ToInt32(colunaSelecionada["idProduto"]);
 
-            if (SelecionadorIdProduto != null)
+            if (SelecionadorIdProduto == null) return;
+
+            if (cadastroForm is { IsDisposed: false })
             {
-                var cadastroDeProdutos = new CadastroDeProdutosView(SelecionadorIdProduto.Value);
-                cadastroDeProdutos.ShowDialog();
+                cadastroForm.Activate();
+                cadastroForm.CarregarProduto(SelecionadorIdProduto.Value);
             }
-            CarregarBancoDeDados();
+            else
+            {
+                cadastroForm = new CadastroDeProdutosView(SelecionadorIdProduto.Value);
+                cadastroForm.FormClosed += (_, _) =>
+                {
+                    cadastroForm = null;
+                    CarregarBancoDeDados();
+                };
+                cadastroForm.Show();
+            }
         }
 
         private void cadastroButtonItem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            var cadastroFormView = GetOpenForm<CadastroDeProdutosView>();
+            if (cadastroFormView != null)
+            {
+                cadastroFormView.Activate(); 
+                return;
+            }
+
             Hide();
             var abrirCadastro = new CadastroDeProdutosView(0);
             abrirCadastro.ShowDialog();
-            Close();
+            Close(); 
         }
     }
 }
