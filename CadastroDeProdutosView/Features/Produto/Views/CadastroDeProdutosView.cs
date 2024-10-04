@@ -45,11 +45,13 @@ namespace CadastroDeProdutosView.Features.Produto.Views
         private void LimitadorDeCaracteres()
         {
             fornecedorTextEdit.Properties.MaxLength = 50;
+            markupTextEdit.Properties.MaxLength = 6;
+            custoTextEdit.Properties.MaxLength = 6;
             precoVendaTextEdit.Properties.MaxLength = 6;
             codigoDeBarrasTextEdit.Properties.MaxLength = 13;
             ncmTextEdit.Properties.MaxLength = 8;
             estoqueTextEdit.Properties.MaxLength = 9;
-            nomeTextEdit.Properties.MaxLength = 100;
+            nomeTextEdit.Properties.MaxLength = 50;
             marcaLookUpEdit.Properties.MaxLength = 50;
             reducaoDeCalculoIcmsTextEdit.Properties.MaxLength = 6;
             aliquotaDeIcmsTextEdit.Properties.MaxLength = 6;
@@ -94,7 +96,9 @@ namespace CadastroDeProdutosView.Features.Produto.Views
                 }
                 else
                 {
+                    var novoProdutoid = _conexao.InserirProduto(produto);
                     XtraMessageBox.Show("Produto cadastrado com sucesso");
+                    produto.Id = novoProdutoid;
                 }
 
                 LimparLookUpEditsETextEdits();
