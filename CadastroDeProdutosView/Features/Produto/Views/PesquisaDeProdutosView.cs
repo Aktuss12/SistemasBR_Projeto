@@ -196,6 +196,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
                 {
                     cadastroForm = null;
                     CarregarBancoDeDados();
+                    WindowState = FormWindowState.Normal;
                 };
                 cadastroForm.ShowDialog();
             }

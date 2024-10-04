@@ -145,20 +145,13 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
                     using (var command = new FbCommand(insertProdutoQuery, conexao, transacao))
                     {
-                        command.Parameters.Add("@Nome", FbDbType.VarChar).Value =
-                            nomeTextEdit.Text ?? (object)DBNull.Value;
-                        command.Parameters.Add("@Categoria", FbDbType.VarChar).Value =
-                            categoriaDeProdutosLookUpEdit.EditValue ?? DBNull.Value;
-                        command.Parameters.Add("@Fornecedor", FbDbType.VarChar).Value =
-                            fornecedorTextEdit.Text ?? (object)DBNull.Value;
-                        command.Parameters.Add("@CodigoDeBarras", FbDbType.VarChar).Value =
-                            codigoDeBarrasTextEdit.Text ?? (object)DBNull.Value;
-                        command.Parameters.Add("@UnidadeDeMedida", FbDbType.VarChar).Value =
-                            unidadeDeMedidaLookUpEdit.EditValue ?? DBNull.Value;
-                        command.Parameters.Add("@Marca", FbDbType.VarChar).Value =
-                            marcaLookUpEdit.EditValue ?? DBNull.Value;
-                        command.Parameters.Add("@Estoque", FbDbType.Integer).Value =
-                            estoqueTextEdit.Text ?? (object)DBNull.Value;
+                        command.Parameters.Add("@Nome", FbDbType.VarChar).Value = nomeTextEdit.Text ?? (object)DBNull.Value;
+                        command.Parameters.Add("@Categoria", FbDbType.VarChar).Value = categoriaDeProdutosLookUpEdit.EditValue ?? DBNull.Value;
+                        command.Parameters.Add("@Fornecedor", FbDbType.VarChar).Value = fornecedorTextEdit.Text ?? (object)DBNull.Value;
+                        command.Parameters.Add("@CodigoDeBarras", FbDbType.VarChar).Value = codigoDeBarrasTextEdit.Text ?? (object)DBNull.Value;
+                        command.Parameters.Add("@UnidadeDeMedida", FbDbType.VarChar).Value = unidadeDeMedidaLookUpEdit.EditValue ?? DBNull.Value;
+                        command.Parameters.Add("@Marca", FbDbType.VarChar).Value = marcaLookUpEdit.EditValue ?? DBNull.Value;
+                        command.Parameters.Add("@Estoque", FbDbType.Integer).Value = estoqueTextEdit.Text ?? (object)DBNull.Value;
                         var custo = ConversorParaDecimal.ParseDecimal(custoTextEdit.Text);
                         command.Parameters.Add("@Custo", FbDbType.Decimal).Value = custo;
                         var markup = ConversorParaDecimal.ParseDecimal(markupTextEdit.Text);
@@ -180,19 +173,14 @@ namespace CadastroDeProdutosView.Features.Produto.Views
                     using (var informacoesCommand = new FbCommand(insertInformacoesFiscaisQuery, conexao, transacao))
                     {
                         informacoesCommand.Parameters.Add("@idProduto", FbDbType.Integer).Value = idProduto;
-                        informacoesCommand.Parameters.Add("@origemDaMercadoria", FbDbType.VarChar).Value =
-                            origemDaMercadoriaLookUpEdit.EditValue ?? DBNull.Value;
-                        informacoesCommand.Parameters.Add("@situacaoTributaria", FbDbType.VarChar).Value =
-                            situacaoTributariaLookUpEdit.EditValue ?? DBNull.Value;
-                        informacoesCommand.Parameters.Add("@naturezaDaOperacao", FbDbType.VarChar).Value =
-                            naturezaDaOperacaoLookUpEdit.EditValue ?? DBNull.Value;
-                        informacoesCommand.Parameters.Add("@Ncm", FbDbType.VarChar).Value =
-                            ncmTextEdit.Text ?? (object)DBNull.Value;
+                        informacoesCommand.Parameters.Add("@origemDaMercadoria", FbDbType.VarChar).Value = origemDaMercadoriaLookUpEdit.EditValue ?? DBNull.Value;
+                        informacoesCommand.Parameters.Add("@situacaoTributaria", FbDbType.VarChar).Value = situacaoTributariaLookUpEdit.EditValue ?? DBNull.Value;
+                        informacoesCommand.Parameters.Add("@naturezaDaOperacao", FbDbType.VarChar).Value = naturezaDaOperacaoLookUpEdit.EditValue ?? DBNull.Value;
+                        informacoesCommand.Parameters.Add("@Ncm", FbDbType.VarChar).Value = ncmTextEdit.Text ?? (object)DBNull.Value;
                         var aliquotaDeIcms = ConversorParaDecimal.ParseDecimal(aliquotaDeIcmsTextEdit.Text);
                         informacoesCommand.Parameters.Add("@aliquotaDeIcms", FbDbType.Decimal).Value = aliquotaDeIcms;
                         var reducaoDeCalculo = ConversorParaDecimal.ParseDecimal(reducaoDeCalculoIcmsTextEdit.Text);
-                        informacoesCommand.Parameters.Add("reducaoDeCalculo", FbDbType.Decimal).Value =
-                            reducaoDeCalculo;
+                        informacoesCommand.Parameters.Add("reducaoDeCalculo", FbDbType.Decimal).Value = reducaoDeCalculo;
                         informacoesCommand.ExecuteNonQuery();
                     }
 
@@ -427,7 +415,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             }
 
             var pesquisarProdutos = new PesquisaDeProdutosView();
-            pesquisarProdutos.Show();
+            pesquisarProdutos.ShowDialog();
         }
 
         private void alterarBancoDeDadosButton_Click_1(object sender, EventArgs e)
@@ -440,7 +428,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
         {
             imagemDoProdutoPictureEdit.Image = null;
         }
-
+        
         private void codigoDeBarrasTextEdit_EditValueChanged(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(codigoDeBarrasTextEdit.Text) || codigoDeBarrasTextEdit.Text != "0") return;
