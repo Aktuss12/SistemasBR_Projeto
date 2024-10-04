@@ -203,12 +203,12 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
         private void cadastroButtonItem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-/*            var cadastroFormView = GetOpenForm<CadastroDeProdutosView>();
+            var cadastroFormView = GetOpenForm<CadastroDeProdutosView>();
             if (cadastroFormView != null)
             {
-                cadastroFormView.Activate(); 
+                cadastroFormView.Activate();
                 return;
-            }*/
+            }
             var abrirCadastro = new CadastroDeProdutosView(0);
             abrirCadastro.ShowDialog();
         }

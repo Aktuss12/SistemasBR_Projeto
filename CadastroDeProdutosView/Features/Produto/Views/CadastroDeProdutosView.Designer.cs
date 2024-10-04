@@ -75,7 +75,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.estoqueLabelControl = new DevExpress.XtraEditors.LabelControl();
             this.custoTextEdit = new DevExpress.XtraEditors.TextEdit();
             this.categoriaLabelControl = new DevExpress.XtraEditors.LabelControl();
-            this.codigodebarrasTextEdit = new DevExpress.XtraEditors.TextEdit();
+            this.codigoDeBarrasTextEdit = new DevExpress.XtraEditors.TextEdit();
             this.infofiscalTabNavigationPage = new DevExpress.XtraBars.Navigation.TabNavigationPage();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
@@ -112,7 +112,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             ((System.ComponentModel.ISupportInitialize)(this.estoqueTextEdit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.precoVendaTextEdit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.custoTextEdit.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.codigodebarrasTextEdit.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.codigoDeBarrasTextEdit.Properties)).BeginInit();
             this.infofiscalTabNavigationPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
@@ -219,7 +219,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.produtosGroupControl.Controls.Add(this.estoqueLabelControl);
             this.produtosGroupControl.Controls.Add(this.custoTextEdit);
             this.produtosGroupControl.Controls.Add(this.categoriaLabelControl);
-            this.produtosGroupControl.Controls.Add(this.codigodebarrasTextEdit);
+            this.produtosGroupControl.Controls.Add(this.codigoDeBarrasTextEdit);
             this.produtosGroupControl.Cursor = System.Windows.Forms.Cursors.Default;
             this.produtosGroupControl.GroupStyle = DevExpress.Utils.GroupStyle.Card;
             this.produtosGroupControl.Location = new System.Drawing.Point(3, 3);
@@ -721,23 +721,24 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.categoriaLabelControl.TabIndex = 21;
             this.categoriaLabelControl.Text = "Categoria: *";
             // 
-            // codigodebarrasTextEdit
+            // codigoDeBarrasTextEdit
             // 
-            this.codigodebarrasTextEdit.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.codigodebarrasTextEdit.EditValue = "";
-            this.codigodebarrasTextEdit.Location = new System.Drawing.Point(499, 392);
-            this.codigodebarrasTextEdit.Margin = new System.Windows.Forms.Padding(2);
-            this.codigodebarrasTextEdit.Name = "codigodebarrasTextEdit";
-            this.codigodebarrasTextEdit.Properties.AppearanceDisabled.BackColor = System.Drawing.Color.White;
-            this.codigodebarrasTextEdit.Properties.AppearanceDisabled.BackColor2 = System.Drawing.Color.White;
-            this.codigodebarrasTextEdit.Properties.AppearanceDisabled.ForeColor = System.Drawing.Color.Black;
-            this.codigodebarrasTextEdit.Properties.AppearanceDisabled.Options.UseBackColor = true;
-            this.codigodebarrasTextEdit.Properties.AppearanceDisabled.Options.UseForeColor = true;
-            this.codigodebarrasTextEdit.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
-            this.codigodebarrasTextEdit.Properties.Mask.EditMask = "d";
-            this.codigodebarrasTextEdit.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
-            this.codigodebarrasTextEdit.Size = new System.Drawing.Size(158, 22);
-            this.codigodebarrasTextEdit.TabIndex = 10;
+            this.codigoDeBarrasTextEdit.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.codigoDeBarrasTextEdit.EditValue = "";
+            this.codigoDeBarrasTextEdit.Location = new System.Drawing.Point(499, 392);
+            this.codigoDeBarrasTextEdit.Margin = new System.Windows.Forms.Padding(2);
+            this.codigoDeBarrasTextEdit.Name = "codigoDeBarrasTextEdit";
+            this.codigoDeBarrasTextEdit.Properties.AppearanceDisabled.BackColor = System.Drawing.Color.White;
+            this.codigoDeBarrasTextEdit.Properties.AppearanceDisabled.BackColor2 = System.Drawing.Color.White;
+            this.codigoDeBarrasTextEdit.Properties.AppearanceDisabled.ForeColor = System.Drawing.Color.Black;
+            this.codigoDeBarrasTextEdit.Properties.AppearanceDisabled.Options.UseBackColor = true;
+            this.codigoDeBarrasTextEdit.Properties.AppearanceDisabled.Options.UseForeColor = true;
+            this.codigoDeBarrasTextEdit.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
+            this.codigoDeBarrasTextEdit.Properties.Mask.EditMask = "d";
+            this.codigoDeBarrasTextEdit.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
+            this.codigoDeBarrasTextEdit.Size = new System.Drawing.Size(158, 22);
+            this.codigoDeBarrasTextEdit.TabIndex = 10;
+            this.codigoDeBarrasTextEdit.EditValueChanged += new System.EventHandler(this.codigoDeBarrasTextEdit_EditValueChanged);
             // 
             // infofiscalTabNavigationPage
             // 
@@ -983,6 +984,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.Controls.Add(this.barDockControlTop);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "CadastroDeProdutosView";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Cadastro De Produtos";
             ((System.ComponentModel.ISupportInitialize)(this.tabPage)).EndInit();
             this.tabPage.ResumeLayout(false);
@@ -1003,7 +1005,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             ((System.ComponentModel.ISupportInitialize)(this.estoqueTextEdit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.precoVendaTextEdit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.custoTextEdit.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.codigodebarrasTextEdit.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.codigoDeBarrasTextEdit.Properties)).EndInit();
             this.infofiscalTabNavigationPage.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).EndInit();
             this.groupControl1.ResumeLayout(false);
@@ -1063,7 +1065,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
         private DevExpress.XtraEditors.LabelControl estoqueLabelControl;
         private DevExpress.XtraEditors.TextEdit custoTextEdit;
         private DevExpress.XtraEditors.LabelControl categoriaLabelControl;
-        private DevExpress.XtraEditors.TextEdit codigodebarrasTextEdit;
+        private DevExpress.XtraEditors.TextEdit codigoDeBarrasTextEdit;
         private DevExpress.XtraEditors.LabelControl produtosLabelControl;
         private DevExpress.XtraEditors.SimpleButton codigoDeBarrasButton;
         private DevExpress.XtraBars.BarButtonItem cancelarButtomItem;
