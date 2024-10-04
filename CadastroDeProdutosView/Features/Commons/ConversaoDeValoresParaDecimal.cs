@@ -10,11 +10,7 @@ namespace CadastroDeProdutosView.Features.Commons
             var limparValor = new string(value.Where(c => char.IsDigit(c) || c == ',').ToArray());
             limparValor = limparValor.Replace(",", ".");
 
-            if (decimal.TryParse(limparValor, NumberStyles.Any, CultureInfo.InvariantCulture, out var resultado))
-            {
-                return resultado;
-            }
-            return 0;
+            return decimal.TryParse(limparValor, NumberStyles.Any, CultureInfo.InvariantCulture, out var resultado) ? resultado : 0;
         }
     }
 }

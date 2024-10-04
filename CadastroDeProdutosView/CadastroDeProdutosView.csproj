@@ -77,6 +77,7 @@
   <ItemGroup>
     <Compile Include="Features\Commons\CalculadorDeCodigoDeBarras.cs" />
     <Compile Include="Features\Commons\CalculoDeCustoEMarkupParaPrecoDaVenda.cs" />
+    <Compile Include="Features\Commons\ConexaoFirebird.cs" />
     <Compile Include="Features\Commons\ConfiguracaoDoBancoDeDados.cs" />
     <Compile Include="Features\Commons\ConversaoDeValoresParaDecimal.cs" />
     <Compile Include="Features\Commons\ConversorDeImagemParaByte.cs" />
@@ -85,6 +86,7 @@
     <Compile Include="Features\Commons\MessageBoxCustomizada.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Features\Commons\Services\ProdutoService.cs" />
     <Compile Include="Features\Commons\ValidacaoDeCamposObrigatorios.cs" />
     <Compile Include="Features\Produto\Enums\CategoriaDeProduto.cs" />
     <Compile Include="Features\Produto\Enums\MarcaDoProduto.cs" />

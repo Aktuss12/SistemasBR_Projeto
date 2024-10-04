@@ -1,11 +1,11 @@
-﻿using DevExpress.XtraEditors;
+﻿using CadastroDeProdutosView.Features.Commons;
+using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Views.Grid;
 using FirebirdSql.Data.FirebirdClient;
 using System;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
-using CadastroDeProdutosView.Features.Commons;
 
 namespace CadastroDeProdutosView.Features.Produto.Views
 {
@@ -16,13 +16,13 @@ namespace CadastroDeProdutosView.Features.Produto.Views
         private bool mostrarAtivos = true;
         private CadastroDeProdutosView? cadastroForm;
 
-
         public PesquisaDeProdutosView()
         {
             connectionString = ConfiguracaoDoBancoDeDados.ObterStringDeConexao();
             InitializeComponent();
             DesativarBotoes();
             CarregarBancoDeDados();
+/*            AtualizarGridProdutos();*/
         }
 
         private void CarregarBancoDeDados()
@@ -31,10 +31,11 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             {
                 var combinedTable = GetCombinedData();
                 pesquisarGridControl.DataSource = combinedTable;
+/*                AtualizarGridProdutos(); */
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Erro ao carregar dados: " + ex.Message);
+                XtraMessageBox.Show("Erro ao carregar dados: " + ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -62,11 +63,35 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             return tabelaDados;
         }
 
+        /*private void AtualizarGridProdutos()
+        {
+            try
+            {
+                var produtosAtualizados = ProdutoService.ObterProdutosAtualizados();
+
+                if (produtosAtualizados == null! || produtosAtualizados.Count == 0)
+                {
+                    XtraMessageBox.Show("Nenhum produto encontrado.", "Informação", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
+                pesquisarGridControl.DataSource = produtosAtualizados;
+                if (pesquisarGridControl.MainView is GridView gridView)
+                {
+                    gridView.RefreshData();
+                }
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show($"Erro ao atualizar a grade de produtos: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }*/
+
         private void desativarProdutoButtomItem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             if (pesquisarGridControl.MainView is not GridView gridView)
             {
-                XtraMessageBox.Show("O grid não é um GridView.");
+                XtraMessageBox.Show("O grid não é um GridView.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -74,14 +99,14 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
             if (focusedRowHandle < 0)
             {
-                XtraMessageBox.Show("Selecione um produto para desativar.");
+                XtraMessageBox.Show("Selecione um produto para desativar.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
             var colunaSelecionada = gridView.GetDataRow(focusedRowHandle);
             if (colunaSelecionada == null)
             {
-                XtraMessageBox.Show("Erro ao obter o produto selecionado.");
+                XtraMessageBox.Show("Erro ao obter o produto selecionado.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -93,7 +118,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
             DesativarEReativarProduto.DesativarProduto(connectionString, idProduto);
 
-            XtraMessageBox.Show("Produto desativado com sucesso");
+            XtraMessageBox.Show("Produto desativado com sucesso.", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
             CarregarBancoDeDados();
         }
 
@@ -114,14 +139,14 @@ namespace CadastroDeProdutosView.Features.Produto.Views
         {
             var nomeProduto = pesquisarTextEdit.Text.Trim();
             pesquisarGridView.ActiveFilterString =
-               !string.IsNullOrEmpty(nomeProduto) ? $"[nome] LIKE '%{nomeProduto}%'" : string.Empty;
+                !string.IsNullOrEmpty(nomeProduto) ? $"[nome] LIKE '%{nomeProduto}%'" : string.Empty;
         }
 
         private void reativarProdutoButtomItem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             if (pesquisarGridControl.MainView is not GridView gridView)
             {
-                XtraMessageBox.Show("O grid não é um GridView.");
+                XtraMessageBox.Show("O grid não é um GridView.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -129,14 +154,14 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
             if (focusedRowHandle < 0)
             {
-                XtraMessageBox.Show("Selecione um produto para reativar.");
+                XtraMessageBox.Show("Selecione um produto para reativar.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
             var colunaSelecionada = gridView.GetDataRow(focusedRowHandle);
             if (colunaSelecionada == null)
             {
-                XtraMessageBox.Show("Erro ao obter o produto selecionado.");
+                XtraMessageBox.Show("Erro ao obter o produto selecionado.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -148,7 +173,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
             DesativarEReativarProduto.ReativarProduto(connectionString, idProduto);
 
-            XtraMessageBox.Show("Produto reativado com sucesso");
+            XtraMessageBox.Show("Produto reativado com sucesso.", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
             CarregarBancoDeDados();
         }
 
@@ -157,26 +182,25 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             return Application.OpenForms.OfType<T>().FirstOrDefault();
         }
 
-
         private void alterarButtonItem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            if (pesquisarGridControl.MainView is not GridView gridview)
+            if (pesquisarGridControl.MainView is not GridView gridView)
             {
-                XtraMessageBox.Show("Por favor, selecione a aba de pesquisa");
+                XtraMessageBox.Show("Por favor, selecione a aba de pesquisa.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            var focusedRowHandle = gridview.FocusedRowHandle;
+            var focusedRowHandle = gridView.FocusedRowHandle;
             if (focusedRowHandle < 0)
             {
-                XtraMessageBox.Show("Selecione um produto para alterar");
+                XtraMessageBox.Show("Selecione um produto para alterar.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            var colunaSelecionada = gridview.GetDataRow(focusedRowHandle);
+            var colunaSelecionada = gridView.GetDataRow(focusedRowHandle);
             if (colunaSelecionada == null)
             {
-                XtraMessageBox.Show("Erro ao obter o produto selecionado");
+                XtraMessageBox.Show("Erro ao obter o produto selecionado.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -196,6 +220,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
                 {
                     cadastroForm = null;
                     CarregarBancoDeDados();
+                    WindowState = FormWindowState.Normal;
                 };
                 cadastroForm.ShowDialog();
             }
@@ -209,7 +234,8 @@ namespace CadastroDeProdutosView.Features.Produto.Views
                 cadastroFormView.Activate();
                 return;
             }
-            var abrirCadastro = new CadastroDeProdutosView(0);
+
+            var abrirCadastro = new CadastroDeProdutosView();
             abrirCadastro.ShowDialog();
         }
     }
