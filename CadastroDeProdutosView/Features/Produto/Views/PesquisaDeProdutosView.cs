@@ -1,5 +1,4 @@
 ﻿using CadastroDeProdutosView.Features.Commons;
-using CadastroDeProdutosView.Features.Commons.Services;
 using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Views.Grid;
 using FirebirdSql.Data.FirebirdClient;
@@ -23,7 +22,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             InitializeComponent();
             DesativarBotoes();
             CarregarBancoDeDados();
-            AtualizarGridProdutos();
+/*            AtualizarGridProdutos();*/
         }
 
         private void CarregarBancoDeDados()
@@ -32,7 +31,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             {
                 var combinedTable = GetCombinedData();
                 pesquisarGridControl.DataSource = combinedTable;
-                AtualizarGridProdutos(); 
+/*                AtualizarGridProdutos(); */
             }
             catch (Exception ex)
             {
@@ -64,7 +63,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             return tabelaDados;
         }
 
-        private void AtualizarGridProdutos()
+        /*private void AtualizarGridProdutos()
         {
             try
             {
@@ -86,7 +85,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             {
                 XtraMessageBox.Show($"Erro ao atualizar a grade de produtos: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
+        }*/
 
         private void desativarProdutoButtomItem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {

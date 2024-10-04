@@ -94,8 +94,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
                 }
                 else
                 {
-                    var novoProdutoId = _conexao.InserirProduto(produto);
-                    XtraMessageBox.Show($"Produto cadastrado com sucesso. ID: {novoProdutoId}");
+                    XtraMessageBox.Show("Produto cadastrado com sucesso");
                 }
 
                 LimparLookUpEditsETextEdits();
@@ -124,7 +123,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             codigodebarrasLabelControl.Text = "Codigo de Barras:";
             codigodebarrasLabelControl.AllowHtmlString = false;
 
-            if (!ValidacaoDeCamposObrigatorios.ValidacaoParaCamposObrigatorios(
+            if (ValidacaoDeCamposObrigatorios.ValidacaoParaCamposObrigatorios(
                     nomeTextEdit,
                     estoqueTextEdit,
                     precoVendaTextEdit,
@@ -134,13 +133,9 @@ namespace CadastroDeProdutosView.Features.Produto.Views
                     estoqueLabelControl,
                     precoDaVendaLabelControl,
                     unidadeDeMedidaLabelControl,
-                    categoriaLabelControl))
-            {
-                XtraMessageBox.Show("Todos os campos obrigatórios devem ser preenchidos!");
-                return false;
-            }
-
-            return true;
+                    categoriaLabelControl)) return true;
+            XtraMessageBox.Show("Todos os campos obrigatórios devem ser preenchidos!");
+            return false;
         }
 
         private Commons.Produto CriarProdutoDoFormulario()
