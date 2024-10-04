@@ -112,8 +112,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
         private void pesquisarTextEdit_EditValueChanged(object sender, EventArgs e)
         {
             var nomeProduto = pesquisarTextEdit.Text.Trim();
-            pesquisarGridView.ActiveFilterString =
-                !string.IsNullOrEmpty(nomeProduto) ? $"[nome] LIKE '%{nomeProduto}%'" : string.Empty;
+            pesquisarGridView.ActiveFilterString = !string.IsNullOrEmpty(nomeProduto) ? $"[nome] LIKE '%{nomeProduto}%'" : string.Empty;
         }
 
         private void reativarProdutoButtomItem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
