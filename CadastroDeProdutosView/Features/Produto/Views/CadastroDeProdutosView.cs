@@ -80,19 +80,16 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             reducaoDeCalculoIcmsTextEdit.Properties.MaxLength = 6;
             aliquotaDeIcmsTextEdit.Properties.MaxLength = 6;
         }
-        /*
-        Anotação (Paulo) -- 
-        O método inscrito nesse evento faz muitas coisas e é muito longo, portanto é importante abtrair algumas funcionalidades pra outros métodos.
-        Dito isso, provavelmente vamos criar uma classe só pra operações no banco mais pra frente, então você que sabe.
-        */
+
         private void ClicadoSalvarButtonItem(object sender, ItemClickEventArgs e)
         {
-            codigoDeBarrasTextEdit.Properties.MaxLength = 13;
+
+            // Veja Item 4 do documento
 
             if (!string.IsNullOrWhiteSpace(codigoDeBarrasTextEdit.Text))
             {
                 var codigoDeBarrasValido =
-                    CalculadorDeCodigoDeBarras.ValidarCodigoDeBarrasEAN13(codigoDeBarrasTextEdit.Text);
+                    CalculadorDeCodigoDeBarras.ValidarCodigoDeBarrasEan13(codigoDeBarrasTextEdit.Text);
 
                 if (!codigoDeBarrasValido)
                 {
@@ -375,7 +372,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
         // Edita o valor da TextEdit do codigo de barras para o tipo EAN13 caso seja clicado no botão
         private void ConverterCodigoDeBarrasPraEan13(object sender, EventArgs e)
         {
-            var geradorDeCodigoDeBarras = CalculadorDeCodigoDeBarras.GerarCodigoDeBarrasEAN13();
+            var geradorDeCodigoDeBarras = CalculadorDeCodigoDeBarras.GerarCodigoDeBarrasEan13();
             codigoDeBarrasTextEdit.EditValue = geradorDeCodigoDeBarras;
         }
 
