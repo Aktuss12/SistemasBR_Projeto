@@ -25,7 +25,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             bancoDeDadosTextEdit.Text = config.CaminhoBanco;
         }
 
-        private void aplicarButton_Click(object sender, EventArgs e)
+        private void ClicadoBotaoDeAplicarMudança(object sender, EventArgs e)
         {
             var novoCaminho = bancoDeDadosTextEdit.Text.Trim();
             if (string.IsNullOrWhiteSpace(novoCaminho))
@@ -38,8 +38,8 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             ConfiguracaoDoBancoDeDados.SalvarConfiguracao(config);
             XtraMessageBox.Show("Configuração salva com sucesso. Reinicie a aplicação para aplicar as mudanças.");
         }
-
-        private void exploradorBancoDeDadosButton_Click(object sender, EventArgs e)
+        
+        private void ClicadoBotaoDeExplorarArquivos(object sender, EventArgs e)
         {
             var abrirExploradorDeArquivos = new OpenFileDialog();
             abrirExploradorDeArquivos.Filter = "Arquivos de Banco de Dados Firebird (*.FDB)|*.FDB|Todos os arquivos (*.*)|*.*";

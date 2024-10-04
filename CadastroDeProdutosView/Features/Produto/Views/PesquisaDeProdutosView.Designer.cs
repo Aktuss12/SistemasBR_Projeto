@@ -134,7 +134,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.desativarProdutoButtomItem.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("desativarProdutoButtomItem.ImageOptions.SvgImage")));
             this.desativarProdutoButtomItem.Name = "desativarProdutoButtomItem";
             this.desativarProdutoButtomItem.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
-            this.desativarProdutoButtomItem.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.desativarProdutoButtomItem_ItemClick);
+            this.desativarProdutoButtomItem.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.ClicadoBotaoDeDesativarProduto);
             // 
             // reativarProdutoButtomItem
             // 
@@ -144,7 +144,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.reativarProdutoButtomItem.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("reativarProdutoButtomItem.ImageOptions.SvgImage")));
             this.reativarProdutoButtomItem.Name = "reativarProdutoButtomItem";
             this.reativarProdutoButtomItem.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
-            this.reativarProdutoButtomItem.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.reativarProdutoButtomItem_ItemClick);
+            this.reativarProdutoButtomItem.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.ClicadoBotaoDeReativarProduto);
             // 
             // alterarButtonItem
             // 
@@ -155,7 +155,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.alterarButtonItem.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("alterarButtonItem.ImageOptions.SvgImage")));
             this.alterarButtonItem.Name = "alterarButtonItem";
             this.alterarButtonItem.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
-            this.alterarButtonItem.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.alterarButtonItem_ItemClick);
+            this.alterarButtonItem.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.ClicadoBotaoDeAlterar);
             // 
             // cadastroButtonItem
             // 
@@ -166,7 +166,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.cadastroButtonItem.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("cadastroButtonItem.ImageOptions.LargeImage")));
             this.cadastroButtonItem.Name = "cadastroButtonItem";
             this.cadastroButtonItem.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
-            this.cadastroButtonItem.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.cadastroButtonItem_ItemClick);
+            this.cadastroButtonItem.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.ClicadoBotaoDeCadastro);
             // 
             // barDockControl1
             // 
@@ -329,7 +329,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.produtosDesativadosToggleSwitchh.Properties.OnText = " Inativos";
             this.produtosDesativadosToggleSwitchh.Size = new System.Drawing.Size(160, 31);
             this.produtosDesativadosToggleSwitchh.TabIndex = 24;
-            this.produtosDesativadosToggleSwitchh.Toggled += new System.EventHandler(this.produtosDesativadosToggleSwitchh_Toggled_1);
+            this.produtosDesativadosToggleSwitchh.Toggled += new System.EventHandler(this.AlteradoToggleDeProdutosDesativados);
             // 
             // pesquisarGridControl
             // 
@@ -375,7 +375,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.pesquisarTextEdit.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
             this.pesquisarTextEdit.Size = new System.Drawing.Size(337, 22);
             this.pesquisarTextEdit.TabIndex = 22;
-            this.pesquisarTextEdit.EditValueChanged += new System.EventHandler(this.pesquisarTextEdit_EditValueChanged);
+            this.pesquisarTextEdit.EditValueChanged += new System.EventHandler(this.MudouValorPesquisaTextEdit);
             // 
             // pesquisarLabelControl
             // 

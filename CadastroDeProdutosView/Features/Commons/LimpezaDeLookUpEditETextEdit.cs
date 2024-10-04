@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using DevExpress.XtraEditors;
+using System.Runtime.CompilerServices;
 
 namespace CadastroDeProdutosView.Features.Commons
 {

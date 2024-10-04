@@ -24,7 +24,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             InitializeLookUpEdit();
             LimitadorDeCaracteres();
 
-
             _produtoId = produtoId;
             _connectionString = ConfiguracaoDoBancoDeDados.ObterStringDeConexao();
             if (_produtoId > 0)
@@ -51,23 +50,21 @@ namespace CadastroDeProdutosView.Features.Produto.Views
         // Limpando as LookUpEdits, TextEdit e ImageEdit
         private void LimparLookUpEditsETextEdits()
         {
-            nomeTextEdit.LimpezaDeTextEdit();
-            fornecedorTextEdit.LimpezaDeTextEdit();
-            codigoDeBarrasTextEdit.LimpezaDeTextEdit();
-            estoqueTextEdit.LimpezaDeTextEdit();
-            custoTextEdit.LimpezaDeTextEdit();
-            markupTextEdit.LimpezaDeTextEdit();
-            precoVendaTextEdit.LimpezaDeTextEdit();
-            ncmTextEdit.LimpezaDeTextEdit();
-            aliquotaDeIcmsTextEdit.LimpezaDeTextEdit();
-            reducaoDeCalculoIcmsTextEdit.LimpezaDeTextEdit();
-            categoriaDeProdutosLookUpEdit.LimpezaDeLookUpEdit();
-            unidadeDeMedidaLookUpEdit.LimpezaDeLookUpEdit();
-            marcaLookUpEdit.LimpezaDeLookUpEdit();
-            origemDaMercadoriaLookUpEdit.LimpezaDeLookUpEdit();
-            situacaoTributariaLookUpEdit.LimpezaDeLookUpEdit();
-            naturezaDaOperacaoLookUpEdit.LimpezaDeLookUpEdit();
-            imagemDoProdutoPictureEdit.LimpezaDeImageBox();
+            foreach (Control control in this.Controls)
+            {
+                if (control is TextEdit textEdit)
+                {
+                    textEdit.LimpezaDeTextEdit();
+                }
+                else if (control is LookUpEdit lookUpEdit)
+                {
+                    lookUpEdit.LimpezaDeLookUpEdit();
+                }
+                else if (control is PictureEdit pictureEdit)
+                {
+                    pictureEdit.LimpezaDeImageBox();
+                }
+            }
         }
 
         // Limitando a quantidade de caracteres dos campos para que seja responsivo com o Banco de Dados
@@ -83,9 +80,12 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             reducaoDeCalculoIcmsTextEdit.Properties.MaxLength = 6;
             aliquotaDeIcmsTextEdit.Properties.MaxLength = 6;
         }
-
-
-        private void salvarButtomItem_ItemClick(object sender, ItemClickEventArgs e)
+        /*
+        Anotação (Paulo) -- 
+        O método inscrito nesse evento faz muitas coisas e é muito longo, portanto é importante abtrair algumas funcionalidades pra outros métodos.
+        Dito isso, provavelmente vamos criar uma classe só pra operações no banco mais pra frente, então você que sabe.
+        */
+        private void ClicadoSalvarButtonItem(object sender, ItemClickEventArgs e)
         {
             codigoDeBarrasTextEdit.Properties.MaxLength = 13;
 
@@ -346,11 +346,11 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             Close();
         }
 
-        private void adicionarImagemButton_Click(object sender, EventArgs e)
+        private void ClicadoBotaoDeAdicionarImagem(object sender, EventArgs e)
         {
             using var abrirExploradoDeArquivo = new OpenFileDialog();
             abrirExploradoDeArquivo.Filter =
-                "Image Files|*.jpg;*.jpeg;*.png;*.bmp;*.gif;*.tiff;*.tif;*.webp;*.heic;*.svg;*.cr2;*.nef;*.arw";
+                "Image Files|*.jpg;*.jpeg;*.png;*.bmp;*.tiff;*.tif;*.webp;*.heic;*.svg;*.cr2;*.nef;*.arw";
 
             if (abrirExploradoDeArquivo.ShowDialog() != DialogResult.OK) return;
 
@@ -372,15 +372,14 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             }
             else imagemDoProdutoPictureEdit.Image = null;
         }
-
         // Edita o valor da TextEdit do codigo de barras para o tipo EAN13 caso seja clicado no botão
-        private void codigoDeBarrasButton_Click(object sender, EventArgs e)
+        private void ConverterCodigoDeBarrasPraEan13(object sender, EventArgs e)
         {
             var geradorDeCodigoDeBarras = CalculadorDeCodigoDeBarras.GerarCodigoDeBarrasEAN13();
             codigoDeBarrasTextEdit.EditValue = geradorDeCodigoDeBarras;
         }
 
-        private void custoTextEdit_EditValueChanged(object sender, EventArgs e)
+        private void MudouValorDoCustoTextEdit(object sender, EventArgs e)
         {
             custoTextEdit.Properties.MaxLength = 6;
             if (decimal.TryParse(custoTextEdit.Text, out var custo) &&
@@ -389,8 +388,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
                 CalculoDeCustoEMarkupParaPrecoVenda.CalcularPrecoVenda(custo, markup, precoVendaTextEdit);
             }
         }
-
-        private void markupTextEdit_EditValueChanged_1(object sender, EventArgs e)
+        private void MudouValorDoMarkupTextEdit(object sender, EventArgs e)
         {
             markupTextEdit.Properties.MaxLength = 6;
             if (decimal.TryParse(custoTextEdit.Text, out var custo) &&
@@ -405,7 +403,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             return Application.OpenForms.OfType<T>().FirstOrDefault();
         }
 
-        private void pesquisarProdutoButtomItem_ItemClick(object sender, ItemClickEventArgs e)
+        private void BotaoDePequisarProdutoClicado(object sender, ItemClickEventArgs e)
         {
             var pesquisaForm = GetOpenForm<PesquisaDeProdutosView>();
             if (pesquisaForm != null)
@@ -418,18 +416,18 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             pesquisarProdutos.ShowDialog();
         }
 
-        private void alterarBancoDeDadosButton_Click_1(object sender, EventArgs e)
+        private void BotaoDeAlterarBancoDeDadosClicado(object sender, EventArgs e)
         {
             var alterarBancoDeDados = new ConfigurarCaminhoDoBancoDeDadosView();
             alterarBancoDeDados.ShowDialog();
         }
 
-        private void excluirImagemButton_Click(object sender, EventArgs e)
+        private void BotaoDeExcluirImagemClicado(object sender, EventArgs e)
         {
             imagemDoProdutoPictureEdit.Image = null;
         }
         
-        private void codigoDeBarrasTextEdit_EditValueChanged(object sender, EventArgs e)
+        private void MudouValorCodigoDeBarrasTextEdit(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(codigoDeBarrasTextEdit.Text) || codigoDeBarrasTextEdit.Text != "0") return;
             codigoDeBarrasTextEdit.EditValue = null;

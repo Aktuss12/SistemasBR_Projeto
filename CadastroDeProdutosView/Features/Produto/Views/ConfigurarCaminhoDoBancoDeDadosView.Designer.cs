@@ -71,7 +71,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.aplicarButton.Name = "aplicarButton";
             this.aplicarButton.Size = new System.Drawing.Size(57, 51);
             this.aplicarButton.TabIndex = 2;
-            this.aplicarButton.Click += new System.EventHandler(this.aplicarButton_Click);
+            this.aplicarButton.Click += new System.EventHandler(this.ClicadoBotaoDeAplicarMudança);
             // 
             // exploradorBandoDeDadosButton
             // 
@@ -82,7 +82,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.exploradorBandoDeDadosButton.Name = "exploradorBandoDeDadosButton";
             this.exploradorBandoDeDadosButton.Size = new System.Drawing.Size(57, 51);
             this.exploradorBandoDeDadosButton.TabIndex = 3;
-            this.exploradorBandoDeDadosButton.Click += new System.EventHandler(this.exploradorBancoDeDadosButton_Click);
+            this.exploradorBandoDeDadosButton.Click += new System.EventHandler(this.ClicadoBotaoDeExplorarArquivos);
             // 
             // ConfigurarCaminhoDoBancoDeDadosView
             // 

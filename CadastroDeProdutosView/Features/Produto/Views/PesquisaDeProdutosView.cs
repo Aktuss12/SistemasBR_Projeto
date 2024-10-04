@@ -12,14 +12,14 @@ namespace CadastroDeProdutosView.Features.Produto.Views
     public partial class PesquisaDeProdutosView : Form
     {
         public int? SelecionadorIdProduto { get; private set; }
-        private readonly string connectionString;
-        private bool mostrarAtivos = true;
-        private CadastroDeProdutosView? cadastroForm;
+        private readonly string _connectionString;
+        private bool _mostrarAtivos = true;
+        private CadastroDeProdutosView? _cadastroForm;
 
 
         public PesquisaDeProdutosView()
         {
-            connectionString = ConfiguracaoDoBancoDeDados.ObterStringDeConexao();
+            _connectionString = ConfiguracaoDoBancoDeDados.ObterStringDeConexao();
             InitializeComponent();
             DesativarBotoes();
             CarregarBancoDeDados();
@@ -41,7 +41,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
         private DataTable GetCombinedData()
         {
             var tabelaDados = new DataTable();
-            using var conexao = new FbConnection(connectionString);
+            using var conexao = new FbConnection(_connectionString);
             conexao.Open();
             const string query = @"
                 SELECT 
@@ -55,14 +55,15 @@ namespace CadastroDeProdutosView.Features.Produto.Views
                 WHERE P.ativo = @ativo";
 
             using var comando = new FbCommand(query, conexao);
-            comando.Parameters.AddWithValue("@ativo", mostrarAtivos ? 1 : 0);
+            comando.Parameters.AddWithValue("@ativo", _mostrarAtivos ? 1 : 0);
             using var dataAdapter = new FbDataAdapter(comando);
             dataAdapter.Fill(tabelaDados);
 
             return tabelaDados;
         }
 
-        private void desativarProdutoButtomItem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+
+        private void ClicadoBotaoDeDesativarProduto(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             if (pesquisarGridControl.MainView is not GridView gridView)
             {
@@ -91,7 +92,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             messageBox.ShowDialog();
             if (!messageBox.Resultado) return;
 
-            DesativarEReativarProduto.DesativarProduto(connectionString, idProduto);
+            DesativarEReativarProduto.DesativarProduto(_connectionString, idProduto);
 
             XtraMessageBox.Show("Produto desativado com sucesso");
             CarregarBancoDeDados();
@@ -103,21 +104,21 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             reativarProdutoButtomItem.Enabled = produtosDesativadosToggleSwitchh.IsOn;
         }
 
-        public void produtosDesativadosToggleSwitchh_Toggled_1(object sender, EventArgs e)
-        {
-            mostrarAtivos = !mostrarAtivos;
+        public void AlteradoToggleDeProdutosDesativados(object sender, EventArgs e)
+        { 
+            _mostrarAtivos = !_mostrarAtivos;
             DesativarBotoes();
             CarregarBancoDeDados();
         }
 
-        private void pesquisarTextEdit_EditValueChanged(object sender, EventArgs e)
+        private void MudouValorPesquisaTextEdit(object sender, EventArgs e)
         {
             var nomeProduto = pesquisarTextEdit.Text.Trim();
             pesquisarGridView.ActiveFilterString =
                !string.IsNullOrEmpty(nomeProduto) ? $"[nome] LIKE '%{nomeProduto}%'" : string.Empty;
         }
 
-        private void reativarProdutoButtomItem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        private void ClicadoBotaoDeReativarProduto(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             if (pesquisarGridControl.MainView is not GridView gridView)
             {
@@ -146,7 +147,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             messageBox.ShowDialog();
             if (!messageBox.Resultado) return;
 
-            DesativarEReativarProduto.ReativarProduto(connectionString, idProduto);
+            DesativarEReativarProduto.ReativarProduto(_connectionString, idProduto);
 
             XtraMessageBox.Show("Produto reativado com sucesso");
             CarregarBancoDeDados();
@@ -158,7 +159,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
         }
 
 
-        private void alterarButtonItem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        private void ClicadoBotaoDeAlterar(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             if (pesquisarGridControl.MainView is not GridView gridview)
             {
@@ -184,25 +185,25 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
             if (SelecionadorIdProduto == null) return;
 
-            if (cadastroForm is { IsDisposed: false })
+            if (_cadastroForm is { IsDisposed: false })
             {
-                cadastroForm.Activate();
-                cadastroForm.CarregarProduto(SelecionadorIdProduto.Value);
+                _cadastroForm.Activate();
+                _cadastroForm.CarregarProduto(SelecionadorIdProduto.Value);
             }
             else
             {
-                cadastroForm = new CadastroDeProdutosView(SelecionadorIdProduto.Value);
-                cadastroForm.FormClosed += (_, _) =>
+                _cadastroForm = new CadastroDeProdutosView(SelecionadorIdProduto.Value);
+                _cadastroForm.FormClosed += (_, _) =>
                 {
-                    cadastroForm = null;
+                    _cadastroForm = null;
                     CarregarBancoDeDados();
                     WindowState = FormWindowState.Normal;
                 };
-                cadastroForm.ShowDialog();
+                _cadastroForm.ShowDialog();
             }
         }
 
-        private void cadastroButtonItem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        private void ClicadoBotaoDeCadastro(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             var cadastroFormView = GetOpenForm<CadastroDeProdutosView>();
             if (cadastroFormView != null)

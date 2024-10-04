@@ -5,7 +5,7 @@ namespace CadastroDeProdutosView.Features.Commons
 {
     public static class CalculadorDeCodigoDeBarras
     {
-        public static bool ValidarCodigoDeBarrasEAN13(string codigoDeBarras)
+        public static bool ValidarCodigoDeBarrasEan13(string codigoDeBarras)
         {
             if (codigoDeBarras.Length != 13 || !codigoDeBarras.All(char.IsDigit))
                 return false;
@@ -20,7 +20,7 @@ namespace CadastroDeProdutosView.Features.Commons
             return digitoVerificadorCalculado == digitoVerificadorInformado;
         }
 
-        public static string GerarCodigoDeBarrasEAN13()
+        public static string GerarCodigoDeBarrasEan13()
         {
             var random = new Random();
             var codigoParcial = "";
