@@ -93,6 +93,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
                     produto.Id = _produtoId.Value;
                     _conexao.AlterarProduto(produto);
                     XtraMessageBox.Show("Produto alterado com sucesso");
+                    Close();
                 }
                 else
                 {

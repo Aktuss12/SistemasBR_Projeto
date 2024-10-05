@@ -119,8 +119,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.bar.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(this.desativarProdutoButtomItem),
             new DevExpress.XtraBars.LinkPersistInfo(this.reativarProdutoButtomItem),
-            new DevExpress.XtraBars.LinkPersistInfo(this.alterarButtonItem),
-            new DevExpress.XtraBars.LinkPersistInfo(this.cadastroButtonItem)});
+            new DevExpress.XtraBars.LinkPersistInfo(this.alterarButtonItem)});
             this.bar.OptionsBar.AllowQuickCustomization = false;
             this.bar.OptionsBar.AutoPopupMode = DevExpress.XtraBars.BarAutoPopupMode.OnlyMenu;
             this.bar.OptionsBar.DrawBorder = false;

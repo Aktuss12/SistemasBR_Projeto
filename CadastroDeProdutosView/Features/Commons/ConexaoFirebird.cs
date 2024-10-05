@@ -270,36 +270,6 @@ namespace CadastroDeProdutosView.Features.Commons
             }
         }
 
-       /* public void ExcluirProduto(int idProduto)
-        {
-            try
-            {
-                using var conexao = PegarConexao();
-                conexao.Open();
-                using var transacao = conexao.BeginTransaction();
-
-                const string deleteInformacoesFiscaisQuery = "DELETE FROM INFORMACOESFISCAIS WHERE idProduto = @idProduto";
-                using (var command = new FbCommand(deleteInformacoesFiscaisQuery, conexao, transacao))
-                {
-                    command.Parameters.AddWithValue("@idProduto", idProduto);
-                    command.ExecuteNonQuery();
-                }
-
-                const string deleteProdutoQuery = "DELETE FROM PRODUTO WHERE idProduto = @idProduto";
-                using (var command = new FbCommand(deleteProdutoQuery, conexao, transacao))
-                {
-                    command.Parameters.AddWithValue("@idProduto", idProduto);
-                    command.ExecuteNonQuery();
-                }
-
-                transacao.Commit();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Erro ao excluir o produto", ex);
-            }
-        }*/
-
         public bool ValidarCodigoDeBarras(string codigoDeBarras)
         {
             return CalculadorDeCodigoDeBarras.ValidarCodigoDeBarrasEAN13(codigoDeBarras);

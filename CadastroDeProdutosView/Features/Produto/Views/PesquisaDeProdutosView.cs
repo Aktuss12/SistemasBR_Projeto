@@ -22,7 +22,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             InitializeComponent();
             DesativarBotoes();
             CarregarBancoDeDados();
-/*            AtualizarGridProdutos();*/
         }
 
         private void CarregarBancoDeDados()
@@ -31,7 +30,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             {
                 var combinedTable = GetCombinedData();
                 pesquisarGridControl.DataSource = combinedTable;
-/*                AtualizarGridProdutos(); */
             }
             catch (Exception ex)
             {
@@ -62,30 +60,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
             return tabelaDados;
         }
-
-        /*private void AtualizarGridProdutos()
-        {
-            try
-            {
-                var produtosAtualizados = ProdutoService.ObterProdutosAtualizados();
-
-                if (produtosAtualizados == null! || produtosAtualizados.Count == 0)
-                {
-                    XtraMessageBox.Show("Nenhum produto encontrado.", "Informação", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    return;
-                }
-
-                pesquisarGridControl.DataSource = produtosAtualizados;
-                if (pesquisarGridControl.MainView is GridView gridView)
-                {
-                    gridView.RefreshData();
-                }
-            }
-            catch (Exception ex)
-            {
-                XtraMessageBox.Show($"Erro ao atualizar a grade de produtos: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }*/
 
         private void desativarProdutoButtomItem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
@@ -138,8 +112,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
         private void pesquisarTextEdit_EditValueChanged(object sender, EventArgs e)
         {
             var nomeProduto = pesquisarTextEdit.Text.Trim();
-            pesquisarGridView.ActiveFilterString =
-                !string.IsNullOrEmpty(nomeProduto) ? $"[nome] LIKE '%{nomeProduto}%'" : string.Empty;
+            pesquisarGridView.ActiveFilterString = !string.IsNullOrEmpty(nomeProduto) ? $"[nome] LIKE '%{nomeProduto}%'" : string.Empty;
         }
 
         private void reativarProdutoButtomItem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
