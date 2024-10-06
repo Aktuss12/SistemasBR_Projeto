@@ -28,8 +28,8 @@ namespace CadastroDeProdutosView.Features.Produto.Views
         {
             try
             {
-                var combinedTable = GetCombinedData();
-                pesquisarGridControl.DataSource = combinedTable;
+                var carregarTabela = GetCombinedData();
+                pesquisarGridControl.DataSource = carregarTabela;
             }
             catch (Exception ex)
             {
@@ -197,19 +197,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
                 };
                 cadastroForm.ShowDialog();
             }
-        }
-
-        private void cadastroButtonItem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        {
-            var cadastroFormView = GetOpenForm<CadastroDeProdutosView>();
-            if (cadastroFormView != null)
-            {
-                cadastroFormView.Activate();
-                return;
-            }
-
-            var abrirCadastro = new CadastroDeProdutosView();
-            abrirCadastro.ShowDialog();
         }
     }
 }

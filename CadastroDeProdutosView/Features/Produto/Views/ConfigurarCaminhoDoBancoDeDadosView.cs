@@ -10,14 +10,9 @@ namespace CadastroDeProdutosView.Features.Produto.Views
         public ConfigurarCaminhoDoBancoDeDadosView()
         {
             InitializeComponent();
-/*            PosicaoInicialDoForm();*/
             CarregarConfiguracao();
         }
 
-/*        private void PosicaoInicialDoForm()
-        {
-            StartPosition = FormStartPosition.CenterParent;
-        }*/
 
         private void CarregarConfiguracao()
         {

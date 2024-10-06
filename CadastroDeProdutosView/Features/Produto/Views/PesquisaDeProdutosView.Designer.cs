@@ -165,7 +165,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.cadastroButtonItem.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("cadastroButtonItem.ImageOptions.LargeImage")));
             this.cadastroButtonItem.Name = "cadastroButtonItem";
             this.cadastroButtonItem.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
-            this.cadastroButtonItem.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.cadastroButtonItem_ItemClick);
             // 
             // barDockControl1
             // 
