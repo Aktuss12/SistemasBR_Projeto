@@ -440,7 +440,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.alterarBancoDeDadosButton.Name = "alterarBancoDeDadosButton";
             this.alterarBancoDeDadosButton.Size = new System.Drawing.Size(51, 66);
             this.alterarBancoDeDadosButton.TabIndex = 33;
-            this.alterarBancoDeDadosButton.Click += new System.EventHandler(this.alterarBancoDeDadosButton_Click_1);
             // 
             // codigoDeBarrasButton
             // 
@@ -725,7 +724,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.codigoDeBarrasTextEdit.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.codigoDeBarrasTextEdit.Size = new System.Drawing.Size(237, 30);
             this.codigoDeBarrasTextEdit.TabIndex = 10;
-            this.codigoDeBarrasTextEdit.EditValueChanged += new System.EventHandler(this.codigoDeBarrasTextEdit_EditValueChanged);
             // 
             // infofiscalTabNavigationPage
             // 

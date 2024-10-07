@@ -75,21 +75,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Features\Commons\ControladorDeStatusDoProduto.cs" />
     <Compile Include="Features\Commons\ConversaoUtil.cs" />
+    <Compile Include="Features\Commons\LimpezaDeControles.cs" />
     <Compile Include="Features\Commons\Services\CalculadorDeCodigoDeBarrasService.cs" />
     <Compile Include="Features\Commons\ConexaoFirebird.cs" />
-    <Compile Include="Features\Commons\ConfiguracaoDoBancoDeDados.cs" />
+    <Compile Include="Features\Commons\GerenciamentoDoBancoDeDados.cs" />
     <Compile Include="Features\Commons\ConversorDeImagemParaByte.cs" />
     <Compile Include="Features\Commons\MessageBoxCustomizada.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Features\Commons\ValiacaoDeCampos.cs" />
     <Compile Include="Features\Produto\Enums\CategoriaDeProduto.cs" />
     <Compile Include="Features\Produto\Enums\MarcaDoProduto.cs" />
     <Compile Include="Features\Produto\Enums\NaturezaDaOperacao.cs" />
     <Compile Include="Features\Produto\Enums\OrigemDaMercadoria.cs" />
     <Compile Include="Features\Produto\Enums\SituacaoTributaria.cs" />
     <Compile Include="Features\Produto\Models\InformacoesFiscais.cs" />
-    <Compile Include="Features\Produto\Models\Produtos.cs" />
+    <Compile Include="Features\Produto\Models\Produto.cs" />
     <Compile Include="Features\Produto\Views\CadastroDeProdutosView.cs">
       <SubType>Form</SubType>
     </Compile>

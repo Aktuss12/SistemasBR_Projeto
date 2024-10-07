@@ -17,7 +17,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
         public PesquisaDeProdutosView()
         {
-            connectionString = ConfiguracaoDoBancoDeDados.ObterStringDeConexao();
+            connectionString = GerenciamentoDoBancoDeDados.ObterStringDeConexao();
             InitializeComponent();
             DesativarBotoes();
             CarregarBancoDeDados();
@@ -94,10 +94,9 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             messageBox.ShowDialog();
             if (!messageBox.Resultado) return;
 
-            DesativarEReativarProduto.DesativarProduto(connectionString, idProduto);
+            ControladorDeStatusDoProduto.DesativarProduto(connectionString, idProduto);
 
-            XtraMessageBox.Show("Produto desativado com sucesso.", "Sucesso", MessageBoxButtons.OK,
-                MessageBoxIcon.Information);
+            XtraMessageBox.Show("Produto desativado com sucesso.", "Sucesso", MessageBoxButtons.OK);
             CarregarBancoDeDados();
         }
 
@@ -152,10 +151,9 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             messageBox.ShowDialog();
             if (!messageBox.Resultado) return;
 
-            DesativarEReativarProduto.ReativarProduto(connectionString, idProduto);
+            ControladorDeStatusDoProduto.ReativarProduto(connectionString, idProduto);
 
-            XtraMessageBox.Show("Produto reativado com sucesso.", "Sucesso", MessageBoxButtons.OK,
-                MessageBoxIcon.Information);
+            XtraMessageBox.Show("Produto reativado com sucesso.", "Sucesso", MessageBoxButtons.OK);
             CarregarBancoDeDados();
         }
 

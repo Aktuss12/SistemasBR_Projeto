@@ -2,19 +2,20 @@
 using System;
 using System.Drawing;
 using System.IO;
+using CadastroDeProdutosView.Features.Produto.Models;
 
 namespace CadastroDeProdutosView.Features.Commons
 {
     public class ConexaoProdutosFirebird
     {
-        private readonly string _connectionString = ConfiguracaoDoBancoDeDados.ObterStringDeConexao();
+        private readonly string _connectionString = GerenciamentoDoBancoDeDados.ObterStringDeConexao();
 
         private FbConnection PegarConexao()
         {
             return new FbConnection(_connectionString);
         }
 
-        public int InserirProduto(Produto produto)
+        public int InserirProduto(Produto.Models.Produto produto)
         {
             try
             {
@@ -76,7 +77,7 @@ namespace CadastroDeProdutosView.Features.Commons
             command.ExecuteNonQuery();
         }
 
-        public void AlterarProduto(Produto produto)
+        public void AlterarProduto(Produto.Models.Produto produto)
         {
             try
             {
@@ -149,7 +150,7 @@ namespace CadastroDeProdutosView.Features.Commons
             command.ExecuteNonQuery();
         }
 
-        public Produto CarregarProduto(int idProduto)
+        public Produto.Models.Produto CarregarProduto(int idProduto)
         {
             try
             {
@@ -168,7 +169,7 @@ namespace CadastroDeProdutosView.Features.Commons
                 if (!leituraDeDados.Read())
                     return null!;
 
-                var produto = new Produto
+                var produto = new Produto.Models.Produto
                 {
                     Id = idProduto,
                     Nome = leituraDeDados["Nome"].ToString(),
@@ -233,32 +234,5 @@ namespace CadastroDeProdutosView.Features.Commons
         {
             return custo * (1 + markup / 100);
         }
-    }
-
-    public class Produto
-    {
-        public int Id { get; set; }
-        public string? Nome { get; set; }
-        public string? Categoria { get; set; }
-        public string? Fornecedor { get; set; }
-        public string? CodigoDeBarras { get; set; }
-        public string? UnidadeDeMedida { get; set; }
-        public int Estoque { get; set; }
-        public string? Marca { get; set; }
-        public decimal Custo { get; set; }
-        public decimal Markup { get; set; }
-        public decimal PrecoDaVenda { get; set; }
-        public byte[]? Imagem { get; set; }
-        public InformacoesFiscais InformacoesFiscais { get; set; } = null!;
-    }
-
-    public class InformacoesFiscais
-    {
-        public string? OrigemDaMercadoria { get; set; }
-        public string? SituacaoTributaria { get; set; }
-        public string? NaturezaDaOperacao { get; set; }
-        public string? Ncm { get; set; }
-        public decimal AliquotaDeIcms { get; set; }
-        public decimal ReducaoDeCalculo { get; set; }
     }
 }

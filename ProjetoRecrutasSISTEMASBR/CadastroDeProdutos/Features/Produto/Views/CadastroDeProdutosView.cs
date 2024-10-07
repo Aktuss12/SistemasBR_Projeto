@@ -8,6 +8,8 @@ using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Windows.Forms;
+using CadastroDeProdutosView.Features.Produto.Models;
+
 
 namespace CadastroDeProdutosView.Features.Produto.Views
 {
@@ -58,7 +60,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             aliquotaDeIcmsTextEdit.Properties.MaxLength = 6;
         }
 
-        private void LimparLookUpEditsETextEdits()
+        private void LimpezaDeCampos()
         {
             nomeTextEdit.LimpezaDeTextEdit();
             fornecedorTextEdit.LimpezaDeTextEdit();
@@ -102,7 +104,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
                     produto.Id = novoProdutoId;
                 }
 
-                LimparLookUpEditsETextEdits();
+                LimpezaDeCampos();
                 ProdutosAtualizados?.Invoke();
             }
             catch (Exception ex)
@@ -111,7 +113,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             }
         }
 
-        private void ShowMessage(string message)
+        private static void ShowMessage(string message)
         {
             XtraMessageBox.Show(message);
         }
@@ -129,7 +131,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
             ResetCodigoDeBarrasLabel();
 
-            if (ValidacaoDeCamposObrigatorios.ValidacaoParaCamposObrigatorios(
+            if (ValiacaoDeCampos.ValidacaoParaCamposObrigatorios(
                     nomeTextEdit,
                     estoqueTextEdit,
                     precoVendaTextEdit,
@@ -140,9 +142,10 @@ namespace CadastroDeProdutosView.Features.Produto.Views
                     precoDaVendaLabelControl,
                     unidadeDeMedidaLabelControl,
                     categoriaLabelControl))
+            {
                 return true;
-
-            ShowMessage("Todos os campos obrigatórios devem ser preenchidos!");
+            }
+            XtraMessageBox.Show("Todos os campos obrigatorios devem ser preenchidos");
             return false;
         }
 
@@ -152,9 +155,9 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             codigodebarrasLabelControl.AllowHtmlString = false;
         }
 
-        private Commons.Produto CriarProduto()
+        private Models.Produto CriarProduto()
         {
-            return new Commons.Produto
+            return new Models.Produto
             {
                 Nome = nomeTextEdit.Text,
                 Categoria = categoriaDeProdutosLookUpEdit.EditValue?.ToString(),
@@ -193,7 +196,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             }
         }
 
-        private void PreencherFormularioComProduto(Commons.Produto produto)
+        private void PreencherFormularioComProduto(Models.Produto produto)
         {
             nomeTextEdit.Text = produto.Nome;
             categoriaDeProdutosLookUpEdit.EditValue = produto.Categoria;
@@ -215,7 +218,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             if (produto.Imagem != null) imagemDoProdutoPictureEdit.Image = Image.FromStream(new MemoryStream(produto.Imagem));
         }
 
-        private void AdicionarImagemButton_Click(object sender, EventArgs e)
+        private void adicionarImagemButton_Click(object sender, EventArgs e)
         {
             using var openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp";
@@ -225,7 +228,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             imagemDoProdutoPictureEdit.Image = Image.FromFile(openFileDialog.FileName);
         }
 
-        private void ExcluirImagem(object sender, EventArgs e)
+        private void excluirImagemButton_Click(object sender, EventArgs e)
         {
             _imagemDoProduto = null;
             imagemDoProdutoPictureEdit.Image = null;
@@ -240,26 +243,39 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             }
         }
 
-        private void alterarBancoDeDados(object sender, EventArgs e)
+        private void alterarBancoDeDadosButton_Click_1(object sender, EventArgs e)
         {
 
         }
 
-        private void limparCodigoDeBarras(object sender, EventArgs e)
+        private void codigoDeBarrasTextEdit_EditValueChanged(object sender, EventArgs e)
         {
+
         }
 
-        private void AtualizarPrecoVenda(object sender, EventArgs e)
+        private void AtualizarPrecoVenda()
         {
             if (decimal.TryParse(custoTextEdit.Text, out var custo) &&
                 decimal.TryParse(markupTextEdit.Text, out var markup))
             {
-                precoVendaTextEdit.Text = (custo + (custo * (markup / 100))).ToString(CultureInfo.InvariantCulture);
+                precoVendaTextEdit.Text = (custo + custo * (markup / 100)).ToString(CultureInfo.InvariantCulture);
             }
+        }
+
+        private void markupTextEdit_EditValueChanged_1(object sender, EventArgs e)
+        {
+            AtualizarPrecoVenda();
+        }
+
+        private void custoTextEdit_EditValueChanged(object sender, EventArgs e)
+        {
+            AtualizarPrecoVenda();
         }
 
         private void pesquisarProdutoButtomItem_ItemClick(object sender, ItemClickEventArgs e)
         {
+            var pesquisaDeProdutosView = new PesquisaDeProdutosView();
+            pesquisaDeProdutosView.ShowDialog();
         }
     }
 }

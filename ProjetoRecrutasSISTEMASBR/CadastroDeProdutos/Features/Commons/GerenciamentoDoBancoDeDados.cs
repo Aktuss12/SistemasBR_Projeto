@@ -8,7 +8,7 @@ namespace CadastroDeProdutosView.Features.Commons
         public string? CaminhoBanco { get; set; }
     }
 
-    public static class ConfiguracaoDoBancoDeDados
+    public static class GerenciamentoDoBancoDeDados
     {
         private const string ArquivoConfiguracao = "config.xml";
 
