@@ -76,7 +76,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Features\Commons\CalculadorDeCodigoDeBarras.cs" />
-    <Compile Include="Features\Commons\CalculoDeCustoEMarkupParaPrecoDaVenda.cs" />
     <Compile Include="Features\Commons\ConexaoFirebird.cs" />
     <Compile Include="Features\Commons\ConfiguracaoDoBancoDeDados.cs" />
     <Compile Include="Features\Commons\ConversaoDeValoresParaDecimal.cs" />

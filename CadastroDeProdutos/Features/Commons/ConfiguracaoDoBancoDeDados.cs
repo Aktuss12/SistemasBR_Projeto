@@ -10,13 +10,14 @@ namespace CadastroDeProdutosView.Features.Commons
 
     public static class ConfiguracaoDoBancoDeDados
     {
+        private const string ArquivoConfiguracao = "config.xml";
+
         public static string ObterStringDeConexao()
         {
             var carregarBanco = CarregarBancoDeDados();
-            return $"User ID=SYSDBA;Password=masterkey;Database={carregarBanco.CaminhoBanco};DataSource=localhost;Port=3050;Dialect=3;Charset=NONE;";
+            return
+                $"User ID=SYSDBA;Password=masterkey;Database={carregarBanco.CaminhoBanco};DataSource=localhost;Port=3050;Dialect=3;Charset=NONE;";
         }
-
-        private const string ArquivoConfiguracao = "config.xml";
 
         public static void SalvarConfiguracao(ConfiguracaoBanco config)
         {
@@ -28,9 +29,7 @@ namespace CadastroDeProdutosView.Features.Commons
         public static ConfiguracaoBanco CarregarBancoDeDados()
         {
             if (!File.Exists(ArquivoConfiguracao))
-            {
                 return new ConfiguracaoBanco { CaminhoBanco = @"C:\Users\admin\Documents\BANCODEDADOSPRODUTOS.FDB" };
-            }
 
             var serializer = new XmlSerializer(typeof(ConfiguracaoBanco));
             using var reader = new StreamReader(ArquivoConfiguracao);

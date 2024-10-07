@@ -1,20 +1,20 @@
-﻿using System.Runtime.CompilerServices;
+﻿using DevExpress.XtraEditors;
 
 namespace CadastroDeProdutosView.Features.Commons
 {
     public static class LimparLookUpEditETextEdit
     {
-        public static void LimpezaDeLookUpEdit(this DevExpress.XtraEditors.LookUpEdit lookUpEditNull)
+        public static void LimpezaDeLookUpEdit(this LookUpEdit lookUpEditNull)
         {
             lookUpEditNull.EditValue = null;
         }
 
-        public static void LimpezaDeTextEdit(this DevExpress.XtraEditors.TextEdit textEditsNull)
+        public static void LimpezaDeTextEdit(this TextEdit textEditsNull)
         {
             textEditsNull.Text = null;
         }
 
-        public static void LimpezaDeImageBox(this DevExpress.XtraEditors.PictureEdit pictureBoxNull)
+        public static void LimpezaDeImageBox(this PictureEdit pictureBoxNull)
         {
             pictureBoxNull.Image = null;
         }

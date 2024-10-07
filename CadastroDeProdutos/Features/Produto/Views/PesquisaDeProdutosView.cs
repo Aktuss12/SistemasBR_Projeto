@@ -1,19 +1,19 @@
-﻿using CadastroDeProdutosView.Features.Commons;
+﻿using System;
+using System.Data;
+using System.Windows.Forms;
+using CadastroDeProdutosView.Features.Commons;
+using DevExpress.XtraBars;
 using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Views.Grid;
 using FirebirdSql.Data.FirebirdClient;
-using System;
-using System.Data;
-using System.Windows.Forms;
 
 namespace CadastroDeProdutosView.Features.Produto.Views
 {
     public partial class PesquisaDeProdutosView : Form
     {
-        public int? SelecionadorIdProduto { get; private set; }
         private readonly string connectionString;
-        private bool mostrarAtivos = true;
         private CadastroDeProdutosView? cadastroForm;
+        private bool mostrarAtivos = true;
 
         public PesquisaDeProdutosView()
         {
@@ -22,6 +22,8 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             DesativarBotoes();
             CarregarBancoDeDados();
         }
+
+        public int? SelecionadorIdProduto { get; private set; }
 
         private void CarregarBancoDeDados()
         {
@@ -32,7 +34,8 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             }
             catch (Exception ex)
             {
-                XtraMessageBox.Show("Erro ao carregar dados: " + ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                XtraMessageBox.Show("Erro ao carregar dados: " + ex.Message, "Erro", MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
             }
         }
 
@@ -60,7 +63,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             return tabelaDados;
         }
 
-        private void desativarProdutoButtomItem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        private void desativarProdutoButtomItem_ItemClick(object sender, ItemClickEventArgs e)
         {
             if (pesquisarGridControl.MainView is not GridView gridView)
             {
@@ -72,14 +75,16 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
             if (focusedRowHandle < 0)
             {
-                XtraMessageBox.Show("Selecione um produto para desativar.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                XtraMessageBox.Show("Selecione um produto para desativar.", "Erro", MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
                 return;
             }
 
             var colunaSelecionada = gridView.GetDataRow(focusedRowHandle);
             if (colunaSelecionada == null)
             {
-                XtraMessageBox.Show("Erro ao obter o produto selecionado.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                XtraMessageBox.Show("Erro ao obter o produto selecionado.", "Erro", MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
                 return;
             }
 
@@ -91,7 +96,8 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
             DesativarEReativarProduto.DesativarProduto(connectionString, idProduto);
 
-            XtraMessageBox.Show("Produto desativado com sucesso.", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            XtraMessageBox.Show("Produto desativado com sucesso.", "Sucesso", MessageBoxButtons.OK,
+                MessageBoxIcon.Information);
             CarregarBancoDeDados();
         }
 
@@ -111,10 +117,11 @@ namespace CadastroDeProdutosView.Features.Produto.Views
         private void pesquisarTextEdit_EditValueChanged(object sender, EventArgs e)
         {
             var nomeProduto = pesquisarTextEdit.Text.Trim();
-            pesquisarGridView.ActiveFilterString = !string.IsNullOrEmpty(nomeProduto) ? $"[nome] LIKE '%{nomeProduto}%'" : string.Empty;
+            pesquisarGridView.ActiveFilterString =
+                !string.IsNullOrEmpty(nomeProduto) ? $"[nome] LIKE '%{nomeProduto}%'" : string.Empty;
         }
 
-        private void reativarProdutoButtomItem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        private void reativarProdutoButtomItem_ItemClick(object sender, ItemClickEventArgs e)
         {
             if (pesquisarGridControl.MainView is not GridView gridView)
             {
@@ -126,14 +133,16 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
             if (focusedRowHandle < 0)
             {
-                XtraMessageBox.Show("Selecione um produto para reativar.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                XtraMessageBox.Show("Selecione um produto para reativar.", "Erro", MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
                 return;
             }
 
             var colunaSelecionada = gridView.GetDataRow(focusedRowHandle);
             if (colunaSelecionada == null)
             {
-                XtraMessageBox.Show("Erro ao obter o produto selecionado.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                XtraMessageBox.Show("Erro ao obter o produto selecionado.", "Erro", MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
                 return;
             }
 
@@ -145,29 +154,33 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
             DesativarEReativarProduto.ReativarProduto(connectionString, idProduto);
 
-            XtraMessageBox.Show("Produto reativado com sucesso.", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            XtraMessageBox.Show("Produto reativado com sucesso.", "Sucesso", MessageBoxButtons.OK,
+                MessageBoxIcon.Information);
             CarregarBancoDeDados();
         }
 
-        private void alterarButtonItem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        private void alterarButtonItem_ItemClick(object sender, ItemClickEventArgs e)
         {
             if (pesquisarGridControl.MainView is not GridView gridView)
             {
-                XtraMessageBox.Show("Por favor, selecione a aba de pesquisa.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                XtraMessageBox.Show("Por favor, selecione a aba de pesquisa.", "Erro", MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
                 return;
             }
 
             var focusedRowHandle = gridView.FocusedRowHandle;
             if (focusedRowHandle < 0)
             {
-                XtraMessageBox.Show("Selecione um produto para alterar.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                XtraMessageBox.Show("Selecione um produto para alterar.", "Erro", MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
                 return;
             }
 
             var colunaSelecionada = gridView.GetDataRow(focusedRowHandle);
             if (colunaSelecionada == null)
             {
-                XtraMessageBox.Show("Erro ao obter o produto selecionado.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                XtraMessageBox.Show("Erro ao obter o produto selecionado.", "Erro", MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
                 return;
             }
 

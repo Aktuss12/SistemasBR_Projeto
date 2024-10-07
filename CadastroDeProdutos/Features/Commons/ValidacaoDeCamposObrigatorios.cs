@@ -1,18 +1,20 @@
-﻿namespace CadastroDeProdutosView.Features.Commons
+﻿using DevExpress.XtraEditors;
+
+namespace CadastroDeProdutosView.Features.Commons
 {
     public static class ValidacaoDeCamposObrigatorios
     {
         public static bool ValidacaoParaCamposObrigatorios(
-            DevExpress.XtraEditors.TextEdit nomeTextEdit,
-            DevExpress.XtraEditors.TextEdit estoqueTextEdit,
-            DevExpress.XtraEditors.TextEdit precoVendaTextEdit,
-            DevExpress.XtraEditors.LookUpEdit unidadeDeMedidaLookUpEdit,
-            DevExpress.XtraEditors.LookUpEdit categoriaDeProdutosLookUpEdit,
-            DevExpress.XtraEditors.LabelControl nomeLabelControl,
-            DevExpress.XtraEditors.LabelControl estoqueLabelControl,
-            DevExpress.XtraEditors.LabelControl precoDaVendaLabelControl,
-            DevExpress.XtraEditors.LabelControl unidadeDeMedidaLabelControl,
-            DevExpress.XtraEditors.LabelControl categoriaLabelControl)
+            TextEdit nomeTextEdit,
+            TextEdit estoqueTextEdit,
+            TextEdit precoVendaTextEdit,
+            LookUpEdit unidadeDeMedidaLookUpEdit,
+            LookUpEdit categoriaDeProdutosLookUpEdit,
+            LabelControl nomeLabelControl,
+            LabelControl estoqueLabelControl,
+            LabelControl precoDaVendaLabelControl,
+            LabelControl unidadeDeMedidaLabelControl,
+            LabelControl categoriaLabelControl)
         {
             var todosCamposPreenchidos = true;
             todosCamposPreenchidos &= !string.IsNullOrWhiteSpace(nomeTextEdit.Text);

@@ -1,6 +1,5 @@
 ﻿using FirebirdSql.Data.FirebirdClient;
 using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 
@@ -203,70 +202,6 @@ namespace CadastroDeProdutosView.Features.Commons
             catch (Exception ex)
             {
                 throw new Exception("Erro ao carregar o produto", ex);
-            }
-        }
-
-        public List<Produto> ListarProdutos(bool incluirDesativados)
-        {
-            try
-            {
-                using var conexao = PegarConexao();
-                conexao.Open();
-                var query = @"SELECT P.*, I.*
-                              FROM PRODUTO P
-                              LEFT JOIN INFORMACOESFISCAIS I ON P.idProduto = I.idProduto
-                              WHERE 1=1";
-
-                if (!incluirDesativados)
-                {
-                    query += " AND P.CLIENTE_ATIVO = 1";
-                }
-
-                query += " ORDER BY P.Nome";
-
-                using var command = new FbCommand(query, conexao);
-                using var reader = command.ExecuteReader();
-                var produtos = new List<Produto>();
-
-                while (reader.Read())
-                {
-                    var produto = new Produto
-                    {
-                        Id = Convert.ToInt32(reader["idProduto"]),
-                        Nome = reader["Nome"].ToString(),
-                        Categoria = reader["Categoria"].ToString(),
-                        Fornecedor = reader["Fornecedor"].ToString(),
-                        CodigoDeBarras = reader["CodigoDeBarras"].ToString(),
-                        UnidadeDeMedida = reader["UnidadeDeMedida"].ToString(),
-                        Estoque = Convert.ToInt32(reader["Estoque"]),
-                        Marca = reader["Marca"].ToString(),
-                        Custo = Convert.ToDecimal(reader["Custo"]),
-                        Markup = Convert.ToDecimal(reader["Markup"]),
-                        PrecoDaVenda = Convert.ToDecimal(reader["PrecoDaVenda"]),
-                        InformacoesFiscais = new InformacoesFiscais
-                        {
-                            OrigemDaMercadoria = reader["origemDaMercadoria"].ToString(),
-                            SituacaoTributaria = reader["situacaoTributaria"].ToString(),
-                            NaturezaDaOperacao = reader["naturezaDaOperacao"].ToString(),
-                            Ncm = reader["ncm"].ToString(),
-                            AliquotaDeIcms = Convert.ToDecimal(reader["aliquotaDeIcms"]),
-                            ReducaoDeCalculo = Convert.ToDecimal(reader["reducaoDeCalculo"])
-                        }
-                    };
-
-                    if (reader["Imagem"] != DBNull.Value)
-                    {
-                        produto.Imagem = (byte[])reader["Imagem"];
-                    }
-
-                    produtos.Add(produto);
-                }
-
-                return produtos;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Erro ao listar os produtos", ex);
             }
         }
 

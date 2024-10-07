@@ -1,22 +1,22 @@
-﻿using CadastroDeProdutosView.Features.Commons;
-using CadastroDeProdutosView.Features.Commons.Services;
-using CadastroDeProdutosView.Features.Produto.Enums;
-using DevExpress.XtraBars;
-using DevExpress.XtraEditors;
-using System;
+﻿using System;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
+using CadastroDeProdutosView.Features.Commons;
+using CadastroDeProdutosView.Features.Commons.Services;
+using CadastroDeProdutosView.Features.Produto.Enums;
+using DevExpress.XtraBars;
+using DevExpress.XtraEditors;
 
 namespace CadastroDeProdutosView.Features.Produto.Views
 {
     public partial class CadastroDeProdutosView : Form
     {
+        private readonly ConexaoProdutosFirebird _conexao;
 
         private readonly int? _produtoId;
         private byte[] _imagemDoProduto = null!;
-        private readonly ConexaoProdutosFirebird _conexao;
 
         public CadastroDeProdutosView(int produtoId = 0)
         {
@@ -26,20 +26,21 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
             _produtoId = produtoId > 0 ? produtoId : null;
             _conexao = new ConexaoProdutosFirebird();
-            if (_produtoId.HasValue)
-            {
-                CarregarProduto(_produtoId.Value);
-            }
+            if (_produtoId.HasValue) CarregarProduto(_produtoId.Value);
         }
 
         private void InitializeLookUpEdit()
         {
             unidadeDeMedidaLookUpEdit.PreencherLookUpEditComOValorDoEnum<UnidadeDeMedidaView.UnidadeDeMedida>();
-            categoriaDeProdutosLookUpEdit.PreencherLookUpEditComOValorDoEnum<CategoriaDoProdutoView.CategoriaDeProdutos>();
+            categoriaDeProdutosLookUpEdit
+                .PreencherLookUpEditComOValorDoEnum<CategoriaDoProdutoView.CategoriaDeProdutos>();
             marcaLookUpEdit.PreencherLookUpEditComOValorDoEnum<MarcaDoProdutoView.MarcaDoProduto>();
-            origemDaMercadoriaLookUpEdit.PreencherLookUpEditComOValorDoEnum<OrigemDaMercadoriaView.OrigemDaMercadoria>();
-            situacaoTributariaLookUpEdit.PreencherLookUpEditComOValorDoEnum<SituacaoTributariaView.SituacaoTributaria>();
-            naturezaDaOperacaoLookUpEdit.PreencherLookUpEditComOValorDoEnum<NaturezaDaOperacaoView.NaturezaDaOperacao>();
+            origemDaMercadoriaLookUpEdit
+                .PreencherLookUpEditComOValorDoEnum<OrigemDaMercadoriaView.OrigemDaMercadoria>();
+            situacaoTributariaLookUpEdit
+                .PreencherLookUpEditComOValorDoEnum<SituacaoTributariaView.SituacaoTributaria>();
+            naturezaDaOperacaoLookUpEdit
+                .PreencherLookUpEditComOValorDoEnum<NaturezaDaOperacaoView.NaturezaDaOperacao>();
         }
 
         private void LimitadorDeCaracteres()
@@ -115,7 +116,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
         private bool ValidarCampos()
         {
             if (!string.IsNullOrWhiteSpace(codigoDeBarrasTextEdit.Text))
-            {
                 if (!_conexao.ValidarCodigoDeBarras(codigoDeBarrasTextEdit.Text))
                 {
                     XtraMessageBox.Show("O código de barras não é um tipo EAN-13");
@@ -123,7 +123,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
                     codigodebarrasLabelControl.AllowHtmlString = true;
                     return false;
                 }
-            }
 
             codigodebarrasLabelControl.Text = "Codigo de Barras:";
             codigodebarrasLabelControl.AllowHtmlString = false;
@@ -201,8 +200,10 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             situacaoTributariaLookUpEdit.EditValue = produto.InformacoesFiscais.SituacaoTributaria;
             naturezaDaOperacaoLookUpEdit.EditValue = produto.InformacoesFiscais.NaturezaDaOperacao;
             ncmTextEdit.Text = produto.InformacoesFiscais.Ncm;
-            aliquotaDeIcmsTextEdit.Text = produto.InformacoesFiscais.AliquotaDeIcms.ToString(CultureInfo.InvariantCulture);
-            reducaoDeCalculoIcmsTextEdit.Text = produto.InformacoesFiscais.ReducaoDeCalculo.ToString(CultureInfo.InvariantCulture);
+            aliquotaDeIcmsTextEdit.Text =
+                produto.InformacoesFiscais.AliquotaDeIcms.ToString(CultureInfo.InvariantCulture);
+            reducaoDeCalculoIcmsTextEdit.Text =
+                produto.InformacoesFiscais.ReducaoDeCalculo.ToString(CultureInfo.InvariantCulture);
 
             if (produto.Imagem == null) return;
             imagemDoProdutoPictureEdit.Image = _conexao.ConverterBytesParaImagem(produto.Imagem);
@@ -212,7 +213,8 @@ namespace CadastroDeProdutosView.Features.Produto.Views
         private void adicionarImagemButton_Click(object sender, EventArgs e)
         {
             using var abrirExploradoDeArquivo = new OpenFileDialog();
-            abrirExploradoDeArquivo.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp;*.gif;*.tiff;*.tif;*.webp;*.heic;*.svg;*.cr2;*.nef;*.arw";
+            abrirExploradoDeArquivo.Filter =
+                "Image Files|*.jpg;*.jpeg;*.png;*.bmp;*.gif;*.tiff;*.tif;*.webp;*.heic;*.svg;*.cr2;*.nef;*.arw";
 
             if (abrirExploradoDeArquivo.ShowDialog() != DialogResult.OK) return;
 
@@ -223,15 +225,21 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             imagemDoProdutoPictureEdit.Image = new Bitmap(imagemOriginal, new Size(190, 241));
         }
 
-        private void codigoDeBarrasButton_Click(object sender, EventArgs e) =>
+        private void codigoDeBarrasButton_Click(object sender, EventArgs e)
+        {
             codigoDeBarrasTextEdit.EditValue = _conexao.GerarCodigoDeBarras();
+        }
 
-        private void custoTextEdit_EditValueChanged(object sender, EventArgs e) =>
+        private void custoTextEdit_EditValueChanged(object sender, EventArgs e)
+        {
             AtualizarPrecoVenda();
+        }
 
-        private void markupTextEdit_EditValueChanged_1(object sender, EventArgs e) =>
+        private void markupTextEdit_EditValueChanged_1(object sender, EventArgs e)
+        {
             AtualizarPrecoVenda();
-        
+        }
+
 
         private void AtualizarPrecoVenda()
         {

@@ -16,11 +16,11 @@ namespace CadastroDeProdutosView.Features.Commons
             {
                 var digito = codigoDeBarras[i] - '0'; // Converte o caractere para seu valor numérico
                 // Se o índice for par, soma o dígito; se ímpar, soma o dígito multiplicado por 3
-                soma += (i % 2 == 0) ? digito : digito * 3;
+                soma += i % 2 == 0 ? digito : digito * 3;
             }
 
             // Calcula o dígito verificador
-            var digitoVerificador = (10 - (soma % 10)) % 10;
+            var digitoVerificador = (10 - soma % 10) % 10;
             // Compara o dígito verificador calculado com o dígito verificador no código de barras
             return digitoVerificador == codigoDeBarras[12] - '0';
         }
@@ -42,11 +42,11 @@ namespace CadastroDeProdutosView.Features.Commons
             {
                 var digito = codigoString[i] - '0'; // Converte o caractere para seu valor numérico
                 // Se o índice for par, soma o dígito; se ímpar, soma o dígito multiplicado por 3
-                soma += (i % 2 == 0) ? digito : digito * 3;
+                soma += i % 2 == 0 ? digito : digito * 3;
             }
 
             // Calcula o dígito verificador
-            var digitoVerificador = (10 - (soma % 10)) % 10;
+            var digitoVerificador = (10 - soma % 10) % 10;
             // Retorna o código de barras completo (12 dígitos + dígito verificador)
             return codigoString + digitoVerificador;
         }

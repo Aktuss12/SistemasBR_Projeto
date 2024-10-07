@@ -1,14 +1,13 @@
-﻿using System.Windows.Forms;
+﻿using System.Drawing;
+using System.Windows.Forms;
 using DevExpress.XtraEditors;
 
 namespace CadastroDeProdutosView.Features.Commons
 {
     public sealed class MessageBoxCustomizado : XtraForm
     {
-        private readonly SimpleButton botaoSim;
         private readonly SimpleButton botaoNao;
-
-        public bool Resultado { get; private set; }
+        private readonly SimpleButton botaoSim;
 
         public MessageBoxCustomizado(string mensagem)
         {
@@ -16,8 +15,8 @@ namespace CadastroDeProdutosView.Features.Commons
             {
                 Text = mensagem,
                 AutoSize = true,
-                Font = new System.Drawing.Font("Segoe UI", 8.25f),
-                TextAlign = System.Drawing.ContentAlignment.MiddleCenter,
+                Font = new Font("Segoe UI", 8.25f),
+                TextAlign = ContentAlignment.MiddleCenter,
                 Top = 30,
                 Left = (ClientSize.Width - 250) / 2,
                 Width = 250
@@ -41,8 +40,18 @@ namespace CadastroDeProdutosView.Features.Commons
                 Left = botaoSim.Right + 10
             };
 
-            botaoSim.Click += (_, _) => { Resultado = true; Hide(); Close(); };
-            botaoNao.Click += (_, _) => { Resultado = false; Hide(); Close(); };
+            botaoSim.Click += (_, _) =>
+            {
+                Resultado = true;
+                Hide();
+                Close();
+            };
+            botaoNao.Click += (_, _) =>
+            {
+                Resultado = false;
+                Hide();
+                Close();
+            };
 
             Controls.Add(labelMensagem);
             Controls.Add(botaoSim);
@@ -54,9 +63,11 @@ namespace CadastroDeProdutosView.Features.Commons
             MaximizeBox = false;
             MinimizeBox = false;
 
-            ClientSize = new System.Drawing.Size(270, 110);
+            ClientSize = new Size(270, 110);
             AcceptButton = botaoSim;
             CancelButton = botaoNao;
         }
+
+        public bool Resultado { get; private set; }
     }
 }

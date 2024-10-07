@@ -1,7 +1,7 @@
-﻿using CadastroDeProdutosView.Features.Commons;
-using DevExpress.XtraEditors;
-using System;
+﻿using System;
 using System.Windows.Forms;
+using CadastroDeProdutosView.Features.Commons;
+using DevExpress.XtraEditors;
 
 namespace CadastroDeProdutosView.Features.Produto.Views
 {
@@ -37,7 +37,8 @@ namespace CadastroDeProdutosView.Features.Produto.Views
         private void exploradorBancoDeDadosButton_Click(object sender, EventArgs e)
         {
             var abrirExploradorDeArquivos = new OpenFileDialog();
-            abrirExploradorDeArquivos.Filter = "Arquivos de Banco de Dados Firebird (*.FDB)|*.FDB|Todos os arquivos (*.*)|*.*";
+            abrirExploradorDeArquivos.Filter =
+                "Arquivos de Banco de Dados Firebird (*.FDB)|*.FDB|Todos os arquivos (*.*)|*.*";
 
             if (abrirExploradorDeArquivos.ShowDialog() != DialogResult.OK) return;
             try

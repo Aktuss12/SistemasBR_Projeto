@@ -1,9 +1,10 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Linq;
 using DevExpress.XtraEditors;
 
 namespace CadastroDeProdutosView.Features.Commons.Services
-{ 
+{
     public static class ManipuladorDeEnumService
     {
         private static T? ObterAtributoDoTipo<T>(this Enum valorEnum) where T : Attribute
@@ -14,14 +15,16 @@ namespace CadastroDeProdutosView.Features.Commons.Services
             return attributes.Length > 0 ? (T)attributes[0] : null;
         }
 
-        public static string ObterDescricao(this Enum valorEnum) =>
-             valorEnum.ObterAtributoDoTipo<System.ComponentModel.DescriptionAttribute>()!.Description;
+        public static string ObterDescricao(this Enum valorEnum)
+        {
+            return valorEnum.ObterAtributoDoTipo<DescriptionAttribute>()!.Description;
+        }
 
         public static void PreencherLookUpEditComOValorDoEnum<T>(this LookUpEdit lookUpEdit) where T : Enum
         {
             var dicionarioDeEnums = Enum.GetValues(typeof(T))
-            .Cast<T>()
-            .ToDictionary(x => Convert.ToInt32(x), x => x.ObterDescricao());
+                .Cast<T>()
+                .ToDictionary(x => Convert.ToInt32(x), x => x.ObterDescricao());
 
             lookUpEdit.Properties.DataSource = dicionarioDeEnums;
             lookUpEdit.Properties.ValueMember = "Key";
