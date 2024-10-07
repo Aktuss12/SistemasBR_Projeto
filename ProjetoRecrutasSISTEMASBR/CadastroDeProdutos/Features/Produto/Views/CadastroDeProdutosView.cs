@@ -145,6 +145,19 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             return false;
         }
 
+        public void CarregarProduto(int idProduto)
+        {
+            try
+            {
+                var produto = _conexao.CarregarProduto(idProduto);
+                PreencherFormularioComProduto(produto);
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show($"Erro ao carregar o produto: {ex.Message}");
+            }
+        }
+
         private Models.Produto CarregarProduto()
         {
             return new Models.Produto
@@ -171,19 +184,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
                     ReducaoDeCalculo = ConversaoParaDecimais.ConversaoParaDecimal(reducaoDeCalculoIcmsTextEdit.Text)
                 }
             };
-        }
-
-        public void CarregarProduto(int idProduto)
-        {
-            try
-            {
-                var produto = _conexao.CarregarProduto(idProduto);
-                PreencherFormularioComProduto(produto);
-            }
-            catch (Exception ex)
-            {
-               XtraMessageBox.Show($"Erro ao carregar o produto: {ex.Message}");
-            }
         }
 
         private void PreencherFormularioComProduto(Models.Produto produto)

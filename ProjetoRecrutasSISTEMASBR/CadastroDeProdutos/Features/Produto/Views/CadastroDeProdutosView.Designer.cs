@@ -650,7 +650,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.estoqueTextEdit.Name = "estoqueTextEdit";
             this.estoqueTextEdit.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
             this.estoqueTextEdit.Properties.Mask.EditMask = "d";
-            this.estoqueTextEdit.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.estoqueTextEdit.Properties.Mask.UseMaskAsDisplayFormat = true;
             this.estoqueTextEdit.Size = new System.Drawing.Size(188, 22);
             this.estoqueTextEdit.TabIndex = 8;
@@ -734,7 +733,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.codigoDeBarrasTextEdit.Properties.AppearanceDisabled.Options.UseForeColor = true;
             this.codigoDeBarrasTextEdit.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
             this.codigoDeBarrasTextEdit.Properties.Mask.EditMask = "d";
-            this.codigoDeBarrasTextEdit.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.codigoDeBarrasTextEdit.Size = new System.Drawing.Size(158, 22);
             this.codigoDeBarrasTextEdit.TabIndex = 10;
             // 
