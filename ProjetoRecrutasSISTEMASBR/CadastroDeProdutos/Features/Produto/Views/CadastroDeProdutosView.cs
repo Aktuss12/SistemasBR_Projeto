@@ -233,7 +233,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             }
         }
 
-        private void AtualizarPrecoVenda()
+        private void AtualizarPrecoDaVenda()
         {
             if (decimal.TryParse(custoTextEdit.Text, out var custo) &&
                 decimal.TryParse(markupTextEdit.Text, out var markup))
@@ -244,12 +244,12 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
         private void markupTextEdit_EditValueChanged_1(object sender, EventArgs e)
         {
-            AtualizarPrecoVenda();
+            AtualizarPrecoDaVenda();
         }
 
         private void custoTextEdit_EditValueChanged(object sender, EventArgs e)
         {
-            AtualizarPrecoVenda();
+            AtualizarPrecoDaVenda();
         }
 
         private void pesquisarProdutoButtomItem_ItemClick(object sender, ItemClickEventArgs e)
@@ -262,11 +262,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
         {
             var alterarBancoDeDados = new ConfigurarCaminhoDoBancoDeDadosView();
             alterarBancoDeDados.ShowDialog();
-        }
-
-        private void nomeTextEdit_EditValueChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }

@@ -85,7 +85,6 @@
     <Compile Include="Features\Commons\MessageBoxCustomizada.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Features\Commons\TextEditValores.cs" />
     <Compile Include="Features\Commons\ValidacaoDeCampos.cs" />
     <Compile Include="Features\Produto\Enums\CategoriaDeProduto.cs" />
     <Compile Include="Features\Produto\Enums\MarcaDoProduto.cs" />

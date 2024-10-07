@@ -503,7 +503,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             this.nomeTextEdit.Properties.Mask.SaveLiteral = false;
             this.nomeTextEdit.Size = new System.Drawing.Size(260, 22);
             this.nomeTextEdit.TabIndex = 1;
-            this.nomeTextEdit.EditValueChanged += new System.EventHandler(this.nomeTextEdit_EditValueChanged);
             // 
             // marcaLookUpEdit
             // 
