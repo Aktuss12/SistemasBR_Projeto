@@ -76,7 +76,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Features\Commons\ControladorDeStatusDoProduto.cs" />
-    <Compile Include="Features\Commons\ConversaoUtil.cs" />
+    <Compile Include="Features\Commons\ConversaoParaDecimais.cs" />
     <Compile Include="Features\Commons\LimpezaDeControles.cs" />
     <Compile Include="Features\Commons\Services\CalculadorDeCodigoDeBarrasService.cs" />
     <Compile Include="Features\Commons\ConexaoFirebird.cs" />

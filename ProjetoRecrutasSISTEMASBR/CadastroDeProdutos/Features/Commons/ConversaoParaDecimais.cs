@@ -1,6 +1,6 @@
 ﻿namespace CadastroDeProdutosView.Features.Commons
 {
-    public static class ConversaoUtil
+    public static class ConversaoParaDecimais
     {
         public static decimal ConversaoParaDecimal(string valor)
         {

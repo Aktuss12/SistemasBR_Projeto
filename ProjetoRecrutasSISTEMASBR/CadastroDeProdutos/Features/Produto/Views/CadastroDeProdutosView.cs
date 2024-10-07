@@ -84,7 +84,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
             try
             {
-                var produto = CriarProduto();
+                var produto = CarregarProduto();
                 if (_produtoId.HasValue)
                 {
                     produto.Id = _produtoId.Value;
@@ -145,7 +145,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             return false;
         }
 
-        private Models.Produto CriarProduto()
+        private Models.Produto CarregarProduto()
         {
             return new Models.Produto
             {
@@ -156,9 +156,9 @@ namespace CadastroDeProdutosView.Features.Produto.Views
                 UnidadeDeMedida = unidadeDeMedidaLookUpEdit.EditValue?.ToString(),
                 Estoque = int.Parse(estoqueTextEdit.Text),
                 Marca = marcaLookUpEdit.EditValue?.ToString(),
-                Custo = ConversaoUtil.ConversaoParaDecimal(custoTextEdit.Text),
-                Markup = ConversaoUtil.ConversaoParaDecimal(markupTextEdit.Text),
-                PrecoDaVenda = ConversaoUtil.ConversaoParaDecimal(precoVendaTextEdit.Text),
+                Custo = ConversaoParaDecimais.ConversaoParaDecimal(custoTextEdit.Text),
+                Markup = ConversaoParaDecimais.ConversaoParaDecimal(markupTextEdit.Text),
+                PrecoDaVenda = ConversaoParaDecimais.ConversaoParaDecimal(precoVendaTextEdit.Text),
                 Imagem = _imagemDoProduto,
 
                 InformacoesFiscais = new InformacoesFiscais
@@ -167,8 +167,8 @@ namespace CadastroDeProdutosView.Features.Produto.Views
                     SituacaoTributaria = situacaoTributariaLookUpEdit.EditValue?.ToString(),
                     NaturezaDaOperacao = naturezaDaOperacaoLookUpEdit.EditValue?.ToString(),
                     Ncm = ncmTextEdit.Text,
-                    AliquotaDeIcms = ConversaoUtil.ConversaoParaDecimal(aliquotaDeIcmsTextEdit.Text),
-                    ReducaoDeCalculo = ConversaoUtil.ConversaoParaDecimal(reducaoDeCalculoIcmsTextEdit.Text)
+                    AliquotaDeIcms = ConversaoParaDecimais.ConversaoParaDecimal(aliquotaDeIcmsTextEdit.Text),
+                    ReducaoDeCalculo = ConversaoParaDecimais.ConversaoParaDecimal(reducaoDeCalculoIcmsTextEdit.Text)
                 }
             };
         }
