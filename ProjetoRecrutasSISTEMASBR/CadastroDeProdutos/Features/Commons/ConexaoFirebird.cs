@@ -1,9 +1,7 @@
-﻿using FirebirdSql.Data.FirebirdClient;
-using System;
-using System.Drawing;
-using System.IO;
-using CadastroDeProdutosView.Features.Commons.Services;
+﻿using CadastroDeProdutosView.Features.Commons.Services;
 using CadastroDeProdutosView.Features.Produto.Models;
+using FirebirdSql.Data.FirebirdClient;
+using System;
 
 namespace CadastroDeProdutosView.Features.Commons
 {
@@ -212,7 +210,7 @@ namespace CadastroDeProdutosView.Features.Commons
             return CalculadorDeCodigoDeBarras.ValidandoCodigoDeBarrasEAN13(codigoDeBarras);
         }
 
-        public string GerarCodigoDeBarras()
+        /*public string GerarCodigoDeBarras()
         {
             return CalculadorDeCodigoDeBarras.GerarCodigoDeBarrasEAN13();
         }
@@ -234,6 +232,6 @@ namespace CadastroDeProdutosView.Features.Commons
         public decimal CalcularPrecoVenda(decimal custo, decimal markup)
         {
             return custo * (1 + markup / 100);
-        }
+        }*/
     }
 }

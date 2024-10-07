@@ -22,17 +22,12 @@ namespace CadastroDeProdutosView.Features.Produto.Views
         public CadastroDeProdutosView(int produtoId = 0)
         {
             InitializeComponent();
-            InitializeComponents();
+            InitializeLookUpEdit();
+            LimitadorDeCaracteres();
             _produtoId = produtoId > 0 ? produtoId : null;
             _conexao = new ConexaoProdutosFirebird();
 
             if (_produtoId.HasValue) CarregarProduto(_produtoId.Value);
-        }
-
-        private void InitializeComponents()
-        {
-            InitializeLookUpEdit();
-            LimitadorDeCaracteres();
         }
 
         private void InitializeLookUpEdit()
@@ -123,13 +118,14 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             if (!string.IsNullOrWhiteSpace(codigoDeBarrasTextEdit.Text) &&
                 !_conexao.ValidarCodigoDeBarras(codigoDeBarrasTextEdit.Text))
             {
-                ShowMessage("O código de barras não é um tipo EAN-13");
+                XtraMessageBox.Show("O código de barras não é um tipo EAN-13");
                 codigodebarrasLabelControl.Text = "Código de Barras: <color=red>*</color>";
                 codigodebarrasLabelControl.AllowHtmlString = true;
                 return false;
             }
 
-            ResetCodigoDeBarrasLabel();
+            codigodebarrasLabelControl.Text = "Codigo de Barras:";
+            codigodebarrasLabelControl.AllowHtmlString = false;
 
             if (ValidacaoDeCampos.ValidacaoParaCamposObrigatorios(
                     nomeTextEdit,
@@ -147,12 +143,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             }
             XtraMessageBox.Show("Todos os campos obrigatorios devem ser preenchidos");
             return false;
-        }
-
-        private void ResetCodigoDeBarrasLabel()
-        {
-            codigodebarrasLabelControl.Text = "Codigo de Barras:";
-            codigodebarrasLabelControl.AllowHtmlString = false;
         }
 
         private Models.Produto CriarProduto()
@@ -192,7 +182,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             }
             catch (Exception ex)
             {
-                ShowMessage($"Erro ao carregar o produto: {ex.Message}");
+               XtraMessageBox.Show($"Erro ao carregar o produto: {ex.Message}");
             }
         }
 
@@ -272,6 +262,11 @@ namespace CadastroDeProdutosView.Features.Produto.Views
         {
             var alterarBancoDeDados = new ConfigurarCaminhoDoBancoDeDadosView();
             alterarBancoDeDados.ShowDialog();
+        }
+
+        private void nomeTextEdit_EditValueChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
