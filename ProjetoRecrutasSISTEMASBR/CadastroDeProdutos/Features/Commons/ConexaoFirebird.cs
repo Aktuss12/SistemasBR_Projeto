@@ -2,6 +2,7 @@
 using System;
 using System.Drawing;
 using System.IO;
+using CadastroDeProdutosView.Features.Commons.Services;
 using CadastroDeProdutosView.Features.Produto.Models;
 
 namespace CadastroDeProdutosView.Features.Commons
