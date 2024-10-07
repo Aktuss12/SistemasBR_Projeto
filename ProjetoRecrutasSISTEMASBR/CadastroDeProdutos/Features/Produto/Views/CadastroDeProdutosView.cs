@@ -131,7 +131,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
             ResetCodigoDeBarrasLabel();
 
-            if (!ValiacaoDeCampos.ValidacaoParaCamposObrigatorios(
+            if (ValidacaoDeCampos.ValidacaoParaCamposObrigatorios(
                     nomeTextEdit,
                     estoqueTextEdit,
                     precoVendaTextEdit,

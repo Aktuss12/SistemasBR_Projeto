@@ -6,16 +6,26 @@ namespace CadastroDeProdutosView.Features.Produto.Enums
     {
         public enum MarcaDoProduto
         {
-            [Description("Marca A")] MarcaA,
-            [Description("Marca B")] MarcaB,
-            [Description("Marca C")] MarcaC,
-            [Description("Marca D")] MarcaD,
-            [Description("Marca E")] MarcaE,
-            [Description("Marca F")] MarcaF,
-            [Description("Marca G")] MarcaG,
-            [Description("Marca H")] MarcaH,
-            [Description("Marca I")] MarcaI,
-            [Description("Marca J")] MarcaJ
+            [Description("Nestle")] 
+            Nestle,
+            [Description("Saboraki")] 
+            Saboraki,
+            [Description("OMO")]
+            OMO,
+            [Description("Colgate")] 
+            Colgate,
+            [Description("Nivea")]
+            Nivea,
+            [Description(" Pão de Açúcar")]
+            PaoDeAcucar,
+            [Description("Redbull")]
+            Redbull,
+            [Description("Ypê")]
+            Ype,
+            [Description("Bombrill")]
+            Bombrill,
+            [Description("Dove")] 
+            Dove
         }
     }
 }

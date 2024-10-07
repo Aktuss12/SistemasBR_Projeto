@@ -6,7 +6,7 @@ namespace CadastroDeProdutosView.Features.Commons
     {
         public static void LimpezaDeTextEdit(this TextEdit textEdit)
         {
-            textEdit.Text = string.Empty;
+            textEdit.Text = null;
         }
 
         public static void LimpezaDeLookUpEdit(this LookUpEdit lookUpEdit)
