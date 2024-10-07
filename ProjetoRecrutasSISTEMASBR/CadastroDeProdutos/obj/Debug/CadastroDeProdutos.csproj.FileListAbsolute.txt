@@ -121,3 +121,14 @@ C:\Users\admin\Documents\Sistemasbr_Projeto\CadastroDeProdutos\obj\Debug\Cadastr
 C:\Users\admin\Documents\Sistemasbr_Projeto\CadastroDeProdutos\obj\Debug\CadastroDeProdutos.csproj.CopyComplete
 C:\Users\admin\Documents\Sistemasbr_Projeto\CadastroDeProdutos\obj\Debug\CadastroDeProdutosView.exe
 C:\Users\admin\Documents\Sistemasbr_Projeto\CadastroDeProdutos\obj\Debug\CadastroDeProdutosView.pdb
+C:\Users\admin\Documents\Sistemasbr_Projeto\ProjetoRecrutasSISTEMASBR\CadastroDeProdutos\obj\Debug\CadastroDeProdutos.csproj.AssemblyReference.cache
+C:\Users\admin\Documents\Sistemasbr_Projeto\ProjetoRecrutasSISTEMASBR\CadastroDeProdutos\obj\Debug\CadastroDeProdutosView.Features.Commons.MessageBoxCustomizado.resources
+C:\Users\admin\Documents\Sistemasbr_Projeto\ProjetoRecrutasSISTEMASBR\CadastroDeProdutos\obj\Debug\CadastroDeProdutosView.Features.Produto.Views.CadastroDeProdutosView.resources
+C:\Users\admin\Documents\Sistemasbr_Projeto\ProjetoRecrutasSISTEMASBR\CadastroDeProdutos\obj\Debug\CadastroDeProdutosView.Features.Produto.Views.ConfigurarCaminhoDoBancoDeDadosView.resources
+C:\Users\admin\Documents\Sistemasbr_Projeto\ProjetoRecrutasSISTEMASBR\CadastroDeProdutos\obj\Debug\CadastroDeProdutosView.Features.Produto.Views.PesquisaDeProdutosView.resources
+C:\Users\admin\Documents\Sistemasbr_Projeto\ProjetoRecrutasSISTEMASBR\CadastroDeProdutos\obj\Debug\CadastroDeProdutosView.Properties.Resources.resources
+C:\Users\admin\Documents\Sistemasbr_Projeto\ProjetoRecrutasSISTEMASBR\CadastroDeProdutos\obj\Debug\CadastroDeProdutos.csproj.GenerateResource.cache
+C:\Users\admin\Documents\Sistemasbr_Projeto\ProjetoRecrutasSISTEMASBR\CadastroDeProdutos\obj\Debug\CadastroDeProdutosView.exe.licenses
+C:\Users\admin\Documents\Sistemasbr_Projeto\ProjetoRecrutasSISTEMASBR\CadastroDeProdutos\obj\Debug\CadastroDeProdutos.csproj.CoreCompileInputs.cache
+C:\Users\admin\Documents\Sistemasbr_Projeto\ProjetoRecrutasSISTEMASBR\CadastroDeProdutos\obj\Debug\CadastroDeProdutosView.exe
+C:\Users\admin\Documents\Sistemasbr_Projeto\ProjetoRecrutasSISTEMASBR\CadastroDeProdutos\obj\Debug\CadastroDeProdutosView.pdb
