@@ -131,7 +131,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
             ResetCodigoDeBarrasLabel();
 
-            if (ValiacaoDeCampos.ValidacaoParaCamposObrigatorios(
+            if (!ValiacaoDeCampos.ValidacaoParaCamposObrigatorios(
                     nomeTextEdit,
                     estoqueTextEdit,
                     precoVendaTextEdit,
@@ -243,16 +243,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             }
         }
 
-        private void alterarBancoDeDadosButton_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void codigoDeBarrasTextEdit_EditValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void AtualizarPrecoVenda()
         {
             if (decimal.TryParse(custoTextEdit.Text, out var custo) &&
@@ -276,6 +266,12 @@ namespace CadastroDeProdutosView.Features.Produto.Views
         {
             var pesquisaDeProdutosView = new PesquisaDeProdutosView();
             pesquisaDeProdutosView.ShowDialog();
+        }
+
+        private void alterarBancoDeDadosButton_Click(object sender, EventArgs e)
+        {
+            var alterarBancoDeDados = new ConfigurarCaminhoDoBancoDeDadosView();
+            alterarBancoDeDados.ShowDialog();
         }
     }
 }

@@ -32,6 +32,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             var config = new ConfiguracaoBanco { CaminhoBanco = novoCaminho };
             GerenciamentoDoBancoDeDados.SalvarConfiguracao(config);
             XtraMessageBox.Show("Configuração salva com sucesso. Reinicie a aplicação para aplicar as mudanças.");
+            Close();
         }
 
         private void exploradorBancoDeDadosButton_Click(object sender, EventArgs e)

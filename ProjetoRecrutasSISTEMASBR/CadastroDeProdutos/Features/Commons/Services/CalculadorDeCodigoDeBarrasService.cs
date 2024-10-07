@@ -1,17 +1,16 @@
 ﻿using System;
 
-namespace CadastroDeProdutosView.Features.Commons
+namespace CadastroDeProdutosView.Features.Commons.Services
 {
     public static class CalculadorDeCodigoDeBarras
     {
         // Método para validar um código de barras EAN-13
         public static bool ValidandoCodigoDeBarrasEAN13(string codigoDeBarras)
         {
-            // Verifica se o comprimento do código é exatamente 13
             if (codigoDeBarras.Length != 13) return false;
 
-            var soma = 0; // Inicializa a soma dos dígitos
-            // Loop para calcular a soma dos primeiros 12 dígitos
+            var soma = 0;
+            // Loop 
             for (var i = 0; i < 12; i++)
             {
                 var digito = codigoDeBarras[i] - '0'; // Converte o caractere para seu valor numérico
