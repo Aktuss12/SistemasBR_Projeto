@@ -32,15 +32,11 @@ namespace CadastroDeProdutosView.Features.Produto.Views
         private void InitializeLookUpEdit()
         {
             unidadeDeMedidaLookUpEdit.PreencherLookUpEditComOValorDoEnum<UnidadeDeMedidaView.UnidadeDeMedida>();
-            categoriaDeProdutosLookUpEdit
-                .PreencherLookUpEditComOValorDoEnum<CategoriaDoProdutoView.CategoriaDeProdutos>();
+            categoriaDeProdutosLookUpEdit.PreencherLookUpEditComOValorDoEnum<CategoriaDoProdutoView.CategoriaDeProdutos>();
             marcaLookUpEdit.PreencherLookUpEditComOValorDoEnum<MarcaDoProdutoView.MarcaDoProduto>();
-            origemDaMercadoriaLookUpEdit
-                .PreencherLookUpEditComOValorDoEnum<OrigemDaMercadoriaView.OrigemDaMercadoria>();
-            situacaoTributariaLookUpEdit
-                .PreencherLookUpEditComOValorDoEnum<SituacaoTributariaView.SituacaoTributaria>();
-            naturezaDaOperacaoLookUpEdit
-                .PreencherLookUpEditComOValorDoEnum<NaturezaDaOperacaoView.NaturezaDaOperacao>();
+            origemDaMercadoriaLookUpEdit.PreencherLookUpEditComOValorDoEnum<OrigemDaMercadoriaView.OrigemDaMercadoria>();
+            situacaoTributariaLookUpEdit.PreencherLookUpEditComOValorDoEnum<SituacaoTributariaView.SituacaoTributaria>();
+            naturezaDaOperacaoLookUpEdit.PreencherLookUpEditComOValorDoEnum<NaturezaDaOperacaoView.NaturezaDaOperacao>();
         }
 
         private void LimitadorDeCaracteres()
@@ -81,7 +77,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
 
         public static event Action? ProdutosAtualizados;
 
-        private void salvarButtomItem_ItemClick(object sender, ItemClickEventArgs e)
+        private void SalvarProdutoAoClicarSalvarButtomItem(object sender, ItemClickEventArgs e)
         {
             if (!ValidarCampos()) return;
 
@@ -175,7 +171,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             {
                 var produto = _conexao.CarregarProduto(idProduto);
                 if (produto == null!) return;
-
                 PreencherFormularioComProduto(produto);
             }
             catch (Exception ex)
@@ -200,21 +195,18 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             situacaoTributariaLookUpEdit.EditValue = produto.InformacoesFiscais.SituacaoTributaria;
             naturezaDaOperacaoLookUpEdit.EditValue = produto.InformacoesFiscais.NaturezaDaOperacao;
             ncmTextEdit.Text = produto.InformacoesFiscais.Ncm;
-            aliquotaDeIcmsTextEdit.Text =
-                produto.InformacoesFiscais.AliquotaDeIcms.ToString(CultureInfo.InvariantCulture);
-            reducaoDeCalculoIcmsTextEdit.Text =
-                produto.InformacoesFiscais.ReducaoDeCalculo.ToString(CultureInfo.InvariantCulture);
+            aliquotaDeIcmsTextEdit.Text = produto.InformacoesFiscais.AliquotaDeIcms.ToString(CultureInfo.InvariantCulture);
+            reducaoDeCalculoIcmsTextEdit.Text = produto.InformacoesFiscais.ReducaoDeCalculo.ToString(CultureInfo.InvariantCulture);
 
             if (produto.Imagem == null) return;
             imagemDoProdutoPictureEdit.Image = _conexao.ConverterBytesParaImagem(produto.Imagem);
             _imagemDoProduto = produto.Imagem;
         }
 
-        private void adicionarImagemButton_Click(object sender, EventArgs e)
+        private void AdicionarImagemAoClicarAdicionarImagemButton(object sender, EventArgs e)
         {
             using var abrirExploradoDeArquivo = new OpenFileDialog();
-            abrirExploradoDeArquivo.Filter =
-                "Image Files|*.jpg;*.jpeg;*.png;*.bmp;*.gif;*.tiff;*.tif;*.webp;*.heic;*.svg;*.cr2;*.nef;*.arw";
+            abrirExploradoDeArquivo.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp;*.gif;*.tiff;*.tif;*.webp;*.heic;*.svg;*.cr2;*.nef;*.arw";
 
             if (abrirExploradoDeArquivo.ShowDialog() != DialogResult.OK) return;
 
@@ -225,7 +217,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             imagemDoProdutoPictureEdit.Image = new Bitmap(imagemOriginal, new Size(190, 241));
         }
 
-        private void codigoDeBarrasButton_Click(object sender, EventArgs e)
+        private void GerarCodigoDeBarrasAoClicarCodigoDeBarrasButton(object sender, EventArgs e)
         {
             codigoDeBarrasTextEdit.EditValue = _conexao.GerarCodigoDeBarras();
         }
@@ -240,7 +232,6 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             AtualizarPrecoVenda();
         }
 
-
         private void AtualizarPrecoVenda()
         {
             if (!decimal.TryParse(custoTextEdit.Text, out var custo) ||
@@ -249,7 +240,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             precoVendaTextEdit.Text = precoVenda.ToString("N2");
         }
 
-        private void pesquisarProdutoButtomItem_ItemClick(object sender, ItemClickEventArgs e)
+        private void AbrirFormDePesquisaAoClicarPesquisarProdutoButtomItem(object sender, ItemClickEventArgs e)
         {
             var pesquisaForm = Application.OpenForms.OfType<PesquisaDeProdutosView>().FirstOrDefault();
             if (pesquisaForm != null)
@@ -262,23 +253,15 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             pesquisarProdutos.ShowDialog();
         }
 
-        private void alterarBancoDeDadosButton_Click_1(object sender, EventArgs e)
-        {
-            var alterarBancoDeDados = new ConfigurarCaminhoDoBancoDeDadosView();
-            alterarBancoDeDados.ShowDialog();
+        private void AbrirFormDeAlterarBancoDeDadosAlterarBancoDeDadosButton(object sender, EventArgs e)
+        { 
+            new ConfigurarCaminhoDoBancoDeDadosView().ShowDialog();
         }
 
-        private void excluirImagemButton_Click(object sender, EventArgs e)
+        private void ExcluirImagemAoClicarExcluirImagemButton(object sender, EventArgs e)
         {
             imagemDoProdutoPictureEdit.Image = null;
             _imagemDoProduto = null!;
-        }
-
-        private void codigoDeBarrasTextEdit_EditValueChanged(object sender, EventArgs e)
-        {
-            if (string.IsNullOrWhiteSpace(codigoDeBarrasTextEdit.Text) || codigoDeBarrasTextEdit.Text != "0") return;
-            codigoDeBarrasTextEdit.EditValue = null;
-            codigoDeBarrasTextEdit.Refresh();
         }
     }
 }

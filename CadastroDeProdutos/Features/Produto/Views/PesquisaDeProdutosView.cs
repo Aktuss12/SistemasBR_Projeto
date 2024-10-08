@@ -18,8 +18,8 @@ namespace CadastroDeProdutosView.Features.Produto.Views
         public PesquisaDeProdutosView()
         {
             connectionString = ConfiguracaoDoBancoDeDados.ObterStringDeConexao();
+            VerificarAtivosInativosProdutosDesativadosToggleSwitchh(null!, null!);
             InitializeComponent();
-            DesativarBotoes();
             CarregarBancoDeDados();
         }
 
@@ -63,7 +63,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             return tabelaDados;
         }
 
-        private void desativarProdutoButtomItem_ItemClick(object sender, ItemClickEventArgs e)
+        private void DesativarProdutoAoClicarDesativarProdutoButtomItem(object sender, ItemClickEventArgs e)
         {
             if (pesquisarGridControl.MainView is not GridView gridView)
             {
@@ -101,27 +101,7 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             CarregarBancoDeDados();
         }
 
-        private void DesativarBotoes()
-        {
-            desativarProdutoButtomItem.Enabled = !produtosDesativadosToggleSwitchh.IsOn;
-            reativarProdutoButtomItem.Enabled = produtosDesativadosToggleSwitchh.IsOn;
-        }
-
-        public void produtosDesativadosToggleSwitchh_Toggled_1(object sender, EventArgs e)
-        {
-            mostrarAtivos = !mostrarAtivos;
-            DesativarBotoes();
-            CarregarBancoDeDados();
-        }
-
-        private void pesquisarTextEdit_EditValueChanged(object sender, EventArgs e)
-        {
-            var nomeProduto = pesquisarTextEdit.Text.Trim();
-            pesquisarGridView.ActiveFilterString =
-                !string.IsNullOrEmpty(nomeProduto) ? $"[nome] LIKE '%{nomeProduto}%'" : string.Empty;
-        }
-
-        private void reativarProdutoButtomItem_ItemClick(object sender, ItemClickEventArgs e)
+        private void ReativarProdutosAoClicarReativarProdutoButtomItem(object sender, ItemClickEventArgs e)
         {
             if (pesquisarGridControl.MainView is not GridView gridView)
             {
@@ -159,7 +139,21 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             CarregarBancoDeDados();
         }
 
-        private void alterarButtonItem_ItemClick(object sender, ItemClickEventArgs e)
+        public void VerificarAtivosInativosProdutosDesativadosToggleSwitchh(object sender, EventArgs e)
+        {
+            mostrarAtivos = !mostrarAtivos;
+            desativarProdutoButtomItem.Enabled = !produtosDesativadosToggleSwitchh.IsOn;
+            reativarProdutoButtomItem.Enabled = produtosDesativadosToggleSwitchh.IsOn;
+            CarregarBancoDeDados();
+        }
+
+        private void PesquisarProdutosPesquisarTextEdit(object sender, EventArgs e)
+        {
+            var nomeProduto = pesquisarTextEdit.Text.Trim();
+            pesquisarGridView.ActiveFilterString = !string.IsNullOrEmpty(nomeProduto) ? $"[nome] LIKE '%{nomeProduto}%'" : string.Empty;
+        }
+
+        private void AlterarProdutosClicarAlterarButtonItem(object sender, ItemClickEventArgs e)
         {
             if (pesquisarGridControl.MainView is not GridView gridView)
             {
@@ -197,12 +191,10 @@ namespace CadastroDeProdutosView.Features.Produto.Views
             {
                 cadastroForm = new CadastroDeProdutosView(SelecionadorIdProduto.Value);
                 cadastroForm.FormClosed += (_, _) =>
-                {
-                    cadastroForm = null;
-                    CarregarBancoDeDados();
-                    WindowState = FormWindowState.Normal;
-                };
+                cadastroForm = null;
+                WindowState = FormWindowState.Normal;
                 cadastroForm.ShowDialog();
+                CarregarBancoDeDados();
             }
         }
     }

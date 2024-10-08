@@ -115,9 +115,7 @@ namespace CadastroDeProdutosView.Features.Commons
                     command.Parameters.Add("@Imagem", FbDbType.Binary).Value = produto.Imagem ?? (object)DBNull.Value;
                     command.ExecuteNonQuery();
                 }
-
                 AlterarInformacoesFiscais(conexao, transacao, produto.Id, produto.InformacoesFiscais);
-
                 transacao.Commit();
             }
             catch (Exception ex)
@@ -191,12 +189,10 @@ namespace CadastroDeProdutosView.Features.Commons
                         ReducaoDeCalculo = Convert.ToDecimal(leituraDeDados["reducaoDeCalculo"])
                     }
                 };
-
                 if (leituraDeDados["Imagem"] != DBNull.Value)
                 {
                     produto.Imagem = (byte[])leituraDeDados["Imagem"];
                 }
-
                 return produto;
             }
             catch (Exception ex)
